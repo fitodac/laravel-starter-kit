@@ -66,13 +66,31 @@ const ForgotPassword = ({ status }: Props) => {
 					</div>
 				</form>
 
-				<div className="space-y-1.5">
+				<div className="space-y-3">
 					<div>
-						<Link href={route('login')}>{t('Already registered?')}</Link>
+						<Button
+							as={Link}
+							disableRipple
+							color="primary"
+							variant="light"
+							className="p-0 h-auto hover:!bg-transparent"
+							href={route('login')}
+						>
+							{t('Already registered?')}
+						</Button>
 					</div>
 
 					<div>
-						<Link href={route('register')}>{t("Don't have an Account?")}</Link>
+						<Button
+							as={Link}
+							disableRipple
+							color="primary"
+							variant="light"
+							className="p-0 h-auto hover:!bg-transparent"
+							href={route('register')}
+						>
+							{t("Don't have an Account?")}
+						</Button>
 					</div>
 				</div>
 			</div>

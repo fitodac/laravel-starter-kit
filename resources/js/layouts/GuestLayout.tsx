@@ -11,7 +11,7 @@ export const GuestLayout = ({ children, pageTitle }: PropsLayout) => {
 		<>
 			<Head title={pageTitle} />
 
-			<main className="w-full min-h-screen">{children}</main>
+			<main className="w-full min-h-svh">{children}</main>
 
 			<Toastify />
 		</>

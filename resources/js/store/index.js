@@ -1,1 +1,1 @@
-export { useStoreMain } from './useStoreMain'
+export { useMainStore } from './useMainStore'

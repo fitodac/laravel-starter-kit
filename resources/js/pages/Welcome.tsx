@@ -26,7 +26,7 @@ const Welcome = ({
 									size="lg"
 									onPress={() => router.visit(route('login'))}
 								>
-									{t('Dashboard')}
+									{t('Enter dashboard')}
 								</Button>
 							</div>
 						</>

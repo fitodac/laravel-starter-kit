@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { useStoreMain } from '@/store'
+import { useMainStore } from '@/store'
 
 export const useColorMode = () => {
-	const { colorMode, setColorMode } = useStoreMain()
+	const { colorMode, setColorMode } = useMainStore()
 
 	useEffect(() => {
 		if (colorMode === 'dark') {

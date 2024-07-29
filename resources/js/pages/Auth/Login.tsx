@@ -106,21 +106,35 @@ const Login = ({ status, canResetPassword }: Props) => {
 							{t('Log in')}
 						</Button>
 
-						{canResetPassword && (
-							<div className="space-y-1.5">
+						<div className="space-y-3">
+							{canResetPassword && (
 								<div>
-									<Link href={route('password.request')}>
+									<Button
+										as={Link}
+										disableRipple
+										color="primary"
+										variant="light"
+										className="p-0 h-auto hover:!bg-transparent"
+										href={route('password.request')}
+									>
 										{t('Forgot your password?')}
-									</Link>
+									</Button>
 								</div>
+							)}
 
-								<div>
-									<Link href={route('register')}>
-										{t("Don't have an Account?")}
-									</Link>
-								</div>
+							<div>
+								<Button
+									as={Link}
+									disableRipple
+									color="primary"
+									variant="light"
+									className="p-0 h-auto hover:!bg-transparent"
+									href={route('register')}
+								>
+									{t("Don't have an Account?")}
+								</Button>
 							</div>
-						)}
+						</div>
 					</div>
 				</form>
 			</div>

@@ -1,8 +1,8 @@
 import { ToastContainer } from 'react-toastify'
-import { useStoreMain } from '@/store'
+import { useMainStore } from '@/store'
 
 export const Toastify = (): JSX.Element => {
-	const { colorMode } = useStoreMain()
+	const { colorMode } = useMainStore()
 
 	return (
 		<ToastContainer

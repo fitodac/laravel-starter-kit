@@ -1,13 +1,15 @@
-import { useStoreMain } from '@/store'
+import { useMainStore } from '@/store'
 import { useWindowWidth } from '.'
 import { useEffect } from 'react'
 
 export const useNavbarToggler = () => {
-	const { navbarOpen, setNavbarOpen } = useStoreMain()
+	const { navbarOpen, setNavbarOpen } = useMainStore()
 	const { windowWidth } = useWindowWidth()
 
 	useEffect(() => {
-		if (windowWidth >= 768) setNavbarOpen(false)
+		setNavbarOpen(false)
+		console.log('windowWidth', windowWidth)
+		// if (windowWidth >= 768) setNavbarOpen(false)
 	}, [windowWidth])
 
 	const toggleNavbar = () => setNavbarOpen(!navbarOpen)

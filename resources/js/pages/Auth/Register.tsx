@@ -124,7 +124,16 @@ const Register = () => {
 						</Button>
 
 						<div className="text-center">
-							<Link href={route('login')}>{t('Already registered?')}</Link>
+							<Button
+								as={Link}
+								disableRipple
+								color="primary"
+								variant="light"
+								className="p-0 h-auto hover:!bg-transparent"
+								href={route('login')}
+							>
+								{t('Already registered?')}
+							</Button>
 						</div>
 					</div>
 				</form>

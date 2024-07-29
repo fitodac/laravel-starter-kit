@@ -2,7 +2,6 @@ import { FormEventHandler } from 'react'
 import { t } from '@/i18n'
 import { Link, useForm } from '@inertiajs/react'
 import { Button } from '@nextui-org/react'
-import { toast } from 'react-toastify'
 import { AuthLayout } from './layout'
 import { StatusMessage } from './components'
 
@@ -12,8 +11,6 @@ interface Props {
 
 const VerifyEmail = ({ status }: Props) => {
 	const { post, processing } = useForm({})
-
-	console.log('status', status)
 
 	const submit: FormEventHandler = (e) => {
 		e.preventDefault()
@@ -43,7 +40,16 @@ const VerifyEmail = ({ status }: Props) => {
 			</div>
 
 			<div className="text-center">
-				<Link href={route('login')}>{t('Already registered?')}</Link>
+				<Button
+					as={Link}
+					disableRipple
+					color="primary"
+					variant="light"
+					className="p-0 h-auto hover:!bg-transparent"
+					href={route('login')}
+				>
+					{t('Already registered?')}
+				</Button>
 			</div>
 		</>
 	)

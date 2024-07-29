@@ -1,8 +1,19 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import type { MainStoreProps } from './types'
+import type { User } from '@/types'
 
-export const useStoreMain = create<MainStoreProps>()(
+export interface MainStoreProps {
+	colorMode: string
+	setColorMode: (value: string) => void
+	auth: { user: User | null }
+	setAuth: (value: any) => void
+	profileTab: string
+	setProfileTab?: (value: string) => void
+	navbarOpen: boolean
+	setNavbarOpen: (value: boolean) => void
+}
+
+export const useMainStore = create<MainStoreProps>()(
 	persist(
 		(set, get) => ({
 			colorMode: localStorage.getItem('colorMode') || 'light',
@@ -18,7 +29,7 @@ export const useStoreMain = create<MainStoreProps>()(
 		}),
 		{
 			name: 'store',
-			storage: createJSONStorage(() => sessionStorage),
-		},
-	),
+			storage: createJSONStorage(() => localStorage),
+		}
+	)
 )

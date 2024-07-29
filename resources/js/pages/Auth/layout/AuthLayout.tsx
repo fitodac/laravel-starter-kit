@@ -18,11 +18,18 @@ export const AuthLayout = ({ children, pageTitle }: PropsLayout) => {
 			<Head title={pageTitle} />
 
 			<div className="flex justify-end p-3 inset-x-0 absolute z-30">
-				<Button isIconOnly size="sm" onPress={changeColorMode}>
+				<Button
+					isIconOnly
+					size="sm"
+					radius="lg"
+					variant="light"
+					color="primary"
+					onPress={changeColorMode}
+				>
 					<i
 						className={cn(
 							colorMode === 'light' ? 'ri-moon-fill' : 'ri-sun-fill',
-							'ri-xl',
+							'ri-xl'
 						)}
 					/>
 				</Button>
