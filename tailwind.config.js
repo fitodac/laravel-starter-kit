@@ -1,5 +1,8 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
+const colors = require('tailwindcss/colors')
 const { nextui } = require('@nextui-org/react')
+
+import theme from './theme.config'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -12,12 +15,21 @@ export default {
 		'./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
 	],
 
-	darkMode: 'class',
+	darkMode: 'selector',
 
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+				sans: ['Inter', ...defaultTheme.fontFamily.sans],
+			},
+			height: {
+				topbar: theme.topbar.height,
+			},
+			padding: {
+				topbar: theme.topbar.height,
+			},
+			spacing: {
+				topbar: theme.topbar.height,
 			},
 		},
 	},
@@ -44,16 +56,17 @@ export default {
 					large: '1.75rem', // text-large
 				},
 				radius: {
-					small: '8px', // rounded-small
-					medium: '12px', // rounded-medium
-					large: '14px', // rounded-large
+					small: '4px', // rounded-small
+					medium: '6px', // rounded-medium
+					large: '12px', // rounded-large
 				},
 				borderWidth: {
-					small: '1px', // border-small
-					medium: '2px', // border-medium (default)
+					small: '0.7px', // border-small
+					medium: '1.5px', // border-medium (default)
 					large: '3px', // border-large
 				},
 			},
+
 			themes: {
 				light: {
 					colors: {
@@ -89,6 +102,13 @@ export default {
 							//... 50 to 900
 							foreground: '#FFFFFF',
 							DEFAULT: '#006FEE',
+						},
+						default: {
+							100: colors.gray[900],
+							DEFAULT: colors.gray[800],
+						},
+						content1: {
+							DEFAULT: colors.gray[950],
 						},
 					},
 					layout: {

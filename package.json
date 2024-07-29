@@ -27,6 +27,7 @@
         "@nextui-org/react": "^2.4.6",
         "@types/ziggy-js": "^1.8.0",
         "framer-motion": "^11.3.17",
+        "react-pro-sidebar": "^1.1.0",
         "react-toastify": "^10.0.5",
         "remixicon": "^4.3.0",
         "zustand": "^4.5.4"
