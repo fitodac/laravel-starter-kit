@@ -105,6 +105,10 @@ export default {
 						},
 						default: {
 							100: colors.gray[900],
+							200: colors.gray[800],
+							300: colors.gray[700],
+							400: colors.gray[600],
+							500: colors.gray[500],
 							DEFAULT: colors.gray[800],
 						},
 						content1: {

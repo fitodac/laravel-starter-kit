@@ -27,13 +27,7 @@ Route::middleware('auth')->prefix('dashboard/corporate')
 
 
 		// Tables
-		Route::get('tables/basic', [TablesController::class, 'index'])->name('corporate.tables.basic');
-
-		Route::get('tables', [TablesController::class, 'index']);
-		Route::get('tables/striped', [TablesController::class, 'index'])->name('corporate.tables.striped');
-		Route::get('tables/borderless', [TablesController::class, 'index'])->name('corporate.tables.borderless');
-		Route::get('tables/dividers', [TablesController::class, 'index'])->name('corporate.tables.dividers');
-		Route::get('tables/bordered', [TablesController::class, 'index'])->name('corporate.tables.bordered');
-		Route::get('tables/card', [TablesController::class, 'index'])->name('corporate.tables.card');
-		Route::get('tables/card2', [TablesController::class, 'index'])->name('corporate.tables.card2');
+		Route::inertia('tables', 'demo/pages/corporate/tables/TableStylesPage');
+		Route::inertia('tables/styles', 'demo/pages/corporate/tables/TableStylesPage')->name('corporate.tables.styles');
+		Route::get('tables/real-data', [TablesController::class, 'index'])->name('corporate.tables.real-data');
 	});

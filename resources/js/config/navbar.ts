@@ -61,32 +61,12 @@ export const navbar: NavbarProps = [
 		icon: 'ri-table-view',
 		submenu: [
 			{
-				label: 'Basic table',
-				route: route('dashboard.corporate.tables.basic'),
+				label: 'Table styles',
+				route: route('dashboard.corporate.tables.styles'),
 			},
 			{
-				label: 'Striped table',
-				route: route('dashboard.corporate.tables.striped'),
-			},
-			{
-				label: 'Borderless table',
-				route: route('dashboard.corporate.tables.borderless'),
-			},
-			{
-				label: 'Dividers table',
-				route: route('dashboard.corporate.tables.dividers'),
-			},
-			{
-				label: 'Bordered table',
-				route: route('dashboard.corporate.tables.bordered'),
-			},
-			{
-				label: 'Card table',
-				route: route('dashboard.corporate.tables.card'),
-			},
-			{
-				label: 'Card2 table',
-				route: route('dashboard.corporate.tables.card2'),
+				label: 'Real data table',
+				route: route('dashboard.corporate.tables.real-data'),
 			},
 		],
 	},

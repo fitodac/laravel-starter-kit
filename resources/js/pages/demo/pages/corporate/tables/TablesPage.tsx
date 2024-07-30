@@ -1,61 +1,34 @@
 import { Layout } from '@/layouts/admin/corporate/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import {
-	BasicTable,
-	BorderedTable,
-	DividersTable,
-	StripedTable,
-	BorderlessTable,
-	CardTable,
-	CardTable2,
-} from '@/pages/demo/componentsDemo'
+import { RealDataTable } from '@/pages/demo/componentsDemo'
 import type { ProductsProps } from '@/pages/demo/types'
 import type { PageProps } from '@/types'
-import { Divider } from '@nextui-org/react'
-import { usePage } from '@inertiajs/react'
 
 interface Props extends PageProps {
 	products: ProductsProps
 }
 
 export const Page = ({ products }: Props) => {
-	const { url } = usePage()
-
 	return (
 		<>
-			<PageHeader title={t('Tables')}></PageHeader>
+			<PageHeader title={t('Real data table')}>
+				<p className="">
+					This table uses Inertia.js to fetch data from the database, presenting
+					real-world information in an effective and fast manner. Inertia.js
+					acts as a bridge between the front-end and back-end, seamlessly
+					loading data without the need for full-page reloads. This results in a
+					smooth user experience, where data is retrieved and displayed quickly.
+					The table's design focuses on clarity and efficiency, ensuring that
+					users can easily access and understand the information presented. By
+					leveraging Inertia.js, the table provides a responsive and up-to-date
+					view of the data, making it a powerful tool for decision-making and
+					analysis.
+				</p>
+			</PageHeader>
 
 			<PageContent>
-				<BasicTable {...{ data: products }} />
-
-				{url === '/dashboard/corporate/tables' && (
-					<BasicTable {...{ data: products }} />
-				)}
-
-				{url === '/dashboard/corporate/tables/striped' && (
-					<StripedTable {...{ data: products }} />
-				)}
-
-				{url === '/dashboard/corporate/tables/borderless' && (
-					<BorderlessTable {...{ data: products }} />
-				)}
-
-				{url === '/dashboard/corporate/tables/dividers' && (
-					<DividersTable {...{ data: products }} />
-				)}
-
-				{url === '/dashboard/corporate/tables/bordered' && (
-					<BorderedTable {...{ data: products }} />
-				)}
-
-				{url === '/dashboard/corporate/tables/card' && (
-					<CardTable {...{ data: products }} />
-				)}
-
-				{url === '/dashboard/corporate/tables/card2' && (
-					<CardTable2 {...{ data: products }} />
-				)}
+				<RealDataTable {...{ data: products }} />
 
 				<div className="h-20" />
 			</PageContent>
@@ -64,7 +37,7 @@ export const Page = ({ products }: Props) => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: t('Tables') }} />
+	<Layout {...{ children: page, pageTitle: t('Real data table') }} />
 )
 
 export default Page
