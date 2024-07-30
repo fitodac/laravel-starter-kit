@@ -62,6 +62,7 @@ const translations: Translations = {
 		'Back to log in page': 'Back to log in page',
 		Cancel: 'Cancel',
 		Delete: 'Delete',
+		loading: 'loading',
 	},
 	es: {
 		Welcome: 'Bienvenido',
@@ -118,6 +119,7 @@ const translations: Translations = {
 		'Back to log in page': 'Volver al incio de sesión',
 		Cancel: 'Cancelar',
 		Delete: 'Borrar',
+		loading: 'cargando',
 	},
 }
 

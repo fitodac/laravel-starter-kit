@@ -19,6 +19,9 @@ export interface ProductsProps {
 	prev_page_url: string
 	to: number
 	total: number
+	links: {
+		url: string
+		label: string
+		active: boolean
+	}[]
 }
-
-

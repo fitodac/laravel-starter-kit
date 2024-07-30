@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
 	Table,
 	TableHeader,
@@ -9,8 +9,11 @@ import {
 	getKeyValue,
 	Spinner,
 	type SortDescriptor,
+	Pagination,
 } from '@nextui-org/react'
 import { useTableSorting } from '@/hooks'
+import { t } from '@/i18n'
+import { router } from '@inertiajs/react'
 
 import type { ProductsProps } from '@/pages/demo/types'
 
@@ -30,6 +33,11 @@ export const BasicTable = ({ data }: { data: ProductsProps }) => {
 	const [isLoading, setIsLoading] = useState(true)
 
 	const sort = useTableSorting()
+	const { links, current_page } = data
+
+	useEffect(() => {
+		if (data.data.length) setIsLoading(false)
+	}, [data])
 
 	return (
 		<>
@@ -54,14 +62,32 @@ export const BasicTable = ({ data }: { data: ProductsProps }) => {
 					color="primary"
 					selectionMode="multiple"
 					selectedKeys={selectedKeys}
-					// @ts-ignore3xcels1or
-					
+					// @ts-ignore
 					onSelectionChange={setSelectedKeys}
 					onSortChange={(sortDescriptor) => {
 						const sd = sort({ sortDescriptor, only: ['products'] })
 						setSortDescriptor(sd)
+						setIsLoading(true)
 					}}
 					sortDescriptor={sortDescriptor}
+					bottomContent={
+						links && (
+							<div className="flex w-full justify-end">
+								<Pagination
+									size="sm"
+									isCompact
+									showControls
+									variant="light"
+									color="primary"
+									page={current_page}
+									total={links.length - 2 || 0}
+									onChange={(page) =>
+										router.reload({ data: { page }, only: ['products'] })
+									}
+								/>
+							</div>
+						)
+					}
 					classNames={{
 						th: 'text-base [&]:first:rounded-none [&]:last:rounded-none [&]:first:before:!rounded-none [&]:last:before:!rounded-none',
 						td: 'text-base [&]:first:rounded-none [&]:last:rounded-none [&]:first:before:!rounded-none [&]:last:before:!rounded-none',
@@ -78,7 +104,8 @@ export const BasicTable = ({ data }: { data: ProductsProps }) => {
 
 					<TableBody
 						items={data.data}
-						loadingContent={<Spinner label="Loading..." />}
+						loadingContent={<Spinner label={t('loading')} />}
+						isLoading={isLoading}
 					>
 						{(item) => (
 							<TableRow key={item.sku}>
