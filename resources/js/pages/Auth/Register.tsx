@@ -143,6 +143,6 @@ const Register = () => {
 }
 
 Register.layout = (page: JSX.Element) => (
-	<AuthLayout {...{ children: page, pageTitle: t('Register') }} />
+	<AuthLayout {...{ children: page, pageTitle: String(t('Register')) }} />
 )
 export default Register

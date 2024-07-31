@@ -66,7 +66,7 @@ const Welcome = ({
 }
 
 Welcome.layout = (page: JSX.Element) => (
-	<GuestLayout {...{ children: page, pageTitle: t('Welcome') }} />
+	<GuestLayout {...{ children: page, pageTitle: String(t('Welcome')) }} />
 )
 
 export default Welcome

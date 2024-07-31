@@ -41,6 +41,22 @@ const data = [
 			{ name: 'Danger', cn: 'bg-danger' },
 		],
 	},
+	{
+		title: 'Foreground',
+		items: [
+			{ name: '50', cn: 'bg-foreground-50' },
+			{ name: '100', cn: 'bg-foreground-100' },
+			{ name: '200', cn: 'bg-foreground-200' },
+			{ name: '300', cn: 'bg-foreground-300' },
+			{ name: '400', cn: 'bg-foreground-400' },
+			{ name: '500', cn: 'bg-foreground-500' },
+			{ name: '600', cn: 'bg-foreground-600' },
+			{ name: '700', cn: 'bg-foreground-700' },
+			{ name: '800', cn: 'bg-foreground-800' },
+			{ name: '900', cn: 'bg-foreground-900' },
+			{ name: 'Default', cn: 'bg-foreground' },
+		],
+	},
 ]
 
 export const Page = ({}: Props) => {
@@ -51,7 +67,7 @@ export const Page = ({}: Props) => {
 			<PageContent>
 				<div className="space-y-2">
 					<h3 className="font-bold">Semantic colors</h3>
-					<div className="pt-3 space-y-5">
+					<div className="max-w-xs pt-3 space-y-8 sm:max-w-lg md:max-w-xl">
 						{data.map(({ title, items }, idx) => (
 							<Fragment key={`row${idx}`}>
 								<Row {...{ title, items }} />
@@ -88,12 +104,12 @@ const Row = ({
 }) => (
 	<div className="space-y-2">
 		<div className="font-bold">{title}</div>
-		<div className="flex gap-5">
+		<div className="w-auto grid grid-cols-3 gap-3 sm:grid-cols-5 xl:grid-cols-6">
 			{items.map((e) => (
 				<Fragment key={`row${e.cn}`}>
 					<div className="space-y-1">
 						<div
-							className={`border border-gray-200 w-20 aspect-video rounded-lg sm:w-24 dark:border-gray-800 ${e.cn}`}
+							className={`border border-gray-200 w-full aspect-video rounded-lg dark:border-gray-800 ${e.cn}`}
 						/>
 						<div className="text-sm font-semibold">{e.name}</div>
 					</div>

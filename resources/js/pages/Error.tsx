@@ -48,9 +48,11 @@ const Page = ({ status }: Props) => {
 					<div className="flex flex-col gap-3 text-center max-w-2xl">
 						<div className="text-6xl">{status}</div>
 
-						<div className="text-2xl">{t(messages?.description)}</div>
+						<div className="text-2xl tracking-tight">
+							{t(messages?.description)}
+						</div>
 
-						<div>
+						<div className="tracking-tight">
 							{t('This page you are looking for does not exsist', {
 								link: (
 									<Link

@@ -16,26 +16,37 @@ type NavbarProps = {
 
 export const navbar: NavbarProps = [
 	{
-		key: 'users',
-		title: t('Users management'),
-		menu: [
-			{
-				label: 'Users',
-				route: route('dashboard.users.list'),
-				icon: 'ri-user-3-fill',
-			},
-		],
-	},
-
-	{
-		key: 'ui-components',
-		title: t('Ui Components'),
+		key: 'main',
+		title: null,
 		menu: [
 			{
 				label: 'Dashboard',
 				route: route('dashboard.corporate'),
 				icon: 'ri-home-5-fill',
 			},
+		],
+	},
+	{
+		key: 'users',
+		title: String(t('Users management')),
+		menu: [
+			{
+				label: 'Users',
+				route: route('dashboard.users.list'),
+				icon: 'ri-group-line',
+			},
+			{
+				label: 'Admins',
+				route: route('dashboard.admins.list'),
+				icon: 'ri-user-line',
+			},
+		],
+	},
+
+	{
+		key: 'ui-components',
+		title: String(t('Ui Components')),
+		menu: [
 			{
 				label: 'UI Elements',
 				route: null,

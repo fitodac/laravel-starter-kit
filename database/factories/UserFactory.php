@@ -46,7 +46,7 @@ class UserFactory extends Factory
 
 			// Prefferences and settions
 			'bio' => fake()->text(200),
-			'profile_picture' => fake()->imageUrl(400, 400, 'people'),
+			'profile_picture' => rand(1, 30) . '.jpg',
 
 			'remember_token' => Str::random(10),
 		];

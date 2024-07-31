@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {
 	Table,
 	TableHeader,
@@ -8,41 +8,78 @@ import {
 	TableCell,
 	getKeyValue,
 	Spinner,
-	type SortDescriptor,
 	Pagination,
+	Avatar,
+	Button,
+	type SortDescriptor,
 } from '@nextui-org/react'
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
-import { router, usePage } from '@inertiajs/react'
-import type { User } from '@/types'
+import { Link, router, usePage } from '@inertiajs/react'
+import type { PageProps, User, Users } from '@/types'
 
 const columns = [
 	{ key: 'id', label: '#' },
 	{ key: 'username', label: 'Username' },
 	{ key: 'name', label: 'Name' },
-	// { key: 'description', label: 'Description' },
-	// { key: 'category', label: 'Category', width: 200 },
-	// { key: 'price', label: 'Price', width: 200 },
-	// { key: 'sku', label: 'SKU', width: 150 },
-	// { key: 'stock', label: 'Stock' },
-]
+	{ key: 'company', label: 'Company' },
+	{ key: 'actions', label: '' },
+] as { key: string; label: string; allowsSorting?: boolean }[]
 
 export const UsersList = () => {
-	const { props } = usePage()
+	const { users, total } = usePage<PageProps>().props as unknown as {
+		users: Users
+		total: number
+	}
 
-	const { users } = props
-
-	console.log(users.data)
+	// console.log(users)
 	// const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))
 	// const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
 	// const [isLoading, setIsLoading] = useState(true)
 
 	// const sort = useTableSorting()
-	// const { links, current_page } = data
+	const { links, current_page } = users
 
 	// useEffect(() => {
 	// 	if (data.data.length) setIsLoading(false)
 	// }, [data])
+
+	const renderCell = useCallback((user: User, columnKey: string) => {
+		return {
+			id: <>{user.id}</>,
+			username: (
+				<>
+					<div className="flex gap-x-3 items-center">
+						<Avatar
+							src={`/storage/img/users/avatars/${user.profile_picture}`}
+							name={user.name[0] + user.lastname[0]}
+							radius="full"
+						/>
+						{user.username}
+					</div>
+				</>
+			),
+			name: (
+				<span className="font-medium">{`${user.name} ${user.lastname}`}</span>
+			),
+			company: user.company,
+			actions: (
+				<div className="flex justify-end">
+					<div className="space-x-2">
+						<Button
+							size="sm"
+							color="primary"
+							variant="flat"
+							as={Link}
+							href={route('dashboard.user.show', { user })}
+						>
+							{t('Edit')}
+						</Button>
+					</div>
+				</div>
+			),
+		}[columnKey]
+	}, [])
 
 	return (
 		<>
@@ -54,12 +91,43 @@ export const UsersList = () => {
 						th: '[&]:first:rounded-none [&]:last:rounded-none',
 						td: 'border-t border-content3',
 					}}
+					bottomContent={
+						<div className="flex justify-between items-center">
+							<div className="text-sm flex-1">
+								<span className="whitespace-nowrap">
+									{t('Total users: %', { total })}
+								</span>
+							</div>
+
+							{links && (
+								<div className="flex w-full justify-end">
+									<Pagination
+										size="sm"
+										isCompact
+										showControls
+										showShadow
+										variant="light"
+										color="primary"
+										page={current_page}
+										total={links.length - 2 || 0}
+										classNames={{ wrapper: 'shadow-none' }}
+										onChange={(page) =>
+											router.reload({
+												data: { page },
+												only: ['users'],
+											})
+										}
+									/>
+								</div>
+							)}
+						</div>
+					}
 				>
 					<TableHeader columns={columns}>
 						{(column) => (
 							<TableColumn
 								key={column.key}
-								allowsSorting
+								allowsSorting={column.allowsSorting ?? false}
 								// width={column.width ?? 1}
 							>
 								{column.label}
@@ -74,91 +142,14 @@ export const UsersList = () => {
 					>
 						{(item: User) => (
 							<TableRow key={item.id}>
-								{(key) => <TableCell>{getKeyValue(item, key)}</TableCell>}
+								{(key) => (
+									<TableCell>{renderCell(item, String(key))}</TableCell>
+								)}
 							</TableRow>
 						)}
 					</TableBody>
 				</Table>
 			)}
 		</>
-
-		// <>
-		// 		<div className="space-y-6">
-		// 			<div className="space-y-2">
-		// 				<div className="font-semibold">Basic table</div>
-		// 				<p className="text-sm">
-		// 					The basic table is a simple, minimalist table design without visible
-		// 					separations between rows or columns. This clean layout focuses
-		// 					solely on the data presented, eliminating visual distractions. It's
-		// 					ideal for interfaces where simplicity and clarity are key,
-		// 					seamlessly integrating into any design without overwhelming the
-		// 					user.
-		// 				</p>
-		// 			</div>
-
-		// 			<Table
-		// 				isStriped
-		// 				radius="none"
-		// 				shadow="none"
-		// 				aria-label="Table"
-		// 				color="primary"
-		// 				selectionMode="multiple"
-		// 				selectedKeys={selectedKeys}
-		// 				// @ts-ignore
-		// 				onSelectionChange={setSelectedKeys}
-		// 				onSortChange={(sortDescriptor) => {
-		// 					const sd = sort({ sortDescriptor, only: ['products'] })
-		// 					setSortDescriptor(sd)
-		// 					setIsLoading(true)
-		// 				}}
-		// 				sortDescriptor={sortDescriptor}
-		// 				bottomContent={
-		// 					links && (
-		// 						<div className="flex w-full justify-end">
-		// 							<Pagination
-		// 								size="sm"
-		// 								isCompact
-		// 								showControls
-		// 								showShadow
-		// 								variant="light"
-		// 								color="primary"
-		// 								page={current_page}
-		// 								total={links.length - 2 || 0}
-		// 								classNames={{ wrapper: 'shadow-none' }}
-		// 								onChange={(page) =>
-		// 									router.reload({ data: { page }, only: ['products'] })
-		// 								}
-		// 							/>
-		// 						</div>
-		// 					)
-		// 				}
-		// 				classNames={{
-		// 					th: 'text-base [&]:first:rounded-none [&]:last:rounded-none [&]:first:before:!rounded-none [&]:last:before:!rounded-none',
-		// 					td: 'text-base [&]:first:rounded-none [&]:last:rounded-none [&]:first:before:!rounded-none [&]:last:before:!rounded-none',
-		// 					tbody: 'rounded-none',
-		// 				}}
-		// 			>
-		// 				<TableHeader columns={columns}>
-		// 					{(column) => (
-		// 						<TableColumn key={column.key} allowsSorting width={column.width}>
-		// 							{column.label}
-		// 						</TableColumn>
-		// 					)}
-		// 				</TableHeader>
-
-		// 				<TableBody
-		// 					items={data.data}
-		// 					loadingContent={<Spinner label={t('loading')} />}
-		// 					isLoading={isLoading}
-		// 				>
-		// 					{(item) => (
-		// 						<TableRow key={item.sku}>
-		// 							{(key) => <TableCell>{getKeyValue(item, key)}</TableCell>}
-		// 						</TableRow>
-		// 					)}
-		// 				</TableBody>
-		// 			</Table>
-		// 		</div>
-		// </>
 	)
 }

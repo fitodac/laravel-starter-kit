@@ -63,14 +63,14 @@ export const TopBar = () => {
 
 						<DropdownMenu aria-label="Dropdown Variants" color="primary">
 							<DropdownItem
-								textValue={t('My account')}
+								textValue={String(t('My account'))}
 								onClick={() => router.visit(route('profile.edit'))}
 							>
 								{t('My account')}
 							</DropdownItem>
 
 							<DropdownItem
-								textValue={t('Log out')}
+								textValue={String(t('Log out'))}
 								onClick={() => router.post(route('logout'))}
 							>
 								{t('Log out')}

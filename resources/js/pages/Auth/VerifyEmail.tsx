@@ -56,7 +56,7 @@ const VerifyEmail = ({ status }: Props) => {
 }
 
 VerifyEmail.layout = (page: JSX.Element) => (
-	<AuthLayout {...{ children: page, pageTitle: t('Email Verification') }} />
+	<AuthLayout {...{ children: page, pageTitle: String(t('Email Verification')) }} />
 )
 
 export default VerifyEmail

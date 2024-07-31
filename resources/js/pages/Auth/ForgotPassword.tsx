@@ -99,7 +99,9 @@ const ForgotPassword = ({ status }: Props) => {
 }
 
 ForgotPassword.layout = (page: JSX.Element) => (
-	<AuthLayout {...{ children: page, pageTitle: t('Forgot your password?') }} />
+	<AuthLayout
+		{...{ children: page, pageTitle: String(t('Forgot your password?')) }}
+	/>
 )
 
 export default ForgotPassword

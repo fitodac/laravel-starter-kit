@@ -79,6 +79,8 @@ const translations: Translations = {
 		'This page you are looking for does not exsist':
 			'This page you are looking for does not exsist %link%',
 		'Report this?': 'Report this?',
+		'Showing % of': 'Showing %count% of',
+		'Total users: %': 'Total users: %total%',
 	},
 	es: {
 		Welcome: 'Bienvenido',
@@ -151,6 +153,8 @@ const translations: Translations = {
 		'This page you are looking for does not exsist':
 			'La página que estás buscando no existe %link%',
 		'Report this?': '¿Quieres reportarlo?',
+		'Showing % of': 'Mostrando %count% de',
+		'Total users: %': 'Total de usuarios: %total%',
 	},
 }
 

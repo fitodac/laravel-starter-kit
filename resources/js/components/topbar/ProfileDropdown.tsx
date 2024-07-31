@@ -4,24 +4,35 @@ import {
 	DropdownMenu,
 	DropdownItem,
 	Button,
+	User,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { PageProps } from '@/types'
 import { usePage, router } from '@inertiajs/react'
+import { ButtonSize } from '../../pages/demo/componentsDemo/ui/Buttons'
 
 export const ProfileDropdown = () => {
 	const user = usePage<PageProps>().props.auth.user
 
 	return (
 		<>
-			<Dropdown radius="sm">
-				<DropdownTrigger>
-					<Button
-						variant="light"
-						endContent={<i className="ri-arrow-down-s-line" />}
-					>
-						{user?.name}
-					</Button>
+			<Dropdown radius="sm" classNames={{}}>
+				<DropdownTrigger className="cursor-pointer select-none">
+					<User
+						isFocusable
+						name={user.name}
+						description={user.company}
+						avatarProps={{
+							size: 'sm',
+							color: 'primary',
+							name: user.name[0] + user.lastname[0],
+							src: `/storage/img/users/avatars/${user.profile_picture}`,
+						}}
+						classNames={{
+							name: 'text-foreground-600 leading-tight',
+							description: 'text-foreground-400 leading-tight',
+						}}
+					/>
 				</DropdownTrigger>
 
 				<DropdownMenu
@@ -30,14 +41,14 @@ export const ProfileDropdown = () => {
 					variant="light"
 				>
 					<DropdownItem
-						textValue={t('My account')}
+						textValue={String(t('My account'))}
 						onClick={() => router.visit(route('profile.edit'))}
 					>
 						{t('My account')}
 					</DropdownItem>
 
 					<DropdownItem
-						textValue={t('Log out')}
+						textValue={String(t('Log out'))}
 						onClick={() => router.post(route('logout'))}
 					>
 						{t('Log out')}

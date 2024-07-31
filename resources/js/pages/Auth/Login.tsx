@@ -87,7 +87,7 @@ const Login = ({ status, canResetPassword }: Props) => {
 							<Switch
 								size="sm"
 								name="remember"
-								aria-label={t('Remember me')}
+								aria-label="Remember me"
 								value={data.remember ? '1' : '0'}
 								isDisabled={processing}
 								onValueChange={(e) => setData('remember', e)}
@@ -143,7 +143,7 @@ const Login = ({ status, canResetPassword }: Props) => {
 }
 
 Login.layout = (page: JSX.Element) => (
-	<AuthLayout {...{ children: page, pageTitle: t('Log in') }} />
+	<AuthLayout {...{ children: page, pageTitle: String(t('Log in')) }} />
 )
 
 export default Login

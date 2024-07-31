@@ -35,7 +35,7 @@ const Edit = ({
 }
 
 Edit.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: t('My account') }} />
+	<Layout {...{ children: page, pageTitle: String(t('My account')) }} />
 )
 
 export default Edit

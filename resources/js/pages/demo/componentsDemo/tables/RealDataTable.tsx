@@ -33,7 +33,7 @@ export const RealDataTable = ({ data }: { data: ProductsProps }) => {
 	const [isLoading, setIsLoading] = useState(true)
 
 	const sort = useTableSorting()
-	const { links, current_page } = data
+	const { links, current_page, per_page } = data
 
 	useEffect(() => {
 		if (data.data.length) setIsLoading(false)
@@ -106,7 +106,7 @@ export const RealDataTable = ({ data }: { data: ProductsProps }) => {
 
 					<TableBody
 						items={data.data}
-						loadingContent={<Spinner label={t('loading')} />}
+						loadingContent={<Spinner label={String(t('loading'))} />}
 						isLoading={isLoading}
 					>
 						{(item) => (

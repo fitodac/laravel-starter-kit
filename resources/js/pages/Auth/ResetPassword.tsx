@@ -87,9 +87,7 @@ const ResetPassword = ({ token, email }: Props) => {
 								isDisabled={processing}
 								errorMessage={errors.password_confirmation}
 								isInvalid={errors.password ? true : false}
-								onValueChange={(e) =>
-									setData('password_confirmation', e)
-								}
+								onValueChange={(e) => setData('password_confirmation', e)}
 								endContent={
 									<button
 										type="button"
@@ -122,7 +120,7 @@ const ResetPassword = ({ token, email }: Props) => {
 }
 
 ResetPassword.layout = (page: JSX.Element) => (
-	<AuthLayout {...{ children: page, pageTitle: t('Reset password') }} />
+	<AuthLayout {...{ children: page, pageTitle: String(t('Reset password')) }} />
 )
 
 export default ResetPassword

@@ -1,31 +1,27 @@
 <?php
 
-use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
-
-// Route::group([''])
-
-// Route::middleware(['auth', 'permission:admin_access'])
-// ->prefix('dashboard/corporate')
-// ->name('dashboard.')
-// ->group(function () {
-// 	Route::resource('user', UserController::class)
-// 		->names([
-// 			'index' => 'users.list',
-// 				'create' => 'user.create',
-// 				'store' => 'user.store',
-// 				'show' => 'user.show',
-// 				'edit' => 'user.edit',
-// 				'update' => 'user.update',
-// 				'destroy' => 'user.destroy',
-// 		]);
-// });
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserAdminController;
 
 
-Route::group(['middleware' => ['can:admin_access']], function () {
-	Route::prefix('dashboard/corporate')->name('dashboard.')->group(function () {
+Route::middleware(['auth', 'can:admin_access'])
+	->prefix('dashboard/corporate')
+	->name('dashboard.')
+	->group(function () {
 		Route::resource('user', UserController::class)->names([
-			'index' => 'users.list'
+			'index' => 'users.list',
+			'show' => 'user.show',
 		]);
 	});
-});
+
+
+Route::middleware(['auth', 'can:super_admin_access'])
+	->prefix('dashboard/corporate')
+	->name('dashboard.')
+	->group(function () {
+		Route::resource('administrator', UserAdminController::class)->names([
+			'index' => 'admins.list',
+			'show' => 'admin.show',
+		]);
+	});

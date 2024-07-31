@@ -27,7 +27,7 @@ const Dashboard = () => {
 								href={route('dashboard.corporate')}
 								className="space-y-3 leading-tight"
 							>
-								<div className="bg-slate-100 aspect-video"></div>
+								<div className="bg-slate-200 aspect-video rounded-lg"></div>
 								<h3 className="text-xl font-bold">Corporate</h3>
 								<p>
 									The most popular layout with a sidebar menu section and all

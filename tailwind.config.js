@@ -71,7 +71,9 @@ export default {
 				light: {
 					colors: {
 						background: '#FFFFFF', // or DEFAULT
-						foreground: '#11181C', // or 50 to 900 DEFAULT
+						foreground: {
+							DEFAULT: '#11181C',
+						},
 						primary: {
 							//... 50 to 900
 							foreground: '#FFFFFF',
@@ -97,7 +99,18 @@ export default {
 				dark: {
 					colors: {
 						background: '#000000', // or DEFAULT
-						foreground: '#ECEDEE', // or 50 to 900 DEFAULT
+						foreground: {
+							900: colors.gray[100],
+							800: colors.gray[200],
+							700: colors.gray[300],
+							600: colors.gray[400],
+							500: colors.gray[500],
+							400: colors.gray[600],
+							300: colors.gray[700],
+							200: colors.gray[800],
+							100: colors.gray[900],
+							DEFAULT: '#ECEDEE',
+						},
 						primary: {
 							//... 50 to 900
 							foreground: '#FFFFFF',

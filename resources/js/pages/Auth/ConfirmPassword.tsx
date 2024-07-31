@@ -49,9 +49,9 @@ const ConfirmPassword = () => {
 										onClick={() => setPwdVisibility(!pwdVisibility)}
 									>
 										{pwdVisibility ? (
-											<i className="ri-eye-fill ri-lg text-primary"/>
+											<i className="ri-eye-fill ri-lg text-primary" />
 										) : (
-											<i className="ri-eye-off-fill ri-lg text-zinc-400 dark:text-zinc-600"/>
+											<i className="ri-eye-off-fill ri-lg text-zinc-400 dark:text-zinc-600" />
 										)}
 									</button>
 								}
@@ -75,7 +75,9 @@ const ConfirmPassword = () => {
 }
 
 ConfirmPassword.layout = (page: JSX.Element) => (
-	<AuthLayout {...{ children: page, pageTitle: t('Confirm password') }} />
+	<AuthLayout
+		{...{ children: page, pageTitle: String(t('Confirm password')) }}
+	/>
 )
 
 export default ConfirmPassword

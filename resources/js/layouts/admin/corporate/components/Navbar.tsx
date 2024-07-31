@@ -16,6 +16,7 @@ export const Navbar = () => {
 		<>
 			<div className="left-0 top-topbar bottom-0 fixed overflow-hidden z-30">
 				<Sidebar
+					transitionDuration={400}
 					id="navbar"
 					width={theme.sidebar.width}
 					collapsedWidth={theme.sidebar.collapsedWidth}
@@ -23,22 +24,22 @@ export const Navbar = () => {
 					rootStyles={{ height: '100%' }}
 					className={cn(
 						'bg-gray-800 pt-6',
-						'!border-gray-800 [&>div]:bg-transparent dark:bg-gray-950 dark:!border-gray-950'
+						'!border-gray-800 [&>div]:bg-transparent dark:bg-gray-950 dark:!border-gray-950',
+						'[&.ps-collapsed_.ps-submenu-content]:!hidden'
 					)}
 				>
 					{navbar.map((nav) => (
 						<Fragment key={nav.key}>
-							<div
-								className="text-white text-xs font-medium px-7 mb-2"
-								style={{ color: theme.sidebar.title.color }}
-							>
-								{nav.title}
-							</div>
+							{nav.title && (
+								<div
+									className="text-white text-xs font-medium px-7 mb-1 mt-2 whitespace-nowrap"
+									style={{ color: theme.sidebar.title.color }}
+								>
+									{nav.title}
+								</div>
+							)}
 
 							<Menu
-								// rootStyles={{
-								// 	paddingTop: '10px',
-								// }}
 								menuItemStyles={{
 									root: {},
 									button: ({ level, active, disabled, isSubmenu }) => {
@@ -70,6 +71,7 @@ export const Navbar = () => {
 									// icon: {},
 									// SubMenuExpandIcon: {},
 								}}
+								closeOnClick
 							>
 								{nav.menu.map(({ label, route, icon, submenu }, idx) => {
 									if (submenu) {
@@ -117,7 +119,12 @@ export const Navbar = () => {
 				)}
 			</div>
 
-			<motion.div
+			<div
+				className="hidden flex-[0_0_auto] md:block"
+				style={{ width: theme.sidebar.width }}
+			></div>
+
+			{/* <motion.div
 				className="hidden md:block"
 				initial={
 					windowWidth > theme.sidebar.breakpoint && {
@@ -129,7 +136,7 @@ export const Navbar = () => {
 						width: theme.sidebar.width,
 					}
 				}
-			/>
+			/> */}
 		</>
 	)
 }

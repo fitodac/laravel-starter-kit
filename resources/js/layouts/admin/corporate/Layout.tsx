@@ -1,13 +1,15 @@
 import { type PropsWithChildren, useEffect } from 'react'
 import { Head } from '@inertiajs/react'
-import { Button, cn } from '@nextui-org/react'
+import { Button, cn, Divider } from '@nextui-org/react'
 import { useMainStore } from '@/store'
 import { ColorModeToggler, ProfileDropdown, Toastify } from '@/components'
+import theme from '@/../../theme.config'
 
 import { useColorMode, useWindowWidth } from '@/hooks'
 import { Navbar } from './components'
 
 import imgBrand from '@/assets/img/brand.svg'
+import colors from 'tailwindcss/colors'
 
 interface Props extends PropsWithChildren {
 	pageTitle: string
@@ -44,8 +46,9 @@ export const Layout = ({ children, pageTitle }: Props) => {
 							<img src={imgBrand} alt="Logo" className="w-20 md:w-24" />
 						</div>
 
-						<div>
+						<div className="flex items-center gap-x-3 h-full">
 							<ColorModeToggler />
+							<Divider orientation="vertical" className="h-2/3" />
 							<ProfileDropdown />
 
 							<Button
@@ -66,10 +69,10 @@ export const Layout = ({ children, pageTitle }: Props) => {
 					</div>
 				</div>
 
-				<div className="flex min-h-dvh pt-topbar">
+				<div className="flex min-h-dvh pt-topbar overflow-x-scroll">
 					<Navbar />
 
-					<div className="flex-1">{children}</div>
+					<div className="flex-1 overflow-x-auto">{children}</div>
 				</div>
 			</main>
 

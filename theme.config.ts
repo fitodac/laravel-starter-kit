@@ -5,7 +5,7 @@ export default {
 		width: '230px',
 		collapsedWidth: '0px',
 
-		breakpoint: 768,
+		breakpoint: 820,
 
 		title: {
 			color: colors.gray[500],

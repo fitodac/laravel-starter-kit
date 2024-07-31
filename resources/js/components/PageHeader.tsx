@@ -11,7 +11,7 @@ export const PageHeader = ({ title, children }: Props) => {
 			className={cn(
 				'bg-white w-full px-5 py-7 grid gap-3',
 				'sm:grid-cols-2 md:gap-6 md:px-10 md:py-12 xl:gap-20',
-				'dark:bg-gray-900'
+				'dark:bg-gray-950/40'
 			)}
 		>
 			{title && (
