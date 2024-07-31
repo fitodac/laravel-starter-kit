@@ -23,7 +23,7 @@ const Welcome = ({
 							<div className="flex justify-center">
 								<Button
 									color="primary"
-									size="lg"
+									variant="flat"
 									onPress={() => router.visit(route('login'))}
 								>
 									{t('Enter dashboard')}
@@ -35,7 +35,7 @@ const Welcome = ({
 							<Button
 								fullWidth
 								color="primary"
-								size="lg"
+								variant="flat"
 								onPress={() => router.visit(route('login'))}
 							>
 								{t('Log in')}
@@ -44,7 +44,7 @@ const Welcome = ({
 							<Button
 								fullWidth
 								color="primary"
-								size="lg"
+								variant="flat"
 								onPress={() => router.visit(route('register'))}
 							>
 								{t('Register')}

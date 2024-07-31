@@ -1,6 +1,7 @@
 type Translations = {
 	en: { [index: string]: string }
 	es: { [index: string]: string }
+	[key: string]: { [index: string]: string }
 }
 
 /**
@@ -63,6 +64,21 @@ const translations: Translations = {
 		Cancel: 'Cancel',
 		Delete: 'Delete',
 		loading: 'loading',
+		'503: Service Unavailable': '503: Service Unavailable',
+		'500: Server Error': '500: Server Error',
+		'404: Page Not Found': '404: Page Not Found',
+		'403: Forbidden': '403: Forbidden',
+		'Sorry, we are doing some maintenance. Please check back soon.':
+			'Sorry, we are doing some maintenance. Please check back soon.',
+		'Sorry, something went wrong on our servers.':
+			'Sorry, something went wrong on our servers.',
+		'Sorry, the page you are looking for could not be found.':
+			'Sorry, the page you are looking for could not be found.',
+		'Sorry, you are forbidden from accessing this page.':
+			'Sorry, you are forbidden from accessing this page.',
+		'This page you are looking for does not exsist':
+			'This page you are looking for does not exsist %link%',
+		'Report this?': 'Report this?',
 	},
 	es: {
 		Welcome: 'Bienvenido',
@@ -120,6 +136,21 @@ const translations: Translations = {
 		Cancel: 'Cancelar',
 		Delete: 'Borrar',
 		loading: 'cargando',
+		'503: Service Unavailable': '503: Servicio no disponible',
+		'500: Server Error': '500: Error del servidor',
+		'404: Page Not Found': '404: Página no encontrada',
+		'403: Forbidden': '403: Prohibido',
+		'Sorry, we are doing some maintenance. Please check back soon.':
+			'Lo sentimos, estamos realizando mantenimiento. Por favor, vuelve a intentarlo más tarde.',
+		'Sorry, something went wrong on our servers.':
+			'Lo sentimos, algo salió mal en nuestros servidores.',
+		'Sorry, the page you are looking for could not be found.':
+			'Lo sentimos, no se pudo encontrar la página que buscas.',
+		'Sorry, you are forbidden from accessing this page.':
+			'Lo sentimos, no tienes permiso para acceder a esta página.',
+		'This page you are looking for does not exsist':
+			'La página que estás buscando no existe %link%',
+		'Report this?': '¿Quieres reportarlo?',
 	},
 }
 
@@ -129,9 +160,31 @@ const translations: Translations = {
  * @param str
  * @returns
  */
-export const t = (str: string): string => {
+type Params = {
+	[key: string]: string | React.ReactNode
+}
+
+export const t = (str: string, params: Params = {}): string | JSX.Element => {
 	if (!str) return ''
-	const translation =
-		locale === 'en' ? translations.en[str] : translations.es[str]
+
+	// const locale = 'en'
+	const translation = translations[locale ?? 'en'][str]
+
+	if (typeof translation === 'string') {
+		// @ts-ignore
+		return Object.keys(params).reduce((acc, key) => {
+			const value = params[key]
+			if (typeof value === 'string') {
+				return acc.replace(new RegExp(`%${key}%`, 'g'), value)
+			} else {
+				return acc
+					.split(new RegExp(`%${key}%`, 'g'))
+					.flatMap((item, i, arr) =>
+						i < arr.length - 1 ? [item, value] : item
+					)
+			}
+		}, translation)
+	}
+
 	return translation ?? str
 }

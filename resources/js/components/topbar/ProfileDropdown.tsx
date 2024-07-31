@@ -3,7 +3,6 @@ import {
 	DropdownTrigger,
 	DropdownMenu,
 	DropdownItem,
-	Divider,
 	Button,
 } from '@nextui-org/react'
 import { t } from '@/i18n'

@@ -1,8 +1,8 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ReactElement } from 'react'
 import { cn } from '@nextui-org/react'
 
 interface Props extends PropsWithChildren {
-	title: string
+	title: string | ReactElement
 }
 
 export const PageHeader = ({ title, children }: Props) => {

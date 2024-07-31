@@ -37,7 +37,7 @@ export const Page = ({ products }: Props) => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: t('Real data table') }} />
+	<Layout {...{ children: page, pageTitle: String(t('Real data table')) }} />
 )
 
 export default Page

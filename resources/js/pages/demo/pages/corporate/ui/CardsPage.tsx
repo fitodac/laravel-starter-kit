@@ -47,7 +47,7 @@ export const Page = ({}: Props) => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: t('Cards') }} />
+	<Layout {...{ children: page, pageTitle: String(t('Cards')) }} />
 )
 
 export default Page

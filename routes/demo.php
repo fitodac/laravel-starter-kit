@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use App\Http\Controllers\Demo\TablesController;
 
 
-Route::middleware('auth')->prefix('dashboard/corporate')
+Route::middleware('auth')
+	->prefix('dashboard/corporate')
 	->name('dashboard.')
 	->group(function () {
 

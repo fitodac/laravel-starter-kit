@@ -19,8 +19,3 @@ export * from './ui/CardsActions'
 
 export * from './tables/RealDataTable'
 export * from './tables/TableStyles'
-// export * from './tables/BorderedTable'
-// export * from './tables/DividersTable'
-// export * from './tables/StripedTable'
-// export * from './tables/BorderlessTable'
-// export * from './tables/CardTable'

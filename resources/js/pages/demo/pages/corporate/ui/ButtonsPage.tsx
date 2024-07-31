@@ -57,7 +57,7 @@ export const Page = () => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: t('Buttons') }} />
+	<Layout {...{ children: page, pageTitle: String(t('Buttons')) }} />
 )
 
 export default Page

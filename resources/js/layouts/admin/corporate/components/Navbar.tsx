@@ -5,6 +5,8 @@ import { motion } from 'framer-motion'
 import { Link } from '@inertiajs/react'
 import theme from '@/../../theme.config'
 import { navbar } from '@/config/navbar'
+import { cn } from '@nextui-org/react'
+import { Fragment } from 'react/jsx-runtime'
 
 export const Navbar = () => {
 	const { navbarOpen, setNavbarOpen } = useMainStore()
@@ -19,76 +21,91 @@ export const Navbar = () => {
 					collapsedWidth={theme.sidebar.collapsedWidth}
 					collapsed={windowWidth <= theme.sidebar.breakpoint && !navbarOpen}
 					rootStyles={{ height: '100%' }}
-					className="bg-gray-800 !border-gray-800 [&>div]:bg-transparent dark:bg-gray-950 dark:!border-gray-950"
+					className={cn(
+						'bg-gray-800 pt-6',
+						'!border-gray-800 [&>div]:bg-transparent dark:bg-gray-950 dark:!border-gray-950'
+					)}
 				>
-					<Menu
-						rootStyles={{
-							paddingTop: '10px',
-						}}
-						menuItemStyles={{
-							root: {},
-							button: ({ level, active, disabled, isSubmenu }) => {
-								return {
-									color: active ? 'white' : theme.sidebar.item.color,
-									fontSize: theme.sidebar.item.fontSize,
-									fontWeight: 500,
-									height: theme.sidebar.item.height,
-									userSelect: 'none',
-									transition: '.3s ease-in-out',
-									'&:hover': {
-										backgroundColor: theme.sidebar.item.hover.backgroundColor,
-										color: theme.sidebar.item.hover.color,
-									},
-								}
-							},
-							subMenuContent: {
-								backgroundColor: theme.sidebar.subMenu.backgroundColor,
-							},
-							icon: {
-								fontSize: theme.sidebar.item.icon.size,
-								position: 'relative',
-								top: '-1px',
-							},
-							// label: {},
-							// prefix: {},
-							// suffix: {},
-							// icon: {},
-							// SubMenuExpandIcon: {},
-						}}
-					>
-						{navbar.map(({ label, route, icon, submenu }, idx) => {
-							if (submenu) {
-								return (
-									<SubMenu
-										key={label}
-										label={label}
-										icon={<i className={icon} />}
-									>
-										{submenu.map(({ label, route }, idx) => (
-											<MenuItem
-												key={route}
-												component={<Link href={route || ''} />}
-												active={location.href === route}
-											>
-												{label}
-											</MenuItem>
-										))}
-									</SubMenu>
-								)
-							}
+					{navbar.map((nav) => (
+						<Fragment key={nav.key}>
+							<div
+								className="text-white text-xs font-medium px-7 mb-2"
+								style={{ color: theme.sidebar.title.color }}
+							>
+								{nav.title}
+							</div>
 
-							return (
-								<MenuItem
-									key={route}
-									component={<Link href={route || ''} />}
-									icon={<i className={icon} />}
-									active={location.href === route}
-								>
-									{label}
-								</MenuItem>
-							)
-						})}
-					</Menu>
+							<Menu
+								// rootStyles={{
+								// 	paddingTop: '10px',
+								// }}
+								menuItemStyles={{
+									root: {},
+									button: ({ level, active, disabled, isSubmenu }) => {
+										return {
+											color: active ? 'white' : theme.sidebar.item.color,
+											fontSize: theme.sidebar.item.fontSize,
+											fontWeight: 500,
+											height: theme.sidebar.item.height,
+											userSelect: 'none',
+											transition: '.3s ease-in-out',
+											'&:hover': {
+												backgroundColor:
+													theme.sidebar.item.hover.backgroundColor,
+												color: theme.sidebar.item.hover.color,
+											},
+										}
+									},
+									subMenuContent: {
+										backgroundColor: theme.sidebar.subMenu.backgroundColor,
+									},
+									icon: {
+										fontSize: theme.sidebar.item.icon.size,
+										position: 'relative',
+										top: '-1px',
+									},
+									// label: {},
+									// prefix: {},
+									// suffix: {},
+									// icon: {},
+									// SubMenuExpandIcon: {},
+								}}
+							>
+								{nav.menu.map(({ label, route, icon, submenu }, idx) => {
+									if (submenu) {
+										return (
+											<SubMenu
+												key={label}
+												label={label}
+												icon={<i className={icon} />}
+											>
+												{submenu.map(({ label, route }, idx) => (
+													<MenuItem
+														key={route}
+														component={<Link href={route || ''} />}
+														active={location.href === route}
+													>
+														{label}
+													</MenuItem>
+												))}
+											</SubMenu>
+										)
+									}
+
+									return (
+										<MenuItem
+											key={route}
+											component={<Link href={route || ''} />}
+											icon={<i className={icon} />}
+											active={location.href === route}
+										>
+											{label}
+										</MenuItem>
+									)
+								})}
+							</Menu>
+						</Fragment>
+					))}
 				</Sidebar>
 
 				{navbarOpen && windowWidth <= 768 && (

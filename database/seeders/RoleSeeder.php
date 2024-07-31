@@ -11,40 +11,30 @@ use Spatie\Permission\Models\Permission;
 
 class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
+	/**
+	 * Run the database seeds.
+	 */
+	public function run(): void
+	{
 
-			/**
-			 * Reset permissions
-			 */
-			app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-
-
-			$superAdmin = Role::create(['name' => 'superadmin']);
-			$admin = Role::create(['name' => 'admin']);
-			$user = Role::create(['name' => 'user']);
-			
-			
-			// $admin_permission = Permission::create(['name' => 'access everything']);
-
-			// $client_permission = Permission::create(['name' => 'access its own account']);
-
-			// $private_permission = Permission::create(['name' => 'private access']);
+		/**
+		 * Reset permissions
+		 */
+		app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
 
-			// # Asignando un permiso a un rol
-			// $admin->givePermissionTo($admin_permission);
+		$superAdmin = Role::create(['name' => 'superadmin']);
+		$admin = Role::create(['name' => 'admin']);
+		$user = Role::create(['name' => 'user']);
 
-			// # El otro método es asignar un rol a un permiso
-			// $client_permission->assignRole($client);
+		// Create permission
+		$superAdminAccess = Permission::create(['name' => 'super_admin_access']);
+		$adminAcces = Permission::create(['name' => 'admin_access']);
+		$privateAccess = Permission::create(['name' => 'private_access']);
 
-			// # O puede asignar múltiples roles a un permiso
-			// $private_permission->syncRoles([$admin, $client]);
-
-			// # O asignar multiples permisos a un rol
-			// $role->syncPermissions(['permission_1', 'permission_2']);
-    }
+		// Assign permissions to roles
+		$superAdmin->givePermissionTo($superAdminAccess, $adminAcces);
+		$admin->givePermissionTo($adminAcces);
+		$user->givePermissionTo($privateAccess);
+	}
 }

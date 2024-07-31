@@ -16,7 +16,7 @@ interface Props {}
 export const Page = ({}: Props) => {
 	return (
 		<>
-			<PageHeader title={t('Form Layouts')}>
+			<PageHeader title={`${t('Form Layouts' ?? '')}`}>
 				<p className="text-lg font-medium leading-tight">
 					Forms are essential components of a dashboard, enabling users to
 					manage data efficiently within a maximum content width.
@@ -55,7 +55,7 @@ export const Page = ({}: Props) => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: t('Form layouts') }} />
+	<Layout {...{ children: page, pageTitle: String(t('Form layouts')) }} />
 )
 
 export default Page

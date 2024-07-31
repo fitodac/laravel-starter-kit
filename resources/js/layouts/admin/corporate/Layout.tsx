@@ -4,7 +4,7 @@ import { Button, cn } from '@nextui-org/react'
 import { useMainStore } from '@/store'
 import { ColorModeToggler, ProfileDropdown, Toastify } from '@/components'
 
-import { useWindowWidth } from '@/hooks'
+import { useColorMode, useWindowWidth } from '@/hooks'
 import { Navbar } from './components'
 
 import imgBrand from '@/assets/img/brand.svg'
@@ -16,6 +16,7 @@ interface Props extends PropsWithChildren {
 export const Layout = ({ children, pageTitle }: Props) => {
 	const { navbarOpen, setNavbarOpen } = useMainStore()
 	const { windowWidth } = useWindowWidth()
+	const { colorMode } = useColorMode()
 
 	useEffect(() => {
 		if (windowWidth > 768 && !navbarOpen) {

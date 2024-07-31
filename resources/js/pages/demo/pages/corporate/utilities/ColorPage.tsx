@@ -104,7 +104,7 @@ const Row = ({
 )
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: t('Color') }} />
+	<Layout {...{ children: page, pageTitle: String(t('Color')) }} />
 )
 
 export default Page

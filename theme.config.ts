@@ -7,8 +7,11 @@ export default {
 
 		breakpoint: 768,
 
+		title: {
+			color: colors.gray[500],
+		},
 		item: {
-			color: '#9ca3af', // Gray 400
+			color: colors.gray[400], // Gray 400
 			fontSize: '.9rem',
 			height: '40px',
 			hover: {
@@ -20,7 +23,7 @@ export default {
 			},
 		},
 		subMenu: {
-			backgroundColor: '#111827', // Gray 900
+			backgroundColor: colors.gray[900], // Gray 900
 		},
 	},
 

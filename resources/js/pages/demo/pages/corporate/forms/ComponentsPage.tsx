@@ -15,7 +15,7 @@ interface Props {}
 export const Page = ({}: Props) => {
 	return (
 		<>
-			<PageHeader title={t('Form components')}>
+			<PageHeader title={String(t('Form components'))}>
 				<p className="text-lg font-medium leading-tight">
 					Form components play a crucial role in UX by providing a structured
 					and visually appealing way for users to input and manage data.
@@ -51,7 +51,7 @@ export const Page = ({}: Props) => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: t('Form components') }} />
+	<Layout {...{ children: page, pageTitle: String(t('Form components')) }} />
 )
 
 export default Page
