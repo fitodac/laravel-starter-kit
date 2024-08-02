@@ -15,6 +15,7 @@ Route::middleware('auth')
 		// UI Elements
 		Route::inertia('/ui/buttons', 'demo/pages/corporate/ui/ButtonsPage')->name('corporate.ui.buttons');
 		Route::inertia('/ui/cards', 'demo/pages/corporate/ui/CardsPage')->name('corporate.ui.cards');
+		Route::inertia('/ui/chips', 'demo/pages/corporate/ui/ChipsPage')->name('corporate.ui.chips');
 
 
 		// Utilities

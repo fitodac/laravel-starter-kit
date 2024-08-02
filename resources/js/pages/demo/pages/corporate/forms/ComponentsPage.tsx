@@ -3,7 +3,6 @@ import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import {
 	InputDefault,
-	InputLabelOutside,
 	SimpleSelect,
 	CheckboxDefault,
 	RadioButtonsDefault,
@@ -30,18 +29,20 @@ export const Page = ({}: Props) => {
 					interacting with the application.
 				</p>
 			</PageHeader>
+
 			<PageContent>
-				<div className="grid grid-cols-2 gap-10">
+				<div className="space-y-10">
 					<InputDefault />
-					<InputLabelOutside />
 
-					<div className="col-span-2">
-						<SimpleSelect />
+					<div className="grid grid-cols-2 gap-10">
+						<div className="col-span-2">
+							<SimpleSelect />
+						</div>
+
+						<CheckboxDefault />
+						<RadioButtonsDefault />
+						<SwitchComponent />
 					</div>
-
-					<CheckboxDefault />
-					<RadioButtonsDefault />
-					<SwitchComponent />
 				</div>
 
 				<div className="h-20"></div>

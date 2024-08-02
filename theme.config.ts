@@ -1,6 +1,6 @@
 import colors from 'tailwindcss/colors'
 
-export default {
+export const theme = {
 	sidebar: {
 		width: '230px',
 		collapsedWidth: '0px',
@@ -29,5 +29,12 @@ export default {
 
 	topbar: {
 		height: '56px',
+	},
+
+	form: {
+		field: {
+			variant: 'flat',
+			classicStyle: true,
+		},
 	},
 }

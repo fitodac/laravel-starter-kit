@@ -11,9 +11,7 @@ import {
 	CardExtraFeatures,
 } from '@/pages/demo/componentsDemo'
 
-interface Props {}
-
-export const Page = ({}: Props) => {
+export const Page = () => {
 	return (
 		<>
 			<PageHeader title={t('Cards')}>

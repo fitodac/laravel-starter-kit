@@ -36,11 +36,10 @@ class User extends Authenticatable
 		// Professional information
 		'job_title',
 		'company',
+		'bio',
 
 		// Prefferences and settions
 		'profile_picture',
-		'bio',
-		'social_media'
 	];
 
 	/**

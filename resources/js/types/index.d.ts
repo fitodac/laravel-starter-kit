@@ -1,5 +1,7 @@
 import { Config } from 'ziggy-js'
 
+import { NavbarProps } from './navbar'
+
 export interface User {
 	id: number
 	name: string
@@ -17,6 +19,13 @@ export interface User {
 	profile_picture: string
 	username: string
 	zip: string
+	role?: string
+	roles?: {
+		created_at?: string
+		guard_name: string
+		id: number
+		name: string
+	}[]
 }
 
 export interface Users {
@@ -46,4 +55,25 @@ export type PageProps<
 		user: User
 	}
 	ziggy: Config & { location: string }
+	flash?: FlashMessages
+	adminNavbar?: NavbarProps
+}
+
+interface FlashMessages {
+	success?: string
+	error?: string
+	info?: string
+}
+
+interface PageProps {
+	flash?: FlashMessages
+	errors?: {
+		[key: string]: string[]
+	}
+	[key: string]: any
+}
+
+interface InertiaResponse {
+	props: PageProps
+	[key: string]: any
 }

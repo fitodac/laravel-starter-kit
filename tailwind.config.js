@@ -2,7 +2,7 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 const colors = require('tailwindcss/colors')
 const { nextui } = require('@nextui-org/react')
 
-import theme from './theme.config'
+import { theme } from './theme.config'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -79,7 +79,18 @@ export default {
 							foreground: '#FFFFFF',
 							DEFAULT: '#006FEE',
 						},
-						// ... rest of the colors
+						default: {
+							100: colors.gray[100],
+							200: colors.gray[200],
+							300: colors.gray[300],
+							400: colors.gray[400],
+							500: colors.gray[500],
+							600: colors.gray[600],
+							700: colors.gray[700],
+							800: colors.gray[800],
+							900: colors.gray[900],
+							DEFAULT: colors.gray[200],
+						},
 					},
 					layout: {
 						hoverOpacity: 0.8, //  this value is applied as opacity-[value] when the component is hovered
@@ -118,14 +129,27 @@ export default {
 						},
 						default: {
 							100: colors.gray[900],
-							200: colors.gray[800],
-							300: colors.gray[700],
-							400: colors.gray[600],
-							500: colors.gray[500],
+							// 200: colors.gray[800],
+							// 300: colors.gray[700],
+							// 400: colors.gray[600],
+							// 500: colors.gray[500],
+							// 600: colors.gray[400],
+							// 700: colors.gray[300],
+							// 800: colors.gray[200],
+							// 900: colors.gray[150],
 							DEFAULT: colors.gray[800],
 						},
 						content1: {
 							DEFAULT: colors.gray[950],
+						},
+						content2: {
+							DEFAULT: colors.gray[900],
+						},
+						content3: {
+							DEFAULT: colors.gray[800],
+						},
+						content4: {
+							DEFAULT: colors.gray[700],
 						},
 					},
 					layout: {

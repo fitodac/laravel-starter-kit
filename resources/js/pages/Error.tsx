@@ -56,6 +56,7 @@ const Page = ({ status }: Props) => {
 							{t('This page you are looking for does not exsist', {
 								link: (
 									<Link
+										key="report-link"
 										href={route('dashboard')}
 										className="relative inline-flex items-center tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 text-medium text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity"
 									>
@@ -65,14 +66,25 @@ const Page = ({ status }: Props) => {
 							})}
 						</div>
 
-						<div className="pt-6">
+						<div className="pt-6 flex justify-center gap-x-5">
 							<Button
+								size="sm"
+								color="primary"
+								variant="light"
+								startContent={<i className="ri-arrow-left-line" />}
+								onPress={() => window.history.back()}
+							>
+								{t('Back previous page')}
+							</Button>
+
+							<Button
+								size="sm"
 								as={Link}
 								color="primary"
 								variant="flat"
 								href={route('dashboard')}
 							>
-								Back home
+								{t('Go home')}
 							</Button>
 						</div>
 					</div>

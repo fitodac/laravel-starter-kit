@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Inertia\Inertia;
+use App\Http\Requests\Admin\UpdateUserRequest;
+use App\Http\Requests\Admin\CreateUserRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -22,31 +26,45 @@ class UserController extends Controller
 
 	public function create()
 	{
-		//
+		return Inertia::render('admin/users/Create');
 	}
 
 
-	public function store(Request $request)
+	public function store(CreateUserRequest $request)
 	{
-		//
+		try {
+			$user = User::create($request->validated());
+			return redirect()->route('dashboard.user.show', $user);
+			// return back()->with('success', 'User created successfully.');
+		} catch (\Exception $e) {
+			Log::error('Error updating user: ' . $e->getMessage());
+			return back()->with('error', 'An error occurred while storing user information.');
+		}
 	}
 
 
 	public function show(User $user)
 	{
-		return Inertia::render('admin/users/CreateEdit', compact('user'));
+		$user['role'] = $user->roles->pluck('name')->first();
+		return Inertia::render('admin/users/Edit', compact('user'));
 	}
 
 
-	public function edit(string $id)
+	public function edit(User $user)
 	{
-		//
+		$user['role'] = $user->roles->pluck('name')->first();
+		return Inertia::render('admin/users/Edit', compact('user'));
 	}
 
-
-	public function update(Request $request, string $id)
+	public function update(UpdateUserRequest $request, User $user): RedirectResponse
 	{
-		//
+		try {
+			$user->update($request->validated());
+			return back()->with('success', 'User updated successfully.');
+		} catch (\Exception $e) {
+			Log::error('Error updating user: ' . $e->getMessage());
+			return back()->with('error', 'An error occurred while updating user information.');
+		}
 	}
 
 
@@ -54,5 +72,4 @@ class UserController extends Controller
 	{
 		//
 	}
-
 }

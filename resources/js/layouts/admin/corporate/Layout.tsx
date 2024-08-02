@@ -3,13 +3,11 @@ import { Head } from '@inertiajs/react'
 import { Button, cn, Divider } from '@nextui-org/react'
 import { useMainStore } from '@/store'
 import { ColorModeToggler, ProfileDropdown, Toastify } from '@/components'
-import theme from '@/../../theme.config'
 
 import { useColorMode, useWindowWidth } from '@/hooks'
 import { Navbar } from './components'
 
 import imgBrand from '@/assets/img/brand.svg'
-import colors from 'tailwindcss/colors'
 
 interface Props extends PropsWithChildren {
 	pageTitle: string

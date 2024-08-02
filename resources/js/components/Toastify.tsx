@@ -11,7 +11,6 @@ export const Toastify = (): JSX.Element => {
 			hideProgressBar={false}
 			newestOnTop={true}
 			closeOnClick
-			rtl={false}
 			pauseOnFocusLoss
 			draggable
 			pauseOnHover

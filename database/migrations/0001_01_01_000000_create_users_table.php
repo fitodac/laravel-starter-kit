@@ -20,9 +20,9 @@ return new class extends Migration
 			$table->string('email')->unique();
 			$table->timestamp('email_verified_at')->nullable();
 			$table->string('password');
-			$table->string('phone')->nullable();
 
 			// Personal information
+			$table->string('phone')->nullable();
 			$table->timestamp('birth_date')->nullable();
 			$table->string('address')->nullable();
 			$table->string('city')->nullable();
@@ -32,10 +32,10 @@ return new class extends Migration
 			// Professional information
 			$table->string('job_title')->nullable();
 			$table->string('company')->nullable();
+			$table->text('bio')->nullable();
 
-			// Prefferences and settions
+			// Prefferences and settings
 			$table->string('profile_picture')->nullable();
-			$table->string('bio')->nullable();
 
 			$table->rememberToken();
 			$table->timestamps();
