@@ -38,8 +38,9 @@ class User extends Authenticatable
 		'company',
 		'bio',
 
-		// Prefferences and settions
+		// Prefferences and settings
 		'profile_picture',
+		'status',
 	];
 
 	/**

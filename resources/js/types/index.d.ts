@@ -18,6 +18,7 @@ export interface User {
 	phone: string
 	profile_picture: string
 	username: string
+	status: string
 	zip: string
 	role?: string
 	roles?: {

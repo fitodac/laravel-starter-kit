@@ -6,12 +6,11 @@ import {
 	TableColumn,
 	TableRow,
 	TableCell,
-	getKeyValue,
-	Spinner,
 	Pagination,
 	Avatar,
 	Button,
 	type SortDescriptor,
+	Chip,
 } from '@nextui-org/react'
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
@@ -23,6 +22,7 @@ const columns = [
 	{ key: 'username', label: 'Username' },
 	{ key: 'name', label: 'Name' },
 	{ key: 'company', label: 'Company' },
+	{ key: 'status', label: 'Status' },
 	{ key: 'actions', label: '' },
 ] as { key: string; label: string; allowsSorting?: boolean }[]
 
@@ -63,6 +63,17 @@ export const AdministratorsList = () => {
 				<span className="font-medium">{`${user.name} ${user.lastname}`}</span>
 			),
 			company: user.company,
+			status: (
+				<>
+					<Chip
+						size="sm"
+						color={user.status === 'inactive' ? 'danger' : 'success'}
+						variant="dot"
+					>
+						{user.status}
+					</Chip>
+				</>
+			),
 			actions: (
 				<div className="flex justify-end">
 					<div className="space-x-2">

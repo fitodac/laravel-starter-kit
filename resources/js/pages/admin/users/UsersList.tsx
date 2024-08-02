@@ -11,8 +11,10 @@ export const Page = () => {
 			<PageHeader title={t('Users')}>
 				<div className="flex justify-end">
 					<Button
+						size="sm"
 						color="primary"
 						className="px-6"
+						variant="flat"
 						as={Link}
 						href={route('dashboard.user.create')}
 					>

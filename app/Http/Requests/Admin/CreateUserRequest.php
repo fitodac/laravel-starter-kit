@@ -22,10 +22,11 @@ class CreateUserRequest extends FormRequest
 	public function rules(): array
 	{
 		$rules = [
+			'username' => 'required|string|max:255|unique:users,username',
 			'name' => 'required|string|max:255',
 			'lastname' => 'required|string|max:255',
-			'username' => 'required|string|max:255|unique:users,username',
 			'email' => 'required|email|unique:users,email',
+			'role' => 'required|integer|exists:roles,id',
 			'password' => 'required|string|min:8|regex:/^\S*$/u',
 		];
 
@@ -49,6 +50,9 @@ class CreateUserRequest extends FormRequest
 			'email.required' => 'Email is required',
 			'email.email' => 'Email must be a valid email address',
 			'email.unique' => 'Email already exists',
+			'role.required' => 'Role is required',
+			'role.integer' => 'Role must be an integer',
+			'role.exists' => 'Role does not exist',
 			'password.required' => 'Password is required',
 			'password.string' => 'Password must be a string',
 			'password.min' => 'Password must be at least 8 characters',

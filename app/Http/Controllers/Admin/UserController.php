@@ -10,6 +10,9 @@ use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Http\Requests\Admin\CreateUserRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendUserDetails;
 
 class UserController extends Controller
 {
@@ -34,8 +37,18 @@ class UserController extends Controller
 	{
 		try {
 			$user = User::create($request->validated());
+
+			// Assign a role for the user
+			$role = Role::findById(3);
+			$user->assignRole($role);
+
+			// Send email with user details if send_details is true
+			if ($request->has('send_details') && $request->send_details) {
+				Mail::to($user->email)->send(new SendUserDetails($user, $request->password));
+			}
+
+			// Redirect to the user's profile page
 			return redirect()->route('dashboard.user.show', $user);
-			// return back()->with('success', 'User created successfully.');
 		} catch (\Exception $e) {
 			Log::error('Error updating user: ' . $e->getMessage());
 			return back()->with('error', 'An error occurred while storing user information.');

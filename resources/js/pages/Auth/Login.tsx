@@ -83,7 +83,7 @@ const Login = ({ status, canResetPassword }: Props) => {
 							/>
 						</fieldset>
 
-						<div className="">
+						<div>
 							<Switch
 								size="sm"
 								name="remember"
