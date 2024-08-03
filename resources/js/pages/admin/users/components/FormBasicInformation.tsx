@@ -10,8 +10,6 @@ import type { PageProps, User, InertiaResponse } from '@/types'
 export const FormBasicInformation = () => {
 	const { user } = usePage<PageProps<{ user: User }>>().props
 
-	console.log('user', user)
-
 	const { data, setData, put, processing, errors, clearErrors } = useForm({
 		id: user.id ?? null,
 		name: user.name ?? '',

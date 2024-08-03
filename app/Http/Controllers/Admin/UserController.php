@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendUserDetails;
+use Intervention\Image\Laravel\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+
 
 class UserController extends Controller
 {
@@ -82,6 +85,59 @@ class UserController extends Controller
 		} catch (\Exception $e) {
 			Log::error('Error updating user: ' . $e->getMessage());
 			return back()->with('error', 'An error occurred while updating user information.');
+		}
+	}
+
+
+	public function update_image_profile(User $user, Request $request)
+	{
+		// dd($request->hasFile('profile_picture'));
+
+		try {
+			if ($request->hasFile('profile_picture')) {
+				$currentImagePath = '/public/img/users/avatars/' . $user->profile_picture;
+				if (Storage::exists($currentImagePath)) {
+					Storage::delete($currentImagePath);
+				}
+
+
+				$file = $request->file('profile_picture');
+				// $filename = time() . '.' . $file->getClientOriginalExtension();
+				$filename = time() . '.webp';
+				$image = Image::read($file);
+				$image
+					->resize(256, 256)
+					// ->encodeByMediaType('image/webp', progressive: true, quality: 100)
+					->toWebp(90)
+					->save("storage/img/users/avatars/$filename");
+
+				if ($filename) {
+					$user->update(['profile_picture' => $filename]);
+				}
+			}
+			// dd($user->profile_picture);
+		} catch (\Exception $e) {
+			Log::error('Error updating image profile: ' . $e->getMessage());
+			return back()->with('error', 'An error occurred while updating a user image profile.');
+		}
+	}
+
+
+	public function remove_image_profile(User $user)
+	{
+
+		$imagePath = '/public/img/users/avatars/' . $user->profile_picture;
+
+		try {
+			if (Storage::exists($imagePath)) {
+				Storage::delete($imagePath);
+			}
+
+			$user->update(['profile_picture' => null]);
+			return back()->with('success', 'Image removed successfully.');
+		} catch (\Exception $e) {
+			Log::error('Error removing image profile: ' . $e->getMessage());
+			return back()->with('error', 'An error occurred while removing a user image profile.');
 		}
 	}
 

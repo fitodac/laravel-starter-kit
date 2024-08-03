@@ -18,6 +18,9 @@ Route::middleware(['auth', 'can:admin_access'])
 			->name('user.edit');
 		Route::match(['put', 'patch'], 'user/{user}', [UserController::class, 'update'])->name('user.update');
 		Route::delete('user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
+		Route::post('user/image-profile/{user}', [UserController::class, 'update_image_profile'])->name('user.update_image_profile');
+		Route::delete('user/image-profile/{user}', [UserController::class, 'remove_image_profile'])->name('user.remove_image_profile');
 	});
 
 

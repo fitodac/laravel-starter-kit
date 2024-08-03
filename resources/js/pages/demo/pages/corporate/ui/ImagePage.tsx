@@ -1,8 +1,8 @@
+import { useState } from 'react'
 import { Layout } from '@/layouts/admin/corporate/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import {
-	Button,
 	Card,
 	CardBody,
 	CardFooter,
@@ -15,7 +15,6 @@ import img01 from '@/assets/img/cards/01.jpg'
 import img02 from '@/assets/img/cards/02.jpg'
 import img03 from '@/assets/img/cards/03.jpg'
 import img04 from '@/assets/img/cards/04.jpg'
-import { useRef, useState } from 'react'
 
 export const Page = () => {
 	const [imgLoaded, setImgLoaded] = useState(false)
