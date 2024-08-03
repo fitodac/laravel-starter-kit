@@ -18,5 +18,7 @@ export * from './ui/CardsNotifications'
 export * from './ui/CardsActions'
 export * from './ui/Chips'
 
+export * from './utilities/imagesUploader'
+
 export * from './tables/RealDataTable'
 export * from './tables/TableStyles'

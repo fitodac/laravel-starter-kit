@@ -26,6 +26,8 @@ export const Page = () => {
 			<PageContent>
 				<UsersList />
 			</PageContent>
+
+			<div className="h-20" />
 		</>
 	)
 }

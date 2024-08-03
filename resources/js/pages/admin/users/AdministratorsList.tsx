@@ -2,7 +2,7 @@ import { Layout } from '@/layouts/admin/corporate/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { AdministratorsList } from './components/AdministratorsList'
-import { Button, Chip } from '@nextui-org/react'
+import { Button } from '@nextui-org/react'
 import { Link } from '@inertiajs/react'
 
 export const Page = () => {
@@ -26,6 +26,8 @@ export const Page = () => {
 			<PageContent>
 				<AdministratorsList />
 			</PageContent>
+
+			<div className="h-20" />
 		</>
 	)
 }

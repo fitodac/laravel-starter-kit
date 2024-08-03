@@ -29,18 +29,17 @@ export const Page = ({ user }: Props) => {
 		setData('password', val)
 	}
 
-	const { data, setData, post, processing, errors, clearErrors, transform } =
-		useForm({
-			name: '',
-			lastname: '',
-			username: '',
-			email: '',
-			password: '',
-			role: 3,
-			status: 'active',
-			send_details: true,
-			basic_information: true,
-		})
+	const { data, setData, post, processing, errors, clearErrors } = useForm({
+		name: '',
+		lastname: '',
+		username: '',
+		email: '',
+		password: '',
+		role: 3,
+		status: 'active',
+		send_details: true,
+		basic_information: true,
+	})
 
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
@@ -141,11 +140,11 @@ export const Page = ({ user }: Props) => {
 									/>
 								</fieldset>
 
-								<fieldset className="">
-									<label className="text-sm text-foreground-500 select-none">
+								<fieldset>
+									<label className="text-small text-foreground-500 select-none">
 										{t('Role')}
 									</label>
-									<ButtonGroup fullWidth>
+									<ButtonGroup fullWidth isDisabled={processing}>
 										<Button
 											color="primary"
 											className="text-xs"
@@ -221,13 +220,14 @@ export const Page = ({ user }: Props) => {
 										className="h-10 px-5"
 										radius="md"
 										onPress={fillPassword}
+										isDisabled={processing}
 									>
 										Generate password
 									</Button>
 								</div>
 
 								<div className="flex flex-col gap-y-1 pt-6">
-									<label className="text-sm text-foreground-500 select-none">
+									<label className="text-small text-foreground-500 select-none">
 										{t('User status')}
 									</label>
 
@@ -257,6 +257,7 @@ export const Page = ({ user }: Props) => {
 									base: 'items-start',
 									label: '-top-1 relative lg:-top-0.5',
 								}}
+								isDisabled={processing}
 							>
 								<div className="text-sm text-ellipsis">
 									{t(

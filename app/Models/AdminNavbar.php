@@ -76,6 +76,10 @@ class AdminNavbar extends Model
 						[
 							'label' => 'Chips',
 							'route' => route('dashboard.corporate.ui.chips')
+						],
+						[
+							'label' => 'Image',
+							'route' => route('dashboard.corporate.ui.image')
 						]
 					]
 				],
@@ -87,6 +91,10 @@ class AdminNavbar extends Model
 						[
 							'label' => 'Color',
 							'route' => route('dashboard.corporate.utilities.color')
+						],
+						[
+							'label' => 'Image uploader',
+							'route' => route('dashboard.corporate.utilities.image-uploader')
 						]
 					]
 				],

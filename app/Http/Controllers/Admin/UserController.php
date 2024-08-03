@@ -39,7 +39,7 @@ class UserController extends Controller
 			$user = User::create($request->validated());
 
 			// Assign a role for the user
-			$role = Role::findById(3);
+			$role = Role::findById($request->role);
 			$user->assignRole($role);
 
 			// Send email with user details if send_details is true
@@ -73,6 +73,11 @@ class UserController extends Controller
 	{
 		try {
 			$user->update($request->validated());
+
+			// Assign a role for the user
+			$role = Role::findById($request->role);
+			$user->syncRoles([$role]);
+
 			return back()->with('success', 'User updated successfully.');
 		} catch (\Exception $e) {
 			Log::error('Error updating user: ' . $e->getMessage());

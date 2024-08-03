@@ -105,6 +105,18 @@ export const Page = ({ user }: Props) => {
 							<CardBody>
 								<ul className="text-sm px-5 pt-6 pb-10 space-y-3 [&>li]:flex [&>li]:justify-between">
 									<li>
+										<span className="text-foreground-500">{t('Status')}</span>
+										<span>
+											<Chip
+												size="sm"
+												variant="dot"
+												color={user.status === 'active' ? 'success' : 'danger'}
+											>
+												{user.status}
+											</Chip>
+										</span>
+									</li>
+									<li>
 										<span className="text-foreground-500">{t('Name')}</span>
 										<span>{fullName}</span>
 									</li>
@@ -125,11 +137,9 @@ export const Page = ({ user }: Props) => {
 						</Card>
 					</div>
 
-					<div className="col-span-2 space-y-10 mt-10">
+					<div className="col-span-2 space-y-12 mt-10">
 						<FormBasicInformation />
-						<Divider />
 						<FormPersonalInformation />
-						<Divider />
 						<FormProfessionalInformation />
 					</div>
 				</div>

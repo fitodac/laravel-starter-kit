@@ -2,7 +2,7 @@ import { FormEvent } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
 import { ClassicInput } from '@/components/form'
-import { Button } from '@nextui-org/react'
+import { Button, ButtonGroup, Divider, Switch } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 
 import type { PageProps, User, InertiaResponse } from '@/types'
@@ -10,12 +10,16 @@ import type { PageProps, User, InertiaResponse } from '@/types'
 export const FormBasicInformation = () => {
 	const { user } = usePage<PageProps<{ user: User }>>().props
 
+	console.log('user', user)
+
 	const { data, setData, put, processing, errors, clearErrors } = useForm({
-		id: user ? user.id : null,
-		name: user ? user.name : '',
-		lastname: user ? user.lastname : '',
-		username: user ? user.username : '',
-		email: user ? user.email : '',
+		id: user.id ?? null,
+		name: user.name ?? '',
+		lastname: user.lastname ?? '',
+		username: user.username ?? '',
+		email: user.email ?? '',
+		role: user.roles ? user.roles[0].id : null,
+		status: user.status ?? '',
 		basic_information: true,
 	})
 
@@ -37,8 +41,11 @@ export const FormBasicInformation = () => {
 	return (
 		<>
 			<form onSubmit={submit}>
-				<section className="space-y-3">
-					<div className="font-medium">{t('Basic information')}</div>
+				<section className="space-y-5">
+					<div className="font-medium flex gap-5 items-center">
+						{t('Basic information')}
+						<Divider className="flex-1" />
+					</div>
 
 					<div className="grid grid-cols-2 gap-x-6 gap-y-5">
 						<fieldset>
@@ -96,6 +103,58 @@ export const FormBasicInformation = () => {
 								onValueChange={(e) => setData('email', e)}
 							/>
 						</fieldset>
+
+						<fieldset className="space-y-1">
+							<label className="text-small text-foreground select-none">
+								{t('Role')}
+							</label>
+							<ButtonGroup fullWidth size="sm" isDisabled={processing}>
+								<Button
+									color="primary"
+									className="text-xs"
+									onPress={() => setData('role', 3)}
+									variant={data.role === 3 ? 'solid' : 'flat'}
+								>
+									User
+								</Button>
+								<Button
+									color="primary"
+									className="text-xs"
+									onPress={() => setData('role', 2)}
+									variant={data.role === 2 ? 'solid' : 'flat'}
+								>
+									Admin
+								</Button>
+								<Button
+									color="primary"
+									className="text-xs"
+									onPress={() => setData('role', 1)}
+									variant={data.role === 1 ? 'solid' : 'flat'}
+								>
+									Super Admin
+								</Button>
+							</ButtonGroup>
+						</fieldset>
+
+						<div className="flex flex-col gap-y-1">
+							<label className="text-small text-foreground select-none">
+								{t('User status')}
+							</label>
+
+							<Switch
+								size="sm"
+								aria-label="Remember me"
+								value={'1'}
+								isDisabled={processing}
+								isSelected={data.status === 'active'}
+								onValueChange={(val) =>
+									setData('status', val ? 'active' : 'inactive')
+								}
+								className="mx-2"
+							>
+								{t('Is the user active?')}
+							</Switch>
+						</div>
 					</div>
 
 					<div className="pt-5 flex justify-end">

@@ -16,10 +16,12 @@ Route::middleware('auth')
 		Route::inertia('/ui/buttons', 'demo/pages/corporate/ui/ButtonsPage')->name('corporate.ui.buttons');
 		Route::inertia('/ui/cards', 'demo/pages/corporate/ui/CardsPage')->name('corporate.ui.cards');
 		Route::inertia('/ui/chips', 'demo/pages/corporate/ui/ChipsPage')->name('corporate.ui.chips');
+		Route::inertia('/ui/images', 'demo/pages/corporate/ui/ImagePage')->name('corporate.ui.image');
 
 
 		// Utilities
 		Route::inertia('/utilities/color', 'demo/pages/corporate/utilities/ColorPage')->name('corporate.utilities.color');
+		Route::inertia('/utilities/image-uploader', 'demo/pages/corporate/utilities/ImageUploaderPage')->name('corporate.utilities.image-uploader');
 
 
 		// Forms

@@ -2,7 +2,7 @@ import { FormEvent } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
 import { ClassicInput } from '@/components/form'
-import { Button } from '@nextui-org/react'
+import { Button, Divider } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 
 import type { PageProps, User, InertiaResponse } from '@/types'
@@ -39,8 +39,11 @@ export const FormPersonalInformation = () => {
 	return (
 		<>
 			<form onSubmit={submit}>
-				<section className="space-y-3">
-					<div className="font-medium">{t('Personal information')}</div>
+				<section className="space-y-5">
+					<div className="font-medium flex gap-5 items-center">
+						{t('Personal information')}
+						<Divider className="flex-1" />
+					</div>
 
 					<div className="grid grid-cols-2 gap-x-6 gap-y-5">
 						<fieldset>

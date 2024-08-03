@@ -28,7 +28,7 @@ class UpdateUserRequest extends FormRequest
 			'bio' => 'nullable|string|max:1000',
 
 			// Preferences and settings
-			'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Asegura que sea una imagen
+			'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 		];
 
 		if ($this->has('basic_information')) {
@@ -37,6 +37,8 @@ class UpdateUserRequest extends FormRequest
 			$rules['lastname'] = 'required|string|max:255';
 			$rules['username'] = 'required|string|max:255|unique:users,username,' . $this->user->id;
 			$rules['email'] = 'required|email|unique:users,email,' . $this->user->id;
+			$rules['status'] = 'required|in:active,inactive';
+			$rules['role'] = 'required|integer|exists:roles,id';
 		}
 
 		if ($this->has('personal_information')) {
@@ -69,6 +71,9 @@ class UpdateUserRequest extends FormRequest
 			'email.required' => 'Email is required',
 			'email.email' => 'Email must be a valid email address',
 			'email.unique' => 'Email already exists',
+			'role.required' => 'Role is required',
+			'role.integer' => 'Role must be an integer',
+			'role.exists' => 'Role does not exist',
 
 			// Personal information
 			'phone.string' => 'Phone must be a string',
@@ -84,6 +89,12 @@ class UpdateUserRequest extends FormRequest
 			'zip.max' => 'Zip must not exceed 10 characters',
 
 			'bio.string' => 'Bio must be a string',
+			'bio.max' => 'Bio must not exceed 1000 characters',
+			'profile_picture.image' => 'Profile picture must be an image',
+			'profile_picture.mimes' => 'Profile picture must be a file of type: jpeg, png, jpg, gif, svg',
+			'profile_picture.max' => 'Profile picture must not exceed 2048 kilobytes',
+			'status.in' => 'Status must be active or inactive',
+
 		];
 	}
 }
