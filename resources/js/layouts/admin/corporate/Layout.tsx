@@ -28,7 +28,7 @@ export const Layout = ({ children, pageTitle }: Props) => {
 		<>
 			<Head title={pageTitle} />
 
-			<main className="bg-gray-50 dark:bg-gray-900">
+			<main className="bg-gray-50 min-h-screen dark:bg-gray-900">
 				<div
 					className={cn(
 						'bg-white border-b border-gray-100 top-0 inset-x-0 fixed z-30',
@@ -67,7 +67,7 @@ export const Layout = ({ children, pageTitle }: Props) => {
 					</div>
 				</div>
 
-				<div className="flex min-h-dvh pt-topbar overflow-x-scroll">
+				<div className="flex min-h-svh pt-topbar">
 					<Navbar />
 
 					<div className="flex-1 overflow-x-auto">{children}</div>
