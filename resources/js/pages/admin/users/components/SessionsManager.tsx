@@ -19,7 +19,7 @@ import type {
 
 import { toast } from 'react-toastify'
 
-export const Sessions = () => {
+export const SessionsManager = () => {
 	const { sessions, user } =
 		usePage<PageProps<{ sessions: SessionsProps; user: User }>>().props
 
@@ -43,7 +43,7 @@ export const Sessions = () => {
 
 	return (
 		<>
-			<Card>
+			<Card shadow="none">
 				<CardHeader className="px-8 pt-5">{t('Sessions')}</CardHeader>
 
 				<CardBody className="space-y-3 py-1 pl-8 pr-6">

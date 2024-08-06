@@ -170,8 +170,17 @@ class UserController extends Controller
 	}
 
 
-	public function destroy(string $id)
+	public function destroy(User $user)
 	{
-		//
+		try {
+			$this->remove_image_profile($user);
+			$user->delete();
+			return redirect()
+				->route('dashboard.users.list')
+				->with('success', 'The account was deleted.');
+		} catch (\Exception $e) {
+			Log::error('Error deleting account: ' . $e->getMessage());
+			return back()->with('error', 'An error occurred while deleting this account.');
+		}
 	}
 }

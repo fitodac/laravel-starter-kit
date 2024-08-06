@@ -19,7 +19,8 @@ import {
 	FormPersonalInformation,
 	FormProfessionalInformation,
 	FormPassword,
-	Sessions,
+	SessionsManager,
+	DeleteAccount,
 } from './components'
 
 import userBlank from '@/assets/img/blank-462x265.webp'
@@ -91,7 +92,7 @@ export const Page = ({ user }: Props) => {
 			<PageContent>
 				<div className="grid grid-cols-3 gap-6 lg:gap-12">
 					<div className="col-span-1 space-y-8">
-						<Card>
+						<Card shadow="none">
 							<CardHeader className="pb-4 flex-col p-0 relative group">
 								<Image
 									width="100%"
@@ -219,7 +220,7 @@ export const Page = ({ user }: Props) => {
 							</CardBody>
 						</Card>
 
-						<Sessions />
+						<SessionsManager />
 					</div>
 
 					<div className="col-span-2 space-y-12">
@@ -227,6 +228,7 @@ export const Page = ({ user }: Props) => {
 						<FormPersonalInformation />
 						<FormProfessionalInformation />
 						<FormPassword />
+						<DeleteAccount />
 					</div>
 				</div>
 			</PageContent>
