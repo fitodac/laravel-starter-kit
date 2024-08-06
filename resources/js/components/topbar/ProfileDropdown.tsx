@@ -16,7 +16,7 @@ export const ProfileDropdown = () => {
 
 	return (
 		<>
-			<Dropdown radius="sm" classNames={{}}>
+			<Dropdown radius="none" classNames={{}}>
 				<DropdownTrigger className="cursor-pointer select-none">
 					<User
 						isFocusable
@@ -29,8 +29,9 @@ export const ProfileDropdown = () => {
 							src: `/storage/img/users/avatars/${user.profile_picture}`,
 						}}
 						classNames={{
-							name: 'text-foreground-600 leading-tight',
-							description: 'text-foreground-400 leading-tight',
+							base: 'rounded-none',
+							name: 'text-foreground-600 leading-tight truncate w-32',
+							description: 'text-foreground-400 leading-tight truncate w-32',
 						}}
 					/>
 				</DropdownTrigger>

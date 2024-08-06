@@ -12,16 +12,16 @@ interface Props {
 
 const Login = ({ status, canResetPassword }: Props) => {
 	const { data, setData, post, processing, errors, reset } = useForm({
-		email: '',
+		login: '',
 		password: '',
 		remember: false,
 	})
 
 	const [pwdVisibility, setPwdVisibility] = useState<boolean>(false)
-	const inputEmail = useRef<HTMLInputElement>(null)
+	const inputLogin = useRef<HTMLInputElement>(null)
 
 	useEffect(() => {
-		inputEmail.current?.focus()
+		inputLogin.current?.focus()
 
 		return () => {
 			reset('password')
@@ -31,7 +31,12 @@ const Login = ({ status, canResetPassword }: Props) => {
 	const submit: FormEventHandler = (e) => {
 		e.preventDefault()
 
-		post(route('login'))
+		post(route('login'), {
+			onSuccess: (resp) => {
+				console.log(resp)
+			},
+			onError: (error) => console.log(error),
+		})
 	}
 
 	return (
@@ -43,16 +48,16 @@ const Login = ({ status, canResetPassword }: Props) => {
 					<div className="space-y-4">
 						<fieldset className="space-y-1">
 							<Input
-								id="email"
-								type="email"
-								name="email"
-								label="Email"
-								value={data.email}
+								id="login"
+								type="text"
+								name="login"
+								label={t('Username or Email')}
+								value={data.login}
 								isDisabled={processing}
-								ref={inputEmail}
-								isInvalid={errors.email ? true : false}
-								errorMessage={errors.email}
-								onValueChange={(e) => setData('email', e)}
+								ref={inputLogin}
+								isInvalid={errors.login ? true : false}
+								errorMessage={errors.login}
+								onValueChange={(e) => setData('login', e)}
 							/>
 						</fieldset>
 

@@ -82,7 +82,7 @@ export const UsersList = () => {
 							color="primary"
 							variant="flat"
 							as={Link}
-							href={route('dashboard.user.show', { user })}
+							href={route('dashboard.user.edit', { user })}
 						>
 							{t('Edit')}
 						</Button>

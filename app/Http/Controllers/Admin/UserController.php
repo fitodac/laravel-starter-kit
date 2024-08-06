@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendUserDetails;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -61,25 +62,40 @@ class UserController extends Controller
 
 	public function show(User $user)
 	{
-		$user['role'] = $user->roles->pluck('name')->first();
-		return Inertia::render('admin/users/Edit', compact('user'));
+		return redirect()->route('dashboard.user.edit', ['user' => $user]);
 	}
 
 
 	public function edit(User $user)
 	{
+
+		$auth = Auth::user();
+		$permission = $auth->getPermissionsViaRoles()->pluck('name')->first();
+
 		$user['role'] = $user->roles->pluck('name')->first();
-		return Inertia::render('admin/users/Edit', compact('user'));
+		return Inertia::render('admin/users/Edit', compact('user', 'permission'));
 	}
 
 	public function update(UpdateUserRequest $request, User $user): RedirectResponse
 	{
 		try {
-			$user->update($request->validated());
+			$data = $request->validated();
+
+			// Encrypt password if it's provided
+			if (!empty($data['password'])) {
+				$data['password'] = bcrypt($data['password']);
+			}
+
+			// dd($data);
+
+			$user->update($data);
 
 			// Assign a role for the user
-			$role = Role::findById($request->role);
-			$user->syncRoles([$role]);
+			if (!empty($data['role'])) {
+				$role = Role::findById($data['role']);
+				$user->syncRoles([$role]);
+			}
+
 
 			return back()->with('success', 'User updated successfully.');
 		} catch (\Exception $e) {

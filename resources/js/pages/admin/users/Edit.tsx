@@ -18,6 +18,7 @@ import {
 	FormBasicInformation,
 	FormPersonalInformation,
 	FormProfessionalInformation,
+	FormPassword,
 } from './components'
 
 import userBlank from '@/assets/img/blank-462x265.webp'
@@ -222,6 +223,7 @@ export const Page = ({ user }: Props) => {
 						<FormBasicInformation />
 						<FormPersonalInformation />
 						<FormProfessionalInformation />
+						<FormPassword />
 					</div>
 				</div>
 			</PageContent>

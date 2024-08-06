@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import type { PageProps, User, InertiaResponse } from '@/types'
 
 export const FormBasicInformation = () => {
-	const { user } = usePage<PageProps<{ user: User }>>().props
+	const { user, permission } = usePage<PageProps<{ user: User }>>().props
 
 	const { data, setData, put, processing, errors, clearErrors } = useForm({
 		id: user.id ?? null,
@@ -102,37 +102,39 @@ export const FormBasicInformation = () => {
 							/>
 						</fieldset>
 
-						<fieldset className="space-y-1">
-							<label className="text-small text-foreground select-none">
-								{t('Role')}
-							</label>
-							<ButtonGroup fullWidth size="sm" isDisabled={processing}>
-								<Button
-									color="primary"
-									className="text-xs"
-									onPress={() => setData('role', 3)}
-									variant={data.role === 3 ? 'solid' : 'flat'}
-								>
-									User
-								</Button>
-								<Button
-									color="primary"
-									className="text-xs"
-									onPress={() => setData('role', 2)}
-									variant={data.role === 2 ? 'solid' : 'flat'}
-								>
-									Admin
-								</Button>
-								<Button
-									color="primary"
-									className="text-xs"
-									onPress={() => setData('role', 1)}
-									variant={data.role === 1 ? 'solid' : 'flat'}
-								>
-									Super Admin
-								</Button>
-							</ButtonGroup>
-						</fieldset>
+						{'super_admin_access' === permission && (
+							<fieldset className="space-y-1">
+								<label className="text-small text-foreground select-none">
+									{t('Role')}
+								</label>
+								<ButtonGroup fullWidth size="sm" isDisabled={processing}>
+									<Button
+										color="primary"
+										className="text-xs"
+										onPress={() => setData('role', 3)}
+										variant={data.role === 3 ? 'solid' : 'flat'}
+									>
+										User
+									</Button>
+									<Button
+										color="primary"
+										className="text-xs"
+										onPress={() => setData('role', 2)}
+										variant={data.role === 2 ? 'solid' : 'flat'}
+									>
+										Admin
+									</Button>
+									<Button
+										color="primary"
+										className="text-xs"
+										onPress={() => setData('role', 1)}
+										variant={data.role === 1 ? 'solid' : 'flat'}
+									>
+										Super Admin
+									</Button>
+								</ButtonGroup>
+							</fieldset>
+						)}
 
 						<div className="flex flex-col gap-y-1">
 							<label className="text-small text-foreground select-none">

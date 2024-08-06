@@ -50,6 +50,10 @@ class UpdateUserRequest extends FormRequest
 			$rules['zip'] = 'nullable|string|max:10';
 		}
 
+		if ($this->has('security_information')) {
+			$rules['password'] = 'required|string|min:8|regex:/^\S*$/u';
+		}
+
 		return $rules;
 	}
 
@@ -95,6 +99,10 @@ class UpdateUserRequest extends FormRequest
 			'profile_picture.max' => 'Profile picture must not exceed 2048 kilobytes',
 			'status.in' => 'Status must be active or inactive',
 
+			'password.required' => 'Password is required',
+			'password.string' => 'Password must be a string',
+			'password.min' => 'Password must be at least 8 characters',
+			'password.regex' => 'Password must contain only letters and numbers',
 		];
 	}
 }
