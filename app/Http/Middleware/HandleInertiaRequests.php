@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
-use App\Models\AdminNavbar;
 
 use function PHPUnit\Framework\isNull;
 
@@ -35,7 +34,6 @@ class HandleInertiaRequests extends Middleware
 	{
 
 		$user = $request->user();
-		$admin_navbar = new AdminNavbar();
 
 		return [
 			...parent::share($request),
@@ -51,8 +49,7 @@ class HandleInertiaRequests extends Middleware
 				'success' => fn () => $request->session()->get('success'),
 				'error' => fn () => $request->session()->get('error'),
 				'info' => fn () => $request->session()->get('info'),
-			],
-			'adminNavbar' => $admin_navbar->items()
+			]
 		];
 	}
 }

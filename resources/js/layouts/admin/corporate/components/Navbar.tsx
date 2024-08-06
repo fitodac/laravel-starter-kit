@@ -77,7 +77,7 @@ export const Navbar = () => {
 									closeOnClick
 								>
 									{nav.menu.map(
-										({ label, route, icon, hasRole, submenu }, idx) => {
+										({ label, route: path, icon, hasRole, submenu }, idx) => {
 											if (submenu) {
 												return (
 													<SubMenu
@@ -85,11 +85,11 @@ export const Navbar = () => {
 														label={label}
 														icon={<i className={icon} />}
 													>
-														{submenu.map(({ label, route }, idx) => (
-															<Fragment key={route}>
+														{submenu.map(({ label, route: path }, idx) => (
+															<Fragment key={path}>
 																<MenuItem
-																	component={<Link href={route || ''} />}
-																	active={location.href === route}
+																	component={<Link href={route(path || '')} />}
+																	active={location.href === route(path || '')}
 																>
 																	{label}
 																</MenuItem>
@@ -100,11 +100,11 @@ export const Navbar = () => {
 											}
 
 											return (
-												<Fragment key={route}>
+												<Fragment key={path}>
 													<MenuItem
-														component={<Link href={route || ''} />}
+														component={<Link href={route(path || '')} />}
 														icon={<i className={icon} />}
-														active={location.href === route}
+														active={location.href === route(path || '')}
 													>
 														{label}
 													</MenuItem>
