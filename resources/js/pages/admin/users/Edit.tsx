@@ -19,6 +19,7 @@ import {
 	FormPersonalInformation,
 	FormProfessionalInformation,
 	FormPassword,
+	Sessions,
 } from './components'
 
 import userBlank from '@/assets/img/blank-462x265.webp'
@@ -88,9 +89,9 @@ export const Page = ({ user }: Props) => {
 			</PageHeader>
 
 			<PageContent>
-				<div className="grid grid-cols-3 gap-6">
-					<div className="col-span-1">
-						<Card className="mt-10 ">
+				<div className="grid grid-cols-3 gap-6 lg:gap-12">
+					<div className="col-span-1 space-y-8">
+						<Card>
 							<CardHeader className="pb-4 flex-col p-0 relative group">
 								<Image
 									width="100%"
@@ -192,7 +193,7 @@ export const Page = ({ user }: Props) => {
 											<Chip
 												size="sm"
 												variant="dot"
-												color={user.status === 'active' ? 'success' : 'danger'}
+												color={user.status === 'enabled' ? 'success' : 'danger'}
 											>
 												{user.status}
 											</Chip>
@@ -217,9 +218,11 @@ export const Page = ({ user }: Props) => {
 								</ul>
 							</CardBody>
 						</Card>
+
+						<Sessions />
 					</div>
 
-					<div className="col-span-2 space-y-12 mt-10">
+					<div className="col-span-2 space-y-12">
 						<FormBasicInformation />
 						<FormPersonalInformation />
 						<FormProfessionalInformation />

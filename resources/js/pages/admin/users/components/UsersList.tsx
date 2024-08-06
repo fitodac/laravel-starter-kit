@@ -9,8 +9,10 @@ import {
 	Pagination,
 	Avatar,
 	Button,
+	Badge,
 	type SortDescriptor,
 	Chip,
+	cn,
 } from '@nextui-org/react'
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
@@ -23,6 +25,7 @@ const columns = [
 	{ key: 'name', label: 'Name' },
 	{ key: 'company', label: 'Company' },
 	{ key: 'status', label: 'Status' },
+	{ key: 'sessions', label: 'Sessions' },
 	{ key: 'actions', label: '' },
 ] as { key: string; label: string; allowsSorting?: boolean }[]
 
@@ -54,7 +57,10 @@ export const UsersList = () => {
 							src={`/storage/img/users/avatars/${user.profile_picture}`}
 							name={user.name[0] + user.lastname[0]}
 							radius="full"
+							isBordered={user.sessions?.length ? true : false}
+							color={user.sessions?.length ? 'success' : 'default'}
 						/>
+
 						{user.username}
 					</div>
 				</>
@@ -67,10 +73,22 @@ export const UsersList = () => {
 				<>
 					<Chip
 						size="sm"
-						color={user.status === 'inactive' ? 'danger' : 'success'}
+						color={user.status === 'enabled' ? 'success' : 'danger'}
 						variant="dot"
 					>
 						{user.status}
+					</Chip>
+				</>
+			),
+			sessions: (
+				<>
+					<Chip
+						size="sm"
+						color={user.sessions?.length ? 'success' : 'default'}
+						variant="flat"
+						className={cn(!user.sessions?.length && 'text-opacity-60')}
+					>
+						{user.sessions?.length ? 'Active' : 'Inactive'}
 					</Chip>
 				</>
 			),

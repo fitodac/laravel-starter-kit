@@ -32,9 +32,6 @@ const Login = ({ status, canResetPassword }: Props) => {
 		e.preventDefault()
 
 		post(route('login'), {
-			onSuccess: (resp) => {
-				console.log(resp)
-			},
 			onError: (error) => console.log(error),
 		})
 	}

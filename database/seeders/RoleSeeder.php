@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\PermissionRegistrar;
 
 
 
@@ -20,7 +21,7 @@ class RoleSeeder extends Seeder
 		/**
 		 * Reset permissions
 		 */
-		app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+		app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
 
 		$superAdmin = Role::create(['name' => 'superadmin']);

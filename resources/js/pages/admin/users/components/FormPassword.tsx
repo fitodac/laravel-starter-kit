@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
 import { ClassicInput } from '@/components/form'
-import { Button, ButtonGroup, Divider, Switch } from '@nextui-org/react'
+import { Button, Divider } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 import { useGeneratePassword } from '@/hooks'
 
@@ -96,7 +96,7 @@ export const FormPassword = () => {
 						</div>
 					</div>
 
-					<div className="pt-5 flex justify-end">
+					<div className="flex justify-end">
 						<Button
 							type="submit"
 							color="primary"

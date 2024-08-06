@@ -27,6 +27,7 @@ export interface User {
 		id: number
 		name: string
 	}[]
+	sessions?: Sessions
 }
 
 export interface Users {
@@ -78,3 +79,12 @@ interface InertiaResponse {
 	props: PageProps
 	[key: string]: any
 }
+
+export type Sessions = {
+	id: string
+	ip_address: string
+	last_activity: string
+	payload: string
+	user_agent: string
+	user_id: number
+}[]

@@ -16,6 +16,7 @@ use App\Mail\SendUserDetails;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Session;
 
 
 class UserController extends Controller
@@ -25,7 +26,7 @@ class UserController extends Controller
 	{
 		$per_page = 15;
 
-		$users = User::role('user')->paginate($per_page);
+		$users = User::role('user')->with('sessions')->paginate($per_page);
 		$total = User::count();
 		return Inertia::render('admin/users/UsersList', compact('users', 'total'));
 	}
@@ -73,7 +74,10 @@ class UserController extends Controller
 		$permission = $auth->getPermissionsViaRoles()->pluck('name')->first();
 
 		$user['role'] = $user->roles->pluck('name')->first();
-		return Inertia::render('admin/users/Edit', compact('user', 'permission'));
+
+		$sessions = $user->sessions;
+
+		return Inertia::render('admin/users/Edit', compact('user', 'sessions', 'permission'));
 	}
 
 	public function update(UpdateUserRequest $request, User $user): RedirectResponse
@@ -85,8 +89,6 @@ class UserController extends Controller
 			if (!empty($data['password'])) {
 				$data['password'] = bcrypt($data['password']);
 			}
-
-			// dd($data);
 
 			$user->update($data);
 
@@ -107,8 +109,6 @@ class UserController extends Controller
 
 	public function update_image_profile(User $user, Request $request)
 	{
-		// dd($request->hasFile('profile_picture'));
-
 		try {
 			if ($request->hasFile('profile_picture')) {
 				$currentImagePath = '/public/img/users/avatars/' . $user->profile_picture;
@@ -154,6 +154,18 @@ class UserController extends Controller
 		} catch (\Exception $e) {
 			Log::error('Error removing image profile: ' . $e->getMessage());
 			return back()->with('error', 'An error occurred while removing a user image profile.');
+		}
+	}
+
+
+	public function invalidate_session($id)
+	{
+		try {
+			Session::findOrFail($id)->delete();
+			return back()->with('success', 'The session was closed.');
+		} catch (\Exception $e) {
+			Log::error('Error destroying session: ' . $e->getMessage());
+			return back()->with('error', 'An error occurred while destroying the session.');
 		}
 	}
 

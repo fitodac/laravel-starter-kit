@@ -37,7 +37,7 @@ class UpdateUserRequest extends FormRequest
 			$rules['lastname'] = 'required|string|max:255';
 			$rules['username'] = 'required|string|max:255|unique:users,username,' . $this->user->id;
 			$rules['email'] = 'required|email|unique:users,email,' . $this->user->id;
-			$rules['status'] = 'required|in:active,inactive';
+			$rules['status'] = 'required|in:enabled,disabled';
 			$rules['role'] = 'required|integer|exists:roles,id';
 		}
 
@@ -97,7 +97,7 @@ class UpdateUserRequest extends FormRequest
 			'profile_picture.image' => 'Profile picture must be an image',
 			'profile_picture.mimes' => 'Profile picture must be a file of type: jpeg, png, jpg, gif, svg',
 			'profile_picture.max' => 'Profile picture must not exceed 2048 kilobytes',
-			'status.in' => 'Status must be active or inactive',
+			'status.in' => 'Status must be enabled or disabled',
 
 			'password.required' => 'Password is required',
 			'password.string' => 'Password must be a string',

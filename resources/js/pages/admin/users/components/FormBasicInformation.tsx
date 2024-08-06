@@ -17,7 +17,7 @@ export const FormBasicInformation = () => {
 		username: user.username ?? '',
 		email: user.email ?? '',
 		role: user.roles ? user.roles[0].id : null,
-		status: user.status ?? '',
+		status: user.status ?? 'disabled',
 		basic_information: true,
 	})
 
@@ -146,14 +146,19 @@ export const FormBasicInformation = () => {
 								aria-label="Remember me"
 								value={'1'}
 								isDisabled={processing}
-								isSelected={data.status === 'active'}
-								onValueChange={(val) =>
-									setData('status', val ? 'active' : 'inactive')
-								}
+								isSelected={data.status === 'enabled'}
+								onValueChange={(val) => {
+									setData('status', val ? 'enabled' : 'disabled')
+									clearErrors('status')
+								}}
 								className="mx-2"
 							>
-								{t('Is the user active?')}
+								{t('Is the user enabled?')}
 							</Switch>
+
+							{errors.status && (
+								<span className="text-tiny text-danger">{errors.status}</span>
+							)}
 						</div>
 					</div>
 

@@ -26,6 +26,7 @@
     "dependencies": {
         "@nextui-org/react": "^2.4.6",
         "@types/ziggy-js": "^1.8.0",
+        "dayjs": "^1.11.12",
         "framer-motion": "^11.3.17",
         "react-dropzone": "^14.2.3",
         "react-pro-sidebar": "^1.1.0",

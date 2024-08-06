@@ -21,6 +21,8 @@ Route::middleware(['auth', 'can:admin_access'])
 
 		Route::post('user/image-profile/{user}', [UserController::class, 'update_image_profile'])->name('user.update_image_profile');
 		Route::delete('user/image-profile/{user}', [UserController::class, 'remove_image_profile'])->name('user.remove_image_profile');
+
+		Route::delete('session/{id}/invalidate', [UserController::class, 'invalidate_session'])->name('session.invalidate');
 	});
 
 

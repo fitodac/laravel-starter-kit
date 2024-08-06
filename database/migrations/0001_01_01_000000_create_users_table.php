@@ -36,7 +36,7 @@ return new class extends Migration
 
 			// Prefferences and settings
 			$table->string('profile_picture')->nullable();
-			$table->enum('status', ['active', 'inactive'])->default('active');
+			$table->enum('status', ['enabled', 'disabled'])->default('enabled');
 
 			$table->rememberToken();
 			$table->timestamps();

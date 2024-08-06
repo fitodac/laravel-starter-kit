@@ -36,7 +36,7 @@ export const Page = ({ user }: Props) => {
 		email: '',
 		password: '',
 		role: 3,
-		status: 'active',
+		status: 'enabled',
 		send_details: true,
 		basic_information: true,
 	})
@@ -236,13 +236,13 @@ export const Page = ({ user }: Props) => {
 										aria-label="Remember me"
 										value={'1'}
 										isDisabled={processing}
-										isSelected={data.status === 'active'}
+										isSelected={data.status === 'enabled'}
 										onValueChange={(val) =>
-											setData('status', val ? 'active' : 'inactive')
+											setData('status', val ? 'enabled' : 'disabled')
 										}
 										className="mx-2"
 									>
-										{t('Is the user active?')}
+										{t('Is the user enabled?')}
 									</Switch>
 								</div>
 							</div>
