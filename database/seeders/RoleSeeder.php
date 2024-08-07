@@ -24,14 +24,14 @@ class RoleSeeder extends Seeder
 		app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
 
-		$superAdmin = Role::create(['name' => 'superadmin']);
-		$admin = Role::create(['name' => 'admin']);
-		$user = Role::create(['name' => 'user']);
+		$superAdmin = Role::create(['name' => 'Super Admin']);
+		$admin = Role::create(['name' => 'Admin']);
+		$user = Role::create(['name' => 'User']);
 
 		// Create permission
-		$superAdminAccess = Permission::create(['name' => 'super_admin_access']);
-		$adminAcces = Permission::create(['name' => 'admin_access']);
-		$privateAccess = Permission::create(['name' => 'private_access']);
+		$superAdminAccess = Permission::create(['name' => 'Super Admin Access']);
+		$adminAcces = Permission::create(['name' => 'Admin Access']);
+		$privateAccess = Permission::create(['name' => 'Private Access']);
 
 		// Assign permissions to roles
 		$superAdmin->givePermissionTo($superAdminAccess, $adminAcces);

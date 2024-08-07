@@ -20,6 +20,7 @@ class AdminNavbarProvider extends ServiceProvider
 	 */
 	public function boot(): void
 	{
+
 		$menu = [];
 
 		$menu[] = [
@@ -37,16 +38,39 @@ class AdminNavbarProvider extends ServiceProvider
 		$menu[] = [
 			'key' => 'users',
 			'title' => 'Users management',
+			'permissions' => ['Super Admin Access', 'Admin Access'],
 			'menu' => [
 				[
 					'label' => 'Users',
 					'route' => 'dashboard.users.list',
 					'icon' => 'ri-group-3-fill',
+					'permissions' => ['Super Admin Access', 'Admin Access']
 				],
 				[
-					'label' => 'Admins',
+					'label' => 'Administrators',
 					'route' => 'dashboard.admins.list',
 					'icon' => 'ri-user-2-fill',
+					'permissions' => ['Super Admin Access']
+				]
+			],
+		];
+
+		$menu[] = [
+			'key' => 'roles_permissions',
+			'title' => 'Roles & permissions',
+			'permissions' => ['Super Admin Access', 'Admin Access'],
+			'menu' => [
+				[
+					'label' => 'Roles',
+					'route' => 'dashboard.roles.list',
+					'icon' => 'ri-user-settings-line',
+					'permissions' => ['Super Admin Access', 'Admin Access']
+				],
+				[
+					'label' => 'Permissions',
+					'route' => 'dashboard.permissions.list',
+					'icon' => 'ri-user-2-fill',
+					'permissions' => ['Super Admin Access', 'Admin Access']
 				]
 			],
 		];

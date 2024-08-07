@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
-use function PHPUnit\Framework\isNull;
-
 class HandleInertiaRequests extends Middleware
 {
 	/**
@@ -34,12 +32,13 @@ class HandleInertiaRequests extends Middleware
 	{
 
 		$user = $request->user();
+		// $user = auth()->user();
 
 		return [
 			...parent::share($request),
 			'auth' => [
 				'user' => $user,
-				// 'role' => $user->roles->pluck('name')->first()
+				'permissions' => $user ? $user->permissions : null
 			],
 			'ziggy' => fn () => [
 				...(new Ziggy)->toArray(),

@@ -70,4 +70,13 @@ class User extends Authenticatable
 	{
 		return $this->hasMany(Session::class);
 	}
+
+	public function getPermissionsAttribute()
+	{
+		if ($this->id) {
+			return $this->getPermissionsViaRoles()->pluck('name');
+		}
+
+		return [];
+	}
 }

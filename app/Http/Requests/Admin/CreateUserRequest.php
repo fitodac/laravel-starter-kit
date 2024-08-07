@@ -25,7 +25,7 @@ class CreateUserRequest extends FormRequest
 			'username' => 'required|string|max:255|unique:users,username',
 			'name' => 'required|string|max:255',
 			'lastname' => 'required|string|max:255',
-			'email' => 'required|email|unique:users,email',
+			'email' => 'required|email|lowercase|unique:users,email',
 			'role' => 'required|integer|exists:roles,id',
 			'password' => 'required|string|min:8|regex:/^\S*$/u',
 		];
@@ -49,6 +49,7 @@ class CreateUserRequest extends FormRequest
 			'username.unique' => 'Username already exists',
 			'email.required' => 'Email is required',
 			'email.email' => 'Email must be a valid email address',
+			'email.lowercase' => 'Email must be lowercase',
 			'email.unique' => 'Email already exists',
 			'role.required' => 'Role is required',
 			'role.integer' => 'Role must be an integer',

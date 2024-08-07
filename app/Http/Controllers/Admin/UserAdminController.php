@@ -9,16 +9,28 @@ use Inertia\Inertia;
 
 class UserAdminController extends Controller
 {
+
+	/**
+	 * LIST
+	 * 
+	 * 
+	 * 
+	 */
 	public function index(Request $request)
 	{
 		$per_page = 15;
 
-		$users = User::role('admin')->paginate($per_page);
+		$users = User::role('Admin')->paginate($per_page);
 		$total = User::count();
 		return Inertia::render('admin/users/AdministratorsList', compact('users', 'total'));
 	}
 
-
+	/**
+	 * SHOW
+	 * 
+	 * 
+	 * 
+	 */
 	public function show(User $user)
 	{
 		$user['role'] = $user->roles->pluck('name')->first();

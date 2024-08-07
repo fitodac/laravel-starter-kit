@@ -102,7 +102,7 @@ export const FormBasicInformation = () => {
 							/>
 						</fieldset>
 
-						{'super_admin_access' === permission && (
+						{'Super Admin Access' === permission && (
 							<fieldset className="space-y-1">
 								<label className="text-small text-foreground select-none">
 									{t('Role')}

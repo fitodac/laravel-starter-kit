@@ -21,12 +21,12 @@ class CheckRoleAccess
 		$user = Auth::user();
 		$targetUser = $request->route('user');
 
-		if ($user->roles->pluck('name')->contains('superadmin')) {
+		if ($user->roles->pluck('name')->contains('Super Admin')) {
 			return $next($request);
 		}
 
 		// Check if the authenticated user is trying to edit another admin
-		if ($user->id !== $targetUser->id && $user->roles->pluck('name')->contains('admin') && $targetUser->hasRole('admin')) {
+		if ($user->id !== $targetUser->id && $user->roles->pluck('name')->contains('Admin') && $targetUser->hasRole('Admin')) {
 			throw new HttpException(403, 'You do not have permission to edit this user.');
 		}
 

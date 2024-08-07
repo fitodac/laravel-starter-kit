@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { Layout } from '@/layouts/admin/corporate/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
@@ -96,7 +96,7 @@ export const Page = ({ user }: Props) => {
 							<CardHeader className="pb-4 flex-col p-0 relative group">
 								<Image
 									width="100%"
-									height={300}
+									height={350}
 									removeWrapper
 									classNames={{
 										img: cn(

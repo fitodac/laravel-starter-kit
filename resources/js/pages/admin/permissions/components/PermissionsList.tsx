@@ -17,101 +17,63 @@ import {
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
 import { Link, router, usePage } from '@inertiajs/react'
+
 import type { PageProps, User, Users } from '@/types'
+import type { Permissions, Permission } from '@/types/permissions'
 
 const columns = [
 	{ key: 'id', label: '#' },
-	{ key: 'username', label: t('Username') },
 	{ key: 'name', label: t('Name') },
-	{ key: 'company', label: t('Company') },
-	{ key: 'status', label: t('Status') },
-	{ key: 'sessions', label: t('Sessions') },
+	{ key: 'guard_name', label: t('Guard') },
 	{ key: 'actions', label: '' },
 ] as { key: string; label: string; allowsSorting?: boolean }[]
 
-export const AdministratorsList = () => {
-	const { users, total } = usePage<PageProps>().props as unknown as {
-		users: Users
-		total: number
+export const PermissionsList = () => {
+	const { permissions } = usePage<PageProps>().props as unknown as {
+		permissions: Permissions
 	}
 
-	// console.log(usePage())
+	// console.log(permissions)
 	// const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))
 	// const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
 	// const [isLoading, setIsLoading] = useState(true)
 
 	// const sort = useTableSorting()
-	const { links, current_page } = users
+	const { links, current_page } = permissions
 
 	// useEffect(() => {
 	// 	if (data.data.length) setIsLoading(false)
 	// }, [data])
 
-	const renderCell = useCallback((user: User, columnKey: string) => {
-		return {
-			id: <>{user.id}</>,
-			username: (
-				<>
-					<div className="flex gap-x-3 items-center">
-						<Avatar
-							src={`/storage/img/users/avatars/${user.profile_picture}`}
-							name={user.name[0] + user.lastname[0]}
-							radius="full"
-							isBordered={user.sessions?.length ? true : false}
-							color={user.sessions?.length ? 'success' : 'default'}
-						/>
-						{user.username}
+	const renderCell = useCallback(
+		(permission: Permission, columnKey: string) => {
+			return {
+				id: <>{permission.id}</>,
+				name: <span className="font-medium">{permission.name}</span>,
+				guard_name: permission.guard_name,
+				actions: (
+					<div className="flex justify-end">
+						<div className="space-x-2">
+							<Button
+								size="sm"
+								color="primary"
+								variant="flat"
+								as={Link}
+								href={route('dashboard.permission.edit', { permission })}
+							>
+								{t('Edit')}
+							</Button>
+						</div>
 					</div>
-				</>
-			),
-			name: (
-				<span className="font-medium">{`${user.name} ${user.lastname}`}</span>
-			),
-			company: user.company,
-			status: (
-				<>
-					<Chip
-						size="sm"
-						color={user.status === 'enabled' ? 'success' : 'danger'}
-						variant="dot"
-					>
-						{user.status}
-					</Chip>
-				</>
-			),
-			sessions: (
-				<>
-					<Chip
-						size="sm"
-						color={user.sessions?.length ? 'success' : 'default'}
-						variant="flat"
-						className={cn(!user.sessions?.length && 'text-opacity-60')}
-					>
-						{user.sessions?.length ? 'Active' : 'Inactive'}
-					</Chip>
-				</>
-			),
-			actions: (
-				<div className="flex justify-end">
-					<div className="space-x-2">
-						<Button
-							size="sm"
-							color="primary"
-							variant="flat"
-							as={Link}
-							href={route('dashboard.user.edit', { user })}
-						>
-							{t('Edit')}
-						</Button>
-					</div>
-				</div>
-			),
-		}[columnKey]
-	}, [])
+				),
+			}[columnKey]
+		},
+		[]
+	)
 
 	return (
 		<>
-			{users && (
+			{permissions && (
 				<Table
 					removeWrapper
 					aria-label="Table"
@@ -121,12 +83,6 @@ export const AdministratorsList = () => {
 					}}
 					bottomContent={
 						<div className="flex justify-between items-center">
-							<div className="text-sm flex-1">
-								<span className="whitespace-nowrap">
-									{t('Total users: %', { total })}
-								</span>
-							</div>
-
 							{links && (
 								<div className="flex w-full justify-end">
 									<Pagination
@@ -156,7 +112,6 @@ export const AdministratorsList = () => {
 							<TableColumn
 								key={column.key}
 								allowsSorting={column.allowsSorting ?? false}
-								// width={column.width ?? 1}
 							>
 								{column.label}
 							</TableColumn>
@@ -164,11 +119,11 @@ export const AdministratorsList = () => {
 					</TableHeader>
 
 					<TableBody
-						items={users.data}
+						items={permissions.data}
 						// loadingContent={<Spinner label={t('loading')} />}
 						// isLoading={isLoading}
 					>
-						{(item: User) => (
+						{(item: Permission) => (
 							<TableRow key={item.id}>
 								{(key) => (
 									<TableCell>{renderCell(item, String(key))}</TableCell>

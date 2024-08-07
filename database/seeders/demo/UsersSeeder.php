@@ -20,28 +20,28 @@ class UsersSeeder extends Seeder
 			'username' => 'maxmasterson',
 			'email' => 'superadmin@local.com'
 		])
-			->assignRole('superadmin');
+			->assignRole('Super Admin');
 
 		User::factory()->create([
 			'name' => 'Emma',
 			'lastname' => 'Smith',
 			'username' => 'real_emma',
 			'email' => 'admin@local.com'
-		])->assignRole('admin');
+		])->assignRole('Admin');
 
 		User::factory()->create([
 			'name' => 'John',
 			'lastname' => 'Doe',
 			'username' => 'johndoe',
 			'email' => 'user@local.com'
-		])->assignRole('user');
+		])->assignRole('User');
 
 		User::factory(9)->create()->each(function ($user) {
-			$user->assignRole('admin');
+			$user->assignRole('Admin');
 		});
 
 		User::factory(30)->create()->each(function ($user) {
-			$user->assignRole('user');
+			$user->assignRole('User');
 		});
 	}
 }

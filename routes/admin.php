@@ -3,31 +3,52 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserAdminController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Middleware\CheckRoleAccess;
 
-Route::middleware(['auth', 'can:admin_access'])
+Route::middleware(['auth', 'can:Admin Access'])
 	->prefix('dashboard/corporate')
 	->name('dashboard.')
 	->group(function () {
+
+		// Users
 		Route::get('users', [UserController::class, 'index'])->name('users.list');
-		Route::get('user/create', [UserController::class, 'create'])->name('user.create');
-		Route::post('user', [UserController::class, 'store'])->name('user.store');
-		Route::get('user/{user}', [UserController::class, 'show'])->name('user.show');
-		Route::get('user/{user}/edit', [UserController::class, 'edit'])
+		Route::get('users/create', [UserController::class, 'create'])->name('user.create');
+		Route::post('users', [UserController::class, 'store'])->name('user.store');
+		Route::get('users/{user}', [UserController::class, 'show'])->name('user.show');
+		Route::get('users/{user}/edit', [UserController::class, 'edit'])
 			->middleware(CheckRoleAccess::class)
 			->name('user.edit');
-		Route::match(['put', 'patch'], 'user/{user}', [UserController::class, 'update'])->name('user.update');
-		Route::delete('user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+		Route::match(['put', 'patch'], 'users/{user}', [UserController::class, 'update'])->name('user.update');
+		Route::delete('users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
-		Route::post('user/image-profile/{user}', [UserController::class, 'update_image_profile'])->name('user.update_image_profile');
-		Route::delete('user/image-profile/{user}', [UserController::class, 'remove_image_profile'])->name('user.remove_image_profile');
+		Route::post('users/image-profile/{user}', [UserController::class, 'update_image_profile'])->name('user.update_image_profile');
+		Route::delete('users/image-profile/{user}', [UserController::class, 'remove_image_profile'])->name('user.remove_image_profile');
 
+		// Sessions
 		Route::delete('session/{id}/invalidate', [UserController::class, 'invalidate_session'])->name('session.invalidate');
+
+		// Roles
+		Route::get('roles', [RoleController::class, 'index'])->name('roles.list');
+		Route::get('roles/create', [RoleController::class, 'create'])->name('role.create');
+		Route::get('roles/{role}', [RoleController::class, 'show'])->name('role.show');
+		Route::get('roles/{role}/edit', [RoleController::class, 'edit'])
+			->middleware(CheckRoleAccess::class)
+			->name('role.edit');
+
+		// Permissions
+		Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.list');
+		Route::get('permissions/create', [PermissionController::class, 'create'])->name('permission.create');
+		Route::get('permissions/{permission}', [PermissionController::class, 'show'])->name('permission.show');
+		Route::get('permissions/{permission}/edit', [PermissionController::class, 'edit'])
+			->middleware(CheckRoleAccess::class)
+			->name('permission.edit');
 	});
 
 
 
-Route::middleware(['auth', 'can:super_admin_access'])
+Route::middleware(['auth', 'role:Super Admin'])
 	->prefix('dashboard/corporate')
 	->name('dashboard.')
 	->group(function () {

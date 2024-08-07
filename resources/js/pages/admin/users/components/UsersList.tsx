@@ -21,11 +21,11 @@ import type { PageProps, User, Users } from '@/types'
 
 const columns = [
 	{ key: 'id', label: '#' },
-	{ key: 'username', label: 'Username' },
-	{ key: 'name', label: 'Name' },
-	{ key: 'company', label: 'Company' },
-	{ key: 'status', label: 'Status' },
-	{ key: 'sessions', label: 'Sessions' },
+	{ key: 'username', label: t('Username') },
+	{ key: 'name', label: t('Name') },
+	{ key: 'company', label: t('Company') },
+	{ key: 'status', label: t('Status') },
+	{ key: 'sessions', label: t('Sessions') },
 	{ key: 'actions', label: '' },
 ] as { key: string; label: string; allowsSorting?: boolean }[]
 

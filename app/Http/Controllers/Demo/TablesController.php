@@ -10,6 +10,12 @@ use App\Models\demo\Product;
 class TablesController extends Controller
 {
 
+	/**
+	 * LIST
+	 * 
+	 * 
+	 * 
+	 */
 	public function index(Request $request)
 	{
 		$per_page = 16;

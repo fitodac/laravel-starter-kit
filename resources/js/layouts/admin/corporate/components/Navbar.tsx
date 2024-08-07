@@ -12,7 +12,7 @@ import { PageProps } from '@/types'
 export const Navbar = () => {
 	const { navbarOpen, setNavbarOpen } = useMainStore()
 	const { windowWidth } = useWindowWidth()
-	const { adminNavbar } = usePage<PageProps>().props
+	const { adminNavbar, auth } = usePage<PageProps>().props
 
 	return (
 		<>
@@ -33,13 +33,20 @@ export const Navbar = () => {
 					{adminNavbar &&
 						adminNavbar.map((nav) => (
 							<Fragment key={nav.key}>
-								{nav.title && nav.menu.length > 0 && (
-									<div
-										className="text-white text-xs font-medium px-7 mb-1 mt-2 whitespace-nowrap"
-										style={{ color: theme.sidebar.title.color }}
-									>
-										{nav.title}
-									</div>
+								{nav.permissions &&
+								auth.permissions &&
+								!auth.permissions.some((e) => nav.permissions?.includes(e)) ? (
+									<></>
+								) : (
+									nav.title &&
+									nav.menu.length > 0 && (
+										<div
+											className="text-white text-xs font-medium px-7 mb-1 mt-2 whitespace-nowrap"
+											style={{ color: theme.sidebar.title.color }}
+										>
+											{nav.title}
+										</div>
+									)
 								)}
 
 								<Menu
@@ -77,15 +84,23 @@ export const Navbar = () => {
 									closeOnClick
 								>
 									{nav.menu.map(
-										({ label, route: path, icon, hasRole, submenu }, idx) => {
+										({ label, route: path, icon, submenu, permissions }) => {
+											if (
+												permissions &&
+												auth.permissions &&
+												!auth.permissions.some((e) => permissions?.includes(e))
+											) {
+												return <Fragment key={label + path}></Fragment>
+											}
+
 											if (submenu) {
 												return (
 													<SubMenu
-														key={label}
+														key={label + path}
 														label={label}
 														icon={<i className={icon} />}
 													>
-														{submenu.map(({ label, route: path }, idx) => (
+														{submenu.map(({ label, route: path }) => (
 															<Fragment key={path}>
 																<MenuItem
 																	component={<Link href={route(path || '')} />}

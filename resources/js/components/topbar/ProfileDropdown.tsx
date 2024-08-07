@@ -3,7 +3,7 @@ import {
 	DropdownTrigger,
 	DropdownMenu,
 	DropdownItem,
-	Button,
+	DropdownSection,
 	User,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
@@ -30,8 +30,8 @@ export const ProfileDropdown = () => {
 						}}
 						classNames={{
 							base: 'rounded-none',
-							name: 'text-foreground-600 leading-tight truncate w-32',
-							description: 'text-foreground-400 leading-tight truncate w-32',
+							name: 'text-foreground-600 leading-tight truncate w-24',
+							description: 'text-foreground-400 leading-tight truncate w-24',
 						}}
 					/>
 				</DropdownTrigger>
@@ -41,19 +41,27 @@ export const ProfileDropdown = () => {
 					color="primary"
 					variant="light"
 				>
-					<DropdownItem
-						textValue={String(t('My account'))}
-						onClick={() => router.visit(route('profile.edit'))}
-					>
-						{t('My account')}
-					</DropdownItem>
+					<DropdownSection showDivider>
+						<DropdownItem
+							textValue={String(t('My account'))}
+							onClick={() => router.visit(route('profile.edit'))}
+							startContent={<i className="ri-profile-line ri-lg" />}
+						>
+							{t('My account')}
+						</DropdownItem>
+					</DropdownSection>
 
-					<DropdownItem
-						textValue={String(t('Log out'))}
-						onClick={() => router.post(route('logout'))}
-					>
-						{t('Log out')}
-					</DropdownItem>
+					<DropdownSection>
+						<DropdownItem
+							textValue={String(t('Log out'))}
+							onClick={() => router.post(route('logout'))}
+							startContent={
+								<i className="ri-logout-circle-r-line ri-lg text-danger" />
+							}
+						>
+							{t('Log out')}
+						</DropdownItem>
+					</DropdownSection>
 				</DropdownMenu>
 			</Dropdown>
 		</>

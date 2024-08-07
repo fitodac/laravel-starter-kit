@@ -55,6 +55,7 @@ export type PageProps<
 > = T & {
 	auth: {
 		user: User
+		permissions?: string[]
 	}
 	ziggy: Config & { location: string }
 	flash?: FlashMessages
