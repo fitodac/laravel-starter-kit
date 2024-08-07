@@ -10,6 +10,7 @@ import {
 	ModalBody,
 	ModalFooter,
 	useDisclosure,
+	Divider,
 } from '@nextui-org/react'
 
 export const DeleteAccount = (): JSX.Element => {
@@ -40,24 +41,15 @@ export const DeleteAccount = (): JSX.Element => {
 
 	return (
 		<>
-			<div className="text-danger space-y-5">
-				<h3 className="font-semibold select-none">{t('Delete Account')}</h3>
+			<div className="space-y-3">
+				<Divider />
 
-				<div className="font-light leading-tight select-none">
-					{t('delete-account-confirmation-message')}
-				</div>
-
-				<div className="md:flex justify-end">
-					<div className="w-1/3">
-						<Button color="danger" onPress={onOpen} fullWidth>
-							{t('Delete account')}
-						</Button>
-					</div>
-				</div>
+				<Button color="danger" variant="light" onPress={onOpen}>
+					{t('Delete account')}
+				</Button>
 			</div>
 
 			<Modal
-				hideCloseButton
 				size="sm"
 				isOpen={isOpen}
 				onOpenChange={onOpenChange}
@@ -67,7 +59,7 @@ export const DeleteAccount = (): JSX.Element => {
 				<ModalContent>
 					{(onClose) => (
 						<>
-							<ModalHeader>
+							<ModalHeader className="pb-0">
 								<span className="leading-tight select-none">
 									{t('delete-account-confirmation-title')}
 								</span>
@@ -79,7 +71,7 @@ export const DeleteAccount = (): JSX.Element => {
 										{t('delete-account-confirmation-message')}
 									</p>
 
-									<div className="space-y-1">
+									<div className="space-y-1 mt-3">
 										<Input
 											ref={passwordInput}
 											id="password"
@@ -92,25 +84,30 @@ export const DeleteAccount = (): JSX.Element => {
 											onValueChange={(e) => setData('password', e)}
 										/>
 									</div>
-
-									<div className="flex gap-x-5 pb-5">
-										<Button
-											color="danger"
-											fullWidth
-											type="submit"
-											spinner={
-												<i className="ri-loader-line ri-lg animate-spin"></i>
-											}
-											isLoading={processing}
-										>
-											{t('Delete')}
-										</Button>
-
-										<Button color="default" fullWidth onPress={onClose}>
-											{t('Cancel')}
-										</Button>
-									</div>
 								</ModalBody>
+
+								<ModalFooter className="gap-x-4">
+									<Button
+										fullWidth
+										color="default"
+										variant="ghost"
+										onPress={onClose}
+									>
+										{t('Cancel')}
+									</Button>
+
+									<Button
+										fullWidth
+										color="danger"
+										type="submit"
+										spinner={
+											<i className="ri-loader-line ri-lg animate-spin"></i>
+										}
+										isLoading={processing}
+									>
+										{t('Delete')}
+									</Button>
+								</ModalFooter>
 							</form>
 						</>
 					)}

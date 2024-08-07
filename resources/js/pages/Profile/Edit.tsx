@@ -4,16 +4,28 @@ import { PageHeader, PageContent } from '@/components'
 import { PageProps } from '@/types'
 import {
 	ProfileCard,
-	UpdateProfile,
-	UpdatePassword,
+	FormBasicInformation,
+	FormPersonalInformation,
+	FormProfessionalInformation,
+	FormPassword,
 	DeleteAccount,
 } from './components'
+import { Link, router } from '@inertiajs/react'
 
-const Edit = ({
-	auth,
-	mustVerifyEmail,
-	status,
-}: PageProps<{ mustVerifyEmail: boolean; status?: string }>) => {
+import { User } from '@/types'
+import { Button, Card, CardBody } from '@nextui-org/react'
+
+interface Props extends PageProps {
+	mustVerifyEmail: boolean
+	status?: string
+	auth: { user: User }
+}
+
+const sendEmailAccountConfirmation = () => {
+	router.post(route('verification.send'))
+}
+
+const Page = ({ auth: { user }, mustVerifyEmail, status }: Props) => {
 	return (
 		<>
 			<PageHeader title={t('My account')} />
@@ -25,19 +37,53 @@ const Edit = ({
 					</div>
 
 					<div className="col-span-2 space-y-12">
-						<div className="space-y-6 lg:max-w-xl">
-							<div className="bg-white p-10 shadow-xl rounded-2xl dark:bg-black/20">
-								<UpdateProfile {...{ mustVerifyEmail, status }} />
-							</div>
+						{mustVerifyEmail && user.email_verified_at === null && (
+							<>
+								{status !== 'verification-link-sent' ? (
+									<Card
+										shadow="none"
+										className="bg-danger-50 text-danger-500 pl-14 pr-6 py-6"
+									>
+										<i className="ri-mail-unread-line ri-2x left-3 top-4 absolute" />
+										<CardBody className="p-0">
+											<div className="flex justify-between items-center">
+												<p className="text-danger font-light">
+													{t('Your email address is unverified')}
+												</p>
 
-							<div className="bg-white p-10 shadow-xl rounded-2xl dark:bg-black/20">
-								<UpdatePassword />
-							</div>
+												<div>
+													<Button
+														size="sm"
+														color="danger"
+														onPress={sendEmailAccountConfirmation}
+													>
+														{t('email-verify-link')}
+													</Button>
+												</div>
+											</div>
+										</CardBody>
+									</Card>
+								) : (
+									<>
+										<Card
+											shadow="none"
+											className="bg-success-50 text-success-500 pl-14 pr-6 py-6"
+										>
+											<i className="ri-mail-check-line ri-2x left-3 top-3 absolute" />
+											<CardBody className="text-sm font-light p-0">
+												{t('verification-link-sent-notice')}
+											</CardBody>
+										</Card>
+									</>
+								)}
+							</>
+						)}
 
-							<div className="bg-white p-10 shadow-xl rounded-2xl dark:bg-black/20">
-								<DeleteAccount />
-							</div>
-						</div>
+						<FormBasicInformation />
+						<FormPersonalInformation />
+						<FormProfessionalInformation />
+						<FormPassword />
+						<DeleteAccount />
 					</div>
 				</div>
 			</PageContent>
@@ -47,8 +93,8 @@ const Edit = ({
 	)
 }
 
-Edit.layout = (page: JSX.Element) => (
+Page.layout = (page: JSX.Element) => (
 	<Layout {...{ children: page, pageTitle: String(t('My account')) }} />
 )
 
-export default Edit
+export default Page

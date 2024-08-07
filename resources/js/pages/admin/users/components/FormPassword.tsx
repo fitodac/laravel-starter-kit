@@ -19,11 +19,12 @@ export const FormPassword = () => {
 		setData('password', val)
 	}
 
-	const { data, setData, put, processing, errors, clearErrors } = useForm({
-		id: user.id ?? null,
-		password: '',
-		security_information: true,
-	})
+	const { data, setData, put, processing, errors, clearErrors, isDirty } =
+		useForm({
+			id: user.id ?? null,
+			password: '',
+			security_information: true,
+		})
 
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
@@ -45,7 +46,7 @@ export const FormPassword = () => {
 			<form onSubmit={submit}>
 				<section className="space-y-5">
 					<div className="font-medium flex gap-5 items-center">
-						{t('Password')}
+						{t('Security')}
 						<Divider className="flex-1" />
 					</div>
 
@@ -102,6 +103,7 @@ export const FormPassword = () => {
 							color="primary"
 							className="w-40"
 							isLoading={processing}
+							isDisabled={!isDirty}
 						>
 							{t('Save')}
 						</Button>

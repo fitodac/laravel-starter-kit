@@ -29,10 +29,8 @@ class ProfileUpdateRequest extends FormRequest
 			// Basic information
 			$rules['name'] = 'required|string|max:255';
 			$rules['lastname'] = 'required|string|max:255';
-			$rules['username'] = 'required|string|max:255|unique:users,username,' . $this->user->id;
-			$rules['email'] = 'required|email|lowercase|unique:users,email,' . $this->user->id;
-			$rules['status'] = 'required|in:enabled,disabled';
-			$rules['role'] = 'required|integer|exists:roles,id';
+			$rules['username'] = 'required|string|max:255|unique:users,username,' . $this->id;
+			$rules['email'] = 'required|email|lowercase|unique:users,email,' . $this->id;
 		}
 
 		if ($this->has('personal_information')) {
@@ -44,9 +42,6 @@ class ProfileUpdateRequest extends FormRequest
 			$rules['zip'] = 'nullable|string|max:10';
 		}
 
-		if ($this->has('security_information')) {
-			$rules['password'] = 'required|string|min:8|regex:/^\S*$/u';
-		}
 
 		return $rules;
 	}
@@ -92,11 +87,6 @@ class ProfileUpdateRequest extends FormRequest
 			'profile_picture.mimes' => 'Profile picture must be a file of type: jpeg, png, jpg, gif, svg',
 			'profile_picture.max' => 'Profile picture must not exceed 2048 kilobytes',
 			'status.in' => 'Status must be enabled or disabled',
-
-			'password.required' => 'Password is required',
-			'password.string' => 'Password must be a string',
-			'password.min' => 'Password must be at least 8 characters',
-			'password.regex' => 'Password must contain only letters and numbers',
 		];
 	}
 }

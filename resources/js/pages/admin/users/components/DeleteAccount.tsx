@@ -15,7 +15,7 @@ import type { PageProps, User, InertiaResponse } from '@/types'
 import { toast } from 'react-toastify'
 
 export const DeleteAccount = () => {
-	const { user, permission } = usePage<PageProps<{ user: User }>>().props
+	const { user } = usePage<PageProps<{ user: User }>>().props
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
 	const { delete: destroy } = useForm()
@@ -29,11 +29,16 @@ export const DeleteAccount = () => {
 				</Button>
 			</div>
 
-			<Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false}>
+			<Modal
+				isOpen={isOpen}
+				onOpenChange={onOpenChange}
+				isDismissable={false}
+				isKeyboardDismissDisabled={true}
+			>
 				<ModalContent>
 					{(onClose) => (
 						<>
-							<ModalHeader className="flex flex-col gap-1">
+							<ModalHeader className="flex flex-col gap-1 select-none">
 								{t('Confirm account deletion')}
 							</ModalHeader>
 

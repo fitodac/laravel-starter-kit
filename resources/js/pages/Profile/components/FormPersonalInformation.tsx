@@ -8,23 +8,24 @@ import { toast } from 'react-toastify'
 import type { PageProps, User, InertiaResponse } from '@/types'
 
 export const FormPersonalInformation = () => {
-	const { user } = usePage<PageProps<{ user: User }>>().props
+	const user = usePage<PageProps<{ user: User }>>().props.auth.user
 
-	const { data, setData, patch, processing, errors, clearErrors, isDirty } = useForm({
-		id: user.id,
-		phone: user.phone,
-		birth_date: user.birth_date,
-		address: user.address,
-		city: user.city,
-		country: user.country,
-		zip: user.zip,
-		personal_information: true,
-	})
+	const { data, setData, patch, processing, errors, clearErrors, isDirty } =
+		useForm({
+			id: user.id,
+			phone: user.phone,
+			birth_date: user.birth_date,
+			address: user.address,
+			city: user.city,
+			country: user.country,
+			zip: user.zip,
+			personal_information: true,
+		})
 
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
 
-		patch(route('dashboard.user.update', { user }), {
+		patch(route('profile.update'), {
 			preserveScroll: true,
 			// @ts-ignore
 			onSuccess: (resp: InertiaResponse) => {
