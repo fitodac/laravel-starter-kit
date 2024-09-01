@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MediaManagerController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,7 +31,13 @@ Route::middleware('auth')->group(function () {
 		->name('profile.update_image');
 	Route::delete('profile/image-profile', [ProfileController::class, 'remove_image'])
 		->name('profile.remove_image');
+
+	// Image uploader
+	Route::get('media', [MediaManagerController::class, 'index'])->name('media.list');
+	Route::post('media', [MediaManagerController::class, 'store'])->name('media.upload');
 });
+
+
 
 
 require __DIR__ . '/auth.php';

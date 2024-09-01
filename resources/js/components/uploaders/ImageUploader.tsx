@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone'
 
 interface Props {
 	onFileUpload?: (file: any) => void
-	defaultImageSrc?: string
+	defaultImageSrc?: string | null
 	radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
 	classNames?: {
 		base?: string

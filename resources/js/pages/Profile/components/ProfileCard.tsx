@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import {
 	Image,
-	Button,
 	Card,
 	CardHeader,
 	CardBody,
@@ -10,7 +9,7 @@ import {
 } from '@nextui-org/react'
 import { useUser } from '@/hooks'
 import { t } from '@/i18n'
-import { router, useForm, usePage } from '@inertiajs/react'
+import { router, usePage } from '@inertiajs/react'
 import { toast } from 'react-toastify'
 
 import userBlank from '@/assets/img/blank-462x265.webp'
