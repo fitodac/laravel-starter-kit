@@ -1,14 +1,19 @@
 import { Button } from '@nextui-org/react'
 import { useMediaMangerStore } from '../store/mediaManagerStore'
+import { t } from '@/i18n'
 
 interface Props {}
 
 export const Navbar = ({}: Props) => {
-	const { onClose } = useMediaMangerStore()
+	const { onClose, filesTotal } = useMediaMangerStore()
 
 	return (
 		<div className="bg-white border-t border-gray-100 w-full rounded-b-2xl z-30 dark:bg-gray-900 dark:border-gray-800">
-			<div className="px-8 py-4 flex justify-end gap-x-5">
+			<div className="px-8 py-4 flex justify-between items-end gap-x-5">
+				<div className="text-foreground-600 text-sm">
+					{t('Total files')}: {filesTotal}
+				</div>
+
 				<Button
 					variant="ghost"
 					startContent={

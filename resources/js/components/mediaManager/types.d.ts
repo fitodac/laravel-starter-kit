@@ -1,24 +1,33 @@
 export type Image = {
-	id?: number
-	name?: string
-	filepath?: string
-	alt?: string
-	caption?: string
-	created_at?: string
-	updated_at?: string
+	name: string
+	uuid: string
+	file_name: string
+	preview_url: string
+	original_url: string
+	order: number
+	custom_properties?: any[]
+	extension: string
+	size: number
 }
 
 export type State = {
 	files?: Image[] | any[]
+	filesTotal?: number
+	fileSelected?: Image | null
 	onClose?: () => void
-	tabsEnabled?: string[]
+	tabsDisabled?: string[]
+	selectedTab?: string
 }
 
 export type Action = {
 	setFiles?: (images: State['files']) => void
+	setFilesTotal?: (total: State['filesTotal']) => void
+	setFileSelected?: (image: State['fileSelected']) => void
 	onClose?: () => void
 	setOnClose?: (fn: () => void) => void
-	setTabsEnabled?: (tabsEnabled: State['tabsEnabled']) => void
+	disableTabs?: () => void
+	enableTabs?: () => void
+	setSelectedTab?: (tab: State['selectedTab']) => void
 }
 
 export interface MediaManagerContext {

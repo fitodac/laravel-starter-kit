@@ -169,5 +169,9 @@ export default {
 				},
 			},
 		}),
+		require('tailwind-scrollbar')({
+			nocompatible: true,
+			preferredStrategy: 'pseudoelements',
+		}),
 	],
 }

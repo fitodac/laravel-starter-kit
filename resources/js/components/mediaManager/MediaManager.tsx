@@ -14,6 +14,7 @@ import {
 import { Navbar, MediaLibrary, FileUploader } from './components'
 import { t } from '@/i18n'
 import { useMediaMangerStore } from './store/mediaManagerStore'
+import { tabsMapper } from './helpers/mappers/tabs.mapper'
 
 interface Props {
 	button?: {
@@ -25,7 +26,8 @@ interface Props {
 
 export const MediaManager = ({ button, selectMultiple = false }: Props) => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
-	const { setOnClose, tabsEnabled } = useMediaMangerStore()
+	const { setOnClose, tabsDisabled, selectedTab, setSelectedTab } =
+		useMediaMangerStore()
 
 	useEffect(() => setOnClose && setOnClose(onClose), [])
 
@@ -50,10 +52,9 @@ export const MediaManager = ({ button, selectMultiple = false }: Props) => {
 				backdrop="opaque"
 				onClose={onClose}
 				className="max-w-[90vw] max-h-[90vh]"
-				scrollBehavior="inside"
 			>
 				<ModalContent className="bg-transparent">
-					{(onClose) => (
+					{() => (
 						<>
 							<ModalHeader className="bg-white border-b border-gray-100 rounded-t-2xl dark:bg-gray-900 dark:border-gray-800">
 								{t('Media manager')}
@@ -66,8 +67,12 @@ export const MediaManager = ({ button, selectMultiple = false }: Props) => {
 											aria-label="Media manager"
 											variant="light"
 											color="primary"
-											disabledKeys={tabsEnabled}
-											defaultSelectedKey="mediaLibrary"
+											disabledKeys={tabsDisabled}
+											defaultSelectedKey={selectedTab}
+											selectedKey={selectedTab}
+											onSelectionChange={(t) =>
+												setSelectedTab && setSelectedTab(t.toString())
+											}
 											classNames={{
 												base: 'bg-content2 w-full dark:bg-black/20',
 												tabList: 'p-0 gap-0 rounded-none',
@@ -77,12 +82,15 @@ export const MediaManager = ({ button, selectMultiple = false }: Props) => {
 											}}
 										>
 											{/* File uploader */}
-											<Tab key="uploadFiles" title="Upload files">
+											<Tab key={tabsMapper('TAB_UPLOAD')} title="Upload files">
 												<FileUploader />
 											</Tab>
 
 											{/* Media library */}
-											<Tab key="mediaLibrary" title="Media library">
+											<Tab
+												key={tabsMapper('TAB_LIBRARY')}
+												title="Media library"
+											>
 												<MediaLibrary />
 											</Tab>
 										</Tabs>

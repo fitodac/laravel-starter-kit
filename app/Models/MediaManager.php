@@ -38,4 +38,18 @@ class MediaManager extends Model implements HasMedia
 			->fit(Fit::Contain, 300, 300)
 			->nonQueued();
 	}
+
+	/**
+	 * Get media by UUID from the 'images' collection.
+	 *
+	 * @param MediaManager $mediaManager
+	 * @param string $uuid
+	 * @return \Spatie\MediaLibrary\MediaCollections\Models\Media|null
+	 */
+	protected function getMediaByUuid(MediaManager $mediaManager, string $uuid)
+	{
+		return $mediaManager->getMedia('images')->where('uuid', $uuid)->first();
+	}
+
+	
 }

@@ -1,10 +1,10 @@
-import { type ReactNode, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { Button, cn } from '@nextui-org/react'
+import { Button } from '@nextui-org/react'
 import { useMediaMangerStore } from '../store/mediaManagerStore'
 import { t } from '@/i18n'
-// import { useForm } from '@inertiajs/react'
 import { router } from '@inertiajs/react'
+import { toast } from 'react-toastify'
+import { tabsMapper } from '../helpers/mappers/tabs.mapper'
 
 const defaultAcceptedFormats = {
 	'image/jpeg': ['.jpeg', '.jpg'],
@@ -14,52 +14,47 @@ const defaultAcceptedFormats = {
 	'image/avif': ['.avif'],
 }
 
-const tabsGroup = ['mediaLibrary', 'uploadFiles']
-
 export const FileUploader = () => {
-	const { setOnClose, tabsEnabled, setTabsEnabled } = useMediaMangerStore()
+	const { enableTabs, disableTabs, setSelectedTab } =
+		useMediaMangerStore()
 
 	const upload = (files: any) => {
-		console.log('upload', files)
-		console.log('ruta', route('media.upload'))
 		router.post(
 			route('media.upload'),
 			{ files: files },
 			{
 				forceFormData: true,
 				// @ts-ignore
-				onSuccess: (resp: InertiaResponse) => {},
-				onError: (errors) => console.log(errors),
+				onSuccess: (resp: InertiaResponse) => {
+					setSelectedTab && setSelectedTab(tabsMapper('TAB_LIBRARY'))
+					enableTabs && enableTabs()
+
+					if (resp.props.flash && resp.props.flash.success) {
+						toast.success(resp.props.flash.success)
+					}
+				},
+				onError: (errors) => {
+					console.log('Error uploading files', errors)
+					enableTabs && enableTabs()
+
+					toast.error(
+						t('An error occurred while uploading files. Please try again.')
+					)
+				},
 			}
-			// {
-			//
-			// 	// @ts-ignore
-			// 	onSuccess: (resp: InertiaResponse) => {
-			// 		if (resp.props.flash && resp.props.flash.success) {
-			// 			toast.success(resp.props.flash.success)
-			// 		}
-			// 	},
-			//
-			// }
 		)
 	}
 
 	const { open, getRootProps, getInputProps } = useDropzone({
 		accept: defaultAcceptedFormats,
 		onDrop: (acceptedFiles) => {
-			// console.log('acceptedFiles', acceptedFiles)
-			// const file = acceptedFiles[0]
-			// const previewUrl = URL.createObjectURL(file)
-			// return () => URL.revokeObjectURL(previewUrl)
+			disableTabs && disableTabs()
 		},
 		onDropAccepted: (files) => {
-			// setTabsEnabled && setTabsEnabled([])
-			console.log('onDropAccepted', files)
 			upload(files)
-			// setTabsEnabled && setTabsEnabled([...tabsGroup])
 		},
 		onDropRejected: (err) => {
-			console.log('error', err)
+			console.log('Drop rejected', err)
 		},
 	})
 
@@ -74,14 +69,14 @@ export const FileUploader = () => {
 
 			<div className="space-y-2 text-center">
 				<p className="font-semibold">{t('Drop files to upload')}</p>
-				<p className="text-foreground-500 text-xs">or</p>
+				<p className="text-foreground-500 text-xs">{t('or')}</p>
 				<Button
 					color="primary"
 					variant="faded"
 					className="px-10"
 					onPress={open}
 				>
-					Select files
+					{t('Select files')}
 				</Button>
 				<p className="text-foreground-500 text-xs font-medium pt-5">
 					{t('Maximum upload file size')} 300 MB

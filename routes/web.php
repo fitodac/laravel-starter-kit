@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
 	// Image uploader
 	Route::get('media', [MediaManagerController::class, 'index'])->name('media.list');
 	Route::post('media', [MediaManagerController::class, 'store'])->name('media.upload');
+	Route::delete('media/{uuid}', [MediaManagerController::class, 'destroy'])->name('media.delete');
 });
 
 
