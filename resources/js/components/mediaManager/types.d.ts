@@ -1,13 +1,27 @@
 export type Image = {
-	name: string
+	id: number
+	model_type: string
+	model_id: number
 	uuid: string
+	collection_name: string
+	name: string
 	file_name: string
-	preview_url: string
-	original_url: string
-	order: number
-	custom_properties?: any[]
-	extension: string
+	mime_type: string
+	disk: string
+	conversions_disk: string
 	size: number
+	manipulations: any[]
+	custom_properties: {
+		altText?: string
+		caption?: string
+		description?: string
+	}
+	generated_conversions: any[]
+	responsive_images: any[]
+	order_column: number
+	original_url: string
+	preview_url: string
+	created_at: string
 }
 
 export type State = {

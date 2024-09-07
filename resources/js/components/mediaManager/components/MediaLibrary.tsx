@@ -19,20 +19,21 @@ export const MediaLibrary = () => {
 		getFiles()
 	}, [])
 
-	useEffect(() => {
-		// console.log(files)
-	}, [files])
-
 	return (
 		<section className="w-full relative">
-			<div className="inset-y-0 left-0 right-96 absolute">
+			<div className="inset-y-0 left-0 absolute lg:right-96">
 				{!files ? (
 					<div className="w-full h-full grid place-content-center">
 						<CircularProgress label={t('Loading files')} />
 					</div>
 				) : (
 					<div className="scrollbar-thin h-full overflow-y-scroll">
-						<div className="grid grid-cols-2 gap-7 px-6 pt-4 pb-24 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+						<div
+							className={cn(
+								'grid grid-cols-2 gap-7 px-6 pt-4 pb-24',
+								'sm:grid-cols-3 xl:grid-cols-5'
+							)}
+						>
 							{files.map((file) => (
 								<Card
 									key={file.uuid}

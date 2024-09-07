@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MediaManager;
+use App\Http\Requests\Media\UpdateMediaRequest;
 
 class MediaManagerController extends Controller
 {
@@ -19,11 +20,15 @@ class MediaManagerController extends Controller
 	public function index()
 	{
 		$manager = MediaManager::first();
-		$images = $manager->getMedia('images');
-		$images_total = $manager->getMedia('images')->count();
+		$images = $manager->getMedia('images')->toArray();
+		$images = array_reverse($images);
 
-		return response()->json(compact('images', 'images_total'));
+		$imagesTotal = $manager->getMedia('images')->count();
+
+		return response()->json(compact('images', 'imagesTotal'));
 	}
+
+
 
 	/**
 	 * Store media files in the 'images' collection.
@@ -40,8 +45,30 @@ class MediaManagerController extends Controller
 		$manager = MediaManager::first();
 
 		foreach ($files as $file) {
-			$manager->addMedia($file)->toMediaCollection('images');
+			$manager->addMedia($file)
+				->withCustomProperties([
+					'altText' => '',
+					'caption' => '',
+					'description' => ''
+				])
+				->toMediaCollection('images');
 		}
+	}
+
+	// Create an "update" function to update media files in the 'images' collection.
+	public function update(Request $request, $id)
+	{
+		$manager = MediaManager::first();
+		$media = $manager->getMedia('images')->find($id);
+
+		if ($media) {
+			if (!empty($request->name)) $media->name = $request->name;
+			$media->custom_properties = $request->custom_properties;
+			$media->save();
+			return response()->json(['message' => 'Image updated successfully']);
+		}
+
+		return response()->json(['message' => 'Image not found'], 404);
 	}
 
 
@@ -54,10 +81,10 @@ class MediaManagerController extends Controller
 	 * 
 	 * 
 	 */
-	public function destroy($uuid)
+	public function destroy($id)
 	{
-		$mediaManager = MediaManager::first();
-		$media = $mediaManager->getMediaByUuid($mediaManager, $uuid);
+		$manager = MediaManager::first();
+		$media = $manager->getMedia('images')->find($id);
 
 		if ($media) {
 			$media->delete();

@@ -5,6 +5,21 @@ import { useMediaMangerStore } from '../store/mediaManagerStore'
 import type { Image } from '../types.d'
 import numeral from 'numeral'
 
+// Add a request interceptor
+axios.interceptors.request.use(
+	function (config) {
+		// Add the CSRF token to the request headers
+		config.headers['X-CSRF-TOKEN'] = document
+			.querySelector('meta[name="csrf-token"]')
+			?.getAttribute('content')
+
+		return config
+	},
+	function (error) {
+		return Promise.reject(error)
+	}
+)
+
 export const useMediaManager = () => {
 	const { setFiles, setFilesTotal, setFileSelected } = useMediaMangerStore()
 
@@ -38,7 +53,7 @@ export const useMediaManager = () => {
 	 *
 	 *
 	 */
-	const deleteFile = async (uuid: string) => {
+	const deleteFile = async (id: number) => {
 		let confirmationWindow = null
 
 		const confirmationResult = (confirmationWindow = window.confirm(
@@ -48,9 +63,7 @@ export const useMediaManager = () => {
 		))
 
 		if (confirmationResult) {
-			const { data, status } = await axios.delete(
-				route('media.delete', { uuid })
-			)
+			const { data, status } = await axios.delete(route('media.delete', { id }))
 
 			if (200 !== status) {
 				toast.error(t('Error fetching files'))
@@ -60,6 +73,30 @@ export const useMediaManager = () => {
 			toast.success(data.message)
 			getFiles()
 		}
+	}
+
+	/**
+	 * Update a media file on the server and updates the state.
+	 *
+	 * @param file
+	 * @returns
+	 *
+	 *
+	 *
+	 */
+	const updateFile = async (file: Image) => {
+		const { data, status } = await axios.patch(
+			route('media.update', { id: file.id }),
+			file
+		)
+
+		if (200 !== status) {
+			toast.error(t('Error updating file'))
+			return
+		}
+
+		toast.success(data.message)
+		getFiles()
 	}
 
 	/**
@@ -86,6 +123,7 @@ export const useMediaManager = () => {
 
 	return {
 		getFiles,
+		updateFile,
 		deleteFile,
 		formatSize,
 	}
