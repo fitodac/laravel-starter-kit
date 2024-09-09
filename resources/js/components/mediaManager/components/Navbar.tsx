@@ -1,5 +1,6 @@
+import { useContext } from 'react'
 import { Button } from '@nextui-org/react'
-import { useMediaMangerStore } from '../store/mediaManagerStore'
+import { MediaManagerContext } from '../providers/MediaManagerProvider'
 import { t } from '@/i18n'
 
 interface Props {
@@ -8,7 +9,26 @@ interface Props {
 }
 
 export const Navbar = ({ onFilesSelected, onClose }: Props) => {
-	const { filesTotal, fileSelected } = useMediaMangerStore()
+	const { filesTotal, filesSelected, order, setFilesSelected, setFilesTotal } =
+		useContext(MediaManagerContext)
+
+	const confirm = () => {
+		setFilesTotal && setFilesTotal(0)
+
+		if (order && order.length) {
+			const newItems = []
+
+			for (const index of order) {
+				newItems.push(filesSelected[index])
+			}
+			onFilesSelected && onFilesSelected(newItems)
+			setFilesSelected && setFilesSelected(newItems)
+		} else {
+			onFilesSelected && onFilesSelected(filesSelected)
+		}
+
+		onClose && onClose()
+	}
 
 	return (
 		<div className="bg-white border-t border-gray-100 w-full rounded-b-2xl z-30 dark:bg-gray-900 dark:border-gray-800">
@@ -30,15 +50,8 @@ export const Navbar = ({ onFilesSelected, onClose }: Props) => {
 						{t('Cancel')}
 					</Button>
 
-					{fileSelected && (
-						<Button
-							color="primary"
-							className="px-10"
-							onPress={() => {
-								onFilesSelected && onFilesSelected(fileSelected)
-								onClose && onClose()
-							}}
-						>
+					{filesSelected && (
+						<Button color="primary" className="px-10" onPress={confirm}>
 							{t('Select')}
 						</Button>
 					)}

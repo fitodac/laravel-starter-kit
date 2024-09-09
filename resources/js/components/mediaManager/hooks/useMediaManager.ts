@@ -1,9 +1,11 @@
+import { useContext } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { t } from '@/i18n'
-import { useMediaMangerStore } from '../store/mediaManagerStore'
-import type { Image } from '../types.d'
+import { MediaManagerContext } from '../providers/MediaManagerProvider'
 import numeral from 'numeral'
+
+import type { Image } from '../types.d'
 
 // Add a request interceptor
 axios.interceptors.request.use(
@@ -21,8 +23,13 @@ axios.interceptors.request.use(
 )
 
 export const useMediaManager = () => {
-	const { setFiles, setFilesTotal, collection, setFileSelected } =
-		useMediaMangerStore()
+	const {
+		setFiles,
+		setFilesTotal,
+		filesSelected,
+		setFilesSelected,
+		selectMultiple,
+	} = useContext(MediaManagerContext)
 
 	/**
 	 * Fetches the list of media files from the server and updates the state.
@@ -43,7 +50,23 @@ export const useMediaManager = () => {
 		setFiles && setFiles(Object.entries(data.images).map((e) => e[1]))
 		setFilesTotal && setFilesTotal(data.imagesTotal)
 
-		console.log('useMediaManager [collection]', collection)
+		/**
+		if (selectMultiple && filesSelected) {
+			const compare = [] as number[]
+			filesSelected.forEach((file) => {
+				const key = Object.keys(data.images).find(
+					(k) => data.images[k].id === file.id
+				)
+
+				if (key) compare.push(parseInt(key))
+			})
+
+			setFilesSelected &&
+				setFilesSelected([
+					...data.images.filter((e: Image) => compare.includes(e.id)),
+				])
+		}
+		 */
 	}
 
 	/**
@@ -72,6 +95,7 @@ export const useMediaManager = () => {
 			}
 
 			toast.success(t(data.message))
+			setFilesSelected && setFilesSelected([])
 			getFiles()
 		}
 	}

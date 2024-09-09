@@ -1,3 +1,5 @@
+import { type ButtonProps } from '@nextui-org/react'
+
 export type Image = {
 	id: number
 	model_type: string
@@ -25,32 +27,30 @@ export type Image = {
 	updated_at: string
 }
 
-export type State = {
-	files?: Image[] | any
-	filesTotal?: number
-	fileSelected?: Image | null
-	tabsDisabled?: string[]
-	selectedTab?: string
-	selectMultiple?: boolean
-	collection?: Image[] | null | undefined
-}
-
-export type Action = {
-	setFiles?: (images: State['files']) => void
-	setFilesTotal?: (total: State['filesTotal']) => void
-	setFileSelected?: (image: State['fileSelected']) => void
-	disableTabs?: () => void
+interface MediaManagerContextType {
+	files: Image[] | null
+	setFiles?: (files: any) => void
+	filesTotal: number
+	setFilesTotal?: (filesTotal: number) => void
+	filesSelected: Image[] | never[]
+	setFilesSelected?: (files: Image[]) => void
+	tabsDisabled: string[]
+	setTabsDisabled?: (tabsDisabled: any[]) => void
+	selectedTab: string
+	setSelectedTab?: (selectedTab: string) => void
 	enableTabs?: () => void
-	setSelectedTab?: (tab: State['selectedTab']) => void
-	setSelectMultiple?: (value: State['selectMultiple']) => void
-	setCollection?: (collection: State['collection']) => void
+	disableTabs?: () => void
+	selectMultiple?: boolean
+	order?: number[] | null
+	setOrder?: (order: number[] | null) => void
 }
 
-export interface MediaManagerContext {
-	mediaGallery?: Image[] | null
-	setMediaGallery?: (images: Image[]) => void
-	selectedImage?: Image | null
-	setSelectedImage?: (image: Image | null) => void
-	csrfToken?: string
-	setCsrfToken?: (token: string) => void
+interface ComponentProps {
+	button?: {
+		text?: string
+		props?: ButtonProps
+	}
+	selectMultiple?: boolean
+	onFilesSelected?: (file: any) => void
+	collection?: Image[] | null | undefined
 }

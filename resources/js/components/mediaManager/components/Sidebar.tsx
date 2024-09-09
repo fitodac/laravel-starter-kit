@@ -1,10 +1,10 @@
-import { cn, Input, Textarea, Button } from '@nextui-org/react'
-import { useMediaMangerStore } from '../store/mediaManagerStore'
+import { useEffect, useState, useContext } from 'react'
+import { cn, Input, Textarea, Button, Divider } from '@nextui-org/react'
+import { MediaManagerContext } from '../providers/MediaManagerProvider'
 import { t } from '@/i18n'
 import { toast } from 'react-toastify'
 import { useMediaManager } from '../hooks/useMediaManager'
 import dayjs from 'dayjs'
-import { useEffect, useState } from 'react'
 import { useForm } from '@inertiajs/react'
 
 const handleCopy = (url: string) => {
@@ -29,18 +29,18 @@ const inputStyle = {
 }
 
 export const Sidebar = () => {
-	const { fileSelected } = useMediaMangerStore()
+	const { filesSelected } = useContext(MediaManagerContext)
 	const { updateFile, deleteFile, formatSize } = useMediaManager()
 	const [editable, setEditable] = useState(false)
-	const { data, setData } = useForm({ ...fileSelected })
+	const { data, setData } = useForm({ ...filesSelected[0] })
 
 	useEffect(() => {
 		setEditable(false)
-		setData({ ...fileSelected })
-	}, [fileSelected])
+		setData({ ...filesSelected[0] })
+	}, [filesSelected])
 
 	const content = () => {
-		if (!fileSelected) return null
+		if (!filesSelected.length) return null
 
 		const {
 			name,
@@ -51,48 +51,64 @@ export const Sidebar = () => {
 			id,
 			uuid,
 			custom_properties,
-		} = fileSelected
+		} = filesSelected[0]
 
 		return (
 			<div className="h-full overflow-auto">
 				<div className="text-sm px-6 pt-4 pb-10">
-					<div className="font-semibold">{t('Attachment details')}</div>
+					<div className="text-foreground-500 text-base font-semibold">
+						{t('Attachment details')}
+					</div>
 
-					<div className="mt-2 space-y-5">
-						<div className="space-y-0.5">
-							<div className="font-semibold">{file_name}</div>
-							<div className="flex justify-between gap-4">
-								<span>{t('Size')}:</span>
-								<span>{formatSize(size)}</span>
+					<div className="mt-1 space-y-5">
+						<div className="space-y-2">
+							<div className="text-base font-semibold truncate">{name}</div>
+
+							<div className="flex justify-between gap-4 pt-3">
+								<span className="w-24">{t('File name')}:</span>
+								<span className="truncate flex-1">
+									{file_name} {file_name} {file_name} {file_name}
+								</span>
 							</div>
+							<Divider />
 
 							<div className="flex justify-between gap-4">
-								<span>{t('Date')}:</span>
-								<span>{dayjs(created_at).format('MMM DD, YYYY')}</span>
+								<span className="w-24">{t('Size')}:</span>
+								<span className="truncate flex-1">{formatSize(size)}</span>
 							</div>
+							<Divider />
 
 							<div className="flex justify-between gap-4">
-								<span>{t('uuid')}:</span>
-								<span className="truncate">{uuid}</span>
+								<span className="w-24">{t('Date')}:</span>
+								<span className="truncate flex-1">
+									{dayjs(created_at).format('MMM DD, YYYY')}
+								</span>
 							</div>
+							<Divider />
+
+							<div className="flex justify-between gap-4">
+								<span className="w-24">{t('uuid')}:</span>
+								<span className="truncate flex-1">{uuid}</span>
+							</div>
+							<Divider />
 						</div>
-
-						{!editable && (
-							<div className="flex justify-end">
-								<Button
-									color="primary"
-									size="sm"
-									variant="faded"
-									className="px-10"
-									onPress={() => setEditable(true)}
-								>
-									{t('Edit')}
-								</Button>
-							</div>
-						)}
 
 						{data && (
 							<div className="space-y-3">
+								{!editable && (
+									<div className="flex justify-end">
+										<Button
+											color="primary"
+											size="sm"
+											variant="light"
+											startContent={<i className="ri-image-edit-line ri-xl" />}
+											onPress={() => setEditable(true)}
+										>
+											{t('Edit')}
+										</Button>
+									</div>
+								)}
+
 								<Input
 									size="sm"
 									value={data.name ?? ''}

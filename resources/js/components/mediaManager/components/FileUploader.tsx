@@ -1,10 +1,11 @@
+import { useContext } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Button } from '@nextui-org/react'
-import { useMediaMangerStore } from '../store/mediaManagerStore'
 import { t } from '@/i18n'
 import { router } from '@inertiajs/react'
 import { toast } from 'react-toastify'
 import { tabsMapper } from '../helpers/mappers/tabs.mapper'
+import { MediaManagerContext } from '../providers/MediaManagerProvider'
 
 const defaultAcceptedFormats = {
 	'image/jpeg': ['.jpeg', '.jpg'],
@@ -15,7 +16,8 @@ const defaultAcceptedFormats = {
 }
 
 export const FileUploader = () => {
-	const { enableTabs, disableTabs, setSelectedTab } = useMediaMangerStore()
+	const { enableTabs, disableTabs, setSelectedTab } =
+		useContext(MediaManagerContext)
 
 	const upload = (files: any) => {
 		router.post(

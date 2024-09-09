@@ -1,8 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { Sidebar, GallerySelection } from '.'
 import { t } from '@/i18n'
 import { useMediaManager } from '../hooks'
-import { useMediaMangerStore } from '../store/mediaManagerStore'
+import { MediaManagerContext } from '../providers/MediaManagerProvider'
 import {
 	cn,
 	Card,
@@ -15,13 +15,35 @@ import type { Image as ImageProps } from '../types.d'
 
 export const MediaLibrary = () => {
 	const { getFiles, formatSize } = useMediaManager()
-	const { files, setFileSelected, fileSelected, selectMultiple, collection } =
-		useMediaMangerStore()
+	const { files, setFilesSelected, filesSelected, selectMultiple, setOrder } =
+		useContext(MediaManagerContext)
 
 	useEffect(() => {
-		console.log('collection', collection)
 		getFiles()
 	}, [])
+
+	const selectFile = (file: ImageProps) => {
+		if (!selectMultiple) {
+			if (
+				filesSelected &&
+				filesSelected[0] &&
+				file.id === filesSelected[0].id
+			) {
+				setFilesSelected && setFilesSelected([])
+			} else {
+				setFilesSelected && setFilesSelected([file])
+			}
+		} else {
+			setFilesSelected &&
+				setFilesSelected((prev: ImageProps[]) => {
+					if (prev.find((f) => f.id === file.id)) {
+						return prev.filter((f) => f.id !== file.id)
+					} else {
+						return [...prev, file]
+					}
+				})
+		}
+	}
 
 	return (
 		<section className="w-full relative">
@@ -40,33 +62,26 @@ export const MediaLibrary = () => {
 						>
 							{files.map((file: ImageProps) => (
 								<Card
-									key={file.uuid}
+									key={file.id}
 									radius="md"
 									classNames={{
 										base: cn(
 											'aspect-square',
-											fileSelected &&
-												fileSelected.uuid === file.uuid &&
-												'outline-offset-4 outline-2 outline-primary'
+											filesSelected &&
+												filesSelected.find((f) => f.id === file.id) &&
+												'outline outline-2 outline-primary'
 										),
 										footer:
 											'bg-black/30 whitespace-nowrap flex-col items-end p-2 absolute bottom-0 inset-x-0 rounded-none z-10',
 									}}
 									isFooterBlurred
 									isPressable
-									onPress={() => {
-										if (setFileSelected) {
-											if (fileSelected && file.id === fileSelected.id) {
-												setFileSelected(null)
-											} else {
-												setFileSelected(file)
-											}
-										}
-									}}
+									onPress={() => selectFile(file)}
 								>
-									{fileSelected && fileSelected.uuid === file.uuid && (
-										<i className="ri-checkbox-circle-fill ri-2x text-primary right-0 -top-2 absolute pointer-events-none z-20"></i>
-									)}
+									{filesSelected &&
+										filesSelected.find((f) => f.id === file.id) && (
+											<i className="ri-checkbox-circle-fill ri-2x text-primary right-0 -top-2 absolute pointer-events-none z-20"></i>
+										)}
 									<Image
 										src={file.preview_url}
 										alt={file.name}
@@ -87,7 +102,6 @@ export const MediaLibrary = () => {
 				)}
 			</div>
 
-			{/* {JSON.stringify(selectMultiple)} */}
 			{selectMultiple ? <GallerySelection /> : <Sidebar />}
 		</section>
 	)

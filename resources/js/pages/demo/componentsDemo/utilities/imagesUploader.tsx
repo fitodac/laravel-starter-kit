@@ -57,36 +57,7 @@ export const SingleImageUploader = () => {
 }
 
 export const MediaManagerImageUpload = () => {
-	// const [image, setImage] = useState<Image | null>(null)
-	const [image, setImage] = useState<Image | null>({
-		id: 34,
-		model_type: 'App\\Models\\MediaManager',
-		model_id: 1,
-		uuid: '6e9b7368-83e0-4c7b-b63c-b2a9884bc4a2',
-		collection_name: 'images',
-		name: 'blog-images-821',
-		file_name: 'blog-images-82.jpg',
-		mime_type: 'image/jpeg',
-		disk: 'public',
-		conversions_disk: 'public',
-		size: 172576,
-		manipulations: [],
-		custom_properties: {
-			altText: 'Imagen de un niño',
-			caption: '',
-			description: '',
-		},
-		generated_conversions: {},
-		responsive_images: [],
-		order_column: 32,
-		created_at: '2024-09-07T14:10:43.000000Z',
-		updated_at: '2024-09-07T14:56:29.000000Z',
-		original_url: 'http://localhost/storage/34/blog-images-82.jpg',
-		preview_url:
-			'http://localhost/storage/34/conversions/blog-images-82-preview.jpg',
-	})
-
-	// useEffect(() => console.log('image', JSON.stringify(image)), [image])
+	const [image, setImage] = useState<Image | null>(null)
 
 	return (
 		<Card>
@@ -110,12 +81,11 @@ export const MediaManagerImageUpload = () => {
 						<div className="w-44 grid mt-6 space-y-4">
 							<MediaManager
 								{...{
-									onFilesSelected: (file) => setImage(file),
+									onFilesSelected: (files) => setImage(files[0]),
 									button: {
 										props: { fullWidth: true },
 									},
 									collection: image ? [image] : null,
-									// selectMultiple: false,
 								}}
 							/>
 
@@ -144,6 +114,7 @@ export const MediaManagerImageUpload = () => {
 					</div>
 				</div>
 			</CardBody>
+			<CardFooter />
 		</Card>
 	)
 }
@@ -159,20 +130,44 @@ export const GalleryMediaManager = () => {
 				<CardBody>
 					<div className="grid gap-6 md:grid-cols-2">
 						<div>
-							<MediaManager
-								{...{
-									// onFileUpload: (file) => setImage(file.preview_url),
-									selectMultiple: true,
-									button: {
-										props: { fullWidth: true },
-									},
-								}}
-							/>
+							<div className="grid grid-cols-3 gap-3">
+								{images && images.length > 0 ? (
+									images.map((image) => (
+										<div key={image.id}>
+											<img
+												src={image.preview_url}
+												alt="Uploaded image"
+												className="w-full aspect-square object-cover rounded-md"
+											/>
+										</div>
+									))
+								) : (
+									<div className="bg-background border border-foreground-200 h-28 col-span-3 grid place-content-center rounded-md">
+										<i className="ri-image-add-line ri-2x text-foreground-300" />
+									</div>
+								)}
+							</div>
+
+							<div className="mt-5">
+								<MediaManager
+									{...{
+										onFilesSelected: (files) => setImages(files),
+										selectMultiple: true,
+										button: {
+											text: images ? 'Update images' : 'Add images',
+											props: { fullWidth: true },
+										},
+									}}
+								/>
+							</div>
 						</div>
 
-						<div className="text-foreground-500 text-sm space-y-3"></div>
+						<div className="text-foreground-500 text-sm space-y-3">
+							{/* <pre className="text-xs">{JSON.stringify(images, null, 2)}</pre> */}
+						</div>
 					</div>
 				</CardBody>
+				<CardFooter />
 			</Card>
 		</>
 	)
