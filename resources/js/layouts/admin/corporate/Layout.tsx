@@ -2,7 +2,7 @@ import { type PropsWithChildren, useEffect } from 'react'
 import { Head } from '@inertiajs/react'
 import { Button, cn, Divider } from '@nextui-org/react'
 import { useMainStore } from '@/store'
-import { ColorModeToggler, ProfileDropdown, Toastify } from '@/components'
+import { ColorModeToggler, ProfileDropdown } from '@/components'
 
 import { useColorMode, useWindowWidth } from '@/hooks'
 import { Navbar } from './components'
@@ -73,8 +73,6 @@ export const Layout = ({ children, pageTitle }: Props) => {
 					<div className="flex-1 overflow-x-auto">{children}</div>
 				</div>
 			</main>
-
-			<Toastify />
 		</>
 	)
 }

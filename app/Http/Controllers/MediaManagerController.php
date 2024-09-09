@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MediaManager;
-use App\Http\Requests\Media\UpdateMediaRequest;
+
 
 class MediaManagerController extends Controller
 {

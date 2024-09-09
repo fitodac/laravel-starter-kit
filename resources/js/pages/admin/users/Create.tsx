@@ -49,7 +49,7 @@ export const Page = ({ user }: Props) => {
 			// @ts-ignore
 			onSuccess: (resp: InertiaResponse) => {
 				if (resp.props.flash && resp.props.flash.success) {
-					toast.success(resp.props.flash.success)
+					toast.success(t(resp.props.flash.success))
 				}
 			},
 			onError: (errors) => console.log(errors),

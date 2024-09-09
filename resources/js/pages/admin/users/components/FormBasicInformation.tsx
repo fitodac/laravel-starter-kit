@@ -10,16 +10,17 @@ import type { PageProps, User, InertiaResponse } from '@/types'
 export const FormBasicInformation = () => {
 	const { user, permission } = usePage<PageProps<{ user: User }>>().props
 
-	const { data, setData, patch, processing, errors, clearErrors, isDirty } = useForm({
-		id: user.id,
-		name: user.name,
-		lastname: user.lastname,
-		username: user.username,
-		email: user.email,
-		role: user.roles ? user.roles[0].id : null,
-		status: user.status ?? 'disabled',
-		basic_information: true,
-	})
+	const { data, setData, patch, processing, errors, clearErrors, isDirty } =
+		useForm({
+			id: user.id,
+			name: user.name,
+			lastname: user.lastname,
+			username: user.username,
+			email: user.email,
+			role: user.roles ? user.roles[0].id : null,
+			status: user.status ?? 'disabled',
+			basic_information: true,
+		})
 
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
@@ -29,7 +30,7 @@ export const FormBasicInformation = () => {
 			// @ts-ignore
 			onSuccess: (resp: InertiaResponse) => {
 				if (resp.props.flash && resp.props.flash.success) {
-					toast.success(resp.props.flash.success)
+					toast.success(t(resp.props.flash.success))
 				}
 			},
 			onError: (errors) => console.log(errors),

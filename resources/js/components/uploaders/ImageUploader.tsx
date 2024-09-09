@@ -3,7 +3,6 @@ import { Button, cn, tv } from '@nextui-org/react'
 import { useDropzone } from 'react-dropzone'
 
 interface Props {
-	onFileUpload?: (file: any) => void
 	defaultImageSrc?: string | null
 	radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
 	classNames?: {
@@ -13,6 +12,7 @@ interface Props {
 	icon?: ReactNode | boolean
 	disableButton?: boolean
 	accept?: { [key: string]: string[] }
+	onFileUpload?: (file: any) => void
 }
 
 const options = tv({
@@ -103,7 +103,7 @@ export const ImageUploader = ({
 									size="sm"
 									radius="full"
 									color="danger"
-									className="bg-opacity-50 top-1 right-1 absolute transition-opacity opacity-0- group-hover:opacity-100"
+									className="bg-opacity-50 top-1 right-1 absolute transition-opacity opacity-0 group-hover:opacity-100"
 									onPress={() => {
 										onFileUpload && onFileUpload(null)
 										setSrcPreview(null)

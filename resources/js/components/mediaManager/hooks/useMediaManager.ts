@@ -21,7 +21,8 @@ axios.interceptors.request.use(
 )
 
 export const useMediaManager = () => {
-	const { setFiles, setFilesTotal, setFileSelected } = useMediaMangerStore()
+	const { setFiles, setFilesTotal, collection, setFileSelected } =
+		useMediaMangerStore()
 
 	/**
 	 * Fetches the list of media files from the server and updates the state.
@@ -40,7 +41,9 @@ export const useMediaManager = () => {
 		}
 
 		setFiles && setFiles(Object.entries(data.images).map((e) => e[1]))
-		setFilesTotal && setFilesTotal(data.images_total)
+		setFilesTotal && setFilesTotal(data.imagesTotal)
+
+		console.log('useMediaManager [collection]', collection)
 	}
 
 	/**
@@ -54,13 +57,11 @@ export const useMediaManager = () => {
 	 *
 	 */
 	const deleteFile = async (id: number) => {
-		let confirmationWindow = null
-
-		const confirmationResult = (confirmationWindow = window.confirm(
+		const confirmationResult = window.confirm(
 			t(
 				"You are about to permanently delete this file.\nThis action cannot be undone.\nPress 'Cancel' to stop, 'OK' to delete."
 			) as string
-		))
+		)
 
 		if (confirmationResult) {
 			const { data, status } = await axios.delete(route('media.delete', { id }))
@@ -70,7 +71,7 @@ export const useMediaManager = () => {
 				return
 			}
 
-			toast.success(data.message)
+			toast.success(t(data.message))
 			getFiles()
 		}
 	}
@@ -95,7 +96,7 @@ export const useMediaManager = () => {
 			return
 		}
 
-		toast.success(data.message)
+		toast.success(t(data.message))
 		getFiles()
 	}
 

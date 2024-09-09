@@ -3,27 +3,31 @@ import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import {
 	SingleImageUploader,
-	MultipleImageUploader,
+	MediaManagerImageUpload,
+	GalleryMediaManager,
 } from '@/pages/demo/componentsDemo'
 
 export const Page = () => {
 	return (
 		<>
 			<PageHeader title={t('Image uploader')}>
-				<p className="text-lg font-medium leading-tight">
-					Beautifully designed buttons that enhance visual appeal and usability.
+				<p className="font-medium leading-tight md:text-lg">
+					A well-designed image uploaders that enhances user experience and
+					functionality.
 				</p>
 				<p className="font-light leading-tight mt-2">
-					Each button is intuitive and responsive, providing efficient access to
-					key functions. These buttons offer a perfect blend of aesthetics and
-					practicality, ensuring a seamless user experience.
+					The uploaders are intuitive and responsive, allowing users to easily
+					upload and manage images. It strikes the perfect balance between
+					simplicity and performance, ensuring efficient and seamless
+					interaction.
 				</p>
 			</PageHeader>
 
 			<PageContent>
-				<div className="grid gap-6 lg:grid-cols-2 lg:gap-10">
+				<div className="grid gap-6 xl:grid-cols-2 lg:gap-10">
 					<SingleImageUploader />
-					<MultipleImageUploader />
+					<MediaManagerImageUpload />
+					<GalleryMediaManager />
 				</div>
 
 				<div className="h-20"></div>

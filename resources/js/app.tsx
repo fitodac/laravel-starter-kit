@@ -4,10 +4,12 @@ import 'react-toastify/dist/ReactToastify.css'
 import '../css/app.css'
 
 import { createRoot, hydrateRoot } from 'react-dom/client'
-import { createInertiaApp } from '@inertiajs/react'
+import { createInertiaApp, router } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { NextUIProvider } from '@nextui-org/react'
 import { semanticColors } from '@nextui-org/theme'
+import { SessionAware } from './SessionAware'
+import { Toastify } from '@/components'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 
@@ -21,9 +23,12 @@ createInertiaApp({
 	setup({ el, App, props }) {
 		if (import.meta.env.DEV) {
 			createRoot(el).render(
-				<NextUIProvider>
-					<App {...props} />
-				</NextUIProvider>
+				<SessionAware>
+					<NextUIProvider>
+						<App {...props} />
+						<Toastify />
+					</NextUIProvider>
+				</SessionAware>
 			)
 			return
 		}

@@ -1,4 +1,4 @@
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, Slide } from 'react-toastify'
 import { useMainStore } from '@/store'
 
 export const Toastify = (): JSX.Element => {
@@ -15,6 +15,7 @@ export const Toastify = (): JSX.Element => {
 			draggable
 			pauseOnHover
 			theme={colorMode}
+			transition={Slide}
 		/>
 	)
 }

@@ -10,38 +10,40 @@ export type Image = {
 	disk: string
 	conversions_disk: string
 	size: number
-	manipulations: any[]
+	manipulations: any
 	custom_properties: {
 		altText?: string
 		caption?: string
 		description?: string
 	}
-	generated_conversions: any[]
-	responsive_images: any[]
+	generated_conversions: any
+	responsive_images: any
 	order_column: number
 	original_url: string
 	preview_url: string
 	created_at: string
+	updated_at: string
 }
 
 export type State = {
-	files?: Image[] | any[]
+	files?: Image[] | any
 	filesTotal?: number
 	fileSelected?: Image | null
-	onClose?: () => void
 	tabsDisabled?: string[]
 	selectedTab?: string
+	selectMultiple?: boolean
+	collection?: Image[] | null | undefined
 }
 
 export type Action = {
 	setFiles?: (images: State['files']) => void
 	setFilesTotal?: (total: State['filesTotal']) => void
 	setFileSelected?: (image: State['fileSelected']) => void
-	onClose?: () => void
-	setOnClose?: (fn: () => void) => void
 	disableTabs?: () => void
 	enableTabs?: () => void
 	setSelectedTab?: (tab: State['selectedTab']) => void
+	setSelectMultiple?: (value: State['selectMultiple']) => void
+	setCollection?: (collection: State['collection']) => void
 }
 
 export interface MediaManagerContext {

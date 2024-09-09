@@ -15,8 +15,7 @@ const defaultAcceptedFormats = {
 }
 
 export const FileUploader = () => {
-	const { enableTabs, disableTabs, setSelectedTab } =
-		useMediaMangerStore()
+	const { enableTabs, disableTabs, setSelectedTab } = useMediaMangerStore()
 
 	const upload = (files: any) => {
 		router.post(
@@ -30,7 +29,7 @@ export const FileUploader = () => {
 					enableTabs && enableTabs()
 
 					if (resp.props.flash && resp.props.flash.success) {
-						toast.success(resp.props.flash.success)
+						toast.success(t(resp.props.flash.success))
 					}
 				},
 				onError: (errors) => {

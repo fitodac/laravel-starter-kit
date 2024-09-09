@@ -6,7 +6,6 @@ import { useMediaManager } from '../hooks/useMediaManager'
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import { useForm } from '@inertiajs/react'
-import type { Image } from '../types.d'
 
 const handleCopy = (url: string) => {
 	if (navigator.clipboard) {
@@ -56,7 +55,7 @@ export const Sidebar = () => {
 
 		return (
 			<div className="h-full overflow-auto">
-				<div className="text-sm px-6 py-4 pb-24 h-full">
+				<div className="text-sm px-6 pt-4 pb-10">
 					<div className="font-semibold">{t('Attachment details')}</div>
 
 					<div className="mt-2 space-y-5">
@@ -96,7 +95,7 @@ export const Sidebar = () => {
 							<div className="space-y-3">
 								<Input
 									size="sm"
-									value={data.name}
+									value={data.name ?? ''}
 									label={t('Name')}
 									labelPlacement="outside-left"
 									classNames={inputStyle}
@@ -123,7 +122,7 @@ export const Sidebar = () => {
 
 										<Textarea
 											size="sm"
-											value={data.custom_properties.caption}
+											value={data.custom_properties.caption ?? ''}
 											label={t('Caption')}
 											labelPlacement="outside-left"
 											classNames={inputStyle}
@@ -135,9 +134,10 @@ export const Sidebar = () => {
 												})
 											}
 										/>
+
 										<Textarea
 											size="sm"
-											value={data.custom_properties.description}
+											value={data.custom_properties.description ?? ''}
 											label={t('Description')}
 											labelPlacement="outside-left"
 											classNames={inputStyle}
@@ -166,7 +166,11 @@ export const Sidebar = () => {
 											color="primary"
 											className="flex-1"
 											onPress={() => {
-												updateFile(data)
+												setData({
+													...data,
+													name: data.name,
+													custom_properties: data.custom_properties,
+												})
 												setEditable(false)
 											}}
 										>
@@ -199,7 +203,12 @@ export const Sidebar = () => {
 
 						<div className="flex justify-end">
 							<a href={original_url} target="_blank">
-								<Button color="primary" variant="light" size="sm">
+								<Button
+									color="primary"
+									variant="light"
+									size="sm"
+									startContent={<i className="ri-image-circle-line ri-2x" />}
+								>
 									{t('Open image in new tab')}
 								</Button>
 							</a>
@@ -209,16 +218,13 @@ export const Sidebar = () => {
 					<div className="mt-8 flex justify-end">
 						<Button
 							color="danger"
-							size="sm"
 							variant="light"
+							startContent={<i className="ri-close-line ri-xl" />}
 							onPress={() => deleteFile(id)}
 						>
 							{t('Delete permanently')}
 						</Button>
 					</div>
-
-					{/* <pre className="text-xs">{JSON.stringify(fileSelected, null, 2)}</pre> */}
-					{/* <pre className="text-xs">{JSON.stringify(data, null, 2)}</pre> */}
 				</div>
 			</div>
 		)

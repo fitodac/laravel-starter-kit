@@ -1,12 +1,5 @@
 import { useRef } from 'react'
-import {
-	Image,
-	Card,
-	CardHeader,
-	CardBody,
-	Chip,
-	cn,
-} from '@nextui-org/react'
+import { Image, Card, CardHeader, CardBody, Chip, cn } from '@nextui-org/react'
 import { useUser } from '@/hooks'
 import { t } from '@/i18n'
 import { router, usePage } from '@inertiajs/react'
@@ -27,7 +20,7 @@ export const ProfileCard = () => {
 			// @ts-ignore
 			onSuccess: (resp: InertiaResponse) => {
 				if (resp.props.flash && resp.props.flash.success) {
-					toast.success(resp.props.flash.success)
+					toast.success(t(resp.props.flash.success))
 				}
 			},
 			onError: (errors) => console.log(errors),
@@ -48,7 +41,7 @@ export const ProfileCard = () => {
 					// @ts-ignore
 					onSuccess: (resp: InertiaResponse) => {
 						if (resp.props.flash && resp.props.flash.success) {
-							toast.success(resp.props.flash.success)
+							toast.success(t(resp.props.flash.success))
 						}
 					},
 					onError: (errors) => console.log(errors),

@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react'
 import { Head } from '@inertiajs/react'
-import { Toastify } from '@/components'
 
 type PropsLayout = {
 	pageTitle: string
@@ -12,8 +11,6 @@ export const GuestLayout = ({ children, pageTitle }: PropsLayout) => {
 			<Head title={pageTitle} />
 
 			<main className="w-full min-h-svh">{children}</main>
-
-			<Toastify />
 		</>
 	)
 }
