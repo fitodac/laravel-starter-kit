@@ -1,8 +1,9 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
-const colors = require('tailwindcss/colors')
 const { nextui } = require('@nextui-org/react')
 
-import { theme } from './theme.config'
+import { theme, colors as themeColors } from './config/settings'
+// import * as input from '@nextui-org/input'
+// console.log(input)
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -13,6 +14,8 @@ export default {
 		'./resources/js/**/*.tsx',
 		// NextUI
 		'./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+		// Configuration
+		'./config/settings/**/*.{js,ts,jsx,tsx}',
 	],
 
 	darkMode: 'selector',
@@ -39,27 +42,13 @@ export default {
 			// Common colors, like TailwindCSS colors, remain consistent regardless of the theme.
 			// To prevent conflicts with TailwindCSS colors, common colors are initially disabled
 			// but can be activated with the addCommonColors option.
-			addCommonColors: false,
+			addCommonColors: true,
 			layout: {
 				dividerWeight: '1px', // h-divider the default height applied to the divider component
 				disabledOpacity: 0.5, // this value is applied as opacity-[value] when the component is disabled
-				fontSize: {
-					tiny: '0.75rem', // text-tiny
-					small: '0.875rem', // text-small
-					medium: '1rem', // text-medium
-					large: '1.125rem', // text-large
-				},
-				lineHeight: {
-					tiny: '1rem', // text-tiny
-					small: '1.25rem', // text-small
-					medium: '1.5rem', // text-medium
-					large: '1.75rem', // text-large
-				},
-				radius: {
-					small: '4px', // rounded-small
-					medium: '6px', // rounded-medium
-					large: '12px', // rounded-large
-				},
+				fontSize: theme.fontSize,
+				lineHeight: theme.lineHeight,
+				radius: theme.radius,
 				borderWidth: {
 					small: '0.7px', // border-small
 					medium: '1.5px', // border-medium (default)
@@ -69,29 +58,7 @@ export default {
 
 			themes: {
 				light: {
-					colors: {
-						background: '#FFFFFF', // or DEFAULT
-						foreground: {
-							DEFAULT: '#11181C',
-						},
-						primary: {
-							//... 50 to 900
-							foreground: '#FFFFFF',
-							DEFAULT: '#006FEE',
-						},
-						default: {
-							100: colors.gray[100],
-							200: colors.gray[200],
-							300: colors.gray[300],
-							400: colors.gray[400],
-							500: colors.gray[500],
-							600: colors.gray[600],
-							700: colors.gray[700],
-							800: colors.gray[800],
-							900: colors.gray[900],
-							DEFAULT: colors.gray[200],
-						},
-					},
+					colors: themeColors.light,
 					layout: {
 						hoverOpacity: 0.8, //  this value is applied as opacity-[value] when the component is hovered
 						boxShadow: {
@@ -108,50 +75,8 @@ export default {
 					},
 				},
 				dark: {
-					colors: {
-						background: '#000000', // or DEFAULT
-						foreground: {
-							900: colors.gray[100],
-							800: colors.gray[200],
-							700: colors.gray[300],
-							600: colors.gray[400],
-							500: colors.gray[500],
-							400: colors.gray[600],
-							300: colors.gray[700],
-							200: colors.gray[800],
-							100: colors.gray[900],
-							DEFAULT: '#ECEDEE',
-						},
-						primary: {
-							//... 50 to 900
-							foreground: '#FFFFFF',
-							DEFAULT: '#006FEE',
-						},
-						default: {
-							100: colors.gray[900],
-							// 200: colors.gray[800],
-							// 300: colors.gray[700],
-							// 400: colors.gray[600],
-							// 500: colors.gray[500],
-							// 600: colors.gray[400],
-							// 700: colors.gray[300],
-							// 800: colors.gray[200],
-							// 900: colors.gray[150],
-							DEFAULT: colors.gray[800],
-						},
-						content1: {
-							DEFAULT: colors.gray[950],
-						},
-						content2: {
-							DEFAULT: colors.gray[900],
-						},
-						content3: {
-							DEFAULT: colors.gray[800],
-						},
-						content4: {
-							DEFAULT: colors.gray[700],
-						},
-					},
+					colors: themeColors.dark,
+					// colors: { foreground: { 50: 'red' } },
 					layout: {
 						hoverOpacity: 0.9, //  this value is applied as opacity-[value] when the component is hovered
 						boxShadow: {

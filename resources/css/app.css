@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-.css-1097eso {
-	display: none !important;
+/**
+Input
+**/
+[data-slot='base'][data-has-elements][data-has-label]
+	[data-slot='input-wrapper'] {
+	border: solid 1px hsl(var(--nextui-default-400));
+}
+
+/**
+Select
+**/
+[data-slot='mainWrapper'] > [data-slot='trigger'] {
+	border: solid 1px hsl(var(--nextui-default-400));
 }

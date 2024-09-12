@@ -16,7 +16,7 @@ export const Navbar = () => {
 
 	return (
 		<>
-			<div className="left-0 top-topbar bottom-0 fixed overflow-hidden z-30">
+			<div className="left-0 top-topbar bottom-0 mt-px fixed overflow-hidden z-30">
 				<Sidebar
 					transitionDuration={400}
 					id="navbar"
@@ -25,8 +25,8 @@ export const Navbar = () => {
 					collapsed={windowWidth <= theme.sidebar.breakpoint && !navbarOpen}
 					rootStyles={{ height: '100%' }}
 					className={cn(
-						'bg-gray-800 pt-6',
-						'!border-gray-800 [&>div]:bg-transparent dark:bg-gray-950 dark:!border-gray-950',
+						'pt-6',
+						theme.sidebar.cn.base,
 						'[&.ps-collapsed_.ps-submenu-content]:!hidden'
 					)}
 				>
@@ -41,8 +41,10 @@ export const Navbar = () => {
 									nav.title &&
 									nav.menu.length > 0 && (
 										<div
-											className="text-white text-xs font-medium px-7 mb-1 mt-2 whitespace-nowrap"
-											style={{ color: theme.sidebar.title.color }}
+											className={cn(
+												'text-xs font-medium px-7 mb-1 mt-2 whitespace-nowrap',
+												theme.sidebar.cn.menuTitle
+											)}
 										>
 											{nav.title}
 										</div>
@@ -52,36 +54,14 @@ export const Navbar = () => {
 								<Menu
 									menuItemStyles={{
 										root: {},
-										button: ({ level, active, disabled, isSubmenu }) => {
-											return {
-												color: active ? 'white' : theme.sidebar.item.color,
-												fontSize: theme.sidebar.item.fontSize,
-												fontWeight: 500,
-												height: theme.sidebar.item.height,
-												userSelect: 'none',
-												transition: '.3s ease-in-out',
-												'&:hover': {
-													backgroundColor:
-														theme.sidebar.item.hover.backgroundColor,
-													color: theme.sidebar.item.hover.color,
-												},
-											}
-										},
-										subMenuContent: {
-											backgroundColor: theme.sidebar.subMenu.backgroundColor,
-										},
 										icon: {
 											fontSize: theme.sidebar.item.icon.size,
 											position: 'relative',
 											top: '-1px',
 										},
-										// label: {},
-										// prefix: {},
-										// suffix: {},
-										// icon: {},
-										// SubMenuExpandIcon: {},
 									}}
 									closeOnClick
+									className={theme.sidebar.cn.menuItem}
 								>
 									{nav.menu.map(
 										({ label, route: path, icon, submenu, permissions }) => {
@@ -105,6 +85,7 @@ export const Navbar = () => {
 																<MenuItem
 																	component={<Link href={route(path || '')} />}
 																	active={location.href === route(path || '')}
+																	className={theme.sidebar.cn.subMenu}
 																>
 																	{label}
 																</MenuItem>

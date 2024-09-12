@@ -26,7 +26,7 @@ export const SessionAware = ({ children }: PropsWithChildren) => {
 	 */
 	const onIdle = () => {
 		setState('Idle')
-		if (router.page.props.auth.user) {
+		if ((router.page.props.auth as any).user) {
 			router.post(route('logout'))
 		}
 	}
@@ -49,7 +49,7 @@ export const SessionAware = ({ children }: PropsWithChildren) => {
 	 */
 	const onPrompt = () => {
 		setState('Prompted')
-		if (router.page.props.auth.user) {
+		if ((router.page.props.auth as any).user) {
 			onOpen()
 		}
 	}
@@ -81,7 +81,6 @@ export const SessionAware = ({ children }: PropsWithChildren) => {
 	const handleStillHere = () => {
 		activate()
 	}
-
 
 	return (
 		<>

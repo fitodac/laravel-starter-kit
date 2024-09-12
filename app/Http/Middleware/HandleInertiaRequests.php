@@ -32,7 +32,6 @@ class HandleInertiaRequests extends Middleware
 	{
 
 		$user = $request->user();
-		// $user = auth()->user();
 
 		return [
 			...parent::share($request),
@@ -40,14 +39,17 @@ class HandleInertiaRequests extends Middleware
 				'user' => $user,
 				'permissions' => $user ? $user->permissions : null
 			],
-			'ziggy' => fn () => [
+			'settings' => [
+				'logo' => config('settings.general.logo')
+			],
+			'ziggy' => fn() => [
 				...(new Ziggy)->toArray(),
 				'location' => $request->url(),
 			],
 			'flash' => [
-				'success' => fn () => $request->session()->get('success'),
-				'error' => fn () => $request->session()->get('error'),
-				'info' => fn () => $request->session()->get('info'),
+				'success' => fn() => $request->session()->get('success'),
+				'error' => fn() => $request->session()->get('error'),
+				'info' => fn() => $request->session()->get('info'),
 			]
 		];
 	}

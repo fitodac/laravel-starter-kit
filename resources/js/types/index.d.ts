@@ -60,6 +60,9 @@ export type PageProps<
 	ziggy: Config & { location: string }
 	flash?: FlashMessages
 	adminNavbar?: NavbarProps
+	settings: {
+		logo: string
+	}
 }
 
 interface FlashMessages {

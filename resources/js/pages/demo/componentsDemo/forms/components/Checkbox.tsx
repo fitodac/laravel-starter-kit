@@ -13,7 +13,7 @@ interface Props {}
 export const CheckboxDefault = ({}: Props) => {
 	return (
 		<>
-			<Card shadow="none">
+			<Card>
 				<CardHeader>Checkbox</CardHeader>
 				<CardBody>
 					<div className="space-y-6">

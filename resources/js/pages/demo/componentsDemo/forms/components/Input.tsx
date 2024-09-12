@@ -45,7 +45,7 @@ export const InputDefault = () => {
 
 	return (
 		<>
-			<Card shadow="none">
+			<Card>
 				<CardHeader>
 					<div className="flex justify-between w-full">
 						<div className="flex-1">{t('Input default')}</div>

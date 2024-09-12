@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 			RoleSeeder::class,
 			UsersSeeder::class,
 			ProductsSeeder::class,
-			MediaManagerSeeder::class
+			MediaManagerSeeder::class,
 		]);
 	}
 }

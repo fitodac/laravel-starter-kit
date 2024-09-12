@@ -14,6 +14,42 @@ class UsersSeeder extends Seeder
 	 */
 	public function run(): void
 	{
+
+		/**
+		 * Remove old images
+		 */
+		$dir = storage_path('app/public/img/users/avatars');
+
+		if (is_dir($dir)) {
+			$files = scandir($dir);
+			foreach ($files as $file) {
+				if ($file != '.' && $file != '..') {
+					unlink($dir . '/' . $file);
+				}
+			}
+			rmdir($dir);
+		}
+
+
+		/**
+		 * Copy new images
+		 */
+		$dir = resource_path('js/assets/img/users/avatars');
+		$destination = storage_path('app/public/img/users/avatars');
+
+		if (!is_dir($destination)) {
+			mkdir($destination, 0775, true);
+		}
+
+		$files = scandir($dir);
+		foreach ($files as $file) {
+			if ($file != '.' && $file != '..') {
+				copy($dir . '/' . $file, $destination . '/' . $file);
+			}
+		}
+
+
+		// Create a super admin user
 		User::factory()->create([
 			'name' => 'Max',
 			'lastname' => 'Masterson',

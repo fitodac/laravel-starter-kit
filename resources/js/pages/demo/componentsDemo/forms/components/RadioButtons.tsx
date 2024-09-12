@@ -13,7 +13,7 @@ interface Props {}
 export const RadioButtonsDefault = ({}: Props) => {
 	return (
 		<>
-			<Card shadow="none">
+			<Card>
 				<CardHeader>Radio group</CardHeader>
 				<CardBody>
 					<div className="space-y-6">

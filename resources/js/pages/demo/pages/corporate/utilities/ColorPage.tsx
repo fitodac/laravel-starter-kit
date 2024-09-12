@@ -19,15 +19,16 @@ const data = [
 			{ name: 'Foreground', cn: 'bg-foreground' },
 			{ name: 'Divider', cn: 'bg-divider' },
 			{ name: 'Focus', cn: 'bg-focus' },
+			{ name: 'Overlay', cn: 'bg-overlay' },
 		],
 	},
 	{
 		title: 'Content',
 		items: [
-			{ name: 'Content1', cn: 'bg-content1' },
-			{ name: 'Content2', cn: 'bg-content2' },
-			{ name: 'Content3', cn: 'bg-content3' },
-			{ name: 'Content4', cn: 'bg-content4' },
+			{ name: 'Content1', cn: 'bg-content1 text-content1-foreground' },
+			{ name: 'Content2', cn: 'bg-content2 text-content2-foreground' },
+			{ name: 'Content3', cn: 'bg-content3 text-content3-foreground' },
+			{ name: 'Content4', cn: 'bg-content4 text-content4-foreground' },
 		],
 	},
 	{
@@ -44,17 +45,33 @@ const data = [
 	{
 		title: 'Foreground',
 		items: [
-			{ name: '50', cn: 'bg-foreground-50' },
-			{ name: '100', cn: 'bg-foreground-100' },
-			{ name: '200', cn: 'bg-foreground-200' },
-			{ name: '300', cn: 'bg-foreground-300' },
-			{ name: '400', cn: 'bg-foreground-400' },
-			{ name: '500', cn: 'bg-foreground-500' },
-			{ name: '600', cn: 'bg-foreground-600' },
-			{ name: '700', cn: 'bg-foreground-700' },
-			{ name: '800', cn: 'bg-foreground-800' },
-			{ name: '900', cn: 'bg-foreground-900' },
-			{ name: 'Default', cn: 'bg-foreground' },
+			{ name: '50', cn: 'text-foreground-50' },
+			{ name: '100', cn: 'text-foreground-100' },
+			{ name: '200', cn: 'text-foreground-200' },
+			{ name: '300', cn: 'text-foreground-300' },
+			{ name: '400', cn: 'text-foreground-400' },
+			{ name: '500', cn: 'text-foreground-500' },
+			{ name: '600', cn: 'text-foreground-600' },
+			{ name: '700', cn: 'text-foreground-700' },
+			{ name: '800', cn: 'text-foreground-800' },
+			{ name: '900', cn: 'text-foreground-900' },
+			{ name: 'Default', cn: 'text-foreground' },
+		],
+	},
+	{
+		title: 'Default',
+		items: [
+			{ name: '50', cn: 'bg-default-50' },
+			{ name: '100', cn: 'bg-default-100' },
+			{ name: '200', cn: 'bg-default-200' },
+			{ name: '300', cn: 'bg-default-300' },
+			{ name: '400', cn: 'bg-default-400' },
+			{ name: '500', cn: 'bg-default-500' },
+			{ name: '600', cn: 'bg-default-600' },
+			{ name: '700', cn: 'bg-default-700' },
+			{ name: '800', cn: 'bg-default-800' },
+			{ name: '900', cn: 'bg-default-900' },
+			{ name: 'Default', cn: 'bg-default' },
 		],
 	},
 ]
@@ -107,12 +124,23 @@ const Row = ({
 		<div className="w-auto grid grid-cols-3 gap-3 sm:grid-cols-5 xl:grid-cols-6">
 			{items.map((e) => (
 				<Fragment key={`row${e.cn}`}>
-					<div className="space-y-1">
-						<div
-							className={`border border-gray-200 w-full aspect-video rounded-lg dark:border-gray-800 ${e.cn}`}
-						/>
-						<div className="text-sm font-semibold">{e.name}</div>
-					</div>
+					{title === 'Foreground' || title === 'Content' ? (
+						<div className="space-y-1">
+							<div
+								className={`bg-background border border-divider w-full flex justify-end items-end aspect-video rounded-lg ${e.cn}`}
+							>
+								<span className="text-2xl mr-1.5">Aa</span>
+							</div>
+							<div className="text-sm font-semibold">{e.name}</div>
+						</div>
+					) : (
+						<div className="space-y-1">
+							<div
+								className={`border border-divider w-full aspect-video rounded-lg ${e.cn}`}
+							/>
+							<div className="text-sm font-semibold">{e.name}</div>
+						</div>
+					)}
 				</Fragment>
 			))}
 		</div>

@@ -1,17 +1,20 @@
 import { PropsWithChildren } from 'react'
-import { Head } from '@inertiajs/react'
+import { Head, usePage } from '@inertiajs/react'
 import { Button, cn } from '@nextui-org/react'
 import { useColorMode } from '@/hooks'
 import { Toastify } from '@/components'
+
+import type { PageProps } from '@/types'
 
 interface PropsLayout extends PropsWithChildren {
 	pageTitle: string
 }
 
-import img_brand from '@/assets/img/brand.svg'
-
 export const AuthLayout = ({ children, pageTitle }: PropsLayout) => {
 	const { colorMode, changeColorMode } = useColorMode()
+	const {
+		props: { settings },
+	} = usePage<PageProps>()
 
 	return (
 		<>
@@ -35,9 +38,9 @@ export const AuthLayout = ({ children, pageTitle }: PropsLayout) => {
 				</Button>
 			</div>
 
-			<main className="w-full min-h-screen flex justify-center items-center">
+			<main className="bg-background w-full min-h-screen flex justify-center items-center">
 				<section className="max-w-lg">
-					<img src={img_brand} alt="Logo" className="w-32 mx-auto" />
+					<img src={settings.logo} alt="Logo" className="w-32 mx-auto" />
 
 					<div className="space-y-2 mt-10">
 						<h2 className="font-bold">{pageTitle}</h2>

@@ -1,13 +1,14 @@
 import { type PropsWithChildren, useEffect } from 'react'
-import { Head } from '@inertiajs/react'
+import { Head, usePage } from '@inertiajs/react'
 import { Button, cn, Divider } from '@nextui-org/react'
 import { useMainStore } from '@/store'
 import { ColorModeToggler, ProfileDropdown } from '@/components'
+import { theme } from '@/config'
 
 import { useColorMode, useWindowWidth } from '@/hooks'
 import { Navbar } from './components'
 
-import imgBrand from '@/assets/img/brand.svg'
+import type { PageProps } from '@/types'
 
 interface Props extends PropsWithChildren {
 	pageTitle: string
@@ -16,7 +17,9 @@ interface Props extends PropsWithChildren {
 export const Layout = ({ children, pageTitle }: Props) => {
 	const { navbarOpen, setNavbarOpen } = useMainStore()
 	const { windowWidth } = useWindowWidth()
-	const { colorMode } = useColorMode()
+	const {
+		props: { settings },
+	} = usePage<PageProps>()
 
 	useEffect(() => {
 		if (windowWidth > 768 && !navbarOpen) {
@@ -28,11 +31,11 @@ export const Layout = ({ children, pageTitle }: Props) => {
 		<>
 			<Head title={pageTitle} />
 
-			<main className="bg-gray-50 min-h-screen dark:bg-gray-900">
+			<main className="bg-background min-h-screen">
 				<div
 					className={cn(
-						'bg-white border-b border-gray-100 top-0 inset-x-0 fixed z-30',
-						'dark:bg-gray-900 dark:border-gray-950'
+						'border-b top-0 inset-x-0 fixed z-30',
+						theme.topbar.cn.base
 					)}
 				>
 					<div
@@ -41,7 +44,7 @@ export const Layout = ({ children, pageTitle }: Props) => {
 						)}
 					>
 						<div>
-							<img src={imgBrand} alt="Logo" className="w-20 md:w-24" />
+							<img src={settings.logo} alt="Logo" className="w-20 md:w-24" />
 						</div>
 
 						<div className="flex items-center gap-x-3 h-full">

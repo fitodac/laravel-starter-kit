@@ -7,9 +7,10 @@ import {
 	User,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
-import { PageProps } from '@/types'
 import { usePage, router } from '@inertiajs/react'
 import { ButtonSize } from '../../pages/demo/componentsDemo/ui/Buttons'
+
+import type { PageProps } from '@/types'
 
 export const ProfileDropdown = () => {
 	const user = usePage<PageProps>().props.auth.user

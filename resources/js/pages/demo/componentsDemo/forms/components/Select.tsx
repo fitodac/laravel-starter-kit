@@ -29,7 +29,7 @@ const companies = [
 export const SimpleSelect = ({}: Props) => {
 	return (
 		<>
-			<Card shadow="none">
+			<Card>
 				<CardHeader>Simple select</CardHeader>
 
 				<CardBody>

@@ -55,26 +55,6 @@ class AdminNavbarProvider extends ServiceProvider
 			],
 		];
 
-		$menu[] = [
-			'key' => 'roles_permissions',
-			'title' => 'Roles & permissions',
-			'permissions' => ['Super Admin Access', 'Admin Access'],
-			'menu' => [
-				[
-					'label' => 'Roles',
-					'route' => 'dashboard.roles.list',
-					'icon' => 'ri-user-settings-line',
-					'permissions' => ['Super Admin Access', 'Admin Access']
-				],
-				[
-					'label' => 'Permissions',
-					'route' => 'dashboard.permissions.list',
-					'icon' => 'ri-user-2-fill',
-					'permissions' => ['Super Admin Access', 'Admin Access']
-				]
-			],
-		];
-
 
 		$menu[] = [
 			'key' => 'ui-components',
@@ -103,21 +83,7 @@ class AdminNavbarProvider extends ServiceProvider
 						]
 					]
 				],
-				[
-					'label' => 'Utilities',
-					'route' => null,
-					'icon' => 'ri-pantone-fill',
-					'submenu' => [
-						[
-							'label' => 'Color',
-							'route' => 'dashboard.corporate.utilities.color'
-						],
-						[
-							'label' => 'Image uploader',
-							'route' => 'dashboard.corporate.utilities.image-uploader'
-						]
-					]
-				],
+
 				[
 					'label' => 'Forms',
 					'route' => null,
@@ -133,6 +99,23 @@ class AdminNavbarProvider extends ServiceProvider
 						]
 					]
 				],
+
+				[
+					'label' => 'Utilities',
+					'route' => null,
+					'icon' => 'ri-pantone-fill',
+					'submenu' => [
+						[
+							'label' => 'Color',
+							'route' => 'dashboard.corporate.utilities.color'
+						],
+						[
+							'label' => 'Image uploader',
+							'route' => 'dashboard.corporate.utilities.image-uploader'
+						]
+					]
+				],
+
 				[
 					'label' => 'Tables',
 					'route' => null,
@@ -147,6 +130,26 @@ class AdminNavbarProvider extends ServiceProvider
 							'route' => 'dashboard.corporate.tables.real-data'
 						]
 					]
+				]
+			],
+		];
+
+		$menu[] = [
+			'key' => 'roles_permissions',
+			'title' => 'Roles & permissions',
+			'permissions' => ['Super Admin Access', 'Admin Access'],
+			'menu' => [
+				[
+					'label' => 'Roles',
+					'route' => 'dashboard.roles.list',
+					'icon' => 'ri-user-settings-line',
+					'permissions' => ['Super Admin Access', 'Admin Access']
+				],
+				[
+					'label' => 'Permissions',
+					'route' => 'dashboard.permissions.list',
+					'icon' => 'ri-user-2-fill',
+					'permissions' => ['Super Admin Access', 'Admin Access']
 				]
 			],
 		];

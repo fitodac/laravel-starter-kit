@@ -10,7 +10,7 @@ export const GuestLayout = ({ children, pageTitle }: PropsLayout) => {
 		<>
 			<Head title={pageTitle} />
 
-			<main className="w-full min-h-svh">{children}</main>
+			<main className="bg-background w-full min-h-svh">{children}</main>
 		</>
 	)
 }

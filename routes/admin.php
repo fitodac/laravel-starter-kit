@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Middleware\CheckRoleAccess;
 
 Route::middleware(['auth', 'can:Admin Access'])
@@ -60,4 +61,13 @@ Route::middleware(['auth', 'role:Super Admin'])
 		// Route::get('administrator/{user}/edit', [UserAdminController::class, 'edit'])->name('admin.edit');
 		// Route::match(['put', 'patch'], 'administrator/{user}', [UserAdminController::class, 'update'])->name('admin.update');
 		// Route::delete('administrator/{user}', [UserAdminController::class, 'destroy'])->name('admin.destroy');
+
+	});
+
+
+Route::middleware(['auth', 'role:Super Admin'])
+	->prefix('admin')
+	->name('admin')
+	->group(function () {
+		Route::get('settings', [SettingsController::class, 'index'])->name('settings');
 	});

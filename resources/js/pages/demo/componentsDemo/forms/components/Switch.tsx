@@ -13,7 +13,7 @@ interface Props {}
 export const SwitchComponent = ({}: Props) => {
 	return (
 		<>
-			<Card shadow="none">
+			<Card>
 				<CardHeader>Switch</CardHeader>
 				<CardBody>
 					<div className="space-y-6">

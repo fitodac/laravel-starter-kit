@@ -18,7 +18,7 @@ export const SolidButton = () => {
 							<Button color="primary">Button</Button>
 						</div>
 
-						<div className="text-gray-400 text-sm dark:text-gray-500">
+						<div className="text-foreground text-sm">
 							The solid button is a perfect blend of beauty, simplicity, and
 							functionality. Its bold and consistent color makes it visually
 							striking and easy to recognize, instantly drawing attention to the
@@ -83,7 +83,7 @@ export const ButtonVariants = () => {
 							</Button>
 						</div>
 
-						<div className="text-gray-400 text-sm flex-1 dark:text-gray-500">
+						<div className="text-foreground text-sm flex-1">
 							These buttons showcase a range of design styles that enhance the
 							visual appeal and usability of the interface. Each variant, from
 							the bold lines of the bordered button to the understated elegance
@@ -115,7 +115,7 @@ export const LightButton = () => {
 							</Button>
 						</div>
 
-						<div className="text-gray-400 text-sm dark:text-gray-500">
+						<div className="text-foreground text-sm">
 							The light button offers a subtle design for less important
 							actions, serving as a gentle alternative to links. Its understated
 							look integrates seamlessly into the interface, balancing
@@ -155,7 +155,7 @@ export const LoadingButton = () => {
 							</div>
 						</div>
 
-						<div className="text-gray-400 text-sm dark:text-gray-500">
+						<div className="text-foreground text-sm">
 							The loading button features a spinner that activates with the
 							isLoading attribute, clearly indicating that a process is
 							underway. The spinner enhances user experience by providing
@@ -176,10 +176,10 @@ export const IconizedButtons = () => {
 				<CardBody>
 					<div
 						className={cn(
-							'text-gray-400 text-sm grid gap-8',
+							'text-foreground text-sm grid gap-8',
 							'lg:grid-cols-2 lg:gap-20',
 							'xl:grid-cols-4 xl:gap-14',
-							'dark:text-gray-500'
+							''
 						)}
 					>
 						<div className="space-y-5">
@@ -254,7 +254,7 @@ export const IconizedButtons = () => {
 							</div>
 						</div>
 
-						<div className="text-gray-400 text-sm xl:col-span-2 dark:text-gray-500">
+						<div className="text-foreground text-sm xl:col-span-2">
 							Buttons with icons enhance the UI by combining visual elements
 							with functionality, making interactions more intuitive and
 							efficient. Icons provide immediate visual cues that convey the
