@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback } from 'react'
 import {
 	Table,
 	TableHeader,
@@ -7,39 +7,46 @@ import {
 	TableRow,
 	TableCell,
 	Pagination,
-	Avatar,
 	Button,
-	Badge,
 	type SortDescriptor,
-	Chip,
 	cn,
 } from '@nextui-org/react'
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
-import { Link, router, usePage } from '@inertiajs/react'
+import { router, usePage } from '@inertiajs/react'
 
 import type { PageProps, User, Users } from '@/types'
 import type { Permissions, Permission } from '@/types/permissions'
 
 const columns = [
-	{ key: 'id', label: '#' },
 	{ key: 'name', label: t('Name') },
 	{ key: 'guard_name', label: t('Guard') },
 	{ key: 'actions', label: '' },
 ] as { key: string; label: string; allowsSorting?: boolean }[]
 
-export const PermissionsList = () => {
-	const { permissions } = usePage<PageProps>().props as unknown as {
-		permissions: Permissions
-	}
+interface Props {
+	setDrawerOpen: (open: boolean) => void
+	setSelectedPermission: (selectedPermission: Permission | null) => void
+	onOpen: () => void
+}
 
-	// console.log(permissions)
+export const PermissionsList = ({
+	setDrawerOpen,
+	setSelectedPermission,
+	onOpen,
+}: Props) => {
+	const {
+		props: { permissions, protected_permissions },
+	} = usePage<PageProps>()
+
+	const undeletablePermissions = protected_permissions as string[]
+
 	// const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))
 	// const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
 	// const [isLoading, setIsLoading] = useState(true)
 
 	// const sort = useTableSorting()
-	const { links, current_page } = permissions
+	const { links, current_page } = permissions as Permissions
 
 	// useEffect(() => {
 	// 	if (data.data.length) setIsLoading(false)
@@ -48,21 +55,42 @@ export const PermissionsList = () => {
 	const renderCell = useCallback(
 		(permission: Permission, columnKey: string) => {
 			return {
-				id: <>{permission.id}</>,
 				name: <span className="font-medium">{permission.name}</span>,
 				guard_name: permission.guard_name,
 				actions: (
 					<div className="flex justify-end">
 						<div className="space-x-2">
-							<Button
-								size="sm"
-								color="primary"
-								variant="flat"
-								as={Link}
-								href={route('dashboard.permission.edit', { permission })}
-							>
-								{t('Edit')}
-							</Button>
+							{!undeletablePermissions.includes(permission.name) ? (
+								<>
+									<Button
+										size="sm"
+										color="danger"
+										variant="flat"
+										onPress={() => {
+											onOpen()
+											setSelectedPermission(permission)
+										}}
+									>
+										{t('Delete')}
+									</Button>
+
+									<Button
+										size="sm"
+										color="primary"
+										variant="flat"
+										onPress={() => {
+											setDrawerOpen(true)
+											setSelectedPermission(permission)
+										}}
+									>
+										{t('Edit')}
+									</Button>
+								</>
+							) : (
+								<Button size="sm" isDisabled>
+									{t('Edit')}
+								</Button>
+							)}
 						</div>
 					</div>
 				),

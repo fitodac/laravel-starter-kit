@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { type FormEvent, useState } from 'react'
 import { Layout } from '@/layouts/admin/corporate/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'

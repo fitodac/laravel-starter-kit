@@ -1,3 +1,5 @@
+import { Permission } from './permissions'
+
 export interface Roles {
 	current_page: number
 	data: Role[]
@@ -24,4 +26,6 @@ export interface Role {
 	guard_name: string
 	created_at?: any
 	updated_at?: any
+	permissions: Permission[]
+	users_count: number
 }

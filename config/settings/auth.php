@@ -17,4 +17,7 @@ return [
 
 	// Allow "social registration"
 	// 'allow_social_registration' => env('SETTINGS_AUTH_ALLOW_SOCIAL_REGISTRATION', true),
+	'guard_permissions' => array_keys(config('auth.guards')),
+	'protected_permissions' => ['Super Admin Access', 'Admin Access', 'Private Access'],
+	'protected_roles' => ['Super Admin', 'Admin', 'User']
 ];

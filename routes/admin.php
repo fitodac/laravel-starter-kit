@@ -29,22 +29,6 @@ Route::middleware(['auth', 'can:Admin Access'])
 
 		// Sessions
 		Route::delete('session/{id}/invalidate', [UserController::class, 'invalidate_session'])->name('session.invalidate');
-
-		// Roles
-		Route::get('roles', [RoleController::class, 'index'])->name('roles.list');
-		Route::get('roles/create', [RoleController::class, 'create'])->name('role.create');
-		Route::get('roles/{role}', [RoleController::class, 'show'])->name('role.show');
-		Route::get('roles/{role}/edit', [RoleController::class, 'edit'])
-			->middleware(CheckRoleAccess::class)
-			->name('role.edit');
-
-		// Permissions
-		Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.list');
-		Route::get('permissions/create', [PermissionController::class, 'create'])->name('permission.create');
-		Route::get('permissions/{permission}', [PermissionController::class, 'show'])->name('permission.show');
-		Route::get('permissions/{permission}/edit', [PermissionController::class, 'edit'])
-			->middleware(CheckRoleAccess::class)
-			->name('permission.edit');
 	});
 
 
@@ -62,6 +46,21 @@ Route::middleware(['auth', 'role:Super Admin'])
 		// Route::match(['put', 'patch'], 'administrator/{user}', [UserAdminController::class, 'update'])->name('admin.update');
 		// Route::delete('administrator/{user}', [UserAdminController::class, 'destroy'])->name('admin.destroy');
 
+		// Roles
+		Route::get('roles', [RoleController::class, 'index'])->name('roles.list');
+		Route::get('roles/create', [RoleController::class, 'create'])->name('role.create');
+		Route::post('roles', [RoleController::class, 'store'])->name('role.store');
+		Route::get('roles/{role}/edit', [RoleController::class, 'edit'])
+			->middleware(CheckRoleAccess::class)
+			->name('role.edit');
+		Route::match(['put', 'patch'], 'roles/{role}', [RoleController::class, 'update'])->name('role.update');
+		Route::delete('roles/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
+
+		// Permissions
+		Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.list');
+		Route::post('permissions', [PermissionController::class, 'store'])->name('permissions.store');
+		Route::match(['put', 'patch'], 'permissions/{permission}', [PermissionController::class, 'update'])->name('permissions.update');
+		Route::delete('permissions/{permission}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
 	});
 
 

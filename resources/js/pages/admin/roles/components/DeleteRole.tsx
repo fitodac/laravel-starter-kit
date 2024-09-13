@@ -1,7 +1,5 @@
-import { useForm, usePage } from '@inertiajs/react'
 import {
 	Button,
-	Divider,
 	Modal,
 	ModalContent,
 	ModalHeader,
@@ -9,25 +7,24 @@ import {
 	ModalFooter,
 	useDisclosure,
 } from '@nextui-org/react'
+import { useForm } from '@inertiajs/react'
 import { t } from '@/i18n'
 import { toast } from 'react-toastify'
+import { Role } from '@/types/roles'
 
-import type { PageProps, User, InertiaResponse } from '@/types'
+interface Props {
+	role: Role
+}
 
-export const DeleteAccount = () => {
-	const { user } = usePage<PageProps<{ user: User }>>().props
+export const DeleteRole = ({ role }: Props) => {
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
-
 	const { delete: destroy } = useForm()
 
 	return (
 		<>
-			<div className="space-y-3">
-				<Divider />
-				<Button color="danger" variant="light" onPress={onOpen}>
-					{t('Delete account')}
-				</Button>
-			</div>
+			<Button fullWidth color="danger" variant="flat" onPress={onOpen}>
+				{t('Delete')}
+			</Button>
 
 			<Modal
 				isOpen={isOpen}
@@ -39,13 +36,11 @@ export const DeleteAccount = () => {
 					{(onClose) => (
 						<>
 							<ModalHeader className="flex flex-col gap-1 select-none">
-								{t('Confirm account deletion')}
+								{t('Confirm role deletion')}
 							</ModalHeader>
 
 							<ModalBody className="pt-0">
-								<p className="text-sm">
-									{t('This account will be permanently deleted.')}
-								</p>
+								<p className="text-sm">{t('This action may not be undone.')}</p>
 							</ModalBody>
 
 							<ModalFooter className="gap-x-4">
@@ -56,8 +51,8 @@ export const DeleteAccount = () => {
 								<Button
 									fullWidth
 									color="danger"
-									onPress={() =>
-										destroy(route('dashboard.user.destroy', { user }), {
+									onPress={() => {
+										destroy(route('dashboard.role.destroy', { role }), {
 											preserveScroll: true,
 											// @ts-ignore
 											onSuccess: (resp: InertiaResponse) => {
@@ -66,7 +61,7 @@ export const DeleteAccount = () => {
 												}
 											},
 										})
-									}
+									}}
 								>
 									{t('Confirm')}
 								</Button>

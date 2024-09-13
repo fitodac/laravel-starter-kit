@@ -1,7 +1,7 @@
 import { Layout } from '@/layouts/admin/corporate/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { RolesList } from './components/RolesList'
+import { RolesList } from './components'
 import { Button } from '@nextui-org/react'
 import { Link } from '@inertiajs/react'
 

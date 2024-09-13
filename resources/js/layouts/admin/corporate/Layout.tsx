@@ -5,7 +5,7 @@ import { useMainStore } from '@/store'
 import { ColorModeToggler, ProfileDropdown } from '@/components'
 import { theme } from '@/config'
 
-import { useColorMode, useWindowWidth } from '@/hooks'
+import { useWindowWidth } from '@/hooks'
 import { Navbar } from './components'
 
 import type { PageProps } from '@/types'

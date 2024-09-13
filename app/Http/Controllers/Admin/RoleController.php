@@ -6,9 +6,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
+use App\Models\User;
 
 class RoleController extends Controller
 {
+
+	/**
+	 * getPermissionsByGuard
+	 */
+	protected function getPermissionsByGuard()
+	{
+		$guards = config('settings.auth.guard_permissions');
+		$permissions = [];
+
+		foreach ($guards as $guard_name) {
+			$permissions[$guard_name] = Permission::where('guard_name', $guard_name)->get();
+		}
+
+		return $permissions;
+	}
+
 	/**
 	 * LIST
 	 * 
@@ -18,10 +37,10 @@ class RoleController extends Controller
 	public function index()
 	{
 		$per_page = 15;
+		$roles = Role::with('permissions')->withCount('users')->paginate($per_page);
+		$undeletable_roles = config('settings.auth.undeletable_roles');
 
-		$roles = Role::paginate($per_page);
-
-		return Inertia::render('admin/roles/Roles', compact('roles'));
+		return Inertia::render('admin/roles/Roles', compact('roles', 'undeletable_roles'));
 	}
 
 	/**
@@ -32,7 +51,8 @@ class RoleController extends Controller
 	 */
 	public function create()
 	{
-		//
+		$permissions = $this->getPermissionsByGuard();
+		return Inertia::render('admin/roles/CreateEdit', compact('permissions'));
 	}
 
 	/**
@@ -43,18 +63,22 @@ class RoleController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
-	}
 
-	/**
-	 * SHOW
-	 * 
-	 * 
-	 * 
-	 */
-	public function show(string $id)
-	{
-		//
+		$request->validate([
+			'name' => 'required|unique:roles,name',
+		], [
+			'name.required' => 'Role name is required.',
+			'name.unique' => 'Role name already exists.'
+		]);
+
+
+		$role = Role::create([
+			'name' => $request->name
+		]);
+
+		$role->givePermissionTo($request->permissions);
+
+		return redirect()->route('dashboard.roles.list')->with('success', 'Role created successfully.');
 	}
 
 	/**
@@ -63,9 +87,13 @@ class RoleController extends Controller
 	 * 
 	 * 
 	 */
-	public function edit(string $id)
+	public function edit(Role $role)
 	{
-		//
+		$role = $role->loadCount('users')->load('permissions');
+		$permissions = $this->getPermissionsByGuard();
+		$protected_roles = config('settings.auth.protected_roles');
+
+		return Inertia::render('admin/roles/CreateEdit', compact('role', 'permissions', 'protected_roles'));
 	}
 
 	/**
@@ -76,7 +104,19 @@ class RoleController extends Controller
 	 */
 	public function update(Request $request, string $id)
 	{
-		//
+
+		$request->validate([
+			'name' => 'required|unique:roles,name,' . $id,
+		], [
+			'name.required' => 'Role name is required.',
+			'name.unique' => 'Role name already exists.',
+		]);
+
+		$role = Role::find($id);
+		$role->update(['name' => $request->name]);
+		$role->syncPermissions($request->permissions);
+
+		return redirect()->route('dashboard.roles.list')->with('success', 'Role updated successfully.');
 	}
 
 	/**
@@ -85,8 +125,9 @@ class RoleController extends Controller
 	 * 
 	 * 
 	 */
-	public function destroy(string $id)
+	public function destroy(Role $role)
 	{
-		//
+		$role->delete();
+		return redirect()->route('dashboard.roles.list')->with('success', 'Role deleted successfully.');
 	}
 }

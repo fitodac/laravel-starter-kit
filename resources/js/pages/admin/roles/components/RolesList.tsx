@@ -24,21 +24,23 @@ const columns = [
 	{ key: 'id', label: '#' },
 	{ key: 'name', label: t('Name') },
 	{ key: 'guard_name', label: t('Guard') },
+	{ key: 'permissions', label: t('Permissions') },
+	{ key: 'users_count', label: t('Associated users') },
 	{ key: 'actions', label: '' },
 ] as { key: string; label: string; allowsSorting?: boolean }[]
 
 export const RolesList = () => {
-	const { roles } = usePage<PageProps>().props as unknown as {
-		roles: Roles
-	}
+	const {
+		props: { roles },
+	} = usePage<PageProps>()
 
-	// console.log(roles)
+	const { links, current_page } = roles as Roles
+
 	// const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))
 	// const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
 	// const [isLoading, setIsLoading] = useState(true)
 
 	// const sort = useTableSorting()
-	const { links, current_page } = roles
 
 	// useEffect(() => {
 	// 	if (data.data.length) setIsLoading(false)
@@ -52,18 +54,30 @@ export const RolesList = () => {
 			actions: (
 				<div className="flex justify-end">
 					<div className="space-x-2">
-						<Button
-							size="sm"
-							color="primary"
-							variant="flat"
-							as={Link}
-							href={route('dashboard.role.edit', { role })}
-						>
-							{t('Edit')}
-						</Button>
+						<>
+							<Button
+								size="sm"
+								color="primary"
+								variant="flat"
+								as={Link}
+								href={route('dashboard.role.edit', { role })}
+							>
+								{t('Edit')}
+							</Button>
+						</>
 					</div>
 				</div>
 			),
+			permissions: (
+				<div className="flex gap-2">
+					{role.permissions.map((permission) => (
+						<Chip key={permission.id} size="sm" color="primary">
+							{permission.name}
+						</Chip>
+					))}
+				</div>
+			),
+			users_count: role.users_count,
 		}[columnKey]
 	}, [])
 

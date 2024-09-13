@@ -48,7 +48,7 @@ export const colors = {
 			foreground: '#3C3C3D',
 		},
 		default: {
-			DEFAULT: '#F4F4F4', // 100
+			DEFAULT: '#E9E9EA', // 200
 			'50': '#F9FAFA',
 			'100': '#F4F4F4',
 			'200': '#E9E9EA',

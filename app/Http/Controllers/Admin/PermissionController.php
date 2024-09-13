@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
@@ -21,19 +22,17 @@ class PermissionController extends Controller
 		$per_page = 15;
 
 		$permissions = Permission::paginate($per_page);
+		$guards = config('settings.auth.guard_permissions');
+		$protected_permissions = config('settings.auth.protected_permissions');
 
-		return Inertia::render('admin/permissions/Permissions', compact('permissions'));
-	}
-
-	/**
-	 * CREATE
-	 * 
-	 * 
-	 * 
-	 */
-	public function create()
-	{
-		//
+		return Inertia::render(
+			'admin/permissions/Permissions',
+			compact(
+				'permissions',
+				'guards',
+				'protected_permissions'
+			)
+		);
 	}
 
 	/**
@@ -42,31 +41,19 @@ class PermissionController extends Controller
 	 * 
 	 * 
 	 */
-	public function store(Request $request)
+	public function store(Request $request): RedirectResponse
 	{
-		//
-	}
 
-	/**
-	 * SHOW
-	 * 
-	 * 
-	 * 
-	 */
-	public function show(string $id)
-	{
-		//
-	}
+		$request->validate([
+			'name' => 'required|unique:permissions,name'
+		], [
+			'name.required' => 'Permission name is required.',
+			'name.unique' => 'Permission name already exists.',
+		]);
 
-	/**
-	 * EDIT
-	 * 
-	 * 
-	 * 
-	 */
-	public function edit(string $id)
-	{
-		//
+		Permission::create(['name' => $request->name]);
+
+		return back()->with('success', 'Permission created successfully.');
 	}
 
 	/**
@@ -75,9 +62,21 @@ class PermissionController extends Controller
 	 * 
 	 * 
 	 */
-	public function update(Request $request, string $id)
+	public function update(Request $request, Permission $permission): RedirectResponse
 	{
-		//
+
+		$request->validate([
+			'name' => 'required|unique:permissions,name',
+		], [
+			'name.required' => 'Permission name is required.',
+			'name.unique' => 'Permission name already exists.'
+		]);
+
+		$permission->update([
+			'name' => $request->name,
+		]);
+
+		return back()->with('success', 'Permission updated successfully.');
 	}
 
 	/**
@@ -86,8 +85,10 @@ class PermissionController extends Controller
 	 * 
 	 * 
 	 */
-	public function destroy(string $id)
+	public function destroy(Permission $permission): RedirectResponse
 	{
-		//
+		$permission->delete();
+
+		return back()->with('success', 'Permission deleted successfully.');
 	}
 }

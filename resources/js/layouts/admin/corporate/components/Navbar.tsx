@@ -51,18 +51,7 @@ export const Navbar = () => {
 									)
 								)}
 
-								<Menu
-									menuItemStyles={{
-										root: {},
-										icon: {
-											fontSize: theme.sidebar.item.icon.size,
-											position: 'relative',
-											top: '-1px',
-										},
-									}}
-									closeOnClick
-									className={theme.sidebar.cn.menuItem}
-								>
+								<Menu closeOnClick className={theme.sidebar.cn.menuItem}>
 									{nav.menu.map(
 										({ label, route: path, icon, submenu, permissions }) => {
 											if (
@@ -78,7 +67,11 @@ export const Navbar = () => {
 													<SubMenu
 														key={label + path}
 														label={label}
-														icon={<i className={icon} />}
+														icon={
+															<i
+																className={cn(icon, theme.sidebar.cn.menuIcon)}
+															/>
+														}
 													>
 														{submenu.map(({ label, route: path }) => (
 															<Fragment key={path}>
@@ -99,7 +92,11 @@ export const Navbar = () => {
 												<Fragment key={path}>
 													<MenuItem
 														component={<Link href={route(path || '')} />}
-														icon={<i className={icon} />}
+														icon={
+															<i
+																className={cn(icon, theme.sidebar.cn.menuIcon)}
+															/>
+														}
 														active={location.href === route(path || '')}
 													>
 														{label}

@@ -80,6 +80,14 @@ class AdminNavbarProvider extends ServiceProvider
 						[
 							'label' => 'Image',
 							'route' => 'dashboard.corporate.ui.image'
+						],
+						[
+							'label' => 'Modal',
+							'route' => 'dashboard.corporate.ui.modal'
+						],
+						[
+							'label' => 'Drawer',
+							'route' => 'dashboard.corporate.ui.drawer'
 						]
 					]
 				],
@@ -137,19 +145,19 @@ class AdminNavbarProvider extends ServiceProvider
 		$menu[] = [
 			'key' => 'roles_permissions',
 			'title' => 'Roles & permissions',
-			'permissions' => ['Super Admin Access', 'Admin Access'],
+			'permissions' => ['Super Admin Access'],
 			'menu' => [
 				[
 					'label' => 'Roles',
 					'route' => 'dashboard.roles.list',
 					'icon' => 'ri-user-settings-line',
-					'permissions' => ['Super Admin Access', 'Admin Access']
+					'permissions' => ['Super Admin Access']
 				],
 				[
 					'label' => 'Permissions',
 					'route' => 'dashboard.permissions.list',
 					'icon' => 'ri-user-2-fill',
-					'permissions' => ['Super Admin Access', 'Admin Access']
+					'permissions' => ['Super Admin Access']
 				]
 			],
 		];

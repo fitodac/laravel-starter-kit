@@ -17,6 +17,8 @@ Route::middleware('auth')
 		Route::inertia('/ui/cards', 'demo/pages/corporate/ui/CardsPage')->name('corporate.ui.cards');
 		Route::inertia('/ui/chips', 'demo/pages/corporate/ui/ChipsPage')->name('corporate.ui.chips');
 		Route::inertia('/ui/images', 'demo/pages/corporate/ui/ImagePage')->name('corporate.ui.image');
+		Route::inertia('/ui/modal', 'demo/pages/corporate/ui/ModalPage')->name('corporate.ui.modal');
+		Route::inertia('/ui/drawer', 'demo/pages/corporate/ui/DrawerPage')->name('corporate.ui.drawer');
 
 
 		// Utilities
