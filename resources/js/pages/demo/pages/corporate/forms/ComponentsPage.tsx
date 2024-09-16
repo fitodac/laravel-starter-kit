@@ -19,7 +19,7 @@ export const Page = ({}: Props) => {
 					Form components play a crucial role in UX by providing a structured
 					and visually appealing way for users to input and manage data.
 				</p>
-				<p className="font-light leading-tight mt-2">
+				<p className="text-sm mt-2">
 					Their thoughtful design enhances beauty and functionality, making
 					forms not only attractive but also easy to use. By using clear labels,
 					responsive fields, and intuitive controls, these components streamline

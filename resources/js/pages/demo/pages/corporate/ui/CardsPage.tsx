@@ -3,6 +3,9 @@ import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import {
 	CardsBasic,
+	CardBasicHeader,
+	CardBasicFooter,
+	CardBasicDivider,
 	CardRadius,
 	CardShadow,
 	CardImage,
@@ -19,7 +22,7 @@ export const Page = () => {
 					Cards are versatile UI components that present information in a
 					concise and visually appealing format.
 				</p>
-				<p className="font-light leading-tight mt-2">
+				<p className="text-sm mt-2">
 					Each card is designed to be compact yet comprehensive, providing a
 					snapshot of key details at a glance. The use of varied sizes allows
 					for highlighting the most relevant information, ensuring that users
@@ -27,9 +30,20 @@ export const Page = () => {
 				</p>
 			</PageHeader>
 
-			<PageContent>
-				<div className="space-y-10">
+			<PageContent
+				aside={
+					<ul>
+						<li>Item 1</li>
+						<li>Item 2</li>
+						<li>Item 3</li>
+					</ul>
+				}
+			>
+				<div className="max-w-lg space-y-14">
 					<CardsBasic />
+					<CardBasicHeader />
+					<CardBasicFooter />
+					<CardBasicDivider />
 					<CardRadius />
 					<CardShadow />
 					<CardImage />

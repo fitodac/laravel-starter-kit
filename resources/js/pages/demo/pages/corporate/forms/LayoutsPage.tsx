@@ -21,7 +21,7 @@ export const Page = ({}: Props) => {
 					Forms are essential components of a dashboard, enabling users to
 					manage data efficiently within a maximum content width.
 				</p>
-				<p className="font-light leading-tight mt-2">
+				<p className="text-sm mt-2">
 					Their design maximizes space usage and ensures that interactions are
 					straightforward and effective, enhancing the overall user experience
 					by keeping data entry and management streamlined and accessible.

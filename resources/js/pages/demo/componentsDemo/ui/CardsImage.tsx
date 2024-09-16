@@ -14,11 +14,11 @@ import img04 from '@/assets/img/cards/04.jpg'
 
 export const CardImage = () => {
 	return (
-		<>
-			<h3>Images & card styles</h3>
+		<div>
+			<h3 className="font-semibold">Images & card styles</h3>
 
-			<div className="grid gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4">
-				<div>
+			<div className="space-y-7 mt-6">
+				<div className="w-72">
 					<Card radius="lg">
 						<CardHeader className="text-sm leading-tight">
 							<p>
@@ -40,7 +40,7 @@ export const CardImage = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card radius="lg">
 						<CardBody className="p-0">
 							<Image
@@ -62,7 +62,7 @@ export const CardImage = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card isFooterBlurred radius="lg">
 						<CardBody className="p-0">
 							<Image
@@ -116,6 +116,6 @@ export const CardImage = () => {
 					</Card>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }

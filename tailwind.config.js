@@ -49,11 +49,7 @@ export default {
 				fontSize: theme.fontSize,
 				lineHeight: theme.lineHeight,
 				radius: theme.radius,
-				borderWidth: {
-					small: '0.7px', // border-small
-					medium: '1.5px', // border-medium (default)
-					large: '3px', // border-large
-				},
+				borderWidth: theme.borderWidth,
 			},
 
 			themes: {

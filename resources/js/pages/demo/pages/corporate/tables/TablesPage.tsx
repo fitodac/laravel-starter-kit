@@ -13,7 +13,7 @@ export const Page = ({ products }: Props) => {
 	return (
 		<>
 			<PageHeader title={t('Real data table')}>
-				<p className="">
+				<p className="text-sm">
 					This table uses Inertia.js to fetch data from the database, presenting
 					real-world information in an effective and fast manner. Inertia.js
 					acts as a bridge between the front-end and back-end, seamlessly

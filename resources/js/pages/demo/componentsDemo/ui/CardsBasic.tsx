@@ -11,85 +11,91 @@ import {
 
 export const CardsBasic = () => {
 	return (
-		<>
-			<div className="grid gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4">
-				<div>
-					<Card shadow="none">
-						<CardHeader className="flex-col items-start">
-							<p className="font-semibold">Basic card</p>
-							<p className="text-default-400 text-sm">Card subtitle</p>
-						</CardHeader>
-						<CardBody className="font-light leading-tight">
-							A card with a header and footer provides a structured and
-							organized way to present content, enhancing both aesthetics and
-							functionality.
-						</CardBody>
-						<CardFooter className="flex justify-end gap-4">
-							<Button variant="light" color="primary">
-								Card action
-							</Button>
-							<Button variant="light" color="primary">
-								Card link
-							</Button>
-						</CardFooter>
-					</Card>
-				</div>
+		<div className="w-72">
+			<Card shadow="none">
+				<CardHeader className="flex-col items-start">
+					<p className="font-semibold">Basic card</p>
+					<p className="text-default-400 text-sm">Card subtitle</p>
+				</CardHeader>
+				<CardBody className="font-light leading-tight">
+					A card with a header and footer provides a structured and organized
+					way to present content, enhancing both aesthetics and functionality.
+				</CardBody>
+				<CardFooter className="flex justify-end gap-4">
+					<Button variant="light" color="primary">
+						Card action
+					</Button>
+					<Button variant="light" color="primary">
+						Card link
+					</Button>
+				</CardFooter>
+			</Card>
+		</div>
+	)
+}
 
-				<div>
-					<Card shadow="none">
-						<CardHeader className="font-semibold">Card header</CardHeader>
-						<CardBody className="font-light leading-tight pb-10">
-							A card with only a header provides a simple and focused layout,
-							with the header serving as the primary focal point.
-						</CardBody>
-					</Card>
-				</div>
+export const CardBasicHeader = () => {
+	return (
+		<div className="w-72">
+			<Card shadow="none">
+				<CardHeader className="font-semibold">Card header</CardHeader>
+				<CardBody className="font-light leading-tight pb-10">
+					A card with only a header provides a simple and focused layout, with
+					the header serving as the primary focal point.
+				</CardBody>
+			</Card>
+		</div>
+	)
+}
 
-				<div>
-					<Card shadow="none">
-						<CardBody className="font-light leading-tight">
-							A card with only a footer provides a unique and minimalistic
-							design, where the footer serves as the main point of interaction
-							or information display.
-						</CardBody>
-						<CardFooter className="text-sm font-light italic pb-5">
-							- Someone famous in Source Title
-						</CardFooter>
-					</Card>
-				</div>
+export const CardBasicFooter = () => {
+	return (
+		<div className="w-72">
+			<Card shadow="none">
+				<CardBody className="font-light leading-tight">
+					A card with only a footer provides a unique and minimalistic design,
+					where the footer serves as the main point of interaction or
+					information display.
+				</CardBody>
+				<CardFooter className="text-sm font-light italic pb-5">
+					- Someone famous in Source Title
+				</CardFooter>
+			</Card>
+		</div>
+	)
+}
 
-				<div>
-					<Card shadow="none">
-						<CardHeader className="flex-col items-start">
-							<p className="font-semibold">With divider</p>
-						</CardHeader>
-						<Divider />
-						<CardBody className="font-light leading-tight">
-							A card with a header and footer provides a structured and
-							organized way to present content, enhancing both aesthetics and
-							functionality.
-						</CardBody>
-						<Divider />
-						<CardFooter className="flex justify-end gap-4">
-							<Button variant="light">Cancel</Button>
-							<Button variant="light" color="primary">
-								Confirm
-							</Button>
-						</CardFooter>
-					</Card>
-				</div>
-			</div>
-		</>
+export const CardBasicDivider = () => {
+	return (
+		<div className="w-72">
+			<Card shadow="none">
+				<CardHeader className="flex-col items-start">
+					<p className="font-semibold">With divider</p>
+				</CardHeader>
+				<Divider />
+				<CardBody className="font-light leading-tight">
+					A card with a header and footer provides a structured and organized
+					way to present content, enhancing both aesthetics and functionality.
+				</CardBody>
+				<Divider />
+				<CardFooter className="flex justify-end gap-4">
+					<Button variant="light">Cancel</Button>
+					<Button variant="light" color="primary">
+						Confirm
+					</Button>
+				</CardFooter>
+			</Card>
+		</div>
 	)
 }
 
 export const CardRadius = () => {
 	return (
-		<>
-			<h3>Border radius</h3>
+		<div>
+			<h3 className="font-semibold">Border radius</h3>
 
-			<div className="grid gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4">
-				<div>
+			<div className="space-y-7 mt-6">
+				<div className="w-72">
 					<Card
 						shadow="none"
 						radius="none"
@@ -106,7 +112,7 @@ export const CardRadius = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card
 						shadow="none"
 						radius="sm"
@@ -121,7 +127,7 @@ export const CardRadius = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card
 						shadow="none"
 						className="bg-primary text-primary-foreground h-44"
@@ -134,13 +140,12 @@ export const CardRadius = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card
 						shadow="none"
-						radius="lg"
-						className="bg-primary text-primary-foreground h-44"
+						className="bg-primary text-primary-foreground h-44 rounded-xl"
 					>
-						<CardHeader className="flex-col items-start">Large</CardHeader>
+						<CardHeader className="flex-col items-start">Custom</CardHeader>
 						<CardBody className="text-sm font-light">
 							A large border radius gives the card a noticeably rounded
 							appearance, creating a softer and more inviting look.
@@ -148,17 +153,17 @@ export const CardRadius = () => {
 					</Card>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 
 export const CardShadow = () => {
 	return (
-		<>
-			<h3>Shadow elevation</h3>
+		<div>
+			<h3 className="font-semibold">Shadow elevation</h3>
 
-			<div className="grid gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4">
-				<div>
+			<div className="space-y-7 mt-6">
+				<div className="w-72">
 					<Card shadow="none" className="h-32">
 						<CardBody className="text-sm leading-tight justify-center">
 							<p>
@@ -168,7 +173,7 @@ export const CardShadow = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card shadow="sm" className="h-32">
 						<CardBody className="text-sm leading-tight justify-center">
 							<p>
@@ -179,7 +184,7 @@ export const CardShadow = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card shadow="md" className="h-32">
 						<CardBody className="text-sm leading-tight justify-center">
 							<p>
@@ -190,7 +195,7 @@ export const CardShadow = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card shadow="lg" className="h-32">
 						<CardBody className="text-sm leading-tight justify-center">
 							<p>
@@ -201,17 +206,17 @@ export const CardShadow = () => {
 					</Card>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 
 export const CardExtraFeatures = () => {
 	return (
-		<>
-			<h3>Extra features</h3>
+		<div>
+			<h3 className="font-semibold">Extra features</h3>
 
-			<div className="grid gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4">
-				<div>
+			<div className="space-y-7 mt-6">
+				<div className="w-72">
 					<Card isDisabled shadow="md" className="h-52">
 						<CardHeader>Disabled card</CardHeader>
 						<CardBody className="text-sm leading-tight pt-0">
@@ -223,7 +228,7 @@ export const CardExtraFeatures = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card shadow="md" className="h-52">
 						<CardHeader>Scrolleable content</CardHeader>
 						<CardBody className="font-light leading-tight pt-0 pb-8">
@@ -260,6 +265,6 @@ export const CardExtraFeatures = () => {
 					</Card>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }

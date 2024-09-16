@@ -15,7 +15,7 @@ export const Page = () => {
 					A well-designed image uploaders that enhances user experience and
 					functionality.
 				</p>
-				<p className="font-light leading-tight mt-2">
+				<p className="text-sm mt-2">
 					The uploaders are intuitive and responsive, allowing users to easily
 					upload and manage images. It strikes the perfect balance between
 					simplicity and performance, ensuring efficient and seamless

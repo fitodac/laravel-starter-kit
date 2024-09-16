@@ -46,11 +46,11 @@ export const CardActions = () => {
 	}
 
 	return (
-		<>
-			<h3>Actions</h3>
+		<div>
+			<h3 className="font-semibold">Actions</h3>
 
-			<div className="grid gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4">
-				<div>
+			<div className="space-y-7 mt-6">
+				<div className="w-72">
 					<Card isPressable fullWidth shadow="md" className="h-52">
 						<CardHeader className="font-semibold">Pressable card</CardHeader>
 						<CardBody className="font-light leading-tight pt-0 pb-5">
@@ -61,7 +61,7 @@ export const CardActions = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					{dismisableVisible && (
 						<Card className="h-52">
 							<CardHeader className="justify-between">
@@ -88,7 +88,7 @@ export const CardActions = () => {
 					)}
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card
 						className={cn(
 							'h-52',
@@ -122,7 +122,7 @@ export const CardActions = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card
 						radius={isResized === true ? 'none' : 'md'}
 						className={cn(
@@ -183,6 +183,6 @@ export const CardActions = () => {
 					</Card>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }

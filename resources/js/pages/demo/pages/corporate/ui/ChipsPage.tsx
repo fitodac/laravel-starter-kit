@@ -18,7 +18,7 @@ export const Page = () => {
 					A Chip is a small block of essential information representing an
 					input, attribute, or action.
 				</p>
-				<p className="font-light leading-tight mt-2">
+				<p className="text-sm mt-2">
 					Chips are often used to display content that is dynamic or
 					interactive, such as tags, selected items, or categories. They provide
 					a compact way to manage or highlight elements in a user interface,

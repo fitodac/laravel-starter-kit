@@ -73,7 +73,7 @@ export const Layout = ({ children, pageTitle }: Props) => {
 				<div className="flex min-h-svh pt-topbar">
 					<Navbar />
 
-					<div className="flex-1 overflow-x-auto">{children}</div>
+					<div className="flex-1">{children}</div>
 				</div>
 			</main>
 		</>

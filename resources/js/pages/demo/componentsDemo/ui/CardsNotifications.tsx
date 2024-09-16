@@ -2,11 +2,11 @@ import { Card, CardBody, CardHeader } from '@nextui-org/react'
 
 export const CardNotifications = () => {
 	return (
-		<>
-			<h3>Using cards for notifications</h3>
+		<div>
+			<h3 className="font-semibold">Using cards for notifications</h3>
 
-			<div className="grid gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4">
-				<div>
+			<div className="space-y-7 mt-6">
+				<div className="w-72">
 					<Card shadow="none" className="bg-warning-50 text-warning-500 pl-12">
 						<i className="ri-error-warning-fill ri-2x left-3 top-1 absolute" />
 						<CardHeader className="pb-0">Warning</CardHeader>
@@ -16,7 +16,7 @@ export const CardNotifications = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card shadow="none" className="bg-success-50 text-success-500 pl-12">
 						<i className="ri-check-line ri-2x left-3 top-1 absolute" />
 						<CardHeader className="pb-0">Success</CardHeader>
@@ -26,7 +26,7 @@ export const CardNotifications = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card shadow="none" className="bg-danger-50 text-danger-500 pl-12">
 						<i className="ri-file-close-line ri-2x left-3 top-1 absolute" />
 						<CardHeader className="pb-0">Danger</CardHeader>
@@ -36,7 +36,7 @@ export const CardNotifications = () => {
 					</Card>
 				</div>
 
-				<div>
+				<div className="w-72">
 					<Card shadow="none" className="bg-primary-50 text-primary-500 pl-12">
 						<i className="ri-message-2-fill ri-2x left-3 top-1 absolute" />
 						<CardHeader className="pb-0">Info</CardHeader>
@@ -46,6 +46,6 @@ export const CardNotifications = () => {
 					</Card>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }

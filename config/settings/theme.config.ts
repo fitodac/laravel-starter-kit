@@ -30,7 +30,19 @@ export const theme = {
 	radius: {
 		small: '4px', // rounded-small
 		medium: '6px', // rounded-medium
-		large: '12px', // rounded-large
+		large: '8px', // rounded-large
+	},
+
+	/**
+	 *
+	 *
+	 * Border width
+	 * ........................................................................
+	 */
+	borderWidth: {
+		small: '0.7px', // border-small
+		medium: '1.5px', // border-medium (default)
+		large: '3px', // border-large
 	},
 
 	/**

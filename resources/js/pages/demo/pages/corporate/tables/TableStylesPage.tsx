@@ -21,7 +21,7 @@ export const Page = () => {
 					Tables are a versatile tool for presenting data in a clear and
 					organized manner.
 				</p>
-				<p className="font-light leading-tight mt-2">
+				<p className="text-sm mt-2">
 					The minimalist design style emphasizes simplicity and efficiency,
 					removing unnecessary elements and focusing on clean lines and ample
 					white space. This approach not only enhances readability but also
