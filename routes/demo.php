@@ -29,6 +29,7 @@ Route::middleware('auth')
 		// Forms
 		Route::inertia('forms/components', 'demo/pages/corporate/forms/ComponentsPage')->name('corporate.form.components');
 		Route::inertia('forms/layouts', 'demo/pages/corporate/forms/LayoutsPage')->name('corporate.form.layouts');
+		Route::inertia('forms/wysiwyg', 'demo/pages/corporate/forms/TipTapPage')->name('corporate.form.wysiwyg');
 
 
 		// Tables

@@ -39,7 +39,7 @@ export const Page = () => {
 					</ul>
 				}
 			>
-				<div className="max-w-lg space-y-14">
+				<div className="flex-1 max-w-lg space-y-14">
 					<CardsBasic />
 					<CardBasicHeader />
 					<CardBasicFooter />

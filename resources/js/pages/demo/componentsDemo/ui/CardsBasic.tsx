@@ -6,7 +6,6 @@ import {
 	Divider,
 	Button,
 	Checkbox,
-	ScrollShadow,
 } from '@nextui-org/react'
 
 export const CardsBasic = () => {
