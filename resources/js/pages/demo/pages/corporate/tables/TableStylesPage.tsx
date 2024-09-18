@@ -17,7 +17,7 @@ export const Page = () => {
 	return (
 		<>
 			<PageHeader title={t('Tables styles')}>
-				<p className="text-lg font-medium leading-tight">
+				<p className="font-bold leading-tight">
 					Tables are a versatile tool for presenting data in a clear and
 					organized manner.
 				</p>

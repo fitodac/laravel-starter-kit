@@ -11,12 +11,13 @@ import {
 	ButtonVariantsRounded,
 	GroupedButtons,
 } from '@/pages/demo/componentsDemo'
+import { ButtonsNavbar } from './components'
 
 export const Page = () => {
 	return (
 		<>
 			<PageHeader title={t('Buttons')}>
-				<p className="text-lg font-medium leading-tight">
+				<p className="font-bold leading-tight">
 					Beautifully designed buttons that enhance visual appeal and usability.
 				</p>
 				<p className="text-sm mt-2">
@@ -28,11 +29,21 @@ export const Page = () => {
 
 			<PageContent
 				aside={
-					<ul>
-						<li>Solid button</li>
-						<li>Small button</li>
-						<li>Large button</li>
-					</ul>
+					<ButtonsNavbar
+						{...{
+							menu: [
+								{ key: 'solidButton', label: 'Solid button' },
+								{ key: 'smallButtons', label: 'Small' },
+								{ key: 'largeButtons', label: 'Large' },
+								{ key: 'variants', label: 'Variants' },
+								{ key: 'lightButton', label: 'Light button' },
+								{ key: 'loadingState', label: 'Loading state' },
+								{ key: 'icons', label: 'Icons' },
+								{ key: 'roundedVariants', label: 'Rounded variants' },
+								{ key: 'buttonGroup', label: 'Button group' },
+							],
+						}}
+					/>
 				}
 			>
 				<div className="flex-1 max-w-xl space-y-14">

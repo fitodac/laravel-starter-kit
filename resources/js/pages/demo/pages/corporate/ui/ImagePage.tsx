@@ -10,6 +10,7 @@ import {
 	cn,
 	Image,
 } from '@nextui-org/react'
+import { ButtonsNavbar } from './components'
 
 import img01 from '@/assets/img/cards/01.jpg'
 import img02 from '@/assets/img/cards/02.jpg'
@@ -33,157 +34,144 @@ export const Page = () => {
 				</p> */}
 			</PageHeader>
 
-			<PageContent>
-				<div className="grid gap-6 lg:grid-cols-2 lg:gap-10">
-					<Card>
-						<CardHeader>Basic image</CardHeader>
-						<CardBody>
-							<div className="grid gap-7 lg:grid-cols-2">
-								<div>
-									<Image
-										width="100%"
-										height={300}
-										alt="Image demo"
-										src={img01}
-										classNames={{ img: 'object-cover' }}
-									/>
-								</div>
+			<PageContent
+				aside={
+					<ButtonsNavbar
+						{...{
+							menu: [
+								{ key: 'basic', label: 'Basic image' },
+								{ key: 'onLoad', label: 'On image load' },
+								{ key: 'zoomed', label: 'Zoomed effect' },
+								{ key: 'carousel', label: 'Carousel' },
+								{ key: 'rounded', label: 'Rounded' },
+								{ key: 'shadow', label: 'Shadow' },
+							],
+						}}
+					/>
+				}
+			>
+				<div className="flex-1 max-w-xl space-y-14">
+					<div className="space-y-6" id="basic">
+						<h3 className="font-semibold">Basic image</h3>
+
+						<Image
+							width={250}
+							height={300}
+							alt="Image demo"
+							src={img01}
+							classNames={{ img: 'object-cover' }}
+						/>
+					</div>
+
+					<div className="space-y-6" id="onLoad">
+						<h3 className="font-semibold">On image load</h3>
+
+						<div className="space-y-4">
+							<Image
+								width={250}
+								height={300}
+								alt="Image demo"
+								src={`https://app.requestly.io/delay/2000/https://images.pexels.com/photos/27402086/pexels-photo-27402086/free-photo-of-a-large-fish-swimming-in-the-water.jpeg`}
+								onLoad={() => setTimeout(() => setImgLoaded(true), 1000)}
+								classNames={{ img: 'object-cover aspect-video' }}
+							/>
+
+							<div
+								className={cn(
+									'text-success text-sm transition-opacity flex items-center gap-2',
+									imgLoaded ? 'opacity-100' : 'opacity-0'
+								)}
+							>
+								<i className="ri-image-circle-line ri-2x" />
+								Image loaded!
 							</div>
-						</CardBody>
-						<CardFooter />
-					</Card>
+						</div>
+					</div>
 
-					<Card>
-						<CardHeader>On image load</CardHeader>
-						<CardBody>
-							<div className="grid gap-7 lg:grid-cols-2">
-								<div className="space-y-4">
-									<Image
-										width="100%"
-										height={300}
-										alt="Image demo"
-										src={`https://app.requestly.io/delay/2000/https://images.pexels.com/photos/27402086/pexels-photo-27402086/free-photo-of-a-large-fish-swimming-in-the-water.jpeg`}
-										onLoad={() => setTimeout(() => setImgLoaded(true), 1000)}
-										classNames={{ img: 'object-cover aspect-video' }}
-									/>
+					<div className="space-y-6" id="zoomed">
+						<h3 className="font-semibold">Zoomed effect</h3>
 
-									<div
-										className={cn(
-											'text-sm transition-opacity flex items-center gap-2',
-											imgLoaded ? 'opacity-100' : 'opacity-0'
-										)}
-									>
-										<i className="ri-image-circle-line ri-2x" />
-										Image loaded!
-									</div>
-								</div>
-							</div>
-						</CardBody>
-						<CardFooter />
-					</Card>
+						<Image
+							isZoomed
+							width={250}
+							height={300}
+							alt="Image demo"
+							src={img02}
+							classNames={{ wrapper: 'overflow-hidden', img: 'object-cover' }}
+						/>
+					</div>
 
-					<Card>
-						<CardHeader>Zoomed effect</CardHeader>
-						<CardBody>
-							<div className="grid gap-7 lg:grid-cols-2">
-								<div>
-									<Image
-										isZoomed
-										width="100%"
-										height={300}
-										alt="Image demo"
-										src={img02}
-										classNames={{ img: 'object-cover' }}
-									/>
-								</div>
-							</div>
-						</CardBody>
-						<CardFooter />
-					</Card>
+					<div className="space-y-6" id="carousel">
+						<h3 className="font-semibold">Carousel</h3>
 
-					<Card>
-						<CardHeader>Carousel</CardHeader>
-						<CardBody>
-							<div className="grid gap-7 lg:grid-cols-2">
-								<div className="flex flex-col justify-between gap-3 h-full">
-									<Image
-										height={230}
-										width="100%"
-										alt="Image demo"
-										src={carouselSrc}
-										classNames={{ img: 'object-cover' }}
-									/>
+						<div className="w-[250px] flex flex-col justify-between gap-3 h-full">
+							<Image
+								width={250}
+								height={300}
+								alt="Image demo"
+								src={carouselSrc}
+								classNames={{ img: 'object-cover' }}
+							/>
 
-									<div className="flex justify-center gap-5">
-										{[img01, img02, img03, img04].map((src) => {
-											return (
-												<Image
-													width={40}
-													src={src}
-													alt={`pic ${src}`}
-													onClick={() => setCarouselSrc(src)}
-													classNames={{
-														wrapper: cn(
-															'cursor-pointer transition-opacity',
-															carouselSrc === src &&
-																'opacity-30 pointer-events-none'
-														),
-													}}
-												/>
-											)
-										})}
-									</div>
-								</div>
-
-								<div className="">
-									<div></div>
-								</div>
-							</div>
-						</CardBody>
-						<CardFooter />
-					</Card>
-
-					<Card className="lg:col-span-2">
-						<CardHeader>Rounded</CardHeader>
-						<CardBody>
-							<div className="grid grid-cols-3 gap-5 sm:flex lg:gap-10">
-								{['none', 'sm', 'md', 'lg', 'full'].map((radius, idx) => (
-									<div key={`rounded-${idx}`}>
+							<div className="flex justify-center gap-5">
+								{[img01, img02, img03, img04].map((src) => {
+									return (
 										<Image
-											width={120}
-											alt="Image demo"
-											// @ts-ignore
-											radius={radius}
-											src={img04}
-											classNames={{ img: 'object-cover aspect-square' }}
+											width={40}
+											src={src}
+											alt={`pic ${src}`}
+											onClick={() => setCarouselSrc(src)}
+											classNames={{
+												wrapper: cn(
+													'cursor-pointer transition-opacity',
+													carouselSrc === src &&
+														'opacity-30 pointer-events-none'
+												),
+											}}
 										/>
-									</div>
-								))}
+									)
+								})}
 							</div>
-						</CardBody>
-						<CardFooter />
-					</Card>
+						</div>
+					</div>
 
-					<Card className="lg:col-span-2">
-						<CardHeader>Shadow</CardHeader>
-						<CardBody>
-							<div className="grid grid-cols-3 gap-5 py-12 sm:flex lg:gap-10">
-								{['sm', 'md', 'lg'].map((radius, idx) => (
-									<div key={`rounded-${idx}`}>
-										<Image
-											width={120}
-											alt="Image demo"
-											// @ts-ignore
-											shadow={radius}
-											src={img03}
-											classNames={{ img: 'object-cover aspect-square' }}
-										/>
-									</div>
-								))}
-							</div>
-						</CardBody>
-						<CardFooter />
-					</Card>
+					<div className="space-y-6" id="rounded">
+						<h3 className="font-semibold">Rounded</h3>
+
+						<div className="grid grid-cols-3 gap-5 sm:flex lg:gap-10">
+							{['none', 'sm', 'md', 'lg', 'full'].map((radius, idx) => (
+								<div key={`rounded-${idx}`}>
+									<Image
+										width={120}
+										alt="Image demo"
+										// @ts-ignore
+										radius={radius}
+										src={img04}
+										classNames={{ img: 'object-cover aspect-square' }}
+									/>
+								</div>
+							))}
+						</div>
+					</div>
+
+					<div className="space-y-6" id="shadow">
+						<h3 className="font-semibold">Shadow</h3>
+
+						<div className="grid grid-cols-3 gap-5 sm:flex lg:gap-10">
+							{['sm', 'md', 'lg'].map((radius, idx) => (
+								<div key={`rounded-${idx}`}>
+									<Image
+										width={120}
+										alt="Image demo"
+										// @ts-ignore
+										shadow={radius}
+										src={img03}
+										classNames={{ img: 'object-cover aspect-square' }}
+									/>
+								</div>
+							))}
+						</div>
+					</div>
 				</div>
 
 				<div className="h-20"></div>

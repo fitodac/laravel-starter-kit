@@ -14,7 +14,7 @@ import img04 from '@/assets/img/cards/04.jpg'
 
 export const CardImage = () => {
 	return (
-		<div>
+		<div id="images">
 			<h3 className="font-semibold">Images & card styles</h3>
 
 			<div className="space-y-7 mt-6">

@@ -50,7 +50,7 @@ export const CardActions = () => {
 			<h3 className="font-semibold">Actions</h3>
 
 			<div className="space-y-7 mt-6">
-				<div className="w-72">
+				<div className="w-72" id="pressable">
 					<Card isPressable fullWidth shadow="md" className="h-52">
 						<CardHeader className="font-semibold">Pressable card</CardHeader>
 						<CardBody className="font-light leading-tight pt-0 pb-5">
@@ -61,7 +61,7 @@ export const CardActions = () => {
 					</Card>
 				</div>
 
-				<div className="w-72">
+				<div className="w-72" id="dismisable">
 					{dismisableVisible && (
 						<Card className="h-52">
 							<CardHeader className="justify-between">
@@ -88,7 +88,7 @@ export const CardActions = () => {
 					)}
 				</div>
 
-				<div className="w-72">
+				<div className="w-72" id="updateContent">
 					<Card
 						className={cn(
 							'h-52',
@@ -122,7 +122,7 @@ export const CardActions = () => {
 					</Card>
 				</div>
 
-				<div className="w-72">
+				<div className="w-72" id="resizable">
 					<Card
 						radius={isResized === true ? 'none' : 'md'}
 						className={cn(

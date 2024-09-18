@@ -10,7 +10,7 @@ import {
 
 export const CardsBasic = () => {
 	return (
-		<div className="w-72">
+		<div className="w-72" id="basicCard">
 			<Card shadow="none">
 				<CardHeader className="flex-col items-start">
 					<p className="font-semibold">Basic card</p>
@@ -35,7 +35,7 @@ export const CardsBasic = () => {
 
 export const CardBasicHeader = () => {
 	return (
-		<div className="w-72">
+		<div className="w-72" id="cardHeader">
 			<Card shadow="none">
 				<CardHeader className="font-semibold">Card header</CardHeader>
 				<CardBody className="font-light leading-tight pb-10">
@@ -49,7 +49,7 @@ export const CardBasicHeader = () => {
 
 export const CardBasicFooter = () => {
 	return (
-		<div className="w-72">
+		<div className="w-72" id="cardFooter">
 			<Card shadow="none">
 				<CardBody className="font-light leading-tight">
 					A card with only a footer provides a unique and minimalistic design,
@@ -66,7 +66,7 @@ export const CardBasicFooter = () => {
 
 export const CardBasicDivider = () => {
 	return (
-		<div className="w-72">
+		<div className="w-72" id="cardWithDivider">
 			<Card shadow="none">
 				<CardHeader className="flex-col items-start">
 					<p className="font-semibold">With divider</p>
@@ -90,7 +90,7 @@ export const CardBasicDivider = () => {
 
 export const CardRadius = () => {
 	return (
-		<div>
+		<div id="borderRadius">
 			<h3 className="font-semibold">Border radius</h3>
 
 			<div className="space-y-7 mt-6">
@@ -158,7 +158,7 @@ export const CardRadius = () => {
 
 export const CardShadow = () => {
 	return (
-		<div>
+		<div id="shadowElevation">
 			<h3 className="font-semibold">Shadow elevation</h3>
 
 			<div className="space-y-7 mt-6">
@@ -215,7 +215,7 @@ export const CardExtraFeatures = () => {
 			<h3 className="font-semibold">Extra features</h3>
 
 			<div className="space-y-7 mt-6">
-				<div className="w-72">
+				<div className="w-72" id="disabled">
 					<Card isDisabled shadow="md" className="h-52">
 						<CardHeader>Disabled card</CardHeader>
 						<CardBody className="text-sm leading-tight pt-0">
@@ -227,7 +227,7 @@ export const CardExtraFeatures = () => {
 					</Card>
 				</div>
 
-				<div className="w-72">
+				<div className="w-72" id="scrolleableContent">
 					<Card shadow="md" className="h-52">
 						<CardHeader>Scrolleable content</CardHeader>
 						<CardBody className="font-light leading-tight pt-0 pb-8">

@@ -3,18 +3,13 @@ import { Layout } from '@/layouts/admin/corporate/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import {
-	Card,
-	CardBody,
-	CardFooter,
-	CardHeader,
-	cn,
-	Image,
 	Modal,
 	ModalBody,
 	ModalContent,
 	ModalHeader,
 	useDisclosure,
 } from '@nextui-org/react'
+import { ButtonsNavbar } from './components'
 
 type placement =
 	| 'auto'
@@ -41,7 +36,17 @@ export const Page = () => {
 				</p>
 			</PageHeader>
 
-			<PageContent>
+			<PageContent
+				aside={
+					<ButtonsNavbar
+						{...{
+							menu: [
+								// { key: 'solidButton', label: 'Solid button' },
+							],
+						}}
+					/>
+				}
+			>
 				<div className="max-w-2xl space-y-10">
 					<div className="text-xl">Position</div>
 

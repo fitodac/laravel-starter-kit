@@ -1,19 +1,12 @@
-import {
-	Card,
-	CardHeader,
-	CardBody,
-	Button,
-	ButtonGroup,
-	Divider,
-	cn,
-} from '@nextui-org/react'
+import { Button, ButtonGroup, Divider } from '@nextui-org/react'
 
 export const SolidButton = () => {
 	return (
-		<div className="space-y-6">
+		<div className="space-y-6" id="solidButton">
+			<h3 className="font-semibold">Basic button</h3>
 			<Button color="primary">Button</Button>
 
-			<p className="text-foreground text-sm">
+			<p className="text-xs">
 				The solid button is a perfect blend of beauty, simplicity, and
 				functionality. Its bold and consistent color makes it visually striking
 				and easy to recognize, instantly drawing attention to the most important
@@ -31,7 +24,10 @@ export const ButtonSize = ({
 	title: string
 }) => {
 	return (
-		<div className="space-y-6">
+		<div
+			className="space-y-6"
+			id={size === 'sm' ? 'smallButtons' : 'largeButtons'}
+		>
 			<h3 className="font-semibold">
 				{size === 'sm' ? 'Small buttons' : 'Large buttons'}
 			</h3>
@@ -51,7 +47,7 @@ export const ButtonSize = ({
 
 export const ButtonVariants = () => {
 	return (
-		<div className="space-y-6">
+		<div className="space-y-6" id="variants">
 			<h3 className="font-semibold">Button variants</h3>
 
 			<div className="flex flex-wrap gap-4">
@@ -72,7 +68,7 @@ export const ButtonVariants = () => {
 				</Button>
 			</div>
 
-			<p className="text-foreground text-sm">
+			<p className="text-xs">
 				These buttons showcase a range of design styles that enhance the visual
 				appeal and usability of the interface. Each variant, from the bold lines
 				of the bordered button to the understated elegance of the ghost button,
@@ -89,14 +85,14 @@ export const ButtonVariants = () => {
 
 export const LightButton = () => {
 	return (
-		<div className="space-y-6">
+		<div className="space-y-6" id="lightButton">
 			<h3 className="font-semibold">Light button</h3>
 
 			<Button color="primary" variant="light">
 				Light button
 			</Button>
 
-			<p className="text-foreground text-sm">
+			<p className="text-xs">
 				The light button offers a subtle design for less important actions,
 				serving as a gentle alternative to links. Its understated look
 				integrates seamlessly into the interface, balancing visibility and
@@ -108,7 +104,7 @@ export const LightButton = () => {
 
 export const LoadingButton = () => {
 	return (
-		<div className="space-y-6">
+		<div className="space-y-6" id="loadingState">
 			<h3 className="font-semibold">Loading states</h3>
 
 			<div className="flex flex-col gap-6 sm:flex-row">
@@ -131,7 +127,7 @@ export const LoadingButton = () => {
 				</div>
 			</div>
 
-			<p className="text-foreground text-sm">
+			<p className="text-xs">
 				The loading button features a spinner that activates with the isLoading
 				attribute, clearly indicating that a process is underway. The spinner
 				enhances user experience by providing feedback and maintaining clarity
@@ -143,12 +139,12 @@ export const LoadingButton = () => {
 
 export const IconizedButtons = () => {
 	return (
-		<div className="space-y-6">
+		<div className="space-y-6" id="icons">
 			<h3 className="font-semibold">Icons</h3>
 
 			<div className="space-y-5 max-w-lg">
 				<div className="flex justify-between items-center">
-					<span>Basic button</span>
+					<span className="text-sm font-medium">Basic button</span>
 					<Button
 						color="primary"
 						size="sm"
@@ -161,7 +157,7 @@ export const IconizedButtons = () => {
 				<Divider />
 
 				<div className="flex justify-between items-center">
-					<span>Flat variant</span>
+					<span className="text-sm font-medium">Flat variant</span>
 					<Button
 						color="primary"
 						size="sm"
@@ -175,7 +171,7 @@ export const IconizedButtons = () => {
 				<Divider />
 
 				<div className="flex justify-between items-center">
-					<span>Light variant</span>
+					<span className="text-sm font-medium">Light variant</span>
 					<Button
 						color="primary"
 						variant="light"
@@ -190,7 +186,7 @@ export const IconizedButtons = () => {
 				<Divider />
 
 				<div className="flex justify-between items-center">
-					<span>Rounded shdowed</span>
+					<span className="text-sm font-medium">Rounded shdowed</span>
 					<Button
 						color="primary"
 						size="sm"
@@ -205,7 +201,7 @@ export const IconizedButtons = () => {
 				<Divider />
 
 				<div className="flex justify-between items-center">
-					<span>Icon button</span>
+					<span className="text-sm font-medium">Icon button</span>
 					<Button isIconOnly color="primary">
 						<i className="ri-instagram-line ri-xl" />
 					</Button>
@@ -214,7 +210,7 @@ export const IconizedButtons = () => {
 				<Divider />
 
 				<div className="flex justify-between items-center">
-					<span>Rounded icon</span>
+					<span className="text-sm font-medium">Rounded icon</span>
 					<Button isIconOnly color="primary" radius="full">
 						<i className="ri-user-line ri-xl" />
 					</Button>
@@ -223,14 +219,14 @@ export const IconizedButtons = () => {
 				<Divider />
 
 				<div className="flex justify-between items-center">
-					<span>Light variant</span>
+					<span className="text-sm font-medium">Light variant</span>
 					<Button isIconOnly color="primary" variant="light">
 						<i className="ri-facebook-fill ri-xl" />
 					</Button>
 				</div>
 			</div>
 
-			<p className="text-foreground text-sm">
+			<p className="text-xs">
 				Buttons with icons enhance the UI by combining visual elements with
 				functionality, making interactions more intuitive and efficient. Icons
 				provide immediate visual cues that convey the button's purpose at a
@@ -247,7 +243,7 @@ export const IconizedButtons = () => {
 
 export const ButtonVariantsRounded = () => {
 	return (
-		<div className="space-y-6">
+		<div className="space-y-6" id="roundedVariants">
 			<h3 className="font-semibold">Button rounded variants</h3>
 
 			<div className="flex flex-wrap gap-4">
@@ -273,7 +269,7 @@ export const ButtonVariantsRounded = () => {
 
 export const GroupedButtons = () => {
 	return (
-		<div className="space-y-6">
+		<div className="space-y-6" id="buttonGroup">
 			<h3 className="font-semibold">Button group</h3>
 
 			<div className="space-y-8">

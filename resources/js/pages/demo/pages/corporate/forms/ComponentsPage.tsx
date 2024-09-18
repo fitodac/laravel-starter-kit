@@ -15,7 +15,7 @@ export const Page = ({}: Props) => {
 	return (
 		<>
 			<PageHeader title={String(t('Form components'))}>
-				<p className="text-lg font-medium leading-tight">
+				<p className="font-bold leading-tight">
 					Form components play a crucial role in UX by providing a structured
 					and visually appealing way for users to input and manage data.
 				</p>

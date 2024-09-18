@@ -19,11 +19,24 @@ Route::middleware('auth')
 		Route::inertia('/ui/images', 'demo/pages/corporate/ui/ImagePage')->name('corporate.ui.image');
 		Route::inertia('/ui/modal', 'demo/pages/corporate/ui/ModalPage')->name('corporate.ui.modal');
 		Route::inertia('/ui/drawer', 'demo/pages/corporate/ui/DrawerPage')->name('corporate.ui.drawer');
+		Route::inertia('/ui/dropdown', 'demo/pages/corporate/ui/DropdownPage')->name('corporate.ui.dropdown');
+		Route::inertia('/ui/listbox', 'demo/pages/corporate/ui/ListBoxPage')->name('corporate.ui.listbox');
+		Route::inertia('/ui/breadcrumbs', 'demo/pages/corporate/ui/BreadcrumbsPage')->name('corporate.ui.breadcrumbs');
+		Route::inertia('/ui/alerts', 'demo/pages/corporate/ui/AlertsPage')->name('corporate.ui.alerts');
+		Route::inertia('/ui/tabs', 'demo/pages/corporate/ui/TabsPage')->name('corporate.ui.tabs');
+		Route::inertia('/ui/pagination', 'demo/pages/corporate/ui/PaginationPage')->name('corporate.ui.pagination');
+		Route::inertia('/ui/popover', 'demo/pages/corporate/ui/PopoversPage')->name('corporate.ui.popover');
+		Route::inertia('/ui/progress', 'demo/pages/corporate/ui/ProgressPage')->name('corporate.ui.progress');
+		Route::inertia('/ui/loading', 'demo/pages/corporate/ui/LoadingIndicatorsPage')->name('corporate.ui.loading');
+		Route::inertia('/ui/toasts', 'demo/pages/corporate/ui/ToastsPage')->name('corporate.ui.toasts');
+		Route::inertia('/ui/tooltips', 'demo/pages/corporate/ui/TooltipsPage')->name('corporate.ui.tooltips');
+		Route::inertia('/ui/avatar', 'demo/pages/corporate/ui/AvatarPage')->name('corporate.ui.avatar');
 
 
 		// Utilities
 		Route::inertia('/utilities/color', 'demo/pages/corporate/utilities/ColorPage')->name('corporate.utilities.color');
 		Route::inertia('/utilities/image-uploader', 'demo/pages/corporate/utilities/ImageUploaderPage')->name('corporate.utilities.image-uploader');
+		Route::inertia('/utilities/icons', 'demo/pages/corporate/utilities/IconsPage')->name('corporate.utilities.icons');
 
 
 		// Forms

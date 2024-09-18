@@ -9,16 +9,16 @@ import {
 	CardRadius,
 	CardShadow,
 	CardImage,
-	CardNotifications,
 	CardActions,
 	CardExtraFeatures,
 } from '@/pages/demo/componentsDemo'
+import { ButtonsNavbar } from './components'
 
 export const Page = () => {
 	return (
 		<>
 			<PageHeader title={t('Cards')}>
-				<p className="text-lg font-medium leading-tight">
+				<p className="font-bold leading-tight">
 					Cards are versatile UI components that present information in a
 					concise and visually appealing format.
 				</p>
@@ -32,11 +32,25 @@ export const Page = () => {
 
 			<PageContent
 				aside={
-					<ul>
-						<li>Item 1</li>
-						<li>Item 2</li>
-						<li>Item 3</li>
-					</ul>
+					<ButtonsNavbar
+						{...{
+							menu: [
+								{ key: 'basicCard', label: 'Basic card' },
+								{ key: 'cardHeader', label: 'Card header' },
+								{ key: 'cardFooter', label: 'Card footer' },
+								{ key: 'cardWithDivider', label: 'Card with dividers' },
+								{ key: 'borderRadius', label: 'Border radius' },
+								{ key: 'shadowElevation', label: 'Shadow elevation' },
+								{ key: 'images', label: 'Images & card styles' },
+								{ key: 'pressable', label: 'Pressable card' },
+								{ key: 'dismisable', label: 'Dismisable card' },
+								{ key: 'updateContent', label: 'Update content' },
+								{ key: 'resizable', label: 'Resizable' },
+								{ key: 'disabled', label: 'Disabled' },
+								{ key: 'scrolleableContent', label: 'Scrolleable content' },
+							],
+						}}
+					/>
 				}
 			>
 				<div className="flex-1 max-w-lg space-y-14">
@@ -47,7 +61,6 @@ export const Page = () => {
 					<CardRadius />
 					<CardShadow />
 					<CardImage />
-					<CardNotifications />
 					<CardActions />
 					<CardExtraFeatures />
 				</div>

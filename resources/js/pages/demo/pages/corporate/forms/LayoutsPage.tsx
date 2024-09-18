@@ -17,7 +17,7 @@ export const Page = ({}: Props) => {
 	return (
 		<>
 			<PageHeader title={`${t('Form Layouts' ?? '')}`}>
-				<p className="text-lg font-medium leading-tight">
+				<p className="font-bold leading-tight">
 					Forms are essential components of a dashboard, enabling users to
 					manage data efficiently within a maximum content width.
 				</p>

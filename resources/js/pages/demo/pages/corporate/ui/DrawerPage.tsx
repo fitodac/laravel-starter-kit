@@ -5,6 +5,7 @@ import { PageHeader, PageContent } from '@/components'
 import { Card, CardBody, cn } from '@nextui-org/react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
+import { ButtonsNavbar } from './components'
 
 type DirectionProps = 'left' | 'right' | 'top' | 'bottom'
 
@@ -34,7 +35,17 @@ export const Page = () => {
 				</p>
 			</PageHeader>
 
-			<PageContent>
+			<PageContent
+				aside={
+					<ButtonsNavbar
+						{...{
+							menu: [
+								// { key: 'solidButton', label: 'Solid button' },
+							],
+						}}
+					/>
+				}
+			>
 				<div className="max-w-2xl space-y-10">
 					<div>
 						<Card

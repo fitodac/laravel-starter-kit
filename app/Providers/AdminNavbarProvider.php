@@ -70,6 +70,42 @@ class AdminNavbarProvider extends ServiceProvider
 							'route' => 'dashboard.corporate.ui.buttons'
 						],
 						[
+							'label' => 'Breadcrumbs',
+							'route' => 'dashboard.corporate.ui.breadcrumbs'
+						],
+						[
+							'label' => 'Alerts',
+							'route' => 'dashboard.corporate.ui.alerts'
+						],
+						[
+							'label' => 'Tabs',
+							'route' => 'dashboard.corporate.ui.tabs'
+						],
+						[
+							'label' => 'Pagination',
+							'route' => 'dashboard.corporate.ui.pagination'
+						],
+						[
+							'label' => 'Popover',
+							'route' => 'dashboard.corporate.ui.popover'
+						],
+						[
+							'label' => 'Progress',
+							'route' => 'dashboard.corporate.ui.progress'
+						],
+						[
+							'label' => 'Loading indicators',
+							'route' => 'dashboard.corporate.ui.loading'
+						],
+						[
+							'label' => 'Toasts',
+							'route' => 'dashboard.corporate.ui.toasts'
+						],
+						[
+							'label' => 'Tooltips',
+							'route' => 'dashboard.corporate.ui.tooltips'
+						],
+						[
 							'label' => 'Cards',
 							'route' => 'dashboard.corporate.ui.cards'
 						],
@@ -78,8 +114,20 @@ class AdminNavbarProvider extends ServiceProvider
 							'route' => 'dashboard.corporate.ui.chips'
 						],
 						[
+							'label' => 'Dropdown',
+							'route' => 'dashboard.corporate.ui.dropdown'
+						],
+						[
 							'label' => 'Image',
 							'route' => 'dashboard.corporate.ui.image'
+						],
+						[
+							'label' => 'ListBox',
+							'route' => 'dashboard.corporate.ui.listbox'
+						],
+						[
+							'label' => 'Breadcrumbs',
+							'route' => 'dashboard.corporate.ui.breadcrumbs'
 						],
 						[
 							'label' => 'Modal',
@@ -88,6 +136,10 @@ class AdminNavbarProvider extends ServiceProvider
 						[
 							'label' => 'Drawer',
 							'route' => 'dashboard.corporate.ui.drawer'
+						],
+						[
+							'label' => 'Avatar',
+							'route' => 'dashboard.corporate.ui.avatar'
 						]
 					]
 				],
