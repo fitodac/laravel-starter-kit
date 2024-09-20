@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'logo' => '/img/brand.svg'
+	// 'logo' => '/img/brand.svg'
 ];

@@ -9,8 +9,8 @@ export interface MainStoreProps {
 	setAuth: (value: any) => void
 	profileTab: string
 	setProfileTab?: (value: string) => void
-	navbarOpen: boolean
-	setNavbarOpen: (value: boolean) => void
+	sidebarOpen: boolean
+	setSidebarOpen: (value: boolean) => void
 }
 
 export const useMainStore = create<MainStoreProps>()(
@@ -24,8 +24,8 @@ export const useMainStore = create<MainStoreProps>()(
 			setAuth: (auth: any) => set({ auth }),
 			profileTab: 'profile',
 			setProfileTab: (profileTab: string) => set({ profileTab }),
-			navbarOpen: false,
-			setNavbarOpen: (navbarOpen: boolean) => set({ navbarOpen }),
+			sidebarOpen: false,
+			setSidebarOpen: (sidebarOpen: boolean) => set({ sidebarOpen }),
 		}),
 		{
 			name: 'store',

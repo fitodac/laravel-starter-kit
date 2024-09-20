@@ -18,6 +18,9 @@ export const ColorModeToggler = ({}) => {
 					)
 				}
 				onChange={changeColorMode}
+				classNames={{
+					wrapper: 'mr-0',
+				}}
 			/>
 		</>
 	)

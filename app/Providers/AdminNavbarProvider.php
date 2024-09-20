@@ -70,10 +70,6 @@ class AdminNavbarProvider extends ServiceProvider
 							'route' => 'dashboard.corporate.ui.buttons'
 						],
 						[
-							'label' => 'Breadcrumbs',
-							'route' => 'dashboard.corporate.ui.breadcrumbs'
-						],
-						[
 							'label' => 'Alerts',
 							'route' => 'dashboard.corporate.ui.alerts'
 						],

@@ -6,6 +6,7 @@
 // import { useStoreMain } from '@/store'
 import { useColorMode } from '@/hooks'
 import { Head, Link } from '@inertiajs/react'
+import { Image } from '@nextui-org/react'
 
 const Dashboard = () => {
 	const { colorMode } = useColorMode()
@@ -25,14 +26,46 @@ const Dashboard = () => {
 						<div>
 							<Link
 								href={route('dashboard.corporate')}
-								className="space-y-3 leading-tight"
+								className="space-y-6 leading-tight"
 							>
-								<div className="bg-slate-200 aspect-video rounded-lg"></div>
-								<h3 className="text-xl font-bold">Corporate</h3>
-								<p>
-									The most popular layout with a sidebar menu section and all
-									the flavor.
-								</p>
+								<div className="aspect-video rounded-lg">
+									<Image
+										src="https://cdn.dribbble.com/userupload/9049378/file/original-a8fa61bd744f8859db6d5b4fe01fb64c.png?resize=800x600"
+										width={400}
+										height={270}
+									/>
+								</div>
+
+								<div className="space-y-1">
+									<h3 className="font-bold">Corporate</h3>
+									<p className="text-sm">
+										The most popular layout with a sidebar menu section and all
+										the flavor.
+									</p>
+								</div>
+							</Link>
+						</div>
+
+						<div>
+							<Link
+								href={route('dashboard.executive')}
+								className="space-y-6 leading-tight"
+							>
+								<div className="aspect-video rounded-lg">
+									<Image
+										src="https://cdn.dribbble.com/userupload/14088455/file/original-3ea823a2c37b9766c4107d1814f601b1.png?resize=800x600"
+										width={400}
+										height={270}
+									/>
+								</div>
+
+								<div className="space-y-1">
+									<h3 className="font-bold">Executive</h3>
+									<p className="text-sm">
+										The most popular layout with a sidebar menu section and all
+										the flavor.
+									</p>
+								</div>
 							</Link>
 						</div>
 					</div>

@@ -1,34 +1,41 @@
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar'
+import {
+	Sidebar as SidebarNav,
+	Menu,
+	MenuItem,
+	SubMenu,
+} from 'react-pro-sidebar'
 import { useWindowWidth } from '@/hooks'
 import { useMainStore } from '@/store'
 import { motion } from 'framer-motion'
 import { Link, usePage } from '@inertiajs/react'
-import { theme } from '@/config'
+import { templates } from '@/config'
 import { cn } from '@nextui-org/react'
 import { Fragment } from 'react/jsx-runtime'
 
 import { PageProps } from '@/types'
 
-export const Navbar = () => {
-	const { navbarOpen, setNavbarOpen } = useMainStore()
+const { corporate: template } = templates
+
+export const Sidebar = () => {
+	const { sidebarOpen, setSidebarOpen } = useMainStore()
 	const { windowWidth } = useWindowWidth()
 	const { adminNavbar, auth } = usePage<PageProps>().props
 
 	return (
 		<>
-			<div className="left-0 top-topbar bottom-0 mt-px fixed overflow-hidden z-30">
-				<Sidebar
+			<div className="left-0 inset-y-0 mt-px fixed overflow-hidden z-30">
+				<SidebarNav
 					transitionDuration={400}
 					id="navbar"
-					width={theme.sidebar.width}
-					collapsedWidth={theme.sidebar.collapsedWidth}
-					collapsed={windowWidth <= theme.sidebar.breakpoint && !navbarOpen}
+					width={template.sidebar.width}
+					collapsedWidth={template.sidebar.collapsedWidth}
+					collapsed={windowWidth <= template.sidebar.breakpoint && !sidebarOpen}
 					rootStyles={{ height: '100%' }}
 					className={cn(
-						'pt-6',
-						theme.sidebar.cn.base,
+						template.sidebar.cn.base,
 						'[&.ps-collapsed_.ps-submenu-content]:!hidden'
 					)}
+					style={{ paddingTop: template.topbar.height }}
 				>
 					{adminNavbar &&
 						adminNavbar.map((nav) => (
@@ -43,7 +50,7 @@ export const Navbar = () => {
 										<div
 											className={cn(
 												'text-xs font-medium px-7 mb-1 mt-2 whitespace-nowrap',
-												theme.sidebar.cn.menuTitle
+												template.sidebar.cn.menuTitle
 											)}
 										>
 											{nav.title}
@@ -51,7 +58,7 @@ export const Navbar = () => {
 									)
 								)}
 
-								<Menu closeOnClick className={theme.sidebar.cn.menuItem}>
+								<Menu closeOnClick className={template.sidebar.cn.menuItem}>
 									{nav.menu.map(
 										({ label, route: path, icon, submenu, permissions }) => {
 											if (
@@ -69,7 +76,10 @@ export const Navbar = () => {
 														label={label}
 														icon={
 															<i
-																className={cn(icon, theme.sidebar.cn.menuIcon)}
+																className={cn(
+																	icon,
+																	template.sidebar.cn.menuIcon
+																)}
 															/>
 														}
 													>
@@ -78,7 +88,7 @@ export const Navbar = () => {
 																<MenuItem
 																	component={<Link href={route(path || '')} />}
 																	active={location.href === route(path || '')}
-																	className={theme.sidebar.cn.subMenu}
+																	className={template.sidebar.cn.subMenu}
 																>
 																	{label}
 																</MenuItem>
@@ -94,7 +104,10 @@ export const Navbar = () => {
 														component={<Link href={route(path || '')} />}
 														icon={
 															<i
-																className={cn(icon, theme.sidebar.cn.menuIcon)}
+																className={cn(
+																	icon,
+																	template.sidebar.cn.menuIcon
+																)}
 															/>
 														}
 														active={location.href === route(path || '')}
@@ -108,20 +121,20 @@ export const Navbar = () => {
 								</Menu>
 							</Fragment>
 						))}
-				</Sidebar>
+				</SidebarNav>
 
-				{navbarOpen && windowWidth <= 768 && (
+				{sidebarOpen && windowWidth <= 768 && (
 					<motion.div
 						className="bg-black/10 inset-0 fixed"
-						animate={{ opacity: navbarOpen ? 1 : 0 }}
-						onClick={() => setNavbarOpen(false)}
+						animate={{ opacity: sidebarOpen ? 1 : 0 }}
+						onClick={() => setSidebarOpen(false)}
 					/>
 				)}
 			</div>
 
 			<div
 				className="hidden flex-[0_0_auto] md:block"
-				style={{ width: theme.sidebar.width }}
+				style={{ width: template.sidebar.width }}
 			></div>
 		</>
 	)

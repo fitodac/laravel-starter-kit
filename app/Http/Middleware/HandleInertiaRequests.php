@@ -39,9 +39,6 @@ class HandleInertiaRequests extends Middleware
 				'user' => $user,
 				'permissions' => $user ? $user->permissions : null
 			],
-			'settings' => [
-				'logo' => config('settings.general.logo')
-			],
 			'ziggy' => fn() => [
 				...(new Ziggy)->toArray(),
 				'location' => $request->url(),

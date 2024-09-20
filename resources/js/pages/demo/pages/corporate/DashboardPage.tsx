@@ -3,9 +3,7 @@ import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { Link } from '@inertiajs/react'
 
-interface Props {}
-
-const Page = ({}: Props) => {
+const Page = () => {
 	return (
 		<>
 			<PageHeader title={t('Dashboard')}></PageHeader>

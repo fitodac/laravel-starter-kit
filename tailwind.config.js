@@ -2,8 +2,6 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 const { nextui } = require('@nextui-org/react')
 
 import { theme, colors as themeColors } from './config/settings'
-// import * as input from '@nextui-org/input'
-// console.log(input)
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -24,15 +22,6 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Inter', ...defaultTheme.fontFamily.sans],
-			},
-			height: {
-				topbar: theme.topbar.height,
-			},
-			padding: {
-				topbar: theme.topbar.height,
-			},
-			spacing: {
-				topbar: theme.topbar.height,
 			},
 		},
 	},
