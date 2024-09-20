@@ -1,11 +1,25 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const AccordionPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const AccordionPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={t('Accordion')}>
+			<PageHeader
+				title={t('Accordion')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">
 					Organize Content Efficiently with Interactive Accordions
 				</p>
@@ -20,6 +34,7 @@ export const AccordionPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

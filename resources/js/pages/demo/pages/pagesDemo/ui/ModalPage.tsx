@@ -9,6 +9,8 @@ import {
 	useDisclosure,
 } from '@nextui-org/react'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
 type placement =
 	| 'auto'
@@ -18,13 +20,25 @@ type placement =
 	| 'bottom'
 	| 'bottom-center'
 
-export const ModalPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const ModalPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 	const [modalPlacement, setModalPlacement] = useState<placement>('auto')
 
 	return (
 		<>
-			<PageHeader title={t('Modal')}>
+			<PageHeader
+				title={t('Modal')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="text-sm leading-tight">
 					A modal is a pop-up window that appears on top of a webpage,
 					temporarily blocking the main content to focus the user’s attention on
@@ -36,6 +50,7 @@ export const ModalPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

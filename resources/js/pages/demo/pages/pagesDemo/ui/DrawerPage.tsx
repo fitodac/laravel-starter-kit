@@ -5,10 +5,19 @@ import { Card, CardBody, cn } from '@nextui-org/react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
 type DirectionProps = 'left' | 'right' | 'top' | 'bottom'
 
-export const DrawerPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const DrawerPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	const [isOpen, setIsOpen] = useState(false)
 	const [direction, setDirection] = useState<DirectionProps>('left')
 
@@ -22,7 +31,12 @@ export const DrawerPage = () => {
 
 	return (
 		<>
-			<PageHeader title={t('Drawer')}>
+			<PageHeader
+				title={t('Drawer')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="text-sm leading-tight">
 					A drawer in UI is a panel that slides in from the side or bottom of
 					the screen to display additional information or options without
@@ -35,6 +49,7 @@ export const DrawerPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

@@ -9,7 +9,7 @@ interface Props extends PropsWithChildren {
 export const PageContent = ({ children, className, aside }: Props) => {
 	return (
 		<>
-			<section className={cn('px-5 py-7 md:px-6 md:py-8 lg:px-10', className)}>
+			<section className={cn('px-5 py-7 md:px-6 md:py-8', className)}>
 				<div className="flex gap-20">
 					{children}
 					{aside && (

@@ -1,11 +1,25 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { Wysiwyg } from '@/components/form'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const TipTapPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const TipTapPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={t('Wysiwyg')}>
+			<PageHeader
+				title={t('Wysiwyg')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				{/* 
 				<p className="text-lg font-medium leading-tight">
 					Beautifully designed buttons that enhance visual appeal and usability.
@@ -19,6 +33,7 @@ export const TipTapPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ul>
 						<li>Solid button</li>

@@ -1,11 +1,25 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const TabsPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const TabsPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={t('Tabs')}>
+			<PageHeader
+				title={t('Tabs')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">
 					Organize Content Seamlessly with Interactive Tabs
 				</p>
@@ -20,6 +34,7 @@ export const TabsPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

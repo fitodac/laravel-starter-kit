@@ -1,11 +1,25 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const BreadcrumbsPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const BreadcrumbsPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={t('Breadcrumbs')}>
+			<PageHeader
+				title={t('Breadcrumbs')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">
 					Enhance Navigation with Intuitive Breadcrumbs
 				</p>
@@ -19,6 +33,7 @@ export const BreadcrumbsPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

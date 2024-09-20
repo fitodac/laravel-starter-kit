@@ -1,11 +1,25 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const ProgressPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const ProgressPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={t('Progress')}>
+			<PageHeader
+				title={t('Progress')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">
 					Visualize Task Completion with Dynamic Progress Indicators
 				</p>
@@ -20,6 +34,7 @@ export const ProgressPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

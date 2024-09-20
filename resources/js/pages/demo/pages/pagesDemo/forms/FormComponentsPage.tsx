@@ -7,11 +7,25 @@ import {
 	RadioButtonsDefault,
 	SwitchComponent,
 } from '@/pages/demo/componentsDemo'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const FormComponentsPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const FormComponentsPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={String(t('Form components'))}>
+			<PageHeader
+				title={String(t('Form components'))}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">
 					Form components play a crucial role in UX by providing a structured
 					and visually appealing way for users to input and manage data.
@@ -27,7 +41,16 @@ export const FormComponentsPage = () => {
 				</p>
 			</PageHeader>
 
-			<PageContent>
+			<PageContent
+				className={contentClassName}
+				aside={
+					<ul>
+						<li>Solid button</li>
+						<li>Small button</li>
+						<li>Large button</li>
+					</ul>
+				}
+			>
 				<div className="space-y-10">
 					<InputDefault />
 

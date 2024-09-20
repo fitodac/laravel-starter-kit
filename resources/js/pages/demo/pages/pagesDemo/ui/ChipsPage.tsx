@@ -9,11 +9,25 @@ import {
 	ChipsPressable,
 } from '@/pages/demo/componentsDemo'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const ChipsPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const ChipsPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={t('Chips')}>
+			<PageHeader
+				title={t('Chips')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">
 					A Chip is a small block of essential information representing an
 					input, attribute, or action.
@@ -27,6 +41,7 @@ export const ChipsPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

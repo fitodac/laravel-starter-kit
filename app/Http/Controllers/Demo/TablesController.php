@@ -16,7 +16,7 @@ class TablesController extends Controller
 	 * 
 	 * 
 	 */
-	public function index(Request $request)
+	public function index(Request $request, $template)
 	{
 		$per_page = 16;
 
@@ -28,6 +28,6 @@ class TablesController extends Controller
 			$products = Product::paginate($per_page);
 		}
 
-		return Inertia::render('demo/pages/corporate/tables/TablesPage', compact('products'));
+		return Inertia::render("demo/pages/$template/RealDataTablesPage", compact('products'));
 	}
 }

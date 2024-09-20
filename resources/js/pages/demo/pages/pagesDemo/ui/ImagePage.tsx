@@ -3,19 +3,33 @@ import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { cn, Image } from '@nextui-org/react'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
 import img01 from '@/assets/img/cards/01.jpg'
 import img02 from '@/assets/img/cards/02.jpg'
 import img03 from '@/assets/img/cards/03.jpg'
 import img04 from '@/assets/img/cards/04.jpg'
 
-export const ImagePage = () => {
+interface Props {
+	template?: Template
+}
+
+export const ImagePage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	const [imgLoaded, setImgLoaded] = useState(false)
 	const [carouselSrc, setCarouselSrc] = useState(img01)
 
 	return (
 		<>
-			<PageHeader title={t('Image')}>
+			<PageHeader
+				title={t('Image')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				{/* <p className="text-lg font-medium leading-tight">
 					Beautifully designed buttons that enhance visual appeal and usability.
 				</p>
@@ -27,6 +41,7 @@ export const ImagePage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

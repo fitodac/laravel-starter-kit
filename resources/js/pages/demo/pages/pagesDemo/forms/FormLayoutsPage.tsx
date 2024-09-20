@@ -10,11 +10,25 @@ import {
 	ComfortableFormLayout,
 	CompactFormLayout,
 } from '@/pages/demo/componentsDemo'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const FormLayoutsPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const FormLayoutsPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={`${t('Form Layouts' ?? '')}`}>
+			<PageHeader
+				title={`${t('Form Layouts' ?? '')}`}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">
 					Forms are essential components of a dashboard, enabling users to
 					manage data efficiently within a maximum content width.
@@ -26,7 +40,16 @@ export const FormLayoutsPage = () => {
 				</p>
 			</PageHeader>
 
-			<PageContent>
+			<PageContent
+				className={contentClassName}
+				aside={
+					<ul>
+						<li>Solid button</li>
+						<li>Small button</li>
+						<li>Large button</li>
+					</ul>
+				}
+			>
 				<div className="space-y-10">
 					<VerticalFormLayout />
 					<ClassicFormLayout />

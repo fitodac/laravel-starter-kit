@@ -194,6 +194,10 @@ class AdminNavbarProvider extends ServiceProvider
 						[
 							'label' => 'Image uploader',
 							'route' => 'dashboard.corporate.utilities.image-uploader'
+						],
+						[
+							'label' => 'Icons',
+							'route' => 'dashboard.corporate.utilities.icons'
 						]
 					]
 				],

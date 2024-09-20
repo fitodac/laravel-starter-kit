@@ -8,8 +8,14 @@ interface Props {}
 const Page = ({}: Props) => {
 	return (
 		<>
-			<PageHeader title={t('Dashboard')}></PageHeader>
-			<PageContent>Dashboard executive</PageContent>
+			<PageHeader
+				title={t('Dashboard')}
+				classNames={{ wrapper: 'max-w-screen-xl px-6' }}
+			/>
+
+			<PageContent className="max-w-screen-xl mx-auto">
+				Dashboard executive
+			</PageContent>
 		</>
 	)
 }

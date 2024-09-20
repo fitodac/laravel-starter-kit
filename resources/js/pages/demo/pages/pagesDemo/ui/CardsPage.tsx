@@ -12,11 +12,25 @@ import {
 	CardExtraFeatures,
 } from '@/pages/demo/componentsDemo'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const CardsPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const CardsPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={t('Cards')}>
+			<PageHeader
+				title={t('Cards')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">
 					Cards are versatile UI components that present information in a
 					concise and visually appealing format.
@@ -30,6 +44,7 @@ export const CardsPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

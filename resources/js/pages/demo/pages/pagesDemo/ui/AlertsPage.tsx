@@ -2,11 +2,25 @@ import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { SemanticAlerts, SolidAlerts } from '@/pages/demo/componentsDemo'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const AlertsPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const AlertsPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={t('Alerts')}>
+			<PageHeader
+				title={t('Alerts')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">
 					Capture Attention with Engaging Alerts
 				</p>
@@ -21,6 +35,7 @@ export const AlertsPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

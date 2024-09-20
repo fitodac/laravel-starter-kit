@@ -44,6 +44,7 @@ export const template = {
 			),
 			menuIcon: 'text-base',
 			subMenu: 'bg-content2',
+			topSpacer: 'h-4',
 		},
 	},
 

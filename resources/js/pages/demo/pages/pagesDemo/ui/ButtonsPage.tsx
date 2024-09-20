@@ -11,11 +11,25 @@ import {
 	GroupedButtons,
 } from '@/pages/demo/componentsDemo'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const ButtonsPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const ButtonsPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={t('Buttons')}>
+			<PageHeader
+				title={t('Buttons')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">
 					Beautifully designed buttons that enhance visual appeal and usability.
 				</p>
@@ -27,6 +41,7 @@ export const ButtonsPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

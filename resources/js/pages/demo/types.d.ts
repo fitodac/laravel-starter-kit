@@ -25,3 +25,6 @@ export interface ProductsProps {
 		active: boolean
 	}[]
 }
+
+
+export type Template = 'corporate' | 'executive'

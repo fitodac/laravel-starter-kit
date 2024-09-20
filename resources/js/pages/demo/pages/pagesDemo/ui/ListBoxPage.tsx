@@ -8,11 +8,25 @@ import {
 	SectionsListbox,
 } from '@/pages/demo/componentsDemo'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const ListBoxPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const ListBoxPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={t('ListBox')}>
+			<PageHeader
+				title={t('ListBox')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">
 					Effortless Action Selection with a Dynamic Listbox
 				</p>
@@ -28,6 +42,7 @@ export const ListBoxPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

@@ -3,24 +3,38 @@ import { cn } from '@nextui-org/react'
 
 interface Props extends PropsWithChildren {
 	title: string | ReactElement
+	classNames?: {
+		base?: string
+		wrapper?: string
+	}
 }
 
-export const PageHeader = ({ title, children }: Props) => {
+export const PageHeader = ({ title, children, classNames }: Props) => {
 	return (
 		<div
 			className={cn(
-				'bg-white w-full px-5 py-7 grid gap-3',
-				'sm:grid-cols-2 md:gap-6 md:px-10 md:py-12 xl:gap-20',
-				'dark:bg-gray-950/40'
+				'bg-white w-full py-7',
+				'flex justify-center',
+				'md:px-10 md:py-12 xl:gap-20',
+				'bg-black',
+				classNames && classNames.base
 			)}
 		>
-			{title && (
-				<h2 className="text-xl font-semibold select-none md:text-2xl">
-					{title}
-				</h2>
-			)}
+			<div
+				className={cn(
+					'w-full grid gap-3 md:gap-6',
+					children && 'sm:grid-cols-2',
+					classNames && classNames.wrapper
+				)}
+			>
+				{title && (
+					<h2 className="text-xl font-semibold select-none md:text-2xl">
+						{title}
+					</h2>
+				)}
 
-			{children && <div>{children}</div>}
+				{children && <div>{children}</div>}
+			</div>
 		</div>
 	)
 }

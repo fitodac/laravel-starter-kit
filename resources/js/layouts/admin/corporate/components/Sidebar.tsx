@@ -37,87 +37,67 @@ export const Sidebar = () => {
 					)}
 					style={{ paddingTop: template.topbar.height }}
 				>
+					{/* Top spacer */}
+					<div className={template.sidebar.cn.topSpacer}></div>
+					
 					{adminNavbar &&
 						adminNavbar.map((nav) => (
 							<Fragment key={nav.key}>
-								{nav.permissions &&
-								auth.permissions &&
-								!auth.permissions.some((e) => nav.permissions?.includes(e)) ? (
-									<></>
-								) : (
-									nav.title &&
-									nav.menu.length > 0 && (
-										<div
-											className={cn(
-												'text-xs font-medium px-7 mb-1 mt-2 whitespace-nowrap',
-												template.sidebar.cn.menuTitle
-											)}
-										>
-											{nav.title}
-										</div>
-									)
+								{nav.title && nav.menu.length > 0 && (
+									<div
+										className={cn(
+											'text-xs font-medium px-7 mb-1 mt-2 whitespace-nowrap',
+											template.sidebar.cn.menuTitle
+										)}
+									>
+										{nav.title}
+									</div>
 								)}
 
 								<Menu closeOnClick className={template.sidebar.cn.menuItem}>
-									{nav.menu.map(
-										({ label, route: path, icon, submenu, permissions }) => {
-											if (
-												permissions &&
-												auth.permissions &&
-												!auth.permissions.some((e) => permissions?.includes(e))
-											) {
-												return <Fragment key={label + path}></Fragment>
-											}
-
-											if (submenu) {
-												return (
-													<SubMenu
-														key={label + path}
-														label={label}
-														icon={
-															<i
-																className={cn(
-																	icon,
-																	template.sidebar.cn.menuIcon
-																)}
-															/>
-														}
-													>
-														{submenu.map(({ label, route: path }) => (
-															<Fragment key={path}>
-																<MenuItem
-																	component={<Link href={route(path || '')} />}
-																	active={location.href === route(path || '')}
-																	className={template.sidebar.cn.subMenu}
-																>
-																	{label}
-																</MenuItem>
-															</Fragment>
-														))}
-													</SubMenu>
-												)
-											}
-
+									{nav.menu.map(({ label, route: path, icon, submenu }) => {
+										if (submenu) {
 											return (
-												<Fragment key={path}>
-													<MenuItem
-														component={<Link href={route(path || '')} />}
-														icon={
-															<i
-																className={cn(
-																	icon,
-																	template.sidebar.cn.menuIcon
-																)}
-															/>
-														}
-														active={location.href === route(path || '')}
-													>
-														{label}
-													</MenuItem>
-												</Fragment>
+												<SubMenu
+													key={label + path}
+													label={label}
+													icon={
+														<i
+															className={cn(icon, template.sidebar.cn.menuIcon)}
+														/>
+													}
+												>
+													{submenu.map(({ label, route: path }) => (
+														<Fragment key={path}>
+															<MenuItem
+																component={<Link href={route(path || '')} />}
+																active={location.href === route(path || '')}
+																className={template.sidebar.cn.subMenu}
+															>
+																{label}
+															</MenuItem>
+														</Fragment>
+													))}
+												</SubMenu>
 											)
 										}
-									)}
+
+										return (
+											<Fragment key={path}>
+												<MenuItem
+													component={<Link href={route(path || '')} />}
+													icon={
+														<i
+															className={cn(icon, template.sidebar.cn.menuIcon)}
+														/>
+													}
+													active={location.href === route(path || '')}
+												>
+													{label}
+												</MenuItem>
+											</Fragment>
+										)
+									})}
 								</Menu>
 							</Fragment>
 						))}

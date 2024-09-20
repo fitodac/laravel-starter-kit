@@ -32,7 +32,7 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 	{
 		$menu = [];
 		$userId = $user->id ?? 0;
-		$cacheKey = "menu_{$userId}_{$role}";
+		$cacheKey = "menu_{$userId}_{$role}_EXECUTIVE";
 
 		// Dashboard
 		$menu[] = [
@@ -194,6 +194,10 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 						[
 							'label' => 'Image uploader',
 							'route' => 'dashboard.executive.utilities.image-uploader'
+						],
+						[
+							'label' => 'Icons',
+							'route' => 'dashboard.executive.utilities.icons'
 						]
 					]
 				],

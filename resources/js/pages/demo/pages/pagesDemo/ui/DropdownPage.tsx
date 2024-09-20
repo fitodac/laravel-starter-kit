@@ -9,11 +9,25 @@ import {
 	DescriptionsDropdown,
 } from '@/pages/demo/componentsDemo'
 import { ButtonsNavbar } from './components'
+import type { Template } from '../../../types'
+import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
-export const DropdownPage = () => {
+interface Props {
+	template?: Template
+}
+
+export const DropdownPage = ({ template }: Props) => {
+	const { headerClassName, contentClassName } =
+		useConditionalClassName(template)
+
 	return (
 		<>
-			<PageHeader title={t('Dropdown')}>
+			<PageHeader
+				title={t('Dropdown')}
+				classNames={{
+					wrapper: headerClassName,
+				}}
+			>
 				<p className="font-bold leading-tight">Simplifying User Choices</p>
 				<p className="text-sm mt-2">
 					A dropdown is a user interface element that displays a list of actions
@@ -26,6 +40,7 @@ export const DropdownPage = () => {
 			</PageHeader>
 
 			<PageContent
+				className={contentClassName}
 				aside={
 					<ButtonsNavbar
 						{...{

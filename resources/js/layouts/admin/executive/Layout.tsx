@@ -26,9 +26,9 @@ export const Layout = ({ children, pageTitle }: Props) => {
 				<Header />
 
 				<div className="flex justify-center min-h-svh">
-					{/* <NavbarMobile /> */}
+					<Sidebar />
 
-					<div className="max-w-screen-xl flex-1">{children}</div>
+					<div className="flex-1">{children}</div>
 				</div>
 			</main>
 		</>
