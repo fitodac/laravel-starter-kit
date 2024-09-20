@@ -3,6 +3,7 @@ import { Head, usePage } from '@inertiajs/react'
 import { Button, cn } from '@nextui-org/react'
 import { useColorMode } from '@/hooks'
 import { Toastify } from '@/components'
+import { theme } from '@/config'
 
 import type { PageProps } from '@/types'
 
@@ -40,7 +41,11 @@ export const AuthLayout = ({ children, pageTitle }: PropsLayout) => {
 
 			<main className="bg-background w-full min-h-screen flex justify-center items-center">
 				<section className="max-w-lg">
-					<img src={settings.logo} alt="Logo" className="w-32 mx-auto" />
+					<img
+						src={theme[colorMode].logo}
+						alt="Logo"
+						className="w-32 mx-auto"
+					/>
 
 					<div className="space-y-2 mt-10">
 						<h2 className="font-bold">{pageTitle}</h2>

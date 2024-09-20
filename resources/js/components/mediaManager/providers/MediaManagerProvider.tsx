@@ -26,7 +26,8 @@ export const MediaManagerProvider = ({
 }: Props) => {
 	const [files, setFiles] = useState(initialState.files)
 	const [filesTotal, setFilesTotal] = useState(initialState.filesTotal)
-	const [filesSelected, setFilesSelected] = useState<Image[] | never[]>(
+	// const [filesSelected, setFilesSelected] = useState<Image[] | never[] | any[]>(
+	const [filesSelected, setFilesSelected] = useState<any>(
 		collection ?? initialState.filesSelected
 	)
 	const [tabsDisabled, setTabsDisabled] = useState<string[]>(

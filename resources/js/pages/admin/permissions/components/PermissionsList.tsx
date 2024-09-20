@@ -46,7 +46,7 @@ export const PermissionsList = ({
 	// const [isLoading, setIsLoading] = useState(true)
 
 	// const sort = useTableSorting()
-	const { links, current_page } = permissions as Permissions
+	const { links, current_page, data } = permissions as Permissions
 
 	// useEffect(() => {
 	// 	if (data.data.length) setIsLoading(false)
@@ -147,7 +147,7 @@ export const PermissionsList = ({
 					</TableHeader>
 
 					<TableBody
-						items={permissions.data}
+						items={data}
 						// loadingContent={<Spinner label={t('loading')} />}
 						// isLoading={isLoading}
 					>

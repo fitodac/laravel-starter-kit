@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Cache;
 
-class AdminNavbarProvider extends ServiceProvider
+class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 {
 	/**
 	 * Register services.
@@ -14,8 +14,8 @@ class AdminNavbarProvider extends ServiceProvider
 	{
 		//
 
-		$this->app->singleton(AdminNavbarProvider::class, function ($app) {
-			return new AdminNavbarProvider(null);
+		$this->app->singleton(DemoAdminExcecutiveNavbarProvider::class, function ($app) {
+			return new DemoAdminExcecutiveNavbarProvider(null);
 		});
 	}
 
@@ -41,7 +41,7 @@ class AdminNavbarProvider extends ServiceProvider
 			'menu' => [
 				[
 					'label' => 'Dashboard',
-					'route' => 'dashboard.corporate',
+					'route' => 'dashboard.executive',
 					'icon' => 'ri-home-5-fill'
 				]
 			]
@@ -89,75 +89,75 @@ class AdminNavbarProvider extends ServiceProvider
 					'submenu' => [
 						[
 							'label' => 'Buttons',
-							'route' => 'dashboard.corporate.ui.buttons'
+							'route' => 'dashboard.executive.ui.buttons'
 						],
 						[
 							'label' => 'Alerts',
-							'route' => 'dashboard.corporate.ui.alerts'
+							'route' => 'dashboard.executive.ui.alerts'
 						],
 						[
 							'label' => 'Tabs',
-							'route' => 'dashboard.corporate.ui.tabs'
+							'route' => 'dashboard.executive.ui.tabs'
 						],
 						[
 							'label' => 'Pagination',
-							'route' => 'dashboard.corporate.ui.pagination'
+							'route' => 'dashboard.executive.ui.pagination'
 						],
 						[
 							'label' => 'Popover',
-							'route' => 'dashboard.corporate.ui.popover'
+							'route' => 'dashboard.executive.ui.popover'
 						],
 						[
 							'label' => 'Progress',
-							'route' => 'dashboard.corporate.ui.progress'
+							'route' => 'dashboard.executive.ui.progress'
 						],
 						[
 							'label' => 'Loading indicators',
-							'route' => 'dashboard.corporate.ui.loading'
+							'route' => 'dashboard.executive.ui.loading'
 						],
 						[
 							'label' => 'Toasts',
-							'route' => 'dashboard.corporate.ui.toasts'
+							'route' => 'dashboard.executive.ui.toasts'
 						],
 						[
 							'label' => 'Tooltips',
-							'route' => 'dashboard.corporate.ui.tooltips'
+							'route' => 'dashboard.executive.ui.tooltips'
 						],
 						[
 							'label' => 'Cards',
-							'route' => 'dashboard.corporate.ui.cards'
+							'route' => 'dashboard.executive.ui.cards'
 						],
 						[
 							'label' => 'Chips',
-							'route' => 'dashboard.corporate.ui.chips'
+							'route' => 'dashboard.executive.ui.chips'
 						],
 						[
 							'label' => 'Dropdown',
-							'route' => 'dashboard.corporate.ui.dropdown'
+							'route' => 'dashboard.executive.ui.dropdown'
 						],
 						[
 							'label' => 'Image',
-							'route' => 'dashboard.corporate.ui.image'
+							'route' => 'dashboard.executive.ui.image'
 						],
 						[
 							'label' => 'ListBox',
-							'route' => 'dashboard.corporate.ui.listbox'
+							'route' => 'dashboard.executive.ui.listbox'
 						],
 						[
 							'label' => 'Breadcrumbs',
-							'route' => 'dashboard.corporate.ui.breadcrumbs'
+							'route' => 'dashboard.executive.ui.breadcrumbs'
 						],
 						[
 							'label' => 'Modal',
-							'route' => 'dashboard.corporate.ui.modal'
+							'route' => 'dashboard.executive.ui.modal'
 						],
 						[
 							'label' => 'Drawer',
-							'route' => 'dashboard.corporate.ui.drawer'
+							'route' => 'dashboard.executive.ui.drawer'
 						],
 						[
 							'label' => 'Avatar',
-							'route' => 'dashboard.corporate.ui.avatar'
+							'route' => 'dashboard.executive.ui.avatar'
 						]
 					]
 				],
@@ -169,15 +169,15 @@ class AdminNavbarProvider extends ServiceProvider
 					'submenu' => [
 						[
 							'label' => 'Form components',
-							'route' => 'dashboard.corporate.form.components'
+							'route' => 'dashboard.executive.form.components'
 						],
 						[
 							'label' => 'Form layouts',
-							'route' => 'dashboard.corporate.form.layouts'
+							'route' => 'dashboard.executive.form.layouts'
 						],
 						[
 							'label' => 'Wysiwyg',
-							'route' => 'dashboard.corporate.form.wysiwyg'
+							'route' => 'dashboard.executive.form.wysiwyg'
 						]
 					]
 				],
@@ -189,11 +189,11 @@ class AdminNavbarProvider extends ServiceProvider
 					'submenu' => [
 						[
 							'label' => 'Color',
-							'route' => 'dashboard.corporate.utilities.color'
+							'route' => 'dashboard.executive.utilities.color'
 						],
 						[
 							'label' => 'Image uploader',
-							'route' => 'dashboard.corporate.utilities.image-uploader'
+							'route' => 'dashboard.executive.utilities.image-uploader'
 						]
 					]
 				],
@@ -205,11 +205,11 @@ class AdminNavbarProvider extends ServiceProvider
 					'submenu' => [
 						[
 							'label' => 'Table styles',
-							'route' => 'dashboard.corporate.tables.styles'
+							'route' => 'dashboard.executive.tables.styles'
 						],
 						[
 							'label' => 'Real data table',
-							'route' => 'dashboard.corporate.tables.real-data'
+							'route' => 'dashboard.executive.tables.real-data'
 						]
 					]
 				]

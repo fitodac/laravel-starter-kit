@@ -13,7 +13,11 @@ import { router } from '@inertiajs/react'
 const promptBeforeIdle = 60 * 1000
 const timeout = 120 * 60 * 1000
 
-export const SessionAware = ({ children }: PropsWithChildren) => {
+interface Props extends PropsWithChildren {
+	user: any
+}
+
+export const SessionAware = ({ children, user }: Props) => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const [state, setState] = useState<string>('Active')
 	const [remaining, setRemaining] = useState<number>(0)
@@ -26,7 +30,7 @@ export const SessionAware = ({ children }: PropsWithChildren) => {
 	 */
 	const onIdle = () => {
 		setState('Idle')
-		if ((router.page.props.auth as any).user) {
+		if (user) {
 			router.post(route('logout'))
 		}
 	}
@@ -49,7 +53,7 @@ export const SessionAware = ({ children }: PropsWithChildren) => {
 	 */
 	const onPrompt = () => {
 		setState('Prompted')
-		if ((router.page.props.auth as any).user) {
+		if (user) {
 			onOpen()
 		}
 	}

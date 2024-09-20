@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import '../css/app.css'
 
 import { createRoot, hydrateRoot } from 'react-dom/client'
-import { createInertiaApp, router } from '@inertiajs/react'
+import { createInertiaApp, usePage } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { NextUIProvider } from '@nextui-org/react'
 import { semanticColors } from '@nextui-org/theme'
@@ -21,14 +21,15 @@ createInertiaApp({
 			import.meta.glob('./pages/**/*.tsx')
 		),
 	setup({ el, App, props }) {
+		const auth = props.initialPage.props.auth as { user: any }
+
 		if (import.meta.env.DEV) {
 			createRoot(el).render(
-				<SessionAware>
-					<NextUIProvider>
-						<App {...props} />
-						<Toastify />
-					</NextUIProvider>
-				</SessionAware>
+				<NextUIProvider>
+					<App {...props} />
+					{auth && <SessionAware {...{ user: auth.user }} />}
+					<Toastify />
+				</NextUIProvider>
 			)
 			return
 		}

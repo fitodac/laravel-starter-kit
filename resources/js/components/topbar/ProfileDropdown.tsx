@@ -64,7 +64,7 @@ export const ProfileDropdown = ({
 					variant="light"
 				>
 					<DropdownSection showDivider>
-						{showNameInDropdown && (
+						{showNameInDropdown ? (
 							<DropdownItem
 								textValue={String(t('My account'))}
 								isReadOnly
@@ -73,6 +73,8 @@ export const ProfileDropdown = ({
 							>
 								{user.name}
 							</DropdownItem>
+						) : (
+							<></>
 						)}
 
 						<DropdownItem

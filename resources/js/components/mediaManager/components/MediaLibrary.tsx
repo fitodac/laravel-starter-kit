@@ -34,14 +34,14 @@ export const MediaLibrary = () => {
 				setFilesSelected && setFilesSelected([file])
 			}
 		} else {
-			setFilesSelected &&
-				setFilesSelected((prev: ImageProps[]) => {
-					if (prev.find((f) => f.id === file.id)) {
-						return prev.filter((f) => f.id !== file.id)
-					} else {
-						return [...prev, file]
-					}
-				})
+			// @ts-ignore
+			setFilesSelected((prev: ImageProps[]) => {
+				if (prev.find((f) => f.id === file.id)) {
+					return prev.filter((f) => f.id !== file.id)
+				} else {
+					return [...prev, file]
+				}
+			})
 		}
 	}
 

@@ -34,7 +34,7 @@ export const RolesList = () => {
 		props: { roles },
 	} = usePage<PageProps>()
 
-	const { links, current_page } = roles as Roles
+	const { links, current_page, data } = roles as Roles
 
 	// const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))
 	// const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
@@ -129,7 +129,7 @@ export const RolesList = () => {
 					</TableHeader>
 
 					<TableBody
-						items={roles.data}
+						items={data}
 						// loadingContent={<Spinner label={t('loading')} />}
 						// isLoading={isLoading}
 					>

@@ -5,6 +5,9 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
+use Illuminate\Support\Facades\Auth;
+use App\Providers\AdminNavbarProvider;
+use App\Providers\DemoAdminExcecutiveNavbarProvider;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -32,13 +35,18 @@ class HandleInertiaRequests extends Middleware
 	{
 
 		$user = $request->user();
+		$role = $user ? $user->roles->first()->name : null;
+		$permissions = $user ? $user->permissions->toArray() : null;
 
 		return [
 			...parent::share($request),
 			'auth' => [
 				'user' => $user,
-				'permissions' => $user ? $user->permissions : null
+				'permissions' => $permissions,
+				'role' => $role
 			],
+			'adminNavbar' => app(AdminNavbarProvider::class)->getMenu($user, $role, $permissions),
+			'demoExecutiveAdminNavbar' => app(DemoAdminExcecutiveNavbarProvider::class)->getMenu($user, $role, $permissions),
 			'ziggy' => fn() => [
 				...(new Ziggy)->toArray(),
 				'location' => $request->url(),

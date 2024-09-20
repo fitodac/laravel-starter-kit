@@ -31,11 +31,13 @@ const { executive: template } = templates
 export const Header = () => {
 	const { sidebarOpen, setSidebarOpen, colorMode } = useMainStore()
 	const { windowWidth } = useWindowWidth()
-	const { adminNavbar, auth } = usePage<PageProps>().props
+	const { demoExecutiveAdminNavbar: adminNavbar, auth } =
+		usePage<PageProps>().props
 
-	const menu = useMemo(() => menuMapper(adminNavbar), [adminNavbar])
+	if (!adminNavbar) return <></>
 
 	console.log('adminNavbar', adminNavbar)
+	const menu = useMemo(() => menuMapper(adminNavbar), [adminNavbar])
 
 	return (
 		<Navbar
