@@ -7,7 +7,7 @@ import {
 	IconsAndDescriptionsListbox,
 	SectionsListbox,
 } from '@/pages/demo/componentsDemo'
-import { ButtonsNavbar } from './components'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -44,7 +44,7 @@ export const ListBoxPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
 								{ key: 'basicListbox', label: 'Basic listbox' },
@@ -60,7 +60,7 @@ export const ListBoxPage = ({ template }: Props) => {
 					/>
 				}
 			>
-				<div className="flex-1 max-w-xl space-y-14">
+				<div className="flex-1 max-w-xl space-y-28">
 					<BasicListbox />
 					<SemanticListbox />
 					<SelectableListbox />

@@ -1,6 +1,6 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { ButtonsNavbar } from './components'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -36,7 +36,7 @@ export const TabsPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
 								// { key: 'solidButton', label: 'Solid button' },

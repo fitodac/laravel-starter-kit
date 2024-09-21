@@ -4,7 +4,7 @@ import { PageHeader, PageContent } from '@/components'
 import { Card, CardBody, cn } from '@nextui-org/react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
-import { ButtonsNavbar } from './components'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -51,17 +51,20 @@ export const DrawerPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
-								// { key: 'solidButton', label: 'Solid button' },
+								{ key: 'leftDrawer', label: 'Left Drawer' },
+								{ key: 'bottomDrawer', label: 'Bottom Drawer' },
+								{ key: 'rightDrawer', label: 'Right Drawer' },
+								{ key: 'topDrawer', label: 'Top Drawer' },
 							],
 						}}
 					/>
 				}
 			>
-				<div className="max-w-2xl space-y-10">
-					<div>
+				<div className="max-w-2xl space-y-20">
+					<div id="leftDrawer">
 						<Card
 							isPressable
 							onPress={() => toggleDrawer('left')}
@@ -73,7 +76,7 @@ export const DrawerPage = ({ template }: Props) => {
 						<div className="text-sm mt-2">Left Drawer</div>
 					</div>
 
-					<div>
+					<div id="bottomDrawer">
 						<Card
 							isPressable
 							onPress={() => toggleDrawer('bottom')}
@@ -85,7 +88,7 @@ export const DrawerPage = ({ template }: Props) => {
 						<div className="text-sm mt-2">Bottom Drawer</div>
 					</div>
 
-					<div>
+					<div id="rightDrawer">
 						<Card
 							isPressable
 							onPress={() => toggleDrawer('right')}
@@ -97,7 +100,7 @@ export const DrawerPage = ({ template }: Props) => {
 						<div className="text-sm mt-2">Right Drawer</div>
 					</div>
 
-					<div>
+					<div id="topDrawer">
 						<Card
 							isPressable
 							onPress={() => toggleDrawer('top')}

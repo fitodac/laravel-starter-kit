@@ -11,7 +11,7 @@ import {
 	CardActions,
 	CardExtraFeatures,
 } from '@/pages/demo/componentsDemo'
-import { ButtonsNavbar } from './components'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -46,7 +46,7 @@ export const CardsPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
 								{ key: 'basicCard', label: 'Basic card' },
@@ -67,7 +67,7 @@ export const CardsPage = ({ template }: Props) => {
 					/>
 				}
 			>
-				<div className="flex-1 max-w-lg space-y-14">
+				<div className="flex-1 max-w-lg space-y-24">
 					<CardsBasic />
 					<CardBasicHeader />
 					<CardBasicFooter />

@@ -16,7 +16,7 @@ export const PageHeader = ({ title, children, classNames }: Props) => {
 				'bg-white w-full py-7',
 				'flex justify-center',
 				'md:px-10 md:py-12 xl:gap-20',
-				'bg-black',
+				'dark:bg-black',
 				classNames && classNames.base
 			)}
 		>

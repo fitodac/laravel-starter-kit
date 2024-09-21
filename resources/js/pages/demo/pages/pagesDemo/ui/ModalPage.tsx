@@ -8,7 +8,7 @@ import {
 	ModalHeader,
 	useDisclosure,
 } from '@nextui-org/react'
-import { ButtonsNavbar } from './components'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -52,7 +52,7 @@ export const ModalPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
 								// { key: 'solidButton', label: 'Solid button' },

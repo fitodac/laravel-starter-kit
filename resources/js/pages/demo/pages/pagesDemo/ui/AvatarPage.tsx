@@ -1,6 +1,13 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { ButtonsNavbar } from './components'
+import {
+	BasicAvatar,
+	BorderedAvatar,
+	BorderRadiusAvatar,
+	AvatarFallback,
+	GroupedAvatars,
+} from '@/pages/demo/componentsDemo'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -36,16 +43,26 @@ export const AvatarPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
-								// { key: 'solidButton', label: 'Solid button' },
+								{ key: 'basicAvatar', label: 'Basic avatar' },
+								{ key: 'borderedAvatar', label: 'Bordered avatar' },
+								{ key: 'borderRadiusAvatar', label: 'Border radius avatar' },
+								{ key: 'avatarFallback', label: 'Avatar fallback' },
+								{ key: 'groupedAvatars', label: 'Grouped avatars' },
 							],
 						}}
 					/>
 				}
 			>
-				<div className="flex-1 max-w-xl space-y-14"></div>
+				<div className="flex-1 max-w-xl space-y-28">
+					<BasicAvatar />
+					<BorderedAvatar />
+					<BorderRadiusAvatar />
+					<AvatarFallback />
+					<GroupedAvatars />
+				</div>
 			</PageContent>
 		</>
 	)

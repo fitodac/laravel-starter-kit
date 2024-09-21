@@ -1,6 +1,12 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { ButtonsNavbar } from './components'
+import {
+	BasicSpinner,
+	BasicSkeleton,
+	Progress,
+	ProgressWithValue
+} from '@/pages/demo/componentsDemo'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -36,16 +42,24 @@ export const LoadingIndicatorsPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
-								// { key: 'solidButton', label: 'Solid button' },
+								{ key: 'basicSpinner', label: 'Spinner' },
+								{ key: 'basicSkeleton', label: 'Skeleton' },
+								{ key: 'circularProgress', label: 'Circular progress' },
+								{ key: 'circularProgressWithValue', label: 'Progress with value' },
 							],
 						}}
 					/>
 				}
 			>
-				<div className="flex-1 max-w-xl space-y-14"></div>
+				<div className="flex-1 max-w-xl space-y-28">
+					<BasicSpinner />
+					<BasicSkeleton />
+					<Progress />
+					<ProgressWithValue />
+				</div>
 			</PageContent>
 		</>
 	)

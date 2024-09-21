@@ -8,7 +8,7 @@ import {
 	OrientatedMenuDropdown,
 	DescriptionsDropdown,
 } from '@/pages/demo/componentsDemo'
-import { ButtonsNavbar } from './components'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -42,7 +42,7 @@ export const DropdownPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
 								{ key: 'basicDropdown', label: 'Basic dropdown' },
@@ -56,7 +56,7 @@ export const DropdownPage = ({ template }: Props) => {
 					/>
 				}
 			>
-				<div className="flex-1 max-w-xl space-y-14">
+				<div className="flex-1 max-w-xl space-y-28">
 					<BasicDropdown />
 					<SemanticDropdown />
 					<SingleSelectionDropdown />

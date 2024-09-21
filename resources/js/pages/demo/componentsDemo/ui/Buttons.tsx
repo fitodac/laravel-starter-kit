@@ -142,7 +142,7 @@ export const IconizedButtons = () => {
 		<div className="space-y-6" id="icons">
 			<h3 className="font-semibold">Icons</h3>
 
-			<div className="space-y-5 max-w-lg">
+			<div className="space-y-4">
 				<div className="flex justify-between items-center">
 					<span className="text-sm font-medium">Basic button</span>
 					<Button

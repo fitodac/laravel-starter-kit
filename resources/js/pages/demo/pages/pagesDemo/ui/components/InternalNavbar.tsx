@@ -17,7 +17,7 @@ interface Props {
 	menu: { key: string; label: string }[]
 }
 
-export const ButtonsNavbar = ({ menu }: Props) => {
+export const InternalNavbar = ({ menu }: Props) => {
 	return (
 		<Listbox
 			items={menu}

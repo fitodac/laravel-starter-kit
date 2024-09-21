@@ -1,6 +1,11 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { ButtonsNavbar } from './components'
+import {
+	BasicBreadcrumbs,
+	BreadcrumbVariants,
+	ControlledBreadcrumbs
+} from '@/pages/demo/componentsDemo'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -35,16 +40,22 @@ export const BreadcrumbsPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
-								// { key: 'solidButton', label: 'Solid button' },
+								{ key: 'basicBreadcrumbs', label: 'Basic breadcrumbs' },
+								{ key: 'breadcrumbVariants', label: 'Breadcrumb variants' },
+								{ key: 'controlledBreadcrumbs', label: 'Controlled breadcrumbs' },
 							],
 						}}
 					/>
 				}
 			>
-				<div className="flex-1 max-w-xl space-y-14"></div>
+				<div className="flex-1 max-w-xl space-y-28">
+					<BasicBreadcrumbs />
+					<BreadcrumbVariants />
+					<ControlledBreadcrumbs />
+				</div>
 			</PageContent>
 		</>
 	)

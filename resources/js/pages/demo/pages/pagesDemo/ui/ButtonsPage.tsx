@@ -10,7 +10,7 @@ import {
 	ButtonVariantsRounded,
 	GroupedButtons,
 } from '@/pages/demo/componentsDemo'
-import { ButtonsNavbar } from './components'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -43,7 +43,7 @@ export const ButtonsPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
 								{ key: 'solidButton', label: 'Solid button' },
@@ -60,7 +60,7 @@ export const ButtonsPage = ({ template }: Props) => {
 					/>
 				}
 			>
-				<div className="flex-1 max-w-xl space-y-14">
+				<div className="flex-1 max-w-xl space-y-28">
 					<SolidButton />
 					<ButtonSize title="Small buttons" />
 					<ButtonSize title="Large buttons" size="lg" />

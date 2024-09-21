@@ -1,7 +1,7 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { SemanticAlerts, SolidAlerts } from '@/pages/demo/componentsDemo'
-import { ButtonsNavbar } from './components'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -37,7 +37,7 @@ export const AlertsPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
 								{ key: 'semanticAlerts', label: 'Semantic alerts' },

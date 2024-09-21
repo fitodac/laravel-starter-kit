@@ -1,6 +1,14 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { ButtonsNavbar } from './components'
+import {
+	BasicAccordion,
+	CompactAccordion,
+	WithSubtitlesAccordion,
+	MultipleItemsAccordion,
+	SplittedAccordion,
+	CustomIndicatorsAccordion,
+} from '@/pages/demo/componentsDemo'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -36,16 +44,28 @@ export const AccordionPage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
-								// { key: 'solidButton', label: 'Solid button' },
+								{ key: 'basicAccordion', label: 'Basic accordion' },
+								{ key: 'compactAccordion', label: 'Compact accordion' },
+								{ key: 'withSubtitles', label: 'With subtitles' },
+								{ key: 'multipleItems', label: 'Multiple items' },
+								{ key: 'splittedAccordion', label: 'Splitted accordion' },
+								{ key: 'customIndicators', label: 'Custom indicators' },
 							],
 						}}
 					/>
 				}
 			>
-				<div className="flex-1 max-w-xl space-y-14"></div>
+				<div className="flex-1 max-w-xl space-y-28">
+					<BasicAccordion />
+					<CompactAccordion />
+					<WithSubtitlesAccordion />
+					<MultipleItemsAccordion />
+					<SplittedAccordion />
+					<CustomIndicatorsAccordion />
+				</div>
 			</PageContent>
 		</>
 	)

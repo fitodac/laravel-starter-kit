@@ -88,40 +88,24 @@ class AdminNavbarProvider extends ServiceProvider
 					'icon' => 'ri-notification-badge-fill',
 					'submenu' => [
 						[
-							'label' => 'Buttons',
-							'route' => 'dashboard.corporate.ui.buttons'
+							'label' => 'Accordion',
+							'route' => 'dashboard.corporate.ui.accordion'
 						],
 						[
 							'label' => 'Alerts',
 							'route' => 'dashboard.corporate.ui.alerts'
 						],
 						[
-							'label' => 'Tabs',
-							'route' => 'dashboard.corporate.ui.tabs'
+							'label' => 'Avatar',
+							'route' => 'dashboard.corporate.ui.avatar'
 						],
 						[
-							'label' => 'Pagination',
-							'route' => 'dashboard.corporate.ui.pagination'
+							'label' => 'Breadcrumbs',
+							'route' => 'dashboard.corporate.ui.breadcrumbs'
 						],
 						[
-							'label' => 'Popover',
-							'route' => 'dashboard.corporate.ui.popover'
-						],
-						[
-							'label' => 'Progress',
-							'route' => 'dashboard.corporate.ui.progress'
-						],
-						[
-							'label' => 'Loading indicators',
-							'route' => 'dashboard.corporate.ui.loading'
-						],
-						[
-							'label' => 'Toasts',
-							'route' => 'dashboard.corporate.ui.toasts'
-						],
-						[
-							'label' => 'Tooltips',
-							'route' => 'dashboard.corporate.ui.tooltips'
+							'label' => 'Buttons',
+							'route' => 'dashboard.corporate.ui.buttons'
 						],
 						[
 							'label' => 'Cards',
@@ -130,6 +114,10 @@ class AdminNavbarProvider extends ServiceProvider
 						[
 							'label' => 'Chips',
 							'route' => 'dashboard.corporate.ui.chips'
+						],
+						[
+							'label' => 'Drawer',
+							'route' => 'dashboard.corporate.ui.drawer'
 						],
 						[
 							'label' => 'Dropdown',
@@ -144,21 +132,37 @@ class AdminNavbarProvider extends ServiceProvider
 							'route' => 'dashboard.corporate.ui.listbox'
 						],
 						[
-							'label' => 'Breadcrumbs',
-							'route' => 'dashboard.corporate.ui.breadcrumbs'
+							'label' => 'Loading indicators',
+							'route' => 'dashboard.corporate.ui.loading'
 						],
 						[
 							'label' => 'Modal',
 							'route' => 'dashboard.corporate.ui.modal'
 						],
 						[
-							'label' => 'Drawer',
-							'route' => 'dashboard.corporate.ui.drawer'
+							'label' => 'Pagination',
+							'route' => 'dashboard.corporate.ui.pagination'
 						],
 						[
-							'label' => 'Avatar',
-							'route' => 'dashboard.corporate.ui.avatar'
-						]
+							'label' => 'Popover',
+							'route' => 'dashboard.corporate.ui.popover'
+						],
+						[
+							'label' => 'Progress',
+							'route' => 'dashboard.corporate.ui.progress'
+						],
+						[
+							'label' => 'Tabs',
+							'route' => 'dashboard.corporate.ui.tabs'
+						],
+						[
+							'label' => 'Toasts',
+							'route' => 'dashboard.corporate.ui.toasts'
+						],
+						[
+							'label' => 'Tooltips',
+							'route' => 'dashboard.corporate.ui.tooltips'
+						],
 					]
 				],
 

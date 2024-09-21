@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { cn, Image } from '@nextui-org/react'
-import { ButtonsNavbar } from './components'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -43,7 +43,7 @@ export const ImagePage = ({ template }: Props) => {
 			<PageContent
 				className={contentClassName}
 				aside={
-					<ButtonsNavbar
+					<InternalNavbar
 						{...{
 							menu: [
 								{ key: 'basic', label: 'Basic image' },
@@ -57,7 +57,7 @@ export const ImagePage = ({ template }: Props) => {
 					/>
 				}
 			>
-				<div className="flex-1 max-w-xl space-y-14">
+				<div className="flex-1 max-w-xl space-y-28">
 					<div className="space-y-6" id="basic">
 						<h3 className="font-semibold">Basic image</h3>
 
