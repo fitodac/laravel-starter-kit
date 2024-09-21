@@ -2,14 +2,17 @@ import { useEffect, useState, type FormEventHandler } from 'react'
 import { useForm } from '@inertiajs/react'
 import { t } from '@/i18n'
 import { Input, Button } from '@nextui-org/react'
-import { AuthLayout } from './layout'
+import { AuthLayout1, AuthLayout2, AuthLayout3 } from './layout'
 
 interface Props {
 	token: string
 	email: string
+	layout: string
 }
 
-const ResetPassword = ({ token, email }: Props) => {
+const pageTitle = t('Reset password').toString()
+
+const Page = ({ token, email }: Props) => {
 	const { data, setData, post, processing, errors, reset } = useForm({
 		token: token,
 		email: email,
@@ -119,8 +122,17 @@ const ResetPassword = ({ token, email }: Props) => {
 	)
 }
 
-ResetPassword.layout = (page: JSX.Element) => (
-	<AuthLayout {...{ children: page, pageTitle: String(t('Reset password')) }} />
-)
+Page.layout = (page: JSX.Element) => {
+	switch (page.props.layout) {
+		case 'layout1':
+			return <AuthLayout1 {...{ children: page, pageTitle }} />
+		case 'layout2':
+			return <AuthLayout2 {...{ children: page, pageTitle }} />
+		case 'layout3':
+			return <AuthLayout3 {...{ children: page, pageTitle }} />
+		default:
+			return <AuthLayout1 {...{ children: page, pageTitle }} />
+	}
+}
 
-export default ResetPassword
+export default Page

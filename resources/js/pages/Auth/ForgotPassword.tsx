@@ -2,14 +2,17 @@ import { useRef, useEffect, FormEventHandler } from 'react'
 import { Link, useForm } from '@inertiajs/react'
 import { t } from '@/i18n'
 import { Input, Button } from '@nextui-org/react'
-import { AuthLayout } from './layout'
+import { AuthLayout1, AuthLayout2, AuthLayout3 } from './layout'
 import { StatusMessage } from './components'
 
 interface Props {
 	status: string
+	layout: string
 }
 
-const ForgotPassword = ({ status }: Props) => {
+const pageTitle = t('Forgot your password?').toString()
+
+const Page = ({ status, layout }: Props) => {
 	const { data, setData, post, processing, errors, reset } = useForm({
 		email: '',
 	})
@@ -98,10 +101,17 @@ const ForgotPassword = ({ status }: Props) => {
 	)
 }
 
-ForgotPassword.layout = (page: JSX.Element) => (
-	<AuthLayout
-		{...{ children: page, pageTitle: String(t('Forgot your password?')) }}
-	/>
-)
+Page.layout = (page: JSX.Element) => {
+	switch (page.props.layout) {
+		case 'layout1':
+			return <AuthLayout1 {...{ children: page, pageTitle }} />
+		case 'layout2':
+			return <AuthLayout2 {...{ children: page, pageTitle }} />
+		case 'layout3':
+			return <AuthLayout3 {...{ children: page, pageTitle }} />
+		default:
+			return <AuthLayout1 {...{ children: page, pageTitle }} />
+	}
+}
 
-export default ForgotPassword
+export default Page

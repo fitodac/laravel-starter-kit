@@ -50,8 +50,9 @@ class AdminNavbarProvider extends ServiceProvider
 
 		// Users and Administrators
 		if (
-			in_array('Super Admin Access', $permissions) ||
-			in_array('Admin Access', $permissions)
+			isset($permissions) &&
+			(in_array('Super Admin Access', $permissions) ||
+				in_array('Admin Access', $permissions))
 		) {
 			$item = [
 				'key' => 'users',
@@ -225,7 +226,7 @@ class AdminNavbarProvider extends ServiceProvider
 		];
 
 		// Roles and permissions
-		if ($role === 'Super Admin') {
+		if (isset($role) && $role === 'Super Admin') {
 			$item = [
 				'key' => 'roles_permissions',
 				'title' => 'Roles & permissions',

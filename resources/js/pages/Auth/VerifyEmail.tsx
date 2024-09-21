@@ -2,14 +2,17 @@ import { FormEventHandler } from 'react'
 import { t } from '@/i18n'
 import { Link, useForm } from '@inertiajs/react'
 import { Button } from '@nextui-org/react'
-import { AuthLayout } from './layout'
+import { AuthLayout1, AuthLayout2, AuthLayout3 } from './layout'
 import { StatusMessage } from './components'
 
 interface Props {
 	status: string
+	layout: string
 }
 
-const VerifyEmail = ({ status }: Props) => {
+const pageTitle = t('Email Verification').toString()
+
+const Page = ({ status, layout }: Props) => {
 	const { post, processing } = useForm({})
 
 	const submit: FormEventHandler = (e) => {
@@ -55,8 +58,17 @@ const VerifyEmail = ({ status }: Props) => {
 	)
 }
 
-VerifyEmail.layout = (page: JSX.Element) => (
-	<AuthLayout {...{ children: page, pageTitle: String(t('Email Verification')) }} />
-)
+Page.layout = (page: JSX.Element) => {
+	switch (page.props.layout) {
+		case 'layout1':
+			return <AuthLayout1 {...{ children: page, pageTitle }} />
+		case 'layout2':
+			return <AuthLayout2 {...{ children: page, pageTitle }} />
+		case 'layout3':
+			return <AuthLayout3 {...{ children: page, pageTitle }} />
+		default:
+			return <AuthLayout1 {...{ children: page, pageTitle }} />
+	}
+}
 
-export default VerifyEmail
+export default Page

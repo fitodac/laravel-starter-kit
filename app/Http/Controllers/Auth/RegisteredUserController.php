@@ -20,7 +20,9 @@ class RegisteredUserController extends Controller
 	 */
 	public function create(): Response
 	{
-		return Inertia::render('auth/Register');
+		$layout = config('settings.general.auth_layout');
+		
+		return Inertia::render('auth/Register', compact('layout'));
 	}
 
 	/**

@@ -18,12 +18,12 @@ class AuthenticatedSessionController extends Controller
 	 */
 	public function create(): Response
 	{
-		$template = config('settings.general.login_page_template') || 'template1';
+		$layout = config('settings.general.auth_layout');
 		$canResetPassword = Route::has('password.request');
 		$status = session('status');
 
 		return Inertia::render('auth/Login', compact(
-			'template',
+			'layout',
 			'canResetPassword',
 			'status'
 		));

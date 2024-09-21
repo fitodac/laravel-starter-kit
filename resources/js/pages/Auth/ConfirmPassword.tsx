@@ -2,9 +2,15 @@ import { useEffect, useState, type FormEventHandler } from 'react'
 import { useForm } from '@inertiajs/react'
 import { t } from '@/i18n'
 import { Input, Button } from '@nextui-org/react'
-import { AuthLayout } from './layout'
+import { AuthLayout1, AuthLayout2, AuthLayout3 } from './layout'
 
-const ConfirmPassword = () => {
+const pageTitle = t('Confirm password').toString()
+
+interface Props {
+	layout: string
+}
+
+const Page = ({ layout }: Props) => {
 	const { data, setData, post, processing, errors, reset } = useForm({
 		password: '',
 	})
@@ -74,10 +80,17 @@ const ConfirmPassword = () => {
 	)
 }
 
-ConfirmPassword.layout = (page: JSX.Element) => (
-	<AuthLayout
-		{...{ children: page, pageTitle: String(t('Confirm password')) }}
-	/>
-)
+Page.layout = (page: JSX.Element) => {
+	switch (page.props.layout) {
+		case 'layout1':
+			return <AuthLayout1 {...{ children: page, pageTitle }} />
+		case 'layout2':
+			return <AuthLayout2 {...{ children: page, pageTitle }} />
+		case 'layout3':
+			return <AuthLayout3 {...{ children: page, pageTitle }} />
+		default:
+			return <AuthLayout1 {...{ children: page, pageTitle }} />
+	}
+}
 
-export default ConfirmPassword
+export default Page

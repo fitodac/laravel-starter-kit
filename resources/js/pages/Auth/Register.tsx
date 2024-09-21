@@ -2,9 +2,15 @@ import { useEffect, useState, FormEventHandler } from 'react'
 import { t } from '@/i18n'
 import { Link, useForm } from '@inertiajs/react'
 import { Input, Button } from '@nextui-org/react'
-import { AuthLayout } from './layout'
+import { AuthLayout1, AuthLayout2, AuthLayout3 } from './layout'
 
-const Register = () => {
+const pageTitle = t('Register').toString()
+
+interface Props {
+	layout: string
+}
+
+const Page = ({ layout }: Props) => {
 	const { data, setData, post, processing, errors, reset } = useForm({
 		name: '',
 		email: '',
@@ -142,7 +148,17 @@ const Register = () => {
 	)
 }
 
-Register.layout = (page: JSX.Element) => (
-	<AuthLayout {...{ children: page, pageTitle: String(t('Register')) }} />
-)
-export default Register
+Page.layout = (page: JSX.Element) => {
+	switch (page.props.layout) {
+		case 'layout1':
+			return <AuthLayout1 {...{ children: page, pageTitle }} />
+		case 'layout2':
+			return <AuthLayout2 {...{ children: page, pageTitle }} />
+		case 'layout3':
+			return <AuthLayout3 {...{ children: page, pageTitle }} />
+		default:
+			return <AuthLayout1 {...{ children: page, pageTitle }} />
+	}
+}
+
+export default Page

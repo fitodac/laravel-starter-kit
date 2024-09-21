@@ -2,5 +2,5 @@
 
 return [
 	// 'logo' => '/img/brand.svg'
-	'login_page_template' => 'template1'
+	'auth_layout' => 'layout3', // layout1 | layout2 | layout3
 ];
