@@ -16,7 +16,10 @@ export interface MainStoreProps {
 export const useMainStore = create<MainStoreProps>()(
 	persist(
 		(set, get) => ({
-			colorMode: localStorage.getItem('colorMode') || 'light',
+			colorMode:
+				localStorage.getItem('colorMode') ||
+				import.meta.env.VITE_COLOR_MODE ||
+				'light',
 			setColorMode: (colorMode: string) => {
 				set({ colorMode })
 			},

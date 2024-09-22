@@ -81,6 +81,7 @@ const translations: Translations = {
 		'Report this?': 'Report this?',
 		'Showing % of': 'Showing %count% of',
 		'Total users: %': 'Total users: %total%',
+		'Enter dashboard': 'Enter dashboard',
 	},
 	es: {
 		Welcome: 'Bienvenido',
@@ -155,6 +156,7 @@ const translations: Translations = {
 		'Report this?': '¿Quieres reportarlo?',
 		'Showing % of': 'Mostrando %count% de',
 		'Total users: %': 'Total de usuarios: %total%',
+		'Enter dashboard': 'Entrar al dashboard',
 	},
 }
 
