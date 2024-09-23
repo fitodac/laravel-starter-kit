@@ -9,18 +9,18 @@ import {
 } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { usePage, router } from '@inertiajs/react'
-import { ButtonSize } from '../../pages/demo/componentsDemo/ui/Buttons'
 
 import type { PageProps } from '@/types'
-import { OrientatedMenuDropdown } from '../../pages/demo/componentsDemo/ui/Dropdowns'
 
 interface Props {
 	showName?: boolean
+	showOnlyName?: boolean
 	showNameInDropdown?: boolean
 }
 
 export const ProfileDropdown = ({
 	showName,
+	showOnlyName,
 	showNameInDropdown = true,
 }: Props) => {
 	const user = usePage<PageProps>().props.auth.user
@@ -29,15 +29,17 @@ export const ProfileDropdown = ({
 		<>
 			<Dropdown radius="none" placement="bottom-end">
 				<DropdownTrigger className="cursor-pointer select-none">
-					{showName ? (
+					{showOnlyName ? (
+						<div>{`${user.username}`}</div>
+					) : showName ? (
 						<User
 							isFocusable
-							name={user.name}
+							name={user.username}
 							description={user.company}
 							avatarProps={{
 								size: 'sm',
 								color: 'primary',
-								name: user.name[0] + user.lastname[0],
+								name: user.username[0] + user.username[1],
 								src: `/storage/img/users/avatars/${user.profile_picture}`,
 							}}
 							classNames={{
@@ -51,7 +53,7 @@ export const ProfileDropdown = ({
 							{...{
 								size: 'sm',
 								color: 'primary',
-								name: user.name[0] + user.lastname[0],
+								name: user.username[0] + user.username[1],
 								src: `/storage/img/users/avatars/${user.profile_picture}`,
 							}}
 						/>
@@ -68,10 +70,13 @@ export const ProfileDropdown = ({
 							<DropdownItem
 								textValue={String(t('My account'))}
 								isReadOnly
-								description={user.company}
 								className="select-none cursor-default"
 							>
-								{user.name}
+								<span className="text-xs text-foreground-500 font-medium">
+									{user.name && user.lastname
+										? `${user.name} ${user.lastname}`
+										: user.username}
+								</span>
 							</DropdownItem>
 						) : (
 							<></>

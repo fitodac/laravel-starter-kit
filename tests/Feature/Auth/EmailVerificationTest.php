@@ -8,51 +8,61 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class EmailVerificationTest extends TestCase
 {
-    use RefreshDatabase;
+	use RefreshDatabase;
 
-    public function test_email_verification_screen_can_be_rendered(): void
-    {
-        $user = User::factory()->unverified()->create();
+	protected $user;
 
-        $response = $this->actingAs($user)->get('/verify-email');
+	protected function setUp(): void
+	{
+		parent::setUp();
 
-        $response->assertStatus(200);
-    }
+		// Create a user with roles and permissions
+		$this->user = User::factory()->unverified()->create();
+		$userRole = Role::create(['name' => 'User']);
+		$privateAccess = Permission::create(['name' => 'Private Access']);
+		$userRole->givePermissionTo($privateAccess);
+		$this->user->assignRole('User');
+	}
 
-    public function test_email_can_be_verified(): void
-    {
-        $user = User::factory()->unverified()->create();
+	public function test_email_verification_screen_can_be_rendered(): void
+	{
+		$response = $this->actingAs($this->user)->get('/verify-email');
 
-        Event::fake();
+		$response->assertStatus(200);
+	}
 
-        $verificationUrl = URL::temporarySignedRoute(
-            'verification.verify',
-            now()->addMinutes(60),
-            ['id' => $user->id, 'hash' => sha1($user->email)]
-        );
+	public function test_email_can_be_verified(): void
+	{
+		Event::fake();
 
-        $response = $this->actingAs($user)->get($verificationUrl);
+		$verificationUrl = URL::temporarySignedRoute(
+			'verification.verify',
+			now()->addMinutes(60),
+			['id' => $this->user->id, 'hash' => sha1($this->user->email)]
+		);
 
-        Event::assertDispatched(Verified::class);
-        $this->assertTrue($user->fresh()->hasVerifiedEmail());
-        $response->assertRedirect(route('dashboard', absolute: false).'?verified=1');
-    }
+		$response = $this->actingAs($this->user)->get($verificationUrl);
 
-    public function test_email_is_not_verified_with_invalid_hash(): void
-    {
-        $user = User::factory()->unverified()->create();
+		Event::assertDispatched(Verified::class);
+		$this->assertTrue($this->user->fresh()->hasVerifiedEmail());
+		$response->assertRedirect(route('dashboard', absolute: false) . '?verified=1');
+	}
 
-        $verificationUrl = URL::temporarySignedRoute(
-            'verification.verify',
-            now()->addMinutes(60),
-            ['id' => $user->id, 'hash' => sha1('wrong-email')]
-        );
+	public function test_email_is_not_verified_with_invalid_hash(): void
+	{
+		$verificationUrl = URL::temporarySignedRoute(
+			'verification.verify',
+			now()->addMinutes(60),
+			['id' => $this->user->id, 'hash' => sha1('wrong-email')]
+		);
 
-        $this->actingAs($user)->get($verificationUrl);
+		$this->actingAs($this->user)->get($verificationUrl);
 
-        $this->assertFalse($user->fresh()->hasVerifiedEmail());
-    }
+		$this->assertFalse($this->user->fresh()->hasVerifiedEmail());
+	}
 }

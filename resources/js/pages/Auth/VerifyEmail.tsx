@@ -26,7 +26,11 @@ const Page = ({ status, layout }: Props) => {
 	return (
 		<>
 			<div className="w-72 space-y-7">
-				<p>{t('email-verification-message')}</p>
+				<div className="space-y-3">
+					<p className="text-sm">{t('email-verification-message-0')}</p>
+					<p className="text-sm">{t('email-verification-message-1')}</p>
+					<p className="text-sm">{t('email-verification-message-2')}</p>
+				</div>
 
 				{status && <StatusMessage {...{ status }} />}
 

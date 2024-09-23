@@ -18,7 +18,7 @@ $pages = [
 		'chips' => 'Chips',
 		'drawer' => 'Drawer',
 		'dropdown' => 'Dropdown',
-		'images' => 'Image',
+		'image' => 'Image',
 		'listbox' => 'ListBox',
 		'loading' => 'Loading indicators',
 		'modal' => 'Modal',
@@ -34,7 +34,7 @@ $pages = [
 		'image-uploader' => 'Image uploader',
 		'icons' => 'Icons',
 	],
-	'forms' => [
+	'form' => [
 		'components' => 'Form components',
 		'layouts' => 'Form layouts',
 		'wysiwyg' => 'Wysiwyg',
@@ -58,8 +58,13 @@ Route::middleware('auth')
 
 		foreach ($pages as $group => $pages) {
 			foreach ($pages as $page => $title) {
-				Route::inertia("/$group/$page", "demo/pages/corporate/$group/$page", ['title' => $title])
-					->name("corporate.$group.$page");
+				if ($group === 'ui') {
+					Route::inertia("/$group/$page", "demo/pages/corporate/UiElementsPage", ['title' => $title])
+						->name("corporate.$group.$page");
+				} else {
+					Route::inertia("/$group/$page", "demo/pages/corporate/$group/$page")
+						->name("corporate.$group.$page");
+				}
 			}
 		}
 	});
@@ -76,8 +81,13 @@ Route::middleware('auth')
 
 		foreach ($pages as $group => $pages) {
 			foreach ($pages as $page => $title) {
-				Route::inertia("/$group/$page", "demo/pages/executive/$group/$page", ['title' => $title])
-					->name("executive.$group.$page");
+				if ($group === 'ui') {
+					Route::inertia("/$group/$page", "demo/pages/executive/UiElementsPage", ['title' => $title])
+						->name("executive.$group.$page");
+				} else {
+					Route::inertia("/$group/$page", "demo/pages/executive/$group/$page")
+						->name("executive.$group.$page");
+				}
 			}
 		}
 	});

@@ -24,6 +24,7 @@ const translations: Translations = {
 			password reset link that will allow you to choose a new one.`,
 		"Don't have an Account?": "Don't have an Account?",
 		Name: 'Name',
+		Lastname: 'Lastname',
 		Username: 'Username',
 		'Confirm password': 'Confirm password',
 		'confirm-password-message':
@@ -34,9 +35,9 @@ const translations: Translations = {
 		'Reset password': 'Reset password',
 		'Verify email': 'Verify email',
 		'Email Verification': 'Email Verification',
-		'email-verification-message': `Thanks for signing up! Before getting started, 
-			could you verify your email address by clicking on the link we just emailed 
-			to you? If you didn't receive the email, we will gladly send you another.`,
+		'email-verification-message-0': `Thanks for signing up!`,
+		'email-verification-message-1': `Before getting started, could you verify your email address by clicking on the link we just emailed to you?`,
+		'email-verification-message-2': `If you didn't receive the email, we will gladly send you another.`,
 		'Resend Verification Email': 'Resend Verification Email',
 		'Email password reset link': 'Email password reset link',
 		Dashboard: 'Dashboard',
@@ -49,6 +50,7 @@ const translations: Translations = {
 		'Your email address is unverified': 'Your email address is unverified.',
 		'email-verify-link': 'Click here to re-send the verification email.',
 		'verification-link-sent': `A new verification link has been sent to your email address.`,
+		'verification-link-sent-notice': `A new verification link has been sent to your email address.`,
 		'Update Password': 'Update Password',
 		'Current Password': 'Current Password',
 		'New Password': 'New Password',
@@ -82,6 +84,22 @@ const translations: Translations = {
 		'Showing % of': 'Showing %count% of',
 		'Total users: %': 'Total users: %total%',
 		'Enter dashboard': 'Enter dashboard',
+		'Basic information': 'Basic information',
+		Security: 'Security',
+		'The password must be at least 8 characters long':
+			'The password must be at least 8 characters long',
+		'Confirm Password': 'Confirm Password',
+		'Personal information': 'Personal information',
+		Phone: 'Phone',
+		'Birth date': 'Birth date',
+		Address: 'Address',
+		City: 'City',
+		Country: 'Country',
+		Zip: 'Zip',
+		'Professional information': 'Professional information',
+		'Job title': 'Job title',
+		Company: 'Company',
+		Biography: 'Biography',
 	},
 	es: {
 		Welcome: 'Bienvenido',
@@ -96,6 +114,7 @@ const translations: Translations = {
 			para cambiar tu contraseña.`,
 		"Don't have an Account?": '¿Aún no tienes una cuenta?',
 		Name: 'Nombre',
+		Lastname: 'Apellidos',
 		Username: 'Nombre de usuario',
 		'Confirm password': 'Confirma la contraseña',
 		'confirm-password-message':
@@ -106,8 +125,9 @@ const translations: Translations = {
 		'Reset password': 'Reiniciar contraseña',
 		'Verify email': 'Verificar email',
 		'Email Verification': 'Verificación de email',
-		'email-verification-message': `Gracias por registrarte. Antes de continuar debes 
-			verificar tu dirección de email. Si no recibiste el correo de verificación, por 
+		'email-verification-message-0': `Gracias por registrarte.`,
+		'email-verification-message-1': `Antes de continuar debes verificar tu dirección de email.`,
+		'email-verification-message-2': `Si no recibiste el correo de verificación, por 
 			favor haz click en el botón abajo y te enviaremos un nuevo link.`,
 		'Resend Verification Email': 'Reenviar link de verificación',
 		'Email password reset link': 'Enviar link para reiniciar contraseña',
@@ -116,12 +136,14 @@ const translations: Translations = {
 		'Profile information': 'Información de perfil',
 		'profile-information-intro': `Actualiza los datos de tu cuenta y Email.`,
 		Account: 'Mi cuenta',
-		'Delete account': 'Delete account',
+		'Delete account': 'Eliminar cuenta',
 		Save: 'Guardar',
 		'Your email address is unverified': 'Necesitas confirmar tu email.',
 		'email-verify-link':
 			'Haz click aquí para enviar el correo de verificación.',
 		'verification-link-sent': `Te hemos enviado un nuevo link de verificación a tu 
+			dirección de correo.`,
+		'verification-link-sent-notice': `Te hemos enviado un nuevo link de verificación a tu 
 			dirección de correo.`,
 		'Update Password': 'Actualizar contraseña',
 		'Current Password': 'Contraseña actual',
@@ -157,6 +179,22 @@ const translations: Translations = {
 		'Showing % of': 'Mostrando %count% de',
 		'Total users: %': 'Total de usuarios: %total%',
 		'Enter dashboard': 'Entrar al dashboard',
+		'Basic information': 'Información básica',
+		Security: 'Seguridad',
+		'The password must be at least 8 characters long':
+			'La contraseña debe tener al menos 8 caracteres',
+		'Confirm Password': 'Confirmar contraseña',
+		'Personal information': 'Información personal',
+		Phone: 'Teléfono',
+		'Birth date': 'Fecha de nacimiento',
+		Address: 'Dirección',
+		City: 'Ciudad',
+		Country: 'País',
+		Zip: 'Código postal',
+		'Professional information': 'Información profesional',
+		'Job title': 'Título',
+		Company: 'Compañia',
+		Biography: 'Biografía',
 	},
 }
 

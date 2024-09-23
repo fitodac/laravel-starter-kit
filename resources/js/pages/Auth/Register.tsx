@@ -12,7 +12,7 @@ interface Props {
 
 const Page = ({ layout }: Props) => {
 	const { data, setData, post, processing, errors, reset } = useForm({
-		name: '',
+		username: '',
 		email: '',
 		password: '',
 		password_confirmation: '',
@@ -39,15 +39,15 @@ const Page = ({ layout }: Props) => {
 					<div className="space-y-4">
 						<fieldset className="space-y-1">
 							<Input
-								id="name"
-								name="name"
+								id="username"
+								name="username"
 								type="text"
-								label={t('Name')}
-								value={data.name}
+								label={t('Username')}
+								value={data.username}
 								isDisabled={processing}
-								isInvalid={errors.name ? true : false}
-								errorMessage={errors.name}
-								onValueChange={(e) => setData('name', e)}
+								isInvalid={errors.username ? true : false}
+								errorMessage={errors.username}
+								onValueChange={(e) => setData('username', e)}
 							/>
 						</fieldset>
 
