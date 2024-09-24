@@ -1,5 +1,10 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
+import {
+	BasicPagination,
+	PaginationVariants,
+	PaginationControls,
+} from '@/pages/demo/componentsDemo'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
@@ -39,13 +44,19 @@ export const PaginationPage = ({ template }: Props) => {
 					<InternalNavbar
 						{...{
 							menu: [
-								// { key: 'solidButton', label: 'Solid button' },
+								{ key: 'paginationSizes', label: 'Pagination sizes' },
+								{ key: 'paginationVariants', label: 'Pagination variants' },
+								{ key: 'paginationControls', label: 'With controls' },
 							],
 						}}
 					/>
 				}
 			>
-				<div className="flex-1 max-w-xl space-y-14"></div>
+				<div className="flex-1 max-w-xl space-y-28">
+					<BasicPagination />
+					<PaginationVariants />
+					<PaginationControls />
+				</div>
 			</PageContent>
 		</>
 	)

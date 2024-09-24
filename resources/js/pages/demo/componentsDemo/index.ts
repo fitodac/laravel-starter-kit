@@ -23,6 +23,8 @@ export * from './ui/Chips'
 export * from './ui/Dropdowns'
 export * from './ui/ListBox'
 export * from './ui/LoadingIndicators'
+export * from './ui/Pagination'
+export * from './ui/Popover'
 
 export * from './utilities/imagesUploader'
 
