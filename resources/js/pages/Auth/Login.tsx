@@ -95,6 +95,7 @@ const Page = ({ status, canResetPassword, layout = 'layout1' }: Props) => {
 								aria-label="Remember me"
 								value={data.remember ? '1' : '0'}
 								isDisabled={processing}
+								isSelected={data.remember}
 								onValueChange={(e) => setData('remember', e)}
 							>
 								{t('Remember me')}

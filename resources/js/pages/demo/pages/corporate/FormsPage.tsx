@@ -13,11 +13,11 @@ interface Props {
 export const Page = ({ title }: Props) => {
 	switch (title) {
 		case 'Form components':
-			return <FormComponentsPage {...{ template: 'executive' }} />
+			return <FormComponentsPage {...{ template: 'corporate' }} />
 		case 'Form layouts':
-			return <FormLayoutsPage {...{ template: 'executive' }} />
+			return <FormLayoutsPage {...{ template: 'corporate' }} />
 		case 'Wysiwyg':
-			return <TipTapPage {...{ template: 'executive' }} />
+			return <TipTapPage {...{ template: 'corporate' }} />
 		default:
 			return null
 	}

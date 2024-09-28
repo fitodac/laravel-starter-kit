@@ -25,6 +25,9 @@ export * from './ui/ListBox'
 export * from './ui/LoadingIndicators'
 export * from './ui/Pagination'
 export * from './ui/Popover'
+export * from './ui/Progress'
+export * from './ui/Tabs'
+export * from './ui/Tooltips'
 
 export * from './utilities/imagesUploader'
 

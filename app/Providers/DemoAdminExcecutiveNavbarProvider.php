@@ -89,40 +89,24 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 					'icon' => 'ri-notification-badge-fill',
 					'submenu' => [
 						[
-							'label' => 'Buttons',
-							'route' => 'dashboard.executive.ui.buttons'
+							'label' => 'Accordion',
+							'route' => 'dashboard.executive.ui.accordion'
 						],
 						[
 							'label' => 'Alerts',
 							'route' => 'dashboard.executive.ui.alerts'
 						],
 						[
-							'label' => 'Tabs',
-							'route' => 'dashboard.executive.ui.tabs'
+							'label' => 'Avatar',
+							'route' => 'dashboard.executive.ui.avatar'
 						],
 						[
-							'label' => 'Pagination',
-							'route' => 'dashboard.executive.ui.pagination'
+							'label' => 'Breadcrumbs',
+							'route' => 'dashboard.executive.ui.breadcrumbs'
 						],
 						[
-							'label' => 'Popover',
-							'route' => 'dashboard.executive.ui.popover'
-						],
-						[
-							'label' => 'Progress',
-							'route' => 'dashboard.executive.ui.progress'
-						],
-						[
-							'label' => 'Loading indicators',
-							'route' => 'dashboard.executive.ui.loading'
-						],
-						[
-							'label' => 'Toasts',
-							'route' => 'dashboard.executive.ui.toasts'
-						],
-						[
-							'label' => 'Tooltips',
-							'route' => 'dashboard.executive.ui.tooltips'
+							'label' => 'Buttons',
+							'route' => 'dashboard.executive.ui.buttons'
 						],
 						[
 							'label' => 'Cards',
@@ -131,6 +115,10 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 						[
 							'label' => 'Chips',
 							'route' => 'dashboard.executive.ui.chips'
+						],
+						[
+							'label' => 'Drawer',
+							'route' => 'dashboard.executive.ui.drawer'
 						],
 						[
 							'label' => 'Dropdown',
@@ -145,20 +133,36 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 							'route' => 'dashboard.executive.ui.listbox'
 						],
 						[
-							'label' => 'Breadcrumbs',
-							'route' => 'dashboard.executive.ui.breadcrumbs'
+							'label' => 'Loading indicators',
+							'route' => 'dashboard.executive.ui.loading'
 						],
 						[
 							'label' => 'Modal',
 							'route' => 'dashboard.executive.ui.modal'
 						],
 						[
-							'label' => 'Drawer',
-							'route' => 'dashboard.executive.ui.drawer'
+							'label' => 'Pagination',
+							'route' => 'dashboard.executive.ui.pagination'
 						],
 						[
-							'label' => 'Avatar',
-							'route' => 'dashboard.executive.ui.avatar'
+							'label' => 'Popover',
+							'route' => 'dashboard.executive.ui.popover'
+						],
+						[
+							'label' => 'Progress',
+							'route' => 'dashboard.executive.ui.progress'
+						],
+						[
+							'label' => 'Tabs',
+							'route' => 'dashboard.executive.ui.tabs'
+						],
+						[
+							'label' => 'Toasts',
+							'route' => 'dashboard.executive.ui.toasts'
+						],
+						[
+							'label' => 'Tooltips',
+							'route' => 'dashboard.executive.ui.tooltips'
 						]
 					]
 				],

@@ -1,5 +1,6 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
+import { BasicTooltip } from '@/pages/demo/componentsDemo'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
@@ -39,13 +40,15 @@ export const TooltipsPage = ({ template }: Props) => {
 					<InternalNavbar
 						{...{
 							menu: [
-								// { key: 'solidButton', label: 'Solid button' },
+								{ key: 'basicTooltip', label: 'Basic tooltip' },
 							],
 						}}
 					/>
 				}
 			>
-				<div className="flex-1 max-w-xl space-y-14"></div>
+				<div className="flex-1 max-w-xl space-y-28">
+					<BasicTooltip />
+				</div>
 			</PageContent>
 		</>
 	)

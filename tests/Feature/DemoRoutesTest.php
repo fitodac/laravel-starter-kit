@@ -9,472 +9,357 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
+
 class DemoRoutesTest extends TestCase
 {
 	use RefreshDatabase;
 
+	protected $user;
 
-	/**
-	 * Accordion
-	 */
-	public function test_corporate_ui_accordion_screen_requires_auth(): void
+	protected function setUp(): void
 	{
-		$this->assertScreenRequiresAuth('corporate', 'accordion', 302);
-	}
+		parent::setUp();
 
-	public function test_corporate_ui_accordion_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'accordion');
-	}
-
-	public function test_executive_ui_accordion_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'accordion', 302);
-	}
-
-	public function test_executive_ui_accordion_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'accordion');
+		// Create a user with roles and permissions
+		$this->user = User::factory()->create();
+		$userRole = Role::create(['name' => 'User']);
+		$privateAccess = Permission::create(['name' => 'Private Access']);
+		$userRole->givePermissionTo($privateAccess);
+		$this->user->assignRole('User');
 	}
 
 	/**
-	 * Alerts
+	 * Corporate
 	 */
-	public function test_corporate_ui_alerts_screen_requires_auth(): void
+	// Accordion
+	public function test_corporate_ui_accordion_screen_can_be_rendered(): void
 	{
-		$this->assertScreenRequiresAuth('corporate', 'alerts', 302);
+		$this->assertUiScreenRequiresAuth('corporate', 'accordion', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'accordion');
+	}
+	// Alerts
+	public function test_corporate_ui_alerts_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'alerts', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'alerts');
+	}
+	// Avatar
+	public function test_corporate_ui_avatar_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'avatar', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'avatar');
+	}
+	// Breadcrumbs
+	public function test_corporate_ui_breadcrumb_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'breadcrumbs', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'breadcrumbs');
+	}
+	// Buttons
+	public function test_corporate_ui_buttons_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'buttons', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'buttons');
+	}
+	// Cards
+	public function test_corporate_ui_cards_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'cards', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'cards');
+	}
+	// Chips
+	public function test_corporate_ui_chips_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'chips', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'chips');
+	}
+	// Drawer
+	public function test_corporate_ui_drawer_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'drawer', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'drawer');
+	}
+	// Dropdown
+	public function test_corporate_ui_dropdown_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'dropdown', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'dropdown');
+	}
+	// Image
+	public function test_corporate_ui_image_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'image', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'image');
+	}
+	// Listbox
+	public function test_corporate_ui_listbox_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'listbox', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'listbox');
+	}
+	// Loading
+	public function test_corporate_ui_loading_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'loading', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'loading');
+	}
+	// Modal
+	public function test_corporate_ui_modal_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'modal', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'modal');
+	}
+	// Pagination
+	public function test_corporate_ui_pagination_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'pagination', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'pagination');
+	}
+	// Popover
+	public function test_corporate_ui_popover_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'popover', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'popover');
+	}
+	// Progress
+	public function test_corporate_ui_progress_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'progress', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'progress');
+	}
+	// Tabs
+	public function test_corporate_ui_tabs_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'tabs', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'tabs');
+	}
+	// Toasts
+	public function test_corporate_ui_toasts_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'toasts', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'toasts');
+	}
+	// Tooltips
+	public function test_corporate_ui_tooltips_screen_can_be_rendered(): void
+	{
+		$this->assertUiScreenRequiresAuth('corporate', 'tooltips', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('corporate', 'tooltips');
+	}
+	/** Utilities */
+	// Color
+	public function test_corporate_utilities_color_screen_can_be_rendered(): void
+	{
+		$this->assertUtilityScreenRequiresAuth('corporate', 'color', 302);
+		$this->assertUtilityScreenCanBeAccessedByAuthenticatedUser('corporate', 'color');
+	}
+	// Image uploader
+	public function test_corporate_utilities_image_uploader_screen_can_be_rendered(): void
+	{
+		$this->assertUtilityScreenRequiresAuth('corporate', 'image-uploader', 302);
+		$this->assertUtilityScreenCanBeAccessedByAuthenticatedUser('corporate', 'image-uploader');
+	}
+	// Icons
+	public function test_corporate_utilities_icons_screen_can_be_rendered(): void
+	{
+		$this->assertUtilityScreenRequiresAuth('corporate', 'icons', 302);
+		$this->assertUtilityScreenCanBeAccessedByAuthenticatedUser('corporate', 'icons');
 	}
 
-	public function test_corporate_ui_alerts_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'alerts');
-	}
 
-	public function test_executive_ui_alerts_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'alerts', 302);
-	}
-
-	public function test_executive_ui_alerts_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'alerts');
-	}
 
 	/**
-	 * Avatar
+	 * Executive
 	 */
-	public function test_corporate_ui_avatar_screen_requires_auth(): void
+	// Accordion
+	public function test_executive_ui_accordion_screen_can_be_rendered(): void
 	{
-		$this->assertScreenRequiresAuth('corporate', 'avatar', 302);
+		$this->assertUiScreenRequiresAuth('executive', 'accordion', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'accordion');
 	}
-
-	public function test_corporate_ui_avatar_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'avatar');
-	}
-
-	public function test_executive_ui_avatar_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'avatar', 302);
-	}
-
-	public function test_executive_ui_avatar_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'avatar');
-	}
-
-	/**
-	 * Breadcrumb
-	 */
-	public function test_corporate_ui_breadcrumb_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'breadcrumbs', 302);
-	}
-
-	public function test_corporate_ui_breadcrumb_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'breadcrumbs');
-	}
-
-	public function test_executive_ui_breadcrumb_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'breadcrumbs', 302);
-	}
-
-	public function test_executive_ui_breadcrumb_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'breadcrumbs');
-	}
-
-	/**
-	 * Buttons
-	 */
-	public function test_corporate_ui_buttons_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'buttons', 302);
-	}
-
-	public function test_corporate_ui_buttons_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'buttons');
-	}
-
-	public function test_executive_ui_buttons_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'buttons', 302);
-	}
-
-	public function test_executive_ui_buttons_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'buttons');
-	}
-
-	/**
-	 * Cards
-	 */
-	public function test_corporate_ui_cards_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'cards', 302);
-	}
-
-	public function test_corporate_ui_cards_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'cards');
-	}
-
-	public function test_executive_ui_cards_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'cards', 302);
-	}
-
-	public function test_executive_ui_cards_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'cards');
-	}
-
-	/**
-	 * Chips
-	 */
-	public function test_corporate_ui_chips_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'chips', 302);
-	}
-
-	public function test_corporate_ui_chips_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'chips');
-	}
-
-	public function test_executive_ui_chips_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'chips', 302);
-	}
-
-	public function test_executive_ui_chips_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'chips');
-	}
-
-	/**
-	 * Drawer
-	 */
-	public function test_corporate_ui_drawer_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'drawer', 302);
-	}
-
-	public function test_corporate_ui_drawer_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'drawer');
-	}
-
-	public function test_executive_ui_drawer_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'drawer', 302);
-	}
-
-	public function test_executive_ui_drawer_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'drawer');
-	}
-
-	/**
-	 * Dropdown
-	 */
-	public function test_corporate_ui_dropdown_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'dropdown', 302);
-	}
-
-	public function test_corporate_ui_dropdown_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'dropdown');
-	}
-
-	public function test_executive_ui_dropdown_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'dropdown', 302);
-	}
-
-	public function test_executive_ui_dropdown_screen_can_be_rendered_by_authenticated_user(): void
+	// Alerts
+	public function test_executive_ui_alerts_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'dropdown');
+		$this->assertUiScreenRequiresAuth('executive', 'alerts', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'alerts');
 	}
-
-	/**
-	 * Image
-	 */
-	public function test_corporate_ui_image_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'image', 302);
-	}
-
-	public function test_corporate_ui_image_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'image');
-	}
-
-	public function test_executive_ui_image_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'image', 302);
-	}
-
-	public function test_executive_ui_image_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'image');
-	}
-
-	/**
-	 * Listbox
-	 */
-	public function test_corporate_ui_listbox_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'listbox', 302);
-	}
-
-	public function test_corporate_ui_listbox_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'listbox');
-	}
-
-	public function test_executive_ui_listbox_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'listbox', 302);
-	}
-
-	public function test_executive_ui_listbox_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'listbox');
-	}
-
-	/**
-	 * Loading
-	 */
-	public function test_corporate_ui_loading_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'loading', 302);
-	}
-
-	public function test_corporate_ui_loading_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'loading');
-	}
-
-	public function test_executive_ui_loading_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'loading', 302);
-	}
-
-	public function test_executive_ui_loading_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'loading');
-	}
-
-	/**
-	 * Modal
-	 */
-	public function test_corporate_ui_modal_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'modal', 302);
-	}
-
-	public function test_corporate_ui_modal_screen_can_be_rendered_by_authenticated_user(): void
+	// Avatar
+	public function test_executive_ui_avatar_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'modal');
+		$this->assertUiScreenRequiresAuth('executive', 'avatar', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'avatar');
 	}
-
-	public function test_executive_ui_modal_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'modal', 302);
-	}
-
-	public function test_executive_ui_modal_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'modal');
-	}
-
-	/**
-	 * Pagination
-	 */
-	public function test_corporate_ui_pagination_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'pagination', 302);
-	}
-
-	public function test_corporate_ui_pagination_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'pagination');
-	}
-
-	public function test_executive_ui_pagination_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('executive', 'pagination', 302);
-	}
-
-	public function test_executive_ui_pagination_screen_can_be_rendered_by_authenticated_user(): void
-	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'pagination');
-	}
-
-	/**
-	 * Popover
-	 */
-	public function test_corporate_ui_popover_screen_requires_auth(): void
-	{
-		$this->assertScreenRequiresAuth('corporate', 'popover', 302);
-	}
-
-	public function test_corporate_ui_popover_screen_can_be_rendered_by_authenticated_user(): void
+	// Breadcrumbs
+	public function test_executive_ui_breadcrumb_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'popover');
+		$this->assertUiScreenRequiresAuth('executive', 'breadcrumbs', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'breadcrumbs');
 	}
-
-	public function test_executive_ui_popover_screen_requires_auth(): void
+	// Buttons
+	public function test_executive_ui_buttons_screen_can_be_rendered(): void
 	{
-		$this->assertScreenRequiresAuth('executive', 'popover', 302);
+		$this->assertUiScreenRequiresAuth('executive', 'buttons', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'buttons');
 	}
-
-	public function test_executive_ui_popover_screen_can_be_rendered_by_authenticated_user(): void
+	// Cards
+	public function test_executive_ui_cards_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'popover');
+		$this->assertUiScreenRequiresAuth('executive', 'cards', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'cards');
 	}
-
-	/**
-	 * Progress
-	 */
-	public function test_corporate_ui_progress_screen_requires_auth(): void
+	// Chips
+	public function test_executive_ui_chips_screen_can_be_rendered(): void
 	{
-		$this->assertScreenRequiresAuth('corporate', 'progress', 302);
+		$this->assertUiScreenRequiresAuth('executive', 'chips', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'chips');
 	}
-
-	public function test_corporate_ui_progress_screen_can_be_rendered_by_authenticated_user(): void
+	// Drawer
+	public function test_executive_ui_drawer_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'progress');
+		$this->assertUiScreenRequiresAuth('executive', 'drawer', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'drawer');
 	}
-
-	public function test_executive_ui_progress_screen_requires_auth(): void
+	// Dropdown
+	public function test_executive_ui_dropdown_screen_can_be_rendered(): void
 	{
-		$this->assertScreenRequiresAuth('executive', 'progress', 302);
+		$this->assertUiScreenRequiresAuth('executive', 'dropdown', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'dropdown');
 	}
-
-	public function test_executive_ui_progress_screen_can_be_rendered_by_authenticated_user(): void
+	// Image
+	public function test_executive_ui_image_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'progress');
+		$this->assertUiScreenRequiresAuth('executive', 'image', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'image');
 	}
-
-	/**
-	 * Tabs
-	 */
-	public function test_corporate_ui_tabs_screen_requires_auth(): void
+	// Listbox
+	public function test_executive_ui_listbox_screen_can_be_rendered(): void
 	{
-		$this->assertScreenRequiresAuth('corporate', 'tabs', 302);
+		$this->assertUiScreenRequiresAuth('executive', 'listbox', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'listbox');
 	}
-
-	public function test_corporate_ui_tabs_screen_can_be_rendered_by_authenticated_user(): void
+	// Loading
+	public function test_executive_ui_loading_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'tabs');
+		$this->assertUiScreenRequiresAuth('executive', 'loading', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'loading');
 	}
-
-	public function test_executive_ui_tabs_screen_requires_auth(): void
+	// Modal
+	public function test_executive_ui_modal_screen_can_be_rendered(): void
 	{
-		$this->assertScreenRequiresAuth('executive', 'tabs', 302);
+		$this->assertUiScreenRequiresAuth('executive', 'modal', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'modal');
 	}
-
-	public function test_executive_ui_tabs_screen_can_be_rendered_by_authenticated_user(): void
+	// Pagination
+	public function test_executive_ui_pagination_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'tabs');
+		$this->assertUiScreenRequiresAuth('executive', 'pagination', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'pagination');
 	}
-
-	/**
-	 * Toasts
-	 */
-	public function test_corporate_ui_toasts_screen_requires_auth(): void
+	// Popover
+	public function test_executive_ui_popover_screen_can_be_rendered(): void
 	{
-		$this->assertScreenRequiresAuth('corporate', 'toasts', 302);
+		$this->assertUiScreenRequiresAuth('executive', 'popover', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'popover');
 	}
-
-	public function test_corporate_ui_toasts_screen_can_be_rendered_by_authenticated_user(): void
+	// Progress
+	public function test_executive_ui_progress_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'toasts');
+		$this->assertUiScreenRequiresAuth('executive', 'progress', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'progress');
 	}
-
-	public function test_executive_ui_toasts_screen_requires_auth(): void
+	// Tabs
+	public function test_executive_ui_tabs_screen_can_be_rendered(): void
 	{
-		$this->assertScreenRequiresAuth('executive', 'toasts', 302);
+		$this->assertUiScreenRequiresAuth('executive', 'tabs', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'tabs');
 	}
-
-	public function test_executive_ui_toasts_screen_can_be_rendered_by_authenticated_user(): void
+	// Toasts
+	public function test_executive_ui_toasts_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'toasts');
+		$this->assertUiScreenRequiresAuth('executive', 'toasts', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'toasts');
 	}
-
-	/**
-	 * Tooltips
-	 */
-	public function test_corporate_ui_tooltips_screen_requires_auth(): void
+	// Tooltips
+	public function test_executive_ui_tooltips_screen_can_be_rendered(): void
 	{
-		$this->assertScreenRequiresAuth('corporate', 'tooltips', 302);
+		$this->assertUiScreenRequiresAuth('executive', 'tooltips', 302);
+		$this->assertUiScreenCanBeAccessedByAuthenticatedUser('executive', 'tooltips');
 	}
-
-	public function test_corporate_ui_tooltips_screen_can_be_rendered_by_authenticated_user(): void
+	/** Utilities */
+	// Color
+	public function test_executive_utilities_color_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('corporate', 'tooltips');
+		$this->assertUtilityScreenRequiresAuth('executive', 'color', 302);
+		$this->assertUtilityScreenCanBeAccessedByAuthenticatedUser('executive', 'color');
 	}
-
-	public function test_executive_ui_tooltips_screen_requires_auth(): void
+	// Image uploader
+	public function test_executive_utilities_image_uploader_screen_can_be_rendered(): void
 	{
-		$this->assertScreenRequiresAuth('executive', 'tooltips', 302);
+		$this->assertUtilityScreenRequiresAuth('executive', 'image-uploader', 302);
+		$this->assertUtilityScreenCanBeAccessedByAuthenticatedUser('executive', 'image-uploader');
 	}
-
-	public function test_executive_ui_tooltips_screen_can_be_rendered_by_authenticated_user(): void
+	// Icons
+	public function test_executive_utilities_icons_screen_can_be_rendered(): void
 	{
-		$this->assertScreenCanBeAccessedByAuthenticatedUser('executive', 'tooltips');
+		$this->assertUtilityScreenRequiresAuth('executive', 'icons', 302);
+		$this->assertUtilityScreenCanBeAccessedByAuthenticatedUser('executive', 'icons');
 	}
 
 
 
 
-	private function assertScreenRequiresAuth(string $template, string $screen, int $statuscode): void
+	private function assertUiScreenRequiresAuth(string $template, string $screen, int $statuscode): void
 	{
 		$response = $this->get("/dashboard/{$template}/ui/{$screen}");
 		$response->assertStatus($statuscode);
 		$response->assertRedirect('/login');
 	}
 
-	private function assertScreenCanBeAccessedByAuthenticatedUser(string $template, string $screen): void
+	private function assertUtilityScreenRequiresAuth(string $template, string $screen, int $statuscode): void
 	{
-		$user = User::factory()->create();
-		$userRole = Role::create(['name' => 'User']);
-		$privateAccess = Permission::create(['name' => 'Private Access']);
-		$userRole->givePermissionTo($privateAccess);
-		$user->assignRole('User');
+		$response = $this->get("/dashboard/{$template}/utilities/{$screen}");
+		$response->assertStatus($statuscode);
+		$response->assertRedirect('/login');
+	}
 
-		$this->post('/login', [
-			'login' => $user->username,
-			'password' => 'password',
-		]);
+	private function assertFormScreenRequiresAuth(string $template, string $screen, int $statuscode): void
+	{
+		$response = $this->get("/dashboard/{$template}/form/{$screen}");
+		$response->assertStatus($statuscode);
+		$response->assertRedirect('/login');
+	}
 
+	private function assertTableScreenRequiresAuth(string $template, string $screen, int $statuscode): void
+	{
+		$response = $this->get("/dashboard/{$template}/tables/{$screen}");
+		$response->assertStatus($statuscode);
+		$response->assertRedirect('/login');
+	}
+
+	private function assertUiScreenCanBeAccessedByAuthenticatedUser(string $template, string $screen): void
+	{
+		$this->post('/login', ['login' => $this->user->username, 'password' => 'password']);
 		$response = $this->get("/dashboard/{$template}/ui/{$screen}");
+		$response->assertStatus(200);
+	}
+
+	private function assertUtilityScreenCanBeAccessedByAuthenticatedUser(string $template, string $screen): void
+	{
+		$this->post('/login', ['login' => $this->user->username, 'password' => 'password']);
+		$response = $this->get("/dashboard/{$template}/utilities/{$screen}");
+		$response->assertStatus(200);
+	}
+
+	private function assertFormScreenCanBeAccessedByAuthenticatedUser(string $template, string $screen): void
+	{
+		$this->post('/login', ['login' => $this->user->username, 'password' => 'password']);
+		$response = $this->get("/dashboard/{$template}/form/{$screen}");
+		$response->assertStatus(200);
+	}
+
+	private function assertTableScreenCanBeAccessedByAuthenticatedUser(string $template, string $screen): void
+	{
+		$this->post('/login', ['login' => $this->user->username, 'password' => 'password']);
+		$response = $this->get("/dashboard/{$template}/tables/{$screen}");
 		$response->assertStatus(200);
 	}
 }

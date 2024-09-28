@@ -1,6 +1,0 @@
-key,value,category
-app_name,Mi Sitio Web,general
-app_language,en,general
-
-admin_email,admin@laravel.com,general
-items_per_page,10,general
