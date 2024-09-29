@@ -94,7 +94,8 @@ export const ColorsPage = ({ template }: Props) => {
 			<PageContent className={contentClassName}>
 				<div className="space-y-2">
 					<h3 className="font-bold">Semantic colors</h3>
-					<div className="max-w-xs pt-3 space-y-8 sm:max-w-lg md:max-w-xl">
+
+					<div className="max-w-xs pt-3 space-y-16 sm:max-w-lg md:max-w-xl">
 						{data.map(({ title, items }, idx) => (
 							<Fragment key={`row${idx}`}>
 								<Row {...{ title, items }} />
@@ -131,7 +132,7 @@ const Row = ({
 }) => (
 	<div className="space-y-2">
 		<div className="font-bold">{title}</div>
-		<div className="w-auto grid grid-cols-3 gap-3 sm:grid-cols-5 xl:grid-cols-6">
+		<div className="w-auto grid grid-cols-3 gap-6 sm:grid-cols-5 xl:grid-cols-6">
 			{items.map((e) => (
 				<Fragment key={`row${e.cn}`}>
 					{title === 'Foreground' || title === 'Content' ? (
@@ -141,14 +142,18 @@ const Row = ({
 							>
 								<span className="text-2xl mr-1.5">Aa</span>
 							</div>
-							<div className="text-sm font-semibold">{e.name}</div>
+							<div className="text-foreground-700 text-xs font-medium">
+								{e.name}
+							</div>
 						</div>
 					) : (
 						<div className="space-y-1">
 							<div
 								className={`border border-divider w-full aspect-video rounded-lg ${e.cn}`}
 							/>
-							<div className="text-sm font-semibold">{e.name}</div>
+							<div className="text-foreground-700 text-xs font-medium">
+								{e.name}
+							</div>
 						</div>
 					)}
 				</Fragment>
