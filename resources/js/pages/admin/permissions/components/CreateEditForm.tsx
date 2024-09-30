@@ -185,9 +185,6 @@ export const CreateEditForm = ({
 									setData('guard_name', val)
 									clearErrors('guard_name')
 								}}
-								// description={t(
-								// 	'You must select at least one guard to create permission.'
-								// )}
 							>
 								{Array.isArray(guards) &&
 									guards.map((e: string) => (

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Middleware\CheckRoleAccess;
 
 /**
@@ -33,6 +34,11 @@ Route::middleware(['auth', 'can:Admin Access'])
 
 		// Sessions
 		Route::delete('session/{id}/invalidate', [UserController::class, 'invalidate_session'])->name('session.invalidate');
+
+		// Notifications
+		Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.list');
+		Route::post('/notifications', [NotificationController::class, 'store'])->name('notification.store');
+		Route::match(['put', 'patch'], 'notifications/{notification}', [NotificationController::class, 'update'])->name('notification.update');
 	});
 
 

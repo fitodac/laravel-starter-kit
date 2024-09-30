@@ -86,7 +86,7 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 				[
 					'label' => 'UI Elements',
 					'route' => null,
-					'icon' => 'ri-notification-badge-fill',
+					'icon' => 'ri-function-add-fill',
 					'submenu' => [
 						[
 							'label' => 'Accordion',
@@ -225,8 +225,8 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 			],
 		];
 
-		// Roles and permissions
 		if (isset($role) && $role === 'Super Admin') {
+			// Roles and permissions
 			$item = [
 				'key' => 'roles_permissions',
 				'title' => 'Roles & permissions',
@@ -240,6 +240,21 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 						'label' => 'Permissions',
 						'route' => 'dashboard.permissions.list',
 						'icon' => 'ri-user-2-fill',
+					]
+				],
+			];
+
+			$menu[] = $item;
+
+			// Notifications
+			$item = [
+				'key' => 'notifications',
+				'title' => 'Notifications',
+				'menu' => [
+					[
+						'label' => 'Notifications',
+						'route' => 'dashboard.notification.list',
+						'icon' => 'ri-notification-badge-fill'
 					]
 				],
 			];

@@ -94,7 +94,7 @@ export const Page = ({ role, permissions, protected_roles }: Props) => {
 										{role ? (
 											<>
 												<p className="text-sm text-right">
-													Total users with this role
+													{t('Total users with this role')}
 												</p>
 												<p className="text-4xl font-light tracking-tighter text-right">
 													{role.users_count}
@@ -102,7 +102,7 @@ export const Page = ({ role, permissions, protected_roles }: Props) => {
 											</>
 										) : (
 											<p className="text-sm">
-												{t('Dere are no users with this role')}
+												{t('There are no users with this role')}
 											</p>
 										)}
 									</div>

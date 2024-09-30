@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useState } from 'react'
+import { createContext, type PropsWithChildren, useState } from 'react'
 import { tabsMapper } from '../helpers/mappers/tabs.mapper'
 
 import type { Image, MediaManagerContextType, ComponentProps } from '../types.d'

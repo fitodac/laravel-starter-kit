@@ -11,10 +11,6 @@ interface Props {
 	template?: Template
 }
 
-Object.entries(iconsList).map((e) => {
-	console.log(e[0], e[1])
-})
-
 const copyIcon = (cn: string) => {
 	try {
 		navigator.clipboard.writeText(`<i className="${cn}" />`)
@@ -69,7 +65,7 @@ export const IconsPage = ({ template }: Props) => {
 						<div id={key[0]} key={key[0]}>
 							<h3 className="font-semibold flex items-center gap-5">
 								{key[1].title}{' '}
-								<Chip size="sm" color="primary">
+								<Chip size="sm" color="primary" variant="flat">
 									{key[1].icons.length}
 								</Chip>
 							</h3>
