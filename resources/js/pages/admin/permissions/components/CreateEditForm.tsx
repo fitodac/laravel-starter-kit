@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useRef, type FormEvent } from 'react'
-import { usePage, useForm, router } from '@inertiajs/react'
+import { useContext } from 'react'
 import {
 	Button,
 	CheckboxGroup,
@@ -8,148 +7,48 @@ import {
 	cn,
 	Spinner,
 } from '@nextui-org/react'
-import { ClassicInput } from '@/components/form'
 import { t } from '@/i18n'
-import { toast } from 'react-toastify'
+import { PermissionContext } from '../providers/PermissionProvider'
+import { ClassicInput } from '@/components/form'
+import { useActions } from '../hooks/useActions'
+import { usePage } from '@inertiajs/react'
 
 import type { PageProps } from '@/types'
 import type { Permission } from '@/types/permissions'
+import type { PermissionContextProps } from '@/types/permissions'
 
-interface Props {
-	drawerOpen: boolean
-	setDrawerOpen: (open: boolean) => void
-	selectedPermission: Permission | null
-	setSelectedPermission: (selectedPermission: Permission | null) => void
-}
+export const CreateEditForm = () => {
+	const { state, dispatch } = useContext(
+		PermissionContext
+	) as PermissionContextProps
 
-export const CreateEditForm = ({
-	drawerOpen,
-	setDrawerOpen,
-	selectedPermission,
-	setSelectedPermission,
-}: Props) => {
 	const {
 		props: { guards },
 	} = usePage<PageProps>()
-	const inputName = useRef<HTMLInputElement>(null)
 
-	useEffect(() => {
-		setTimeout(() => {
-			inputName.current?.focus()
-		}, 300)
-	}, [drawerOpen])
-
-	const { data, post, patch, errors, setData, processing, clearErrors, reset } =
-		useForm({
-			name: '',
-			guard_name: ['web'],
-		})
-
-	/**
-	 * Effect hook that sets the form data when the `selectedPermission` state changes.
-	 *
-	 * @description
-	 * This effect hook is called when the `selectedPermission` state changes.
-	 * It sets the form data with the `name` and `guard_name` properties of the `selectedPermission` state.
-	 */
-	useEffect(() => {
-		if (selectedPermission !== null) {
-			setData({
-				name: selectedPermission.name,
-				guard_name: selectedPermission.guard_name.split(','),
-			})
-		}
-	}, [selectedPermission])
-
-	/**
-	 * Callback function that is called when the form is submitted successfully.
-	 *
-	 * @description
-	 * This function is called when the form is submitted successfully.
-	 * It resets the form, sets the `selectedPermission` state to `null`, and reloads the `permissions` prop.
-	 */
-	const successCallback = useCallback(() => {
-		setDrawerOpen(false)
-
-		reset()
-		setSelectedPermission(null)
-		router.reload({ only: ['permissions'] })
-	}, [])
-
-	/**
-	 * Handles the form submission by sending either a POST or PATCH request
-	 * depending on whether a permission is being created or updated.
-	 *
-	 * @param {FormEvent} e - The form event.
-	 */
-	const submit = (e: FormEvent) => {
-		e.preventDefault()
-
-		if (selectedPermission) {
-			/**
-			 * Sends a PATCH request to update the selected permission.
-			 *
-			 * @param {string} route - The route to send the PATCH request to.
-			 * @param {Object} options - The options for the PATCH request.
-			 * @param {boolean} options.preserveScroll - Whether to preserve the scroll position.
-			 * @param {Function} options.onSuccess - Callback function to handle a successful response.
-			 * @param {Function} options.onError - Callback function to handle errors.
-			 */
-			patch(
-				route('dashboard.permissions.update', {
-					permission: selectedPermission,
-				}),
-				{
-					preserveScroll: true,
-					// @ts-ignore
-					onSuccess: (resp: InertiaResponse) => {
-						if (resp.props.flash && resp.props.flash.success) {
-							toast.success(t(resp.props.flash.success))
-						}
-
-						successCallback()
-					},
-					onError: (errors) => console.log(errors),
-				}
-			)
-		} else {
-			/**
-			 * Sends a POST request to store permissions and handles the response.
-			 *
-			 * @param {string} route - The route to send the POST request to.
-			 * @param {Object} options - The options for the POST request.
-			 * @param {boolean} options.preserveScroll - Whether to preserve the scroll position.
-			 * @param {Function} options.onSuccess - Callback function to handle a successful response.
-			 * @param {InertiaResponse} options.onSuccess.resp - The response object from the server.
-			 * @param {Function} successCallback - Callback function to be called after a successful response.
-			 * @param {Function} options.onError - Callback function to handle errors.
-			 */
-			post(route('dashboard.permissions.store'), {
-				preserveScroll: true,
-				// @ts-ignore
-				onSuccess: (resp: InertiaResponse) => {
-					if (resp.props.flash && resp.props.flash.success) {
-						toast.success(t(resp.props.flash.success))
-					}
-
-					successCallback()
-				},
-				onError: (errors) => console.log(errors),
-			})
-		}
-	}
+	const {
+		data,
+		post,
+		patch,
+		errors,
+		setData,
+		processing,
+		clearErrors,
+		reset,
+		inputName,
+		submit,
+	} = useActions()
 
 	return (
 		<div
 			className={cn(
-				'bg-background border border-divider border-b-none mx-auto relative overflow-hidden',
-				'md:w-[600px]',
-				'shadow-black/20 rounded-t-xl shadow-xl'
+				'bg-background border border-divider border-b-none h-full relative overflow-hidden',
+				'w-full flex justify-center items-center'
 			)}
 		>
 			<div className="p-6 lg:px-10">
 				<div className="text-lg">
-					{selectedPermission
+					{state.selectedPermission
 						? t('Edit permission')
 						: t('Create new permission')}
 				</div>
@@ -171,8 +70,8 @@ export const CreateEditForm = ({
 						/>
 					</fieldset>
 
-					<fieldset>
-						{!selectedPermission ? (
+					{/* <fieldset>
+						{!state.selectedPermission ? (
 							<CheckboxGroup
 								isRequired
 								label="Guards"
@@ -197,18 +96,18 @@ export const CreateEditForm = ({
 							<div className="text-primary text-sm">
 								Guard:{' '}
 								<strong className="uppercase">
-									{selectedPermission.guard_name}
+									{state.selectedPermission.guard_name}
 								</strong>
 							</div>
 						)}
-					</fieldset>
+					</fieldset> */}
 
 					<div className="flex justify-end gap-5">
 						<Button
 							isDisabled={processing}
 							onPress={() => {
-								setDrawerOpen(false)
-								setSelectedPermission(null)
+								dispatch({ type: 'closeDrawer' })
+								dispatch({ type: 'setSelectedPermission', payload: null })
 								reset()
 							}}
 							className="w-32"

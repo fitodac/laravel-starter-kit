@@ -1,11 +1,11 @@
 import { useReducer, type PropsWithChildren, createContext } from 'react'
 import { useDisclosure } from '@nextui-org/react'
 
-import type { NotificationContextProps } from '@/types/notifications'
+import type { PermissionContextProps } from '@/types/permissions'
 
 const initialState = {
 	drawerOpen: false,
-	selectedNotification: null,
+	selectedPermission: null,
 }
 
 function reducer(state: any, action: any) {
@@ -14,25 +14,26 @@ function reducer(state: any, action: any) {
 			return { ...state, drawerOpen: true }
 		case 'closeDrawer':
 			return { ...state, drawerOpen: false }
-		case 'setSelectedNotification':
-			return { ...state, selectedNotification: action.payload }
+		case 'setSelectedPermission':
+			return { ...state, selectedPermission: action.payload }
 		default:
 			throw new Error()
 	}
 }
 
-export const NotificationContext =
-	createContext<NotificationContextProps | null>(null)
+export const PermissionContext = createContext<PermissionContextProps | null>(
+	null
+)
 
-export const NotificationProvider = ({ children }: PropsWithChildren) => {
+export const PermissionProvider = ({ children }: PropsWithChildren) => {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
 	return (
-		<NotificationContext.Provider
+		<PermissionContext.Provider
 			value={{ state, dispatch, isOpen, onOpen, onOpenChange }}
 		>
 			{children}
-		</NotificationContext.Provider>
+		</PermissionContext.Provider>
 	)
 }

@@ -78,7 +78,7 @@ class RoleController extends Controller
 
 		$role->givePermissionTo($request->permissions);
 
-		return redirect()->route('dashboard.roles.list')->with('success', 'Role created successfully.');
+		return redirect()->route('dashboard.role.list')->with('success', 'Role created successfully.');
 	}
 
 	/**
@@ -116,7 +116,7 @@ class RoleController extends Controller
 		$role->update(['name' => $request->name]);
 		$role->syncPermissions($request->permissions);
 
-		return redirect()->route('dashboard.roles.list')->with('success', 'Role updated successfully.');
+		return redirect()->route('dashboard.role.list')->with('success', 'Role updated successfully.');
 	}
 
 	/**
@@ -128,6 +128,6 @@ class RoleController extends Controller
 	public function destroy(Role $role)
 	{
 		$role->delete();
-		return redirect()->route('dashboard.roles.list')->with('success', 'Role deleted successfully.');
+		return redirect()->route('dashboard.role.list')->with('success', 'Role deleted successfully.');
 	}
 }

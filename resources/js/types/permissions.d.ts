@@ -1,3 +1,11 @@
+export type PermissionContextProps = {
+	state: State
+	dispatch: Dispatch<any>
+	isOpen: boolean
+	onOpen: () => void
+	onOpenChange: () => void
+}
+
 export interface Permissions {
 	current_page: number
 	data: Permission[]

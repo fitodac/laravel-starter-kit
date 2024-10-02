@@ -1,15 +1,15 @@
+import { useContext } from 'react'
 import { Layout } from '@/layouts/admin/corporate/Layout'
 import { PageHeader, PageContent } from '@/components'
-import { Button, cn } from '@nextui-org/react'
+import { Button } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { NotificationsList, CreateEditForm } from './components'
-import { useContext } from 'react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import {
 	NotificationProvider,
 	NotificationContext,
-} from './providers/notificationProvider'
+} from './providers/NotificationProvider'
 
 import { NotificationContextProps } from '@/types/notifications'
 
@@ -28,8 +28,8 @@ const Page = () => {
 						className="px-6"
 						variant="flat"
 						onPress={() => {
-							dispatch({ type: 'openDrawer' })
 							dispatch({ type: 'setSelectedNotification', payload: null })
+							dispatch({ type: 'openDrawer' })
 						}}
 					>
 						{t('New notification')}
@@ -47,23 +47,12 @@ const Page = () => {
 				{...{
 					open: state.drawerOpen,
 					direction: 'bottom',
-					size: '80%',
+					size: '85%',
 					duration: 250,
-					// className: cn(state.drawerOpen ? 'block' : 'hidden'),
 				}}
 			>
 				<CreateEditForm />
 			</Drawer>
-
-			{/* <DeletePermission
-				{...{
-					selectedPermission,
-					setSelectedPermission,
-					isOpen,
-					onOpen,
-					onOpenChange,
-				}}
-			/> */}
 		</>
 	)
 }

@@ -1,19 +1,22 @@
+import { useContext } from 'react'
 import { Layout } from '@/layouts/admin/corporate/Layout'
 import { PageHeader, PageContent } from '@/components'
-import { PermissionsList, CreateEditForm, DeletePermission } from './components'
-import { Button, useDisclosure } from '@nextui-org/react'
+import { Button } from '@nextui-org/react'
 import { t } from '@/i18n'
-import { useState } from 'react'
+import { PermissionsList, CreateEditForm } from './components'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
+import {
+	PermissionProvider,
+	PermissionContext,
+} from './providers/PermissionProvider'
 
-import type { Permission } from '@/types/permissions'
+import type { Permission, PermissionContextProps } from '@/types/permissions'
 
 const Page = () => {
-	const [drawerOpen, setDrawerOpen] = useState(false)
-	const [selectedPermission, setSelectedPermission] =
-		useState<Permission | null>(null)
-	const { isOpen, onOpen, onOpenChange } = useDisclosure()
+	const { state, dispatch } = useContext(
+		PermissionContext
+	) as PermissionContextProps
 
 	return (
 		<>
@@ -25,8 +28,8 @@ const Page = () => {
 						className="px-6"
 						variant="flat"
 						onPress={() => {
-							setDrawerOpen(true)
-							setSelectedPermission(null)
+							dispatch({ type: 'setSelectedPermission', payload: null })
+							dispatch({ type: 'openDrawer' })
 						}}
 					>
 						{t('Add new permission')}
@@ -35,47 +38,29 @@ const Page = () => {
 			</PageHeader>
 
 			<PageContent>
-				<PermissionsList
-					{...{ setDrawerOpen, setSelectedPermission, onOpen }}
-				/>
+				<PermissionsList />
 			</PageContent>
 
 			<div className="h-20" />
 
 			<Drawer
 				{...{
-					open: drawerOpen,
+					open: state.drawerOpen,
 					direction: 'bottom',
-					size: 370,
+					size: '85%',
 					duration: 250,
-					className: '!bg-transparent flex !shadow-none',
 				}}
 			>
-				<CreateEditForm
-					{...{
-						setDrawerOpen,
-						selectedPermission,
-						setSelectedPermission,
-						drawerOpen,
-					}}
-				/>
+				<CreateEditForm />
 			</Drawer>
-
-			<DeletePermission
-				{...{
-					selectedPermission,
-					setSelectedPermission,
-					isOpen,
-					onOpen,
-					onOpenChange,
-				}}
-			/>
 		</>
 	)
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: String(t('Permissions')) }} />
+	<PermissionProvider>
+		<Layout {...{ children: page, pageTitle: String(t('Permissions')) }} />
+	</PermissionProvider>
 )
 
 export default Page

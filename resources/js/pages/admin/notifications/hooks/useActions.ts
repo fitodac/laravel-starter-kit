@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef, useContext, useCallback } from 'react'
 import { usePage, useForm, router } from '@inertiajs/react'
-import { NotificationContext } from '../providers/notificationProvider'
+import { NotificationContext } from '../providers/NotificationProvider'
 import { toast } from 'react-toastify'
 import { t } from '@/i18n'
 
@@ -15,33 +15,63 @@ export const useActions = () => {
 		useForm({
 			title: '',
 			body: '',
-			notification_for_all: true,
-			user_ids: [],
+			used_dates: [],
 		})
 
-	const successCallback = useCallback(() => {
-		dispatch({ type: 'closeDrawer' })
+	useEffect(() => {
+		if (state.selectedNotification)
+			setData({
+				...state.selectedNotification,
+				used_dates: state.selectedNotification.used_dates as never[],
+			})
+		console.log(state.selectedNotification)
+	}, [state.selectedNotification])
 
-		reset()
-		dispatch({ type: 'setSelectedNotification', payload: null })
-		router.reload({ only: ['notifications'] })
-	}, [])
-
+	/**
+	 * Submits the form data to the server.
+	 *
+	 * If the user is editing an existing notification, it will call the `update` method
+	 * and then reload the page.
+	 *
+	 * If the user is creating a new notification, it will call the `store` method and
+	 * then reload the page.
+	 *
+	 * @param {FormEvent} e - The form event.
+	 */
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
 
-		console.log('data', data)
-
 		if (state.selectedNotification) {
+			patch(
+				route('dashboard.notification.update', {
+					notification: state.selectedNotification,
+				}),
+				{
+					preserveScroll: true,
+					onSuccess: () => {
+						dispatch({ type: 'closeDrawer' })
+						reset()
+						dispatch({ type: 'setSelectedNotification', payload: null })
+						router.reload({ only: ['notifications'] })
+					},
+					onError: (errors) => console.log('error', errors),
+				}
+			)
 		} else {
 			post(route('dashboard.notification.store'), {
+				preserveScroll: true,
 				// @ts-ignore
 				onSuccess: (resp: InertiaResponse) => {
 					if (resp.props.flash && resp.props.flash.success) {
 						toast.success(t(resp.props.flash.success))
 					}
 
-					successCallback()
+					dispatch({
+						type: 'setSelectedNotification',
+						payload: resp.props.notifications.data.at(0),
+					})
+
+					router.reload({ only: ['notifications'] })
 				},
 				onError: (errors) => console.log('error', errors),
 			})

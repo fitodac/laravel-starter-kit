@@ -8,10 +8,11 @@ import {
 	cn,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
-import { NotificationContext } from '../providers/notificationProvider'
+import { NotificationContext } from '../providers/NotificationProvider'
 import { ClassicInput } from '@/components/form'
 import { useActions } from '../hooks/useActions'
-import { NotificationContextProps } from '@/types/notifications'
+
+import type { NotificationContextProps } from '@/types/notifications'
 
 export const CreateEditForm = () => {
 	const { state, dispatch } = useContext(
@@ -77,12 +78,12 @@ export const CreateEditForm = () => {
 						/>
 					</fieldset>
 
-					<fieldset>
+					{/* <fieldset>
 						<Checkbox
 							isDisabled={processing}
 							defaultSelected
-							isSelected={data.notification_for_all}
-							onValueChange={(e) => setData('notification_for_all', e)}
+							isSelected={data.notify_all_users}
+							onValueChange={(e) => setData('notify_all_users', e)}
 							className="items-start"
 						>
 							<div className="flex flex-col leading-tight">
@@ -92,9 +93,9 @@ export const CreateEditForm = () => {
 								</small>
 							</div>
 						</Checkbox>
-					</fieldset>
+					</fieldset> */}
 
-					<fieldset className="opacity-30">
+					{/* <fieldset className="opacity-30">
 						<Checkbox
 							isDisabled={processing}
 							defaultSelected
@@ -107,7 +108,7 @@ export const CreateEditForm = () => {
 								</small>
 							</div>
 						</Checkbox>
-					</fieldset>
+					</fieldset> */}
 
 					<div className="flex justify-end gap-5">
 						<Button

@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Notifications\InAppNotification;
 use App\Models\User;
+use App\Models\InAppNotification;
+use Inertia\Response;
 
 class NotificationController extends Controller
 {
@@ -16,9 +17,17 @@ class NotificationController extends Controller
 	 * 
 	 * 
 	 */
-	public function index()
+	public function index(): Response
 	{
-		return Inertia::render('admin/notifications/Notifications');
+		$per_page = 15;
+
+		$notifications = InAppNotification::orderBy('created_at', 'desc')->paginate($per_page);
+		return Inertia::render(
+			'admin/notifications/Notifications',
+			compact(
+				'notifications'
+			)
+		);
 	}
 
 
@@ -30,30 +39,29 @@ class NotificationController extends Controller
 	 */
 	public function store(Request $request)
 	{
+
 		$request->validate([
-			'body' => 'required'
+			'body' => 'required',
 		], [
 			'body.required' => 'Notification body is required.',
 		]);
 
-		$title = is_null($request->title) ? '' : $request->title;
+		InAppNotification::create($request->all());
 
-		// $user = User::find(1);
-		// $user->notify(new InAppNotification($title, $request->body));
-		// dd($user);
+		return back()->with('success', 'Notification created successfully.');
 
-		if ($request->notification_for_all) {
-			$users = User::all();
+		// if ($request->notification_for_all) {
+		// 	$users = User::all();
 
-			foreach ($users as $user) {
-				$user->notify(new InAppNotification($title, $request->body));
-			}
+		// 	foreach ($users as $user) {
+		// 		$user->notify(new InAppNotification($title, $request->body));
+		// 	}
 
-			return back()->with('success', 'Notifications sent successfully.');
-		} else {
-			// 	dd($request->all());
-			// 	$notification = new InAppNotification($title, $request->body, $request->user);
-		}
+		// 	return back()->with('success', 'Notifications sent successfully.');
+		// } else {
+		// 	dd($request->all());
+		// 	$notification = new InAppNotification($title, $request->body, $request->user);
+		// }
 	}
 
 
@@ -63,9 +71,17 @@ class NotificationController extends Controller
 	 * 
 	 * 
 	 */
-	public function update(Request $request, string $id)
+	public function update(Request $request, InAppNotification $notification)
 	{
-		//
+		$request->validate([
+			'body' => 'required',
+		], [
+			'body.required' => 'Notification body is required.',
+		]);
+
+		$notification->update($request->all());
+
+		return back()->with('success', 'Notification updated successfully.');
 	}
 
 	/**
@@ -74,8 +90,9 @@ class NotificationController extends Controller
 	 * 
 	 * 
 	 */
-	public function destroy(string $id)
+	public function destroy(InAppNotification $notification)
 	{
-		//
+		$notification->delete();
+		return back()->with('success', 'Notification deleted successfully.');
 	}
 }

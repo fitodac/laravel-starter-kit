@@ -39,6 +39,7 @@ Route::middleware(['auth', 'can:Admin Access'])
 		Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.list');
 		Route::post('/notifications', [NotificationController::class, 'store'])->name('notification.store');
 		Route::match(['put', 'patch'], 'notifications/{notification}', [NotificationController::class, 'update'])->name('notification.update');
+		Route::delete('notifications/{notification}', [NotificationController::class, 'destroy'])->name('notification.destroy');
 	});
 
 
@@ -54,7 +55,7 @@ Route::middleware(['auth', 'role:Super Admin'])
 		 * 
 		 * 
 		 */
-		Route::get('roles', [RoleController::class, 'index'])->name('roles.list');
+		Route::get('roles', [RoleController::class, 'index'])->name('role.list');
 		Route::get('roles/create', [RoleController::class, 'create'])->name('role.create');
 		Route::post('roles', [RoleController::class, 'store'])->name('role.store');
 		Route::get('roles/{role}/edit', [RoleController::class, 'edit'])
@@ -69,10 +70,10 @@ Route::middleware(['auth', 'role:Super Admin'])
 		 * 
 		 * 
 		 */
-		Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.list');
-		Route::post('permissions', [PermissionController::class, 'store'])->name('permissions.store');
-		Route::match(['put', 'patch'], 'permissions/{permission}', [PermissionController::class, 'update'])->name('permissions.update');
-		Route::delete('permissions/{permission}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
+		Route::get('permissions', [PermissionController::class, 'index'])->name('permission.list');
+		Route::post('permissions', [PermissionController::class, 'store'])->name('permission.store');
+		Route::match(['put', 'patch'], 'permissions/{permission}', [PermissionController::class, 'update'])->name('permission.update');
+		Route::delete('permissions/{permission}', [PermissionController::class, 'destroy'])->name('permission.destroy');
 
 		/**
 		 * Administrators

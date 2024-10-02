@@ -10,16 +10,16 @@ import {
 } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { toast } from 'react-toastify'
-import { PermissionContext } from '../providers/PermissionProvider'
+import { NotificationContext } from '../providers/NotificationProvider'
 
-import type { PermissionContextProps } from '@/types/permissions'
+import type { NotificationContextProps } from '@/types/notifications'
 
-export const DeletePermission = () => {
+export const DeleteNotification = () => {
 	const { delete: destroy } = useForm()
 
 	const { isOpen, onOpenChange, state, dispatch } = useContext(
-		PermissionContext
-	) as PermissionContextProps
+		NotificationContext
+	) as NotificationContextProps
 
 	return (
 		<Modal
@@ -32,7 +32,7 @@ export const DeletePermission = () => {
 				{(onClose) => (
 					<>
 						<ModalHeader className="flex flex-col gap-1 select-none">
-							{t('Confirm permission deletion')}
+							{t('Confirm notification deletion')}
 						</ModalHeader>
 
 						<ModalBody className="pt-0">
@@ -40,7 +40,14 @@ export const DeletePermission = () => {
 						</ModalBody>
 
 						<ModalFooter className="gap-x-4">
-							<Button fullWidth variant="ghost" onPress={onClose}>
+							<Button
+								fullWidth
+								variant="ghost"
+								onPress={() => {
+									onClose()
+									dispatch({ type: 'setSelectedNotification', payload: null })
+								}}
+							>
 								{t('Cancel')}
 							</Button>
 
@@ -49,8 +56,8 @@ export const DeletePermission = () => {
 								color="danger"
 								onPress={() => {
 									destroy(
-										route('dashboard.permission.destroy', {
-											permission: state.            selectedPermission,
+										route('dashboard.notification.destroy', {
+											notification: state.selectedNotification,
 										}),
 										{
 											preserveScroll: true,

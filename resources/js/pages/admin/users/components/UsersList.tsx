@@ -13,21 +13,12 @@ import {
 	type SortDescriptor,
 	Chip,
 	cn,
+	Spinner,
 } from '@nextui-org/react'
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
 import { Link, router, usePage } from '@inertiajs/react'
 import type { PageProps, User, Users } from '@/types'
-
-const columns = [
-	{ key: 'id', label: '#' },
-	{ key: 'username', label: t('Username') },
-	{ key: 'name', label: t('Name') },
-	{ key: 'company', label: t('Company') },
-	{ key: 'status', label: t('Status') },
-	{ key: 'sessions', label: t('Sessions') },
-	{ key: 'actions', label: '' },
-] as { key: string; label: string; allowsSorting?: boolean }[]
 
 export const UsersList = () => {
 	const { users, total } = usePage<PageProps>().props as unknown as {
@@ -47,68 +38,70 @@ export const UsersList = () => {
 	// 	if (data.data.length) setIsLoading(false)
 	// }, [data])
 
-	const renderCell = useCallback((user: User, columnKey: string) => {
-		return {
-			id: <>{user.id}</>,
-			username: (
-				<>
-					<div className="flex gap-x-3 items-center">
-						<Avatar
-							src={`/storage/img/users/avatars/${user.profile_picture}`}
-							name={user.name[0] + user.lastname[0]}
-							radius="full"
-							isBordered={user.sessions?.length ? true : false}
-							color={user.sessions?.length ? 'success' : 'default'}
-						/>
+	const renderCell = useCallback(
+		(user: User, columnKey: string) =>
+			({
+				id: <>{user.id}</>,
+				username: (
+					<>
+						<div className="flex gap-x-3 items-center">
+							<Avatar
+								src={`/storage/img/users/avatars/${user.profile_picture}`}
+								name={user.name[0] + user.lastname[0]}
+								radius="full"
+								isBordered={user.sessions?.length ? true : false}
+								color={user.sessions?.length ? 'success' : 'default'}
+							/>
 
-						{user.username}
-					</div>
-				</>
-			),
-			name: (
-				<span className="font-medium">{`${user.name} ${user.lastname}`}</span>
-			),
-			company: user.company,
-			status: (
-				<>
-					<Chip
-						size="sm"
-						color={user.status === 'enabled' ? 'success' : 'danger'}
-						variant="dot"
-					>
-						{user.status}
-					</Chip>
-				</>
-			),
-			sessions: (
-				<>
-					<Chip
-						size="sm"
-						color={user.sessions?.length ? 'success' : 'default'}
-						variant="flat"
-						className={cn(!user.sessions?.length && 'text-opacity-60')}
-					>
-						{user.sessions?.length ? 'Active' : 'Inactive'}
-					</Chip>
-				</>
-			),
-			actions: (
-				<div className="flex justify-end">
-					<div className="space-x-2">
-						<Button
+							{user.username}
+						</div>
+					</>
+				),
+				name: (
+					<span className="font-medium">{`${user.name} ${user.lastname}`}</span>
+				),
+				company: user.company,
+				status: (
+					<>
+						<Chip
 							size="sm"
-							color="primary"
-							variant="flat"
-							as={Link}
-							href={route('dashboard.user.edit', { user })}
+							color={user.status === 'enabled' ? 'success' : 'danger'}
+							variant="dot"
 						>
-							{t('Edit')}
-						</Button>
+							{user.status}
+						</Chip>
+					</>
+				),
+				sessions: (
+					<>
+						<Chip
+							size="sm"
+							color={user.sessions?.length ? 'success' : 'default'}
+							variant="flat"
+							className={cn(!user.sessions?.length && 'text-opacity-60')}
+						>
+							{user.sessions?.length ? 'Active' : 'Inactive'}
+						</Chip>
+					</>
+				),
+				actions: (
+					<div className="flex justify-end">
+						<div className="space-x-2">
+							<Button
+								size="sm"
+								color="primary"
+								variant="flat"
+								as={Link}
+								href={route('dashboard.user.edit', { user })}
+							>
+								{t('Edit')}
+							</Button>
+						</div>
 					</div>
-				</div>
-			),
-		}[columnKey]
-	}, [])
+				),
+			}[columnKey]),
+		[]
+	)
 
 	return (
 		<>
@@ -166,7 +159,7 @@ export const UsersList = () => {
 
 					<TableBody
 						items={users.data}
-						// loadingContent={<Spinner label={t('loading')} />}
+						loadingContent={<Spinner label={t('loading').toString()} />}
 						// isLoading={isLoading}
 					>
 						{(item: User) => (
@@ -182,3 +175,13 @@ export const UsersList = () => {
 		</>
 	)
 }
+
+const columns = [
+	{ key: 'id', label: '#' },
+	{ key: 'username', label: t('Username') },
+	{ key: 'name', label: t('Name') },
+	{ key: 'company', label: t('Company') },
+	{ key: 'status', label: t('Status') },
+	{ key: 'sessions', label: t('Sessions') },
+	{ key: 'actions', label: '' },
+] as { key: string; label: string; allowsSorting?: boolean }[]

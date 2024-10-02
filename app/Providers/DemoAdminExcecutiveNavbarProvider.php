@@ -233,12 +233,12 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 				'menu' => [
 					[
 						'label' => 'Roles',
-						'route' => 'dashboard.roles.list',
+						'route' => 'dashboard.role.list',
 						'icon' => 'ri-user-settings-line'
 					],
 					[
 						'label' => 'Permissions',
-						'route' => 'dashboard.permissions.list',
+						'route' => 'dashboard.permission.list',
 						'icon' => 'ri-user-2-fill',
 					]
 				],
@@ -252,7 +252,7 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 				'title' => 'Notifications',
 				'menu' => [
 					[
-						'label' => 'Notifications',
+						'label' => 'In App Notifications',
 						'route' => 'dashboard.notification.list',
 						'icon' => 'ri-notification-badge-fill'
 					]

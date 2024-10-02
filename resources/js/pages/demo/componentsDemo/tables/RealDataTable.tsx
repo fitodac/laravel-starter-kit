@@ -17,16 +17,6 @@ import { router } from '@inertiajs/react'
 
 import type { ProductsProps } from '@/pages/demo/types'
 
-const columns = [
-	// { key: 'id', label: '#' },
-	{ key: 'name', label: 'Name', width: 550 },
-	// { key: 'description', label: 'Description' },
-	{ key: 'category', label: 'Category', width: 200 },
-	{ key: 'price', label: 'Price', width: 200 },
-	{ key: 'sku', label: 'SKU', width: 150 },
-	// { key: 'stock', label: 'Stock' },
-]
-
 export const RealDataTable = ({ data }: { data: ProductsProps }) => {
 	const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))
 	const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
@@ -120,3 +110,10 @@ export const RealDataTable = ({ data }: { data: ProductsProps }) => {
 		</>
 	)
 }
+
+const columns = [
+	{ key: 'name', label: 'Name', width: 550 },
+	{ key: 'category', label: 'Category', width: 200 },
+	{ key: 'price', label: 'Price', width: 200 },
+	{ key: 'sku', label: 'SKU', width: 150 },
+]

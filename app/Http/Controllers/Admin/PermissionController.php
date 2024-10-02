@@ -21,7 +21,7 @@ class PermissionController extends Controller
 	{
 		$per_page = 15;
 
-		$permissions = Permission::paginate($per_page);
+		$permissions = Permission::orderBy('created_at', 'desc')->paginate($per_page);
 		$guards = config('settings.auth.guard_permissions');
 		$protected_permissions = config('settings.auth.protected_permissions');
 
