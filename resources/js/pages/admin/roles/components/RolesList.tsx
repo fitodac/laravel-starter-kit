@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import {
 	Table,
 	TableHeader,
@@ -6,26 +6,28 @@ import {
 	TableColumn,
 	TableRow,
 	TableCell,
-	Pagination,
-	Button,
-	Badge,
 	type SortDescriptor,
-	Chip,
-	cn,
+	Spinner,
 } from '@nextui-org/react'
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
-import { Link, router, usePage } from '@inertiajs/react'
+import { usePage } from '@inertiajs/react'
+import { RolesListCell, RolesListPager } from './list'
+import { DeleteRole } from './DeleteRole'
+import { RoleContext } from '../providers/RoleProvider'
 
-import type { PageProps, User, Users } from '@/types'
-import type { Roles, Role } from '@/types/roles'
+import type { PageProps } from '@/types'
+import type { Roles, Role, RoleContextProps } from '@/types/roles'
 
 export const RolesList = () => {
 	const {
-		props: { roles },
+		props: { roles, protected_roles },
 	} = usePage<PageProps>()
 
 	const { links, current_page, data } = roles as Roles
+	const undeletableRoles = protected_roles as string[]
+
+	const { onOpen, dispatch } = useContext(RoleContext) as RoleContextProps
 
 	// const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))
 	// const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
@@ -37,43 +39,6 @@ export const RolesList = () => {
 	// 	if (data.data.length) setIsLoading(false)
 	// }, [data])
 
-	const renderCell = useCallback(
-		(role: Role, columnKey: string) =>
-			({
-				id: <>{role.id}</>,
-				name: <span className="font-medium">{role.name}</span>,
-				guard_name: role.guard_name,
-				actions: (
-					<div className="flex justify-end">
-						<div className="space-x-2">
-							<>
-								<Button
-									size="sm"
-									color="primary"
-									variant="flat"
-									as={Link}
-									href={route('dashboard.role.edit', { role })}
-								>
-									{t('Edit')}
-								</Button>
-							</>
-						</div>
-					</div>
-				),
-				permissions: (
-					<div className="flex gap-2">
-						{role.permissions.map((permission) => (
-							<Chip key={permission.id} size="sm" color="primary">
-								{permission.name}
-							</Chip>
-						))}
-					</div>
-				),
-				users_count: role.users_count,
-			}[columnKey]),
-		[]
-	)
-
 	return (
 		<>
 			<Table
@@ -83,31 +48,7 @@ export const RolesList = () => {
 					th: '[&]:first:rounded-none [&]:last:rounded-none',
 					td: 'border-t border-content3',
 				}}
-				bottomContent={
-					<div className="flex justify-between items-center">
-						{links && (
-							<div className="flex w-full justify-end">
-								<Pagination
-									size="sm"
-									isCompact
-									showControls
-									showShadow
-									variant="light"
-									color="primary"
-									page={current_page}
-									total={links.length - 2 || 0}
-									classNames={{ wrapper: 'shadow-none' }}
-									onChange={(page) =>
-										router.reload({
-											data: { page },
-											only: ['roles'],
-										})
-									}
-								/>
-							</div>
-						)}
-					</div>
-				}
+				bottomContent={<RolesListPager {...{ links, current_page }} />}
 			>
 				<TableHeader columns={columns}>
 					{(column) => (
@@ -122,16 +63,30 @@ export const RolesList = () => {
 
 				<TableBody
 					items={data}
-					// loadingContent={<Spinner label={t('loading')} />}
+					loadingContent={<Spinner label={t('loading').toString()} />}
 					// isLoading={isLoading}
 				>
 					{(item: Role) => (
 						<TableRow key={item.id}>
-							{(key) => <TableCell>{renderCell(item, String(key))}</TableCell>}
+							{(key) => (
+								<TableCell>
+									{RolesListCell({
+										...{
+											item,
+											key: String(key),
+											dispatch,
+											onOpen,
+											protected_roles: undeletableRoles,
+										},
+									})}
+								</TableCell>
+							)}
 						</TableRow>
 					)}
 				</TableBody>
 			</Table>
+
+			<DeleteRole />
 		</>
 	)
 }

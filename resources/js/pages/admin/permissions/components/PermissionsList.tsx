@@ -25,12 +25,8 @@ import type {
 
 export const PermissionsList = () => {
 	const {
-		props: { permissions, guards, protected_permissions },
+		props: { permissions, protected_permissions },
 	} = usePage<PageProps>()
-
-	console.log('permissions', permissions)
-	console.log('guards', guards)
-	console.log('protected_permissions', protected_permissions)
 
 	const { links, current_page, data } = permissions as Permissions
 	const undeletablePermissions = protected_permissions as string[]

@@ -164,7 +164,7 @@ export const Page = ({ role, permissions, protected_roles }: Props) => {
 									type="button"
 									as={Link}
 									isDisabled={processing}
-									href={route('dashboard.role.list')}
+									href={route('dashboard.roles.list')}
 									className="w-32"
 								>
 									{t('Cancel')}

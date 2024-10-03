@@ -81,7 +81,7 @@ class AdminNavbarProvider extends ServiceProvider
 		// UI components
 		$menu[] = [
 			'key' => 'ui-components',
-			'title' => 'Ui Components',
+			'title' => 'UX/UI',
 			'menu' => [
 				[
 					'label' => 'UI Elements',
@@ -221,6 +221,12 @@ class AdminNavbarProvider extends ServiceProvider
 							'route' => 'dashboard.corporate.tables.real-data'
 						]
 					]
+				],
+
+				[
+					'label' => 'Apex Charts',
+					'route' => 'dashboard.corporate.charts.apexcharts',
+					'icon' => 'ri-pie-chart-fill'
 				]
 			],
 		];

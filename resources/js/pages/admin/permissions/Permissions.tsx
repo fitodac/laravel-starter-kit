@@ -11,7 +11,7 @@ import {
 	PermissionContext,
 } from './providers/PermissionProvider'
 
-import type { Permission, PermissionContextProps } from '@/types/permissions'
+import type { PermissionContextProps } from '@/types/permissions'
 
 const Page = () => {
 	const { state, dispatch } = useContext(

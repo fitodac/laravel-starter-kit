@@ -33,3 +33,5 @@ export * from './utilities/imagesUploader'
 
 export * from './tables/RealDataTable'
 export * from './tables/TableStyles'
+
+export * from './charts/ApexCharts'

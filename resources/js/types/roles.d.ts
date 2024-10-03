@@ -1,5 +1,13 @@
 import { Permission } from './permissions'
 
+export type RoleContextProps = {
+	state: State
+	dispatch: Dispatch<any>
+	isOpen: boolean
+	onOpen: () => void
+	onOpenChange: () => void
+}
+
 export interface Roles {
 	current_page: number
 	data: Role[]

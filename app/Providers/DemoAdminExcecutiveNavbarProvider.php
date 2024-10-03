@@ -81,7 +81,7 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 		// UI components
 		$menu[] = [
 			'key' => 'ui-components',
-			'title' => 'Ui Components',
+			'title' => 'UX/UI',
 			'menu' => [
 				[
 					'label' => 'UI Elements',
@@ -221,7 +221,14 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 							'route' => 'dashboard.executive.tables.real-data'
 						]
 					]
+				],
+
+				[
+					'label' => 'Apex Charts',
+					'route' => 'dashboard.executive.charts.apexcharts',
+					'icon' => 'ri-pie-chart-fill'
 				]
+
 			],
 		];
 

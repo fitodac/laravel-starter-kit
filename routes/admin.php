@@ -56,11 +56,7 @@ Route::middleware(['auth', 'role:Super Admin'])
 		 * 
 		 */
 		Route::get('roles', [RoleController::class, 'index'])->name('role.list');
-		Route::get('roles/create', [RoleController::class, 'create'])->name('role.create');
 		Route::post('roles', [RoleController::class, 'store'])->name('role.store');
-		Route::get('roles/{role}/edit', [RoleController::class, 'edit'])
-			->middleware(CheckRoleAccess::class)
-			->name('role.edit');
 		Route::match(['put', 'patch'], 'roles/{role}', [RoleController::class, 'update'])->name('role.update');
 		Route::delete('roles/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
 

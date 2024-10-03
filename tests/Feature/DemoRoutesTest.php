@@ -164,6 +164,12 @@ class DemoRoutesTest extends TestCase
 		$this->assertUtilityScreenRequiresAuth('corporate', 'icons', 302);
 		$this->assertUtilityScreenCanBeAccessedByAuthenticatedUser('corporate', 'icons');
 	}
+	/** Charts */
+	public function test_corporate_apex_charts_screen_can_be_rendered(): void
+	{
+		$this->assertChartsScreenRequiresAuth('corporate', 'apexcharts', 302);
+		$this->assertChartsScreenCanBeAccessedByAuthenticatedUser('corporate', 'apexcharts');
+	}
 
 
 
@@ -303,6 +309,12 @@ class DemoRoutesTest extends TestCase
 		$this->assertUtilityScreenRequiresAuth('executive', 'icons', 302);
 		$this->assertUtilityScreenCanBeAccessedByAuthenticatedUser('executive', 'icons');
 	}
+	/** Charts */
+	public function test_executive_apex_charts_screen_can_be_rendered(): void
+	{
+		$this->assertChartsScreenRequiresAuth('executive', 'apexcharts', 302);
+		$this->assertChartsScreenCanBeAccessedByAuthenticatedUser('executive', 'apexcharts');
+	}
 
 
 
@@ -335,6 +347,13 @@ class DemoRoutesTest extends TestCase
 		$response->assertRedirect('/login');
 	}
 
+	private function assertChartsScreenRequiresAuth(string $template, string $screen, int $statuscode): void
+	{
+		$response = $this->get("/dashboard/{$template}/charts/{$screen}");
+		$response->assertStatus($statuscode);
+		$response->assertRedirect('/login');
+	}
+
 	private function assertUiScreenCanBeAccessedByAuthenticatedUser(string $template, string $screen): void
 	{
 		$this->post('/login', ['login' => $this->user->username, 'password' => 'password']);
@@ -360,6 +379,13 @@ class DemoRoutesTest extends TestCase
 	{
 		$this->post('/login', ['login' => $this->user->username, 'password' => 'password']);
 		$response = $this->get("/dashboard/{$template}/tables/{$screen}");
+		$response->assertStatus(200);
+	}
+
+	private function assertChartsScreenCanBeAccessedByAuthenticatedUser(string $template, string $screen): void
+	{
+		$this->post('/login', ['login' => $this->user->username, 'password' => 'password']);
+		$response = $this->get("/dashboard/{$template}/charts/{$screen}");
 		$response->assertStatus(200);
 	}
 }

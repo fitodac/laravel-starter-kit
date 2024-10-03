@@ -43,7 +43,7 @@ export const CreateEditForm = () => {
 				<div className="text-lg">
 					{state.selectedNotification
 						? t('Edit notification')
-						: t('Create new notification')}
+						: t('New notification')}
 				</div>
 
 				<Divider className="my-4" />

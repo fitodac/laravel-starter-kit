@@ -42,6 +42,9 @@ $pages = [
 		'styles' => 'Tables styles',
 		'real-data' => 'Real data',
 	],
+	'charts' => [
+		'apexcharts' => 'Apex charts'
+	]
 ];
 
 
@@ -83,6 +86,13 @@ Route::middleware('auth')
 						->name("corporate.$group.$page");
 				}
 			}
+			
+			if ($group === 'charts') {
+				foreach ($page_group as $page => $title) {
+					Route::inertia("/$group/$page", "demo/pages/corporate/ChartsPage", ['title' => $title])
+						->name("corporate.$group.$page");
+				}
+			}
 		}
 	});
 
@@ -121,6 +131,13 @@ Route::middleware('auth')
 			if ($group === 'tables') {
 				foreach ($page_group as $page => $title) {
 					Route::inertia("/$group/$page", "demo/pages/executive/TablesPage", ['title' => $title])
+						->name("executive.$group.$page");
+				}
+			}
+
+			if ($group === 'charts') {
+				foreach ($page_group as $page => $title) {
+					Route::inertia("/$group/$page", "demo/pages/executive/ChartsPage", ['title' => $title])
 						->name("executive.$group.$page");
 				}
 			}

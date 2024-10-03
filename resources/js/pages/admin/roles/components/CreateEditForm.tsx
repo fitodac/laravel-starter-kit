@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import {
 	Button,
 	CheckboxGroup,
@@ -8,23 +8,30 @@ import {
 	Spinner,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
-import { PermissionContext } from '../providers/PermissionProvider'
+import { RoleContext } from '../providers/RoleProvider'
 import { ClassicInput } from '@/components/form'
 import { useActions } from '../hooks/useActions'
 import { usePage } from '@inertiajs/react'
 
 import type { PageProps } from '@/types'
-import type { Permission } from '@/types/permissions'
-import type { PermissionContextProps } from '@/types/permissions'
+import type { Role, RoleContextProps } from '@/types/roles'
 
 export const CreateEditForm = () => {
-	const { state, dispatch } = useContext(
-		PermissionContext
-	) as PermissionContextProps
+	const { state, dispatch } = useContext(RoleContext) as RoleContextProps
 
 	const {
-		props: { guards },
+		props: { protected_roles, permissions },
 	} = usePage<PageProps>()
+
+	console.log(permissions)
+
+	const undeletableRoles = protected_roles as string[]
+
+	const isProtected = useRef(
+		(state.selectedRole &&
+			undeletableRoles.includes(state.selectedRole.name)) ??
+			false
+	)
 
 	const {
 		data,
@@ -48,9 +55,7 @@ export const CreateEditForm = () => {
 		>
 			<div className="p-6 lg:px-10">
 				<div className="text-lg">
-					{state.selectedPermission
-						? t('Edit permission')
-						: t('New permission')}
+					{state.selectedRole ? t('Edit role') : t('New role')}
 				</div>
 				<Divider className="my-4" />
 
@@ -58,56 +63,54 @@ export const CreateEditForm = () => {
 					<fieldset>
 						<ClassicInput
 							isRequired
-							variant="faded"
 							ref={inputName}
-							label={t('Permission name')}
+							variant="faded"
 							value={data.name}
+							label={t('Role name')}
 							isInvalid={errors.name ? true : false}
 							errorMessage={errors.name}
 							onKeyUp={() => clearErrors('name')}
-							isDisabled={processing}
+							isDisabled={isProtected.current || processing}
 							onValueChange={(e) => setData('name', e)}
 						/>
 					</fieldset>
 
-					{/* <fieldset>
-						{!state.selectedPermission ? (
-							<CheckboxGroup
-								isRequired
-								label="Guards"
-								orientation="horizontal"
-								value={data.guard_name}
-								isInvalid={errors.guard_name ? true : false}
-								errorMessage={errors.guard_name}
-								isDisabled={processing}
-								onValueChange={(val) => {
-									setData('guard_name', val)
-									clearErrors('guard_name')
-								}}
-							>
-								{Array.isArray(guards) &&
-									guards.map((e: string) => (
-										<Checkbox key={e} value={e}>
-											{e}
-										</Checkbox>
-									))}
-							</CheckboxGroup>
-						) : (
-							<div className="text-primary text-sm">
-								Guard:{' '}
-								<strong className="uppercase">
-									{state.selectedPermission.guard_name}
-								</strong>
-							</div>
-						)}
+					{/* <fieldset className="space-y-6">
+						{permissions &&
+							Object.keys(permissions).map((key) => (
+								<div key={key}>
+									<CheckboxGroup
+										label={`${key} ${t('guards')}`}
+										size="sm"
+										value={data.permissions}
+										isDisabled={processing}
+										onValueChange={(val) => {
+											setData('permissions', val)
+										}}
+										classNames={{
+											label: 'text-foreground text-sm font-medium capitalize',
+										}}
+									>
+										{data.permissions[key].map((e: Role) => (
+											<div key={e.name} className="flex items-center gap-3">
+												<Checkbox key={e.name} value={e.name} className="py-3">
+													{e.name}
+												</Checkbox>
+											</div>
+										))}
+									</CheckboxGroup>
+								</div>
+							))}
 					</fieldset> */}
 
 					<div className="flex justify-end gap-5">
+						<pre>{JSON.stringify(permissions, null, 2)}</pre>
+
 						<Button
 							isDisabled={processing}
 							onPress={() => {
 								dispatch({ type: 'closeDrawer' })
-								dispatch({ type: 'setSelectedPermission', payload: null })
+								dispatch({ type: 'setSelectedRole', payload: null })
 								reset()
 							}}
 							className="w-32"

@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { useForm } from '@inertiajs/react'
 import {
 	Button,
 	Modal,
@@ -5,27 +7,22 @@ import {
 	ModalHeader,
 	ModalBody,
 	ModalFooter,
-	useDisclosure,
 } from '@nextui-org/react'
-import { useForm } from '@inertiajs/react'
 import { t } from '@/i18n'
 import { toast } from 'react-toastify'
-import { Role } from '@/types/roles'
+import { RoleContext } from '../providers/RoleProvider'
 
-interface Props {
-	role: Role
-}
+import type { RoleContextProps } from '@/types/roles'
 
-export const DeleteRole = ({ role }: Props) => {
-	const { isOpen, onOpen, onOpenChange } = useDisclosure()
+export const DeleteRole = () => {
 	const { delete: destroy } = useForm()
+
+	const { isOpen, onOpenChange, state, dispatch } = useContext(
+		RoleContext
+	) as RoleContextProps
 
 	return (
 		<>
-			<Button fullWidth color="danger" variant="flat" onPress={onOpen}>
-				{t('Delete')}
-			</Button>
-
 			<Modal
 				isOpen={isOpen}
 				onOpenChange={onOpenChange}
@@ -52,7 +49,7 @@ export const DeleteRole = ({ role }: Props) => {
 									fullWidth
 									color="danger"
 									onPress={() => {
-										destroy(route('dashboard.role.destroy', { role }), {
+										destroy(route('dashboard.role.destroy', { role: state }), {
 											preserveScroll: true,
 											// @ts-ignore
 											onSuccess: (resp: InertiaResponse) => {

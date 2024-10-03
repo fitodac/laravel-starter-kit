@@ -37,22 +37,19 @@ class RoleController extends Controller
 	public function index()
 	{
 		$per_page = 15;
-		$roles = Role::with('permissions')->withCount('users')->paginate($per_page);
-		$undeletable_roles = config('settings.auth.undeletable_roles');
 
-		return Inertia::render('admin/roles/Roles', compact('roles', 'undeletable_roles'));
-	}
-
-	/**
-	 * CREATE
-	 * 
-	 * 
-	 * 
-	 */
-	public function create()
-	{
+		$roles = Role::with('permissions')->withCount('users')->orderBy('created_at', 'desc')->paginate($per_page);
+		$protected_roles = config('settings.auth.protected_roles');
 		$permissions = $this->getPermissionsByGuard();
-		return Inertia::render('admin/roles/CreateEdit', compact('permissions'));
+
+		return Inertia::render(
+			'admin/roles/Roles',
+			compact(
+				'roles',
+				'protected_roles',
+				'permissions'
+			)
+		);
 	}
 
 	/**
@@ -79,21 +76,6 @@ class RoleController extends Controller
 		$role->givePermissionTo($request->permissions);
 
 		return redirect()->route('dashboard.role.list')->with('success', 'Role created successfully.');
-	}
-
-	/**
-	 * EDIT
-	 * 
-	 * 
-	 * 
-	 */
-	public function edit(Role $role)
-	{
-		$role = $role->loadCount('users')->load('permissions');
-		$permissions = $this->getPermissionsByGuard();
-		$protected_roles = config('settings.auth.protected_roles');
-
-		return Inertia::render('admin/roles/CreateEdit', compact('role', 'permissions', 'protected_roles'));
 	}
 
 	/**
