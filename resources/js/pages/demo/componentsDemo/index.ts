@@ -1,8 +1,9 @@
-export * from './forms/components/Input'
-export * from './forms/components/Select'
 export * from './forms/components/Checkbox'
 export * from './forms/components/RadioButtons'
 export * from './forms/components/Switch'
+
+export * from './forms/Input'
+export * from './forms/Select'
 
 export * from './forms/layouts/CompactFormLayout'
 export * from './forms/layouts/VerticalFormLayout'

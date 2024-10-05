@@ -34,9 +34,17 @@ $pages = [
 		'icons' => 'Icons',
 	],
 	'form' => [
-		'components' => 'Form components',
+		'input' => 'Input',
+		'select' => 'Select',
+		'textarea' => 'Textarea',
+		'checkbox' => 'Checkbox',
+		'radio' => 'Radio Button',
+		'switch' => 'Switch',
+		'slider' => 'Slider',
+		'datepicker' => 'Date Picker',
 		'layouts' => 'Form layouts',
 		'wysiwyg' => 'Wysiwyg',
+		'components' => 'Form components',
 	],
 	'tables' => [
 		'styles' => 'Tables styles',
@@ -86,7 +94,7 @@ Route::middleware('auth')
 						->name("corporate.$group.$page");
 				}
 			}
-			
+
 			if ($group === 'charts') {
 				foreach ($page_group as $page => $title) {
 					Route::inertia("/$group/$page", "demo/pages/corporate/ChartsPage", ['title' => $title])

@@ -173,8 +173,36 @@ class AdminNavbarProvider extends ServiceProvider
 					'icon' => 'ri-align-right',
 					'submenu' => [
 						[
-							'label' => 'Form components',
-							'route' => 'dashboard.corporate.form.components'
+							'label' => 'Input',
+							'route' => 'dashboard.corporate.form.input'
+						],
+						[
+							'label' => 'Select',
+							'route' => 'dashboard.corporate.form.select'
+						],
+						[
+							'label' => 'Textarea',
+							'route' => 'dashboard.corporate.form.textarea'
+						],
+						[
+							'label' => 'Checkbox',
+							'route' => 'dashboard.corporate.form.checkbox'
+						],
+						[
+							'label' => 'Radio Button',
+							'route' => 'dashboard.corporate.form.radio'
+						],
+						[
+							'label' => 'Switch',
+							'route' => 'dashboard.corporate.form.switch'
+						],
+						[
+							'label' => 'Slider',
+							'route' => 'dashboard.corporate.form.slider'
+						],
+						[
+							'label' => 'Date Picker',
+							'route' => 'dashboard.corporate.form.datepicker'
 						],
 						[
 							'label' => 'Form layouts',
@@ -183,7 +211,11 @@ class AdminNavbarProvider extends ServiceProvider
 						[
 							'label' => 'Wysiwyg',
 							'route' => 'dashboard.corporate.form.wysiwyg'
-						]
+						],
+						[
+							'label' => 'Components (old)',
+							'route' => 'dashboard.corporate.form.components'
+						],
 					]
 				],
 

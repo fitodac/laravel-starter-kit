@@ -45,6 +45,7 @@ export const ClassicInput = forwardRef<
 				(props.size === undefined || props.size === 'md') && '-top-3',
 				props.size === 'lg' && '-top-4'
 			),
+			description: cn('mt-1'),
 		},
 	})
 

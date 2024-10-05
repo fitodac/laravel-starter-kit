@@ -20,16 +20,15 @@ export const TipTapPage = ({ template }: Props) => {
 					wrapper: headerClassName,
 				}}
 			>
-				{/* 
-				<p className="text-lg font-medium leading-tight">
-					Beautifully designed buttons that enhance visual appeal and usability.
+				<p className="font-bold leading-tight">
+					Powerful rich text editor designed for flexibility and ease of use.
 				</p>
 				<p className="text-sm mt-2">
-					Each button is intuitive and responsive, providing efficient access to
-					key functions. These buttons offer a perfect blend of aesthetics and
-					practicality, ensuring a seamless user experience.
-				</p> 
-				*/}
+					Tiptap provides an intuitive editing experience, allowing users to
+					create and format content effortlessly. This component balances a
+					sleek design with robust functionality, ensuring a smooth and dynamic
+					writing experience.
+				</p>
 			</PageHeader>
 
 			<PageContent

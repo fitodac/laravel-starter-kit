@@ -37,3 +37,13 @@ export interface Role {
 	permissions: Permission[]
 	users_count: number
 }
+
+export type WebPermissions = {
+	web: {
+		id: number
+		name: string
+		guard_name: string
+		created_at?: any
+		updated_at?: any
+	}[]
+}

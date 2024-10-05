@@ -1,8 +1,6 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import {
-	InputDefault,
-	SimpleSelect,
 	CheckboxDefault,
 	RadioButtonsDefault,
 	SwitchComponent,
@@ -52,13 +50,7 @@ export const FormComponentsPage = ({ template }: Props) => {
 				}
 			>
 				<div className="space-y-10">
-					<InputDefault />
-
 					<div className="grid grid-cols-2 gap-10">
-						<div className="col-span-2">
-							<SimpleSelect />
-						</div>
-
 						<CheckboxDefault />
 						<RadioButtonsDefault />
 						<SwitchComponent />

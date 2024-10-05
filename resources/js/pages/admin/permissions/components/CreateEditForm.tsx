@@ -14,17 +14,12 @@ import { useActions } from '../hooks/useActions'
 import { usePage } from '@inertiajs/react'
 
 import type { PageProps } from '@/types'
-import type { Permission } from '@/types/permissions'
 import type { PermissionContextProps } from '@/types/permissions'
 
 export const CreateEditForm = () => {
 	const { state, dispatch } = useContext(
 		PermissionContext
 	) as PermissionContextProps
-
-	const {
-		props: { guards },
-	} = usePage<PageProps>()
 
 	const {
 		data,

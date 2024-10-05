@@ -14,7 +14,7 @@ import { useActions } from '../hooks/useActions'
 import { usePage } from '@inertiajs/react'
 
 import type { PageProps } from '@/types'
-import type { Role, RoleContextProps } from '@/types/roles'
+import type { Role, RoleContextProps, WebPermissions } from '@/types/roles'
 
 export const CreateEditForm = () => {
 	const { state, dispatch } = useContext(RoleContext) as RoleContextProps
@@ -23,7 +23,8 @@ export const CreateEditForm = () => {
 		props: { protected_roles, permissions },
 	} = usePage<PageProps>()
 
-	console.log(permissions)
+	const { web: webPermissions } = permissions as WebPermissions
+	console.log('permissions', webPermissions)
 
 	const undeletableRoles = protected_roles as string[]
 
@@ -75,37 +76,42 @@ export const CreateEditForm = () => {
 						/>
 					</fieldset>
 
-					{/* <fieldset className="space-y-6">
-						{permissions &&
-							Object.keys(permissions).map((key) => (
-								<div key={key}>
-									<CheckboxGroup
-										label={`${key} ${t('guards')}`}
-										size="sm"
-										value={data.permissions}
-										isDisabled={processing}
-										onValueChange={(val) => {
-											setData('permissions', val)
-										}}
-										classNames={{
-											label: 'text-foreground text-sm font-medium capitalize',
-										}}
-									>
-										{data.permissions[key].map((e: Role) => (
-											<div key={e.name} className="flex items-center gap-3">
-												<Checkbox key={e.name} value={e.name} className="py-3">
-													{e.name}
-												</Checkbox>
-											</div>
-										))}
-									</CheckboxGroup>
-								</div>
-							))}
-					</fieldset> */}
+					<>
+						{webPermissions && (
+							<fieldset className="space-y-6">
+								{Object.keys(webPermissions).map((key) => (
+									<div key={key}>
+										<CheckboxGroup
+											label={`${key} ${t('guards')}`}
+											size="sm"
+											value={data.permissions}
+											isDisabled={processing}
+											onValueChange={(val) => {
+												setData('permissions', val)
+											}}
+											classNames={{
+												label: 'text-foreground text-sm font-medium capitalize',
+											}}
+										>
+											{/* {data.permissions[key].map((e: Role) => (
+												<div key={e.name} className="flex items-center gap-3">
+													<Checkbox
+														key={e.name}
+														value={e.name}
+														className="py-3"
+													>
+														{e.name}
+													</Checkbox>
+												</div>
+											))} */}
+										</CheckboxGroup>
+									</div>
+								))}
+							</fieldset>
+						)}
+					</>
 
 					<div className="flex justify-end gap-5">
-						<pre>{JSON.stringify(permissions, null, 2)}</pre>
-
 						<Button
 							isDisabled={processing}
 							onPress={() => {

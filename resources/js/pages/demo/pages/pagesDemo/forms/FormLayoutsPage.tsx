@@ -24,7 +24,7 @@ export const FormLayoutsPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={`${t('Form Layouts' ?? '')}`}
+				title={`${t('Form Layouts')}`}
 				classNames={{
 					wrapper: headerClassName,
 				}}

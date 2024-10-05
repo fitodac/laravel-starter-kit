@@ -1,5 +1,13 @@
 import { Layout } from '@/layouts/admin/executive/Layout'
 import {
+	InputPage,
+	SelectPage,
+	TextareaPage,
+	CheckboxPage,
+	RadioButtonPage,
+	SwitchPage,
+	SliderPage,
+	DatePickerPage,
 	FormComponentsPage,
 	FormLayoutsPage,
 	TipTapPage,
@@ -12,12 +20,28 @@ interface Props {
 
 export const Page = ({ title }: Props) => {
 	switch (title) {
-		case 'Form components':
-			return <FormComponentsPage {...{ template: 'executive' }} />
+		case 'Input':
+			return <InputPage {...{ template: 'executive' }} />
+		case 'Select':
+			return <SelectPage {...{ template: 'executive' }} />
+		case 'Textarea':
+			return <TextareaPage {...{ template: 'executive' }} />
+		case 'Checkbox':
+			return <CheckboxPage {...{ template: 'executive' }} />
+		case 'Radio Button':
+			return <RadioButtonPage {...{ template: 'executive' }} />
+		case 'Switch':
+			return <SwitchPage {...{ template: 'executive' }} />
+		case 'Slider':
+			return <SliderPage {...{ template: 'executive' }} />
+		case 'Date Picker':
+			return <DatePickerPage {...{ template: 'executive' }} />
 		case 'Form layouts':
 			return <FormLayoutsPage {...{ template: 'executive' }} />
 		case 'Wysiwyg':
 			return <TipTapPage {...{ template: 'executive' }} />
+		case 'Form components':
+			return <FormComponentsPage {...{ template: 'executive' }} />
 		default:
 			return null
 	}

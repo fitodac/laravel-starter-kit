@@ -173,8 +173,36 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 					'icon' => 'ri-align-right',
 					'submenu' => [
 						[
-							'label' => 'Form components',
-							'route' => 'dashboard.executive.form.components'
+							'label' => 'Input',
+							'route' => 'dashboard.executive.form.input'
+						],
+						[
+							'label' => 'Select',
+							'route' => 'dashboard.executive.form.select'
+						],
+						[
+							'label' => 'Textarea',
+							'route' => 'dashboard.executive.form.textarea'
+						],
+						[
+							'label' => 'Checkbox',
+							'route' => 'dashboard.executive.form.checkbox'
+						],
+						[
+							'label' => 'Radio Button',
+							'route' => 'dashboard.executive.form.radio'
+						],
+						[
+							'label' => 'Switch',
+							'route' => 'dashboard.executive.form.switch'
+						],
+						[
+							'label' => 'Slider',
+							'route' => 'dashboard.executive.form.slider'
+						],
+						[
+							'label' => 'Date Picker',
+							'route' => 'dashboard.executive.form.datepicker'
 						],
 						[
 							'label' => 'Form layouts',
@@ -183,7 +211,11 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 						[
 							'label' => 'Wysiwyg',
 							'route' => 'dashboard.executive.form.wysiwyg'
-						]
+						],
+						[
+							'label' => 'Components (old)',
+							'route' => 'dashboard.executive.form.components'
+						],
 					]
 				],
 
