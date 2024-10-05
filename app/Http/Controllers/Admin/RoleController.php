@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -58,7 +59,7 @@ class RoleController extends Controller
 	 * 
 	 * 
 	 */
-	public function store(Request $request)
+	public function store(Request $request): RedirectResponse
 	{
 
 		$request->validate([
@@ -68,11 +69,12 @@ class RoleController extends Controller
 			'name.unique' => 'Role name already exists.'
 		]);
 
+		$name = preg_replace('/\s+/', ' ', $request->name);
+		$name = preg_replace('/[^A-Za-z0-9\s]/', '', $name);
 
 		$role = Role::create([
-			'name' => $request->name
+			'name' => trim($name)
 		]);
-
 		$role->givePermissionTo($request->permissions);
 
 		return redirect()->route('dashboard.role.list')->with('success', 'Role created successfully.');
@@ -84,7 +86,7 @@ class RoleController extends Controller
 	 * 
 	 * 
 	 */
-	public function update(Request $request, string $id)
+	public function update(Request $request, string $id): RedirectResponse
 	{
 
 		$request->validate([
@@ -95,7 +97,11 @@ class RoleController extends Controller
 		]);
 
 		$role = Role::find($id);
-		$role->update(['name' => $request->name]);
+
+		$name = preg_replace('/\s+/', ' ', $request->name);
+		$name = preg_replace('/[^A-Za-z0-9\s]/', '', $name);
+
+		$role->update(['name' => trim($name)]);
 		$role->syncPermissions($request->permissions);
 
 		return redirect()->route('dashboard.role.list')->with('success', 'Role updated successfully.');
@@ -107,8 +113,9 @@ class RoleController extends Controller
 	 * 
 	 * 
 	 */
-	public function destroy(Role $role)
+	public function destroy(string $id): RedirectResponse
 	{
+		$role = Role::find($id);
 		$role->delete();
 		return redirect()->route('dashboard.role.list')->with('success', 'Role deleted successfully.');
 	}

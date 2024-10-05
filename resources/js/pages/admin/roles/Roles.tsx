@@ -22,8 +22,6 @@ export const Page = () => {
 						color="primary"
 						className="px-6"
 						variant="flat"
-						// as={Link}
-						// href={route('dashboard.role.create')}
 						onPress={() => {
 							dispatch({ type: 'setSelectedRole', payload: null })
 							dispatch({ type: 'openDrawer' })

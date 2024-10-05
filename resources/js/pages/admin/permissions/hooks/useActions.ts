@@ -59,6 +59,9 @@ export const useActions = () => {
 						payload: resp.props.permissions.data.at(0),
 					})
 
+					dispatch({ type: 'closeDrawer' })
+					reset()
+
 					router.reload({ only: ['permissions'] })
 				},
 				onError: (errors) => console.log(errors),

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { t } from '@/i18n'
 
 import type { RoleContextProps } from '@/types/roles'
+import { Permission } from '@/types/permissions'
 
 export const useActions = () => {
 	const { state, dispatch } = useContext(RoleContext) as RoleContextProps
@@ -16,7 +17,15 @@ export const useActions = () => {
 		})
 
 	useEffect(() => {
-		if (state.selectedRole) setData({ ...state.selectedRole })
+		if (state.selectedRole) {
+			console.log('selectedRole', state.selectedRole)
+			setData({
+				name: state.selectedRole.name,
+				permissions: state.selectedRole.permissions.map(
+					(permission: Permission) => permission.name
+				),
+			})
+		}
 	}, [state.selectedRole])
 
 	const submit = (e: FormEvent) => {
@@ -52,10 +61,10 @@ export const useActions = () => {
 						toast.success(t(resp.props.flash.success))
 					}
 
-					dispatch({
-						type: 'setSelectedRole',
-						payload: resp.props.permissions.data.at(0),
-					})
+					dispatch({ type: 'setSelectedRole', payload: null })
+
+					dispatch({ type: 'closeDrawer' })
+					reset()
 
 					router.reload({ only: ['roles'] })
 				},

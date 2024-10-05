@@ -1,19 +1,10 @@
 import { useContext } from 'react'
-import {
-	Button,
-	CheckboxGroup,
-	Checkbox,
-	Divider,
-	cn,
-	Spinner,
-} from '@nextui-org/react'
+import { Button, Divider, cn, Spinner } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { PermissionContext } from '../providers/PermissionProvider'
 import { ClassicInput } from '@/components/form'
 import { useActions } from '../hooks/useActions'
-import { usePage } from '@inertiajs/react'
 
-import type { PageProps } from '@/types'
 import type { PermissionContextProps } from '@/types/permissions'
 
 export const CreateEditForm = () => {
@@ -23,8 +14,6 @@ export const CreateEditForm = () => {
 
 	const {
 		data,
-		post,
-		patch,
 		errors,
 		setData,
 		processing,
@@ -64,38 +53,6 @@ export const CreateEditForm = () => {
 							onValueChange={(e) => setData('name', e)}
 						/>
 					</fieldset>
-
-					{/* <fieldset>
-						{!state.selectedPermission ? (
-							<CheckboxGroup
-								isRequired
-								label="Guards"
-								orientation="horizontal"
-								value={data.guard_name}
-								isInvalid={errors.guard_name ? true : false}
-								errorMessage={errors.guard_name}
-								isDisabled={processing}
-								onValueChange={(val) => {
-									setData('guard_name', val)
-									clearErrors('guard_name')
-								}}
-							>
-								{Array.isArray(guards) &&
-									guards.map((e: string) => (
-										<Checkbox key={e} value={e}>
-											{e}
-										</Checkbox>
-									))}
-							</CheckboxGroup>
-						) : (
-							<div className="text-primary text-sm">
-								Guard:{' '}
-								<strong className="uppercase">
-									{state.selectedPermission.guard_name}
-								</strong>
-							</div>
-						)}
-					</fieldset> */}
 
 					<div className="flex justify-end gap-5">
 						<Button

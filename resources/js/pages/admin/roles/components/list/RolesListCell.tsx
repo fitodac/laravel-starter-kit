@@ -32,13 +32,33 @@ export const RolesListCell = ({
 			return item.id
 
 		case 'name':
-			return <span className="font-medium">{item.name}</span>
+			return (
+				<>
+					<span
+						className={cn(
+							'font-medium',
+							protected_roles.includes(item.name) && 'opacity-50'
+						)}
+					>
+						{item.name}{' '}
+					</span>
+					{protected_roles.includes(item.name) && (
+						<small className="text-xs text-danger pl-1">{t('Protected')}</small>
+					)}
+				</>
+			)
 
 		case 'guard_name':
-			return item.guard_name
+			return (
+				<span
+					className={cn(protected_roles.includes(item.name) && 'opacity-50')}
+				>
+					{item.guard_name}
+				</span>
+			)
 
 		case 'actions':
-			return (
+			return !protected_roles.includes(item.name) ? (
 				<div className="flex justify-end">
 					<Dropdown placement="bottom-end">
 						<DropdownTrigger>
@@ -57,10 +77,9 @@ export const RolesListCell = ({
 										}
 										break
 									case 'delete':
-										if (!protected_roles.includes(item.name)) {
-											dispatch({ type: 'setSelectedRole', payload: item })
-											onOpen()
-										}
+										dispatch({ type: 'setSelectedRole', payload: item })
+										onOpen()
+
 										break
 								}
 							}}
@@ -83,6 +102,8 @@ export const RolesListCell = ({
 						</DropdownMenu>
 					</Dropdown>
 				</div>
+			) : (
+				<></>
 			)
 
 		case 'permissions':

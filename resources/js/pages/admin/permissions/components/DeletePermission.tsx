@@ -50,7 +50,7 @@ export const DeletePermission = () => {
 								onPress={() => {
 									destroy(
 										route('dashboard.permission.destroy', {
-											permission: state.            selectedPermission,
+											permission: state.selectedPermission,
 										}),
 										{
 											preserveScroll: true,

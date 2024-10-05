@@ -49,15 +49,21 @@ export const DeleteRole = () => {
 									fullWidth
 									color="danger"
 									onPress={() => {
-										destroy(route('dashboard.role.destroy', { role: state }), {
-											preserveScroll: true,
-											// @ts-ignore
-											onSuccess: (resp: InertiaResponse) => {
-												if (resp.props.flash && resp.props.flash.success) {
-													toast.success(t(resp.props.flash.success))
-												}
-											},
-										})
+										destroy(
+											route('dashboard.role.destroy', {
+												role: state.selectedRole,
+											}),
+											{
+												preserveScroll: true,
+												// @ts-ignore
+												onSuccess: (resp: InertiaResponse) => {
+													if (resp.props.flash && resp.props.flash.success) {
+														toast.success(t(resp.props.flash.success))
+													}
+													onClose()
+												},
+											}
+										)
 									}}
 								>
 									{t('Confirm')}

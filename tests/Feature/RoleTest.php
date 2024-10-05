@@ -85,4 +85,39 @@ class RoleTest extends TestCase
 
 		$response->assertStatus(302);
 	}
+
+
+	/**
+	 * Test that a role can't be edited if is protected
+	 *
+	 * @return void
+	 */
+	public function test_protected_role_can_not_be_edited()
+	{
+		$role = Role::where('name', config('settings.auth.protected_roles')[0])->firstOrFail();
+
+		$response = $this
+			->actingAs($this->user)
+			->put(route('dashboard.role.update', $role));
+
+		$response->assertRedirect(route('dashboard.role.list'));
+		$response->assertSessionHas('error');
+	}
+
+	/**
+	 * Test that a role can't be deleted if is protected
+	 *
+	 * @return void
+	 */
+	public function test_protected_role_can_not_be_deleted()
+	{
+		$role = Role::where('name', config('settings.auth.protected_roles')[0])->firstOrFail();
+
+		$response = $this
+			->actingAs($this->user)
+			->delete(route('dashboard.role.destroy', $role));
+
+		$response->assertRedirect(route('dashboard.role.list'));
+		$response->assertSessionHas('error');
+	}
 }

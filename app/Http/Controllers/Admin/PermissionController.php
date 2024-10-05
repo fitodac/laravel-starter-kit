@@ -51,7 +51,10 @@ class PermissionController extends Controller
 			'name.unique' => 'Permission name already exists.',
 		]);
 
-		Permission::create(['name' => $request->name]);
+		$name = preg_replace('/\s+/', ' ', $request->name);
+		$name = preg_replace('/[^A-Za-z0-9\s]/', '', $name);
+
+		Permission::create(['name' => $name]);
 
 		return back()->with('success', 'Permission created successfully.');
 	}
@@ -72,8 +75,11 @@ class PermissionController extends Controller
 			'name.unique' => 'Permission name already exists.'
 		]);
 
+		$name = preg_replace('/\s+/', ' ', $request->name);
+		$name = preg_replace('/[^A-Za-z0-9\s]/', '', $name);
+
 		$permission->update([
-			'name' => $request->name,
+			'name' => $name,
 		]);
 
 		return back()->with('success', 'Permission updated successfully.');
@@ -88,7 +94,6 @@ class PermissionController extends Controller
 	public function destroy(Permission $permission): RedirectResponse
 	{
 		$permission->delete();
-
 		return back()->with('success', 'Permission deleted successfully.');
 	}
 }

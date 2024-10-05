@@ -57,8 +57,13 @@ Route::middleware(['auth', 'role:Super Admin'])
 		 */
 		Route::get('roles', [RoleController::class, 'index'])->name('role.list');
 		Route::post('roles', [RoleController::class, 'store'])->name('role.store');
-		Route::match(['put', 'patch'], 'roles/{role}', [RoleController::class, 'update'])->name('role.update');
-		Route::delete('roles/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
+
+		Route::middleware('check_protected_role')->group(function () {
+			Route::match(['put', 'patch'], 'roles/{role}', [RoleController::class, 'update'])
+				->name('role.update');
+			Route::delete('roles/{role}', [RoleController::class, 'destroy'])
+				->name('role.destroy');
+		});
 
 		/**
 		 * Permissions

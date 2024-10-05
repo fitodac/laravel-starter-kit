@@ -6,6 +6,9 @@ import {
 	Divider,
 	cn,
 	Spinner,
+	Select,
+	SelectItem,
+	Chip,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { RoleContext } from '../providers/RoleProvider'
@@ -15,6 +18,7 @@ import { usePage } from '@inertiajs/react'
 
 import type { PageProps } from '@/types'
 import type { Role, RoleContextProps, WebPermissions } from '@/types/roles'
+import { Permission } from '@/types/permissions'
 
 export const CreateEditForm = () => {
 	const { state, dispatch } = useContext(RoleContext) as RoleContextProps
@@ -24,7 +28,6 @@ export const CreateEditForm = () => {
 	} = usePage<PageProps>()
 
 	const { web: webPermissions } = permissions as WebPermissions
-	console.log('permissions', webPermissions)
 
 	const undeletableRoles = protected_roles as string[]
 
@@ -36,8 +39,6 @@ export const CreateEditForm = () => {
 
 	const {
 		data,
-		post,
-		patch,
 		errors,
 		setData,
 		processing,
@@ -58,9 +59,13 @@ export const CreateEditForm = () => {
 				<div className="text-lg">
 					{state.selectedRole ? t('Edit role') : t('New role')}
 				</div>
+
 				<Divider className="my-4" />
 
-				<form onSubmit={submit} className="pb-10 space-y-5">
+				<form
+					onSubmit={submit}
+					className="pb-10 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0"
+				>
 					<fieldset>
 						<ClassicInput
 							isRequired
@@ -74,65 +79,56 @@ export const CreateEditForm = () => {
 							isDisabled={isProtected.current || processing}
 							onValueChange={(e) => setData('name', e)}
 						/>
+
+						<div className="flex justify-end gap-5 mt-8">
+							<Button
+								isDisabled={processing}
+								onPress={() => {
+									dispatch({ type: 'closeDrawer' })
+									dispatch({ type: 'setSelectedRole', payload: null })
+									reset()
+								}}
+								className="w-32"
+							>
+								{t('Cancel')}
+							</Button>
+
+							<Button
+								type="submit"
+								color="primary"
+								className="w-32"
+								isLoading={processing}
+							>
+								{t('Save')}
+							</Button>
+						</div>
 					</fieldset>
 
 					<>
 						{webPermissions && (
 							<fieldset className="space-y-6">
-								{Object.keys(webPermissions).map((key) => (
-									<div key={key}>
-										<CheckboxGroup
-											label={`${key} ${t('guards')}`}
-											size="sm"
-											value={data.permissions}
-											isDisabled={processing}
-											onValueChange={(val) => {
-												setData('permissions', val)
-											}}
-											classNames={{
-												label: 'text-foreground text-sm font-medium capitalize',
-											}}
-										>
-											{/* {data.permissions[key].map((e: Role) => (
-												<div key={e.name} className="flex items-center gap-3">
-													<Checkbox
-														key={e.name}
-														value={e.name}
-														className="py-3"
-													>
-														{e.name}
-													</Checkbox>
-												</div>
-											))} */}
-										</CheckboxGroup>
-									</div>
-								))}
+								<Select
+									label={t('Permissions')}
+									selectionMode="multiple"
+									selectedKeys={data.permissions}
+									isMultiline={true}
+									onSelectionChange={(values) => {
+										setData(
+											'permissions',
+											Array.from(values).map((e) => e.toString())
+										)
+									}}
+									description={`${data.permissions.length} ${t(
+										'items selected'
+									)}`}
+								>
+									{webPermissions.map((e: Permission) => {
+										return <SelectItem key={e.name}>{e.name}</SelectItem>
+									})}
+								</Select>
 							</fieldset>
 						)}
 					</>
-
-					<div className="flex justify-end gap-5">
-						<Button
-							isDisabled={processing}
-							onPress={() => {
-								dispatch({ type: 'closeDrawer' })
-								dispatch({ type: 'setSelectedRole', payload: null })
-								reset()
-							}}
-							className="w-32"
-						>
-							{t('Cancel')}
-						</Button>
-
-						<Button
-							type="submit"
-							color="primary"
-							className="w-32"
-							isLoading={processing}
-						>
-							{t('Save')}
-						</Button>
-					</div>
 				</form>
 			</div>
 

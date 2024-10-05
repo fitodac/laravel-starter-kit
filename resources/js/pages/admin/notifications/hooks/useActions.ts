@@ -24,7 +24,6 @@ export const useActions = () => {
 				...state.selectedNotification,
 				used_dates: state.selectedNotification.used_dates as never[],
 			})
-		console.log(state.selectedNotification)
 	}, [state.selectedNotification])
 
 	/**
@@ -70,6 +69,9 @@ export const useActions = () => {
 						type: 'setSelectedNotification',
 						payload: resp.props.notifications.data.at(0),
 					})
+
+					dispatch({ type: 'closeDrawer' })
+					reset()
 
 					router.reload({ only: ['notifications'] })
 				},
