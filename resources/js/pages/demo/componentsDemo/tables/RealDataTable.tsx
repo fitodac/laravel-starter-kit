@@ -9,11 +9,11 @@ import {
 	getKeyValue,
 	Spinner,
 	type SortDescriptor,
-	Pagination,
 } from '@nextui-org/react'
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
 import { router } from '@inertiajs/react'
+import { Pager } from './componentes'
 
 import type { ProductsProps } from '@/pages/demo/types'
 
@@ -26,26 +26,14 @@ export const RealDataTable = ({ data }: { data: ProductsProps }) => {
 	const { links, current_page, per_page } = data
 
 	useEffect(() => {
-		if (data.data.length) setIsLoading(false)
+		if (data.data) setIsLoading(false)
 	}, [data])
 
 	return (
 		<>
-			<div className="space-y-6">
-				<div className="space-y-2">
-					<div className="font-semibold">Basic table</div>
-					<p className="text-sm">
-						The basic table is a simple, minimalist table design without visible
-						separations between rows or columns. This clean layout focuses
-						solely on the data presented, eliminating visual distractions. It's
-						ideal for interfaces where simplicity and clarity are key,
-						seamlessly integrating into any design without overwhelming the
-						user.
-					</p>
-				</div>
-
+			<div className="w-full space-y-6">
 				<Table
-					isStriped
+					removeWrapper
 					radius="none"
 					shadow="none"
 					aria-label="Table"
@@ -60,29 +48,11 @@ export const RealDataTable = ({ data }: { data: ProductsProps }) => {
 						setIsLoading(true)
 					}}
 					sortDescriptor={sortDescriptor}
-					bottomContent={
-						links && (
-							<div className="flex w-full justify-end">
-								<Pagination
-									size="sm"
-									isCompact
-									showControls
-									showShadow
-									variant="light"
-									color="primary"
-									page={current_page}
-									total={links.length - 2 || 0}
-									classNames={{ wrapper: 'shadow-none' }}
-									onChange={(page) =>
-										router.reload({ data: { page }, only: ['products'] })
-									}
-								/>
-							</div>
-						)
-					}
+					bottomContent={links && <Pager {...{ links, current_page }} />}
 					classNames={{
-						th: 'text-base [&]:first:rounded-none [&]:last:rounded-none [&]:first:before:!rounded-none [&]:last:before:!rounded-none',
-						td: 'text-base [&]:first:rounded-none [&]:last:rounded-none [&]:first:before:!rounded-none [&]:last:before:!rounded-none',
+						base: 'w-full',
+						th: '[&]:first:rounded-none [&]:last:rounded-none [&]:first:before:!rounded-none [&]:last:before:!rounded-none',
+						td: '[&]:first:rounded-none [&]:last:rounded-none [&]:first:before:!rounded-none [&]:last:before:!rounded-none',
 						tbody: 'rounded-none',
 					}}
 				>
@@ -101,7 +71,13 @@ export const RealDataTable = ({ data }: { data: ProductsProps }) => {
 					>
 						{(item) => (
 							<TableRow key={item.sku}>
-								{(key) => <TableCell>{getKeyValue(item, key)}</TableCell>}
+								{(key) => (
+									<TableCell>
+										<span className="text-sm font-light">
+											{getKeyValue(item, key)}
+										</span>
+									</TableCell>
+								)}
 							</TableRow>
 						)}
 					</TableBody>

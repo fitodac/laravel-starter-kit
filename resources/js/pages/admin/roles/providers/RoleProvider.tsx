@@ -1,11 +1,13 @@
 import { useReducer, type PropsWithChildren, createContext } from 'react'
-import { useDisclosure } from '@nextui-org/react'
+import { useDisclosure, type SortDescriptor } from '@nextui-org/react'
 
 import type { RoleContextProps } from '@/types/roles'
 
 const initialState = {
 	drawerOpen: false,
 	selectedRole: null,
+	sortDescriptor: {} as SortDescriptor,
+	listLoading: true,
 }
 
 function reducer(state: any, action: any) {
@@ -16,6 +18,10 @@ function reducer(state: any, action: any) {
 			return { ...state, drawerOpen: false }
 		case 'setSelectedRole':
 			return { ...state, selectedRole: action.payload }
+		case 'setSortDescriptor':
+			return { ...state, sortDescriptor: action.payload }
+		case 'setListLoading':
+			return { ...state, listLoading: action.payload }
 		default:
 			throw new Error()
 	}

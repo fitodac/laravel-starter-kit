@@ -17,11 +17,11 @@ class PermissionController extends Controller
 	 * 
 	 * 
 	 */
-	public function index()
+	public function index(Request $request)
 	{
 		$per_page = 15;
 
-		$permissions = Permission::orderBy('created_at', 'desc')->paginate($per_page);
+		$permissions = Permission::orderBy($request->order ?? 'created_at', $request->dir === 'ascending' ? 'asc' : 'desc')->paginate($per_page);
 		$guards = config('settings.auth.guard_permissions');
 		$protected_permissions = config('settings.auth.protected_permissions');
 

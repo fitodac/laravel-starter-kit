@@ -1,8 +1,5 @@
 import { Layout } from '@/layouts/admin/executive/Layout'
-import {
-	TablesPage,
-	TableStylesPage,
-} from '@/pages/demo/pages/pagesDemo/tables'
+import { TableStylesPage } from '@/pages/demo/pages/pagesDemo/tables'
 import { t } from '@/i18n'
 
 interface Props {

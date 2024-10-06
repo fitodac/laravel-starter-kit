@@ -31,7 +31,7 @@ export const Page = ({ products }: Props) => {
 			</PageHeader>
 
 			<PageContent className="max-w-screen-xl mx-auto">
-				<div>
+				<div className="flex-1">
 					<RealDataTable {...{ data: products }} />
 
 					<div className="h-20" />

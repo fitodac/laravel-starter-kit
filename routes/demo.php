@@ -48,12 +48,13 @@ $pages = [
 	],
 	'tables' => [
 		'styles' => 'Tables styles',
-		'real-data' => 'Real data',
+		// 'real-data' => 'Real data table',
 	],
 	'charts' => [
 		'apexcharts' => 'Apex charts'
 	]
 ];
+
 
 
 
@@ -65,6 +66,7 @@ Route::middleware('auth')
 	->name('dashboard.')
 	->group(function () use ($pages) {
 		Route::inertia('/', 'demo/pages/corporate/DashboardPage')->name('corporate');
+
 
 		foreach ($pages as $group => $page_group) {
 			if ($group === 'ui') {
@@ -102,6 +104,10 @@ Route::middleware('auth')
 				}
 			}
 		}
+
+		Route::get("/tables/real-data", [TablesController::class, 'index'])
+			->name('corporate.tables.real-data')
+			->defaults('template', 'corporate');
 	});
 
 
@@ -150,4 +156,8 @@ Route::middleware('auth')
 				}
 			}
 		}
+
+		Route::get("/tables/real-data", [TablesController::class, 'index'])
+			->name('executive.tables.real-data')
+			->defaults('template', 'executive');
 	});

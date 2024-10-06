@@ -1,10 +1,5 @@
 import type { Dispatch } from 'react'
 
-export type State = {
-	drawerOpen: boolean
-	selectedNotification: Notification
-}
-
 export type NotificationContextProps = {
 	state: State
 	dispatch: Dispatch<any>
@@ -12,7 +7,6 @@ export type NotificationContextProps = {
 	onOpen: () => void
 	onOpenChange: () => void
 }
-
 
 export type Notification = {
 	id: number

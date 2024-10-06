@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import {
 	Table,
 	TableHeader,
@@ -6,7 +6,6 @@ import {
 	TableColumn,
 	TableRow,
 	TableCell,
-	type SortDescriptor,
 	Spinner,
 } from '@nextui-org/react'
 import { useTableSorting } from '@/hooks'
@@ -27,17 +26,15 @@ export const RolesList = () => {
 	const { links, current_page, data } = roles as Roles
 	const undeletableRoles = protected_roles as string[]
 
-	const { onOpen, dispatch } = useContext(RoleContext) as RoleContextProps
+	const { state, onOpen, dispatch } = useContext(
+		RoleContext
+	) as RoleContextProps
 
-	// const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))
-	// const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
-	// const [isLoading, setIsLoading] = useState(true)
+	const sort = useTableSorting()
 
-	// const sort = useTableSorting()
-
-	// useEffect(() => {
-	// 	if (data.data.length) setIsLoading(false)
-	// }, [data])
+	useEffect(() => {
+		if (data) dispatch({ type: 'setListLoading', payload: false })
+	}, [data])
 
 	return (
 		<>
@@ -49,6 +46,12 @@ export const RolesList = () => {
 					td: 'border-t border-content3',
 				}}
 				bottomContent={<RolesListPager {...{ links, current_page }} />}
+				onSortChange={(sortDescriptor) => {
+					const sd = sort({ sortDescriptor, only: ['roles'] })
+					dispatch({ type: 'setSortDescriptor', payload: sd })
+					dispatch({ type: 'setListLoading', payload: true })
+				}}
+				sortDescriptor={state.sortDescriptor}
 			>
 				<TableHeader columns={columns}>
 					{(column) => (
@@ -63,8 +66,12 @@ export const RolesList = () => {
 
 				<TableBody
 					items={data}
-					loadingContent={<Spinner label={t('loading').toString()} />}
-					// isLoading={isLoading}
+					loadingContent={
+						<div className="bg-white/80 inset-0 absolute grid place-content-center z-10 dark:bg-black/80">
+							<Spinner label={t('loading').toString()} />
+						</div>
+					}
+					isLoading={state.listLoading}
 				>
 					{(item: Role) => (
 						<TableRow key={item.id}>
@@ -92,10 +99,10 @@ export const RolesList = () => {
 }
 
 const columns = [
-	{ key: 'id', label: '#' },
-	{ key: 'name', label: t('Name') },
-	{ key: 'guard_name', label: t('Guard') },
-	{ key: 'permissions', label: t('Permissions') },
-	{ key: 'users_count', label: t('Associated users') },
+	{ key: 'id', label: '#', allowsSorting: true },
+	{ key: 'name', label: t('Name'), allowsSorting: true },
+	{ key: 'guard_name', label: t('Guard'), allowsSorting: true },
+	{ key: 'permissions', label: t('Permissions'), allowsSorting: true },
+	{ key: 'users_count', label: t('Associated users'), allowsSorting: true },
 	{ key: 'actions', label: '' },
 ] as { key: string; label: string; allowsSorting?: boolean }[]

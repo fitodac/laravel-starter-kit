@@ -1,11 +1,13 @@
 import { useReducer, type PropsWithChildren, createContext } from 'react'
-import { useDisclosure } from '@nextui-org/react'
+import { useDisclosure, type SortDescriptor } from '@nextui-org/react'
 
 import type { NotificationContextProps } from '@/types/notifications'
 
 const initialState = {
 	drawerOpen: false,
 	selectedNotification: null,
+	sortDescriptor: {} as SortDescriptor,
+	listLoading: true,
 }
 
 function reducer(state: any, action: any) {
@@ -16,6 +18,10 @@ function reducer(state: any, action: any) {
 			return { ...state, drawerOpen: false }
 		case 'setSelectedNotification':
 			return { ...state, selectedNotification: action.payload }
+		case 'setSortDescriptor':
+			return { ...state, sortDescriptor: action.payload }
+		case 'setListLoading':
+			return { ...state, listLoading: action.payload }
 		default:
 			throw new Error()
 	}

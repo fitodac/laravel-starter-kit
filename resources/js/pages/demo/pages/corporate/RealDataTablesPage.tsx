@@ -28,7 +28,7 @@ export const Page = ({ products }: Props) => {
 			</PageHeader>
 
 			<PageContent>
-				<div>
+				<div className="flex-1">
 					<RealDataTable {...{ data: products }} />
 
 					<div className="h-20" />

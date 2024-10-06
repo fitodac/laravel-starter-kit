@@ -35,11 +35,14 @@ class RoleController extends Controller
 	 * 
 	 * 
 	 */
-	public function index()
+	public function index(Request $request)
 	{
 		$per_page = 15;
 
-		$roles = Role::with('permissions')->withCount('users')->orderBy('created_at', 'desc')->paginate($per_page);
+		$roles = Role::with('permissions')
+			->withCount('users')
+			->orderBy($request->order ?? 'created_at', $request->dir === 'ascending' ? 'asc' : 'desc')
+			->paginate($per_page);
 		$protected_roles = config('settings.auth.protected_roles');
 		$permissions = $this->getPermissionsByGuard();
 

@@ -1,5 +1,4 @@
 import { router } from '@inertiajs/react'
-import { Key } from 'react'
 import type { SortDescriptor } from '@nextui-org/react'
 
 export const useTableSorting = () => {

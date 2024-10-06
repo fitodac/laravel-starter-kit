@@ -1,8 +1,5 @@
 import { Layout } from '@/layouts/admin/corporate/Layout'
-import {
-	TablesPage,
-	TableStylesPage,
-} from '@/pages/demo/pages/pagesDemo/tables'
+import { TableStylesPage } from '@/pages/demo/pages/pagesDemo/tables'
 import { t } from '@/i18n'
 
 interface Props {
@@ -12,7 +9,7 @@ interface Props {
 export const Page = ({ title }: Props) => {
 	switch (title) {
 		case 'Tables styles':
-			return <TableStylesPage />
+			return <TableStylesPage {...{ template: 'corporate' }} />
 		default:
 			return null
 	}

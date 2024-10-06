@@ -17,17 +17,14 @@ class NotificationController extends Controller
 	 * 
 	 * 
 	 */
-	public function index(): Response
+	public function index(Request $request): Response
 	{
 		$per_page = 15;
 
-		$notifications = InAppNotification::orderBy('created_at', 'desc')->paginate($per_page);
-		return Inertia::render(
-			'admin/notifications/Notifications',
-			compact(
-				'notifications'
-			)
-		);
+		$notifications = InAppNotification::orderBy($request->order ?? 'id', $request->dir === 'ascending' ? 'asc' : 'desc')
+			->paginate($per_page);
+
+		return Inertia::render('admin/notifications/Notifications', compact('notifications'));
 	}
 
 
