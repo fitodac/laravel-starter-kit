@@ -214,7 +214,7 @@ export const t = (str: string, params: Params = {}): string | JSX.Element => {
 	// const locale = 'en'
 	const translation = translations[locale ?? 'en'][str]
 
-	if (typeof translation === 'string') {
+	if (typeof translation === 'string' && params) {
 		// @ts-ignore
 		return Object.keys(params).reduce((acc, key) => {
 			const value = params[key]

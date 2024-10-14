@@ -1,14 +1,16 @@
+export type Data = {
+	id: number
+	name: string
+	description: string
+	price: string
+	category: string
+	sku: string
+	stock: string
+}
+
 export interface ProductsProps {
 	current_page: number
-	data: {
-		id: number
-		name: string
-		description: string
-		price: string
-		category: string
-		sku: string
-		stock: string
-	}[]
+	data: Data[]
 	first_page_url: string
 	from: number
 	last_page: number
@@ -25,6 +27,5 @@ export interface ProductsProps {
 		active: boolean
 	}[]
 }
-
 
 export type Template = 'corporate' | 'executive'

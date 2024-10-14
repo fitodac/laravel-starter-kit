@@ -19,10 +19,33 @@ class TablesController extends Controller
 	public function index(Request $request, $template)
 	{
 		$per_page = 16;
+		$orderBy = $request->dir === 'ascending' ? 'asc' : 'desc';
+		$categories = Product::select('category')->distinct()->get();
 
-		$products = Product::orderBy($request->order ?? 'id', $request->dir === 'ascending' ? 'asc' : 'desc')
+		$s = $request->input('s', '');
+		$cat = $request->input('cat', '');
+
+		$products = Product::where(function ($query) use ($request) {
+			if (!empty($request->s)) {
+				$query->where('name', 'like', '%' . $request->s . '%');
+			}
+			if (!empty($request->cat)) {
+				$query->where('category', $request->cat);
+			}
+		})
+			->orderBy($request->order ?? 'id', $orderBy)
 			->paginate($per_page);
 
-		return Inertia::render("demo/pages/$template/RealDataTablesPage", compact('products'));
+		// dd($s, $cat);
+
+		return Inertia::render(
+			"demo/pages/$template/RealDataTablesPage",
+			compact(
+				'products',
+				'categories',
+				's',
+				'cat'
+			)
+		);
 	}
 }

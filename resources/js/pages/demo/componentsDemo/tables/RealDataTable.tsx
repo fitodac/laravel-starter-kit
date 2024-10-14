@@ -12,18 +12,19 @@ import {
 } from '@nextui-org/react'
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
-import { router } from '@inertiajs/react'
-import { Pager } from './componentes'
+import { Pager, Filters } from './componentes'
 
 import type { ProductsProps } from '@/pages/demo/types'
 
 export const RealDataTable = ({ data }: { data: ProductsProps }) => {
-	const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))
+	const [selectedKeys, setSelectedKeys] = useState(
+		new Set(data.data.length > 2 ? [data.data[3].sku] : [])
+	)
 	const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
 	const [isLoading, setIsLoading] = useState(true)
 
 	const sort = useTableSorting()
-	const { links, current_page, per_page } = data
+	const { links, current_page } = data
 
 	useEffect(() => {
 		if (data.data) setIsLoading(false)
@@ -32,6 +33,8 @@ export const RealDataTable = ({ data }: { data: ProductsProps }) => {
 	return (
 		<>
 			<div className="w-full space-y-6">
+				<Filters />
+
 				<Table
 					removeWrapper
 					radius="none"
@@ -68,6 +71,7 @@ export const RealDataTable = ({ data }: { data: ProductsProps }) => {
 						items={data.data}
 						loadingContent={<Spinner label={String(t('loading'))} />}
 						isLoading={isLoading}
+						emptyContent={t('There are no results for this view')}
 					>
 						{(item) => (
 							<TableRow key={item.sku}>

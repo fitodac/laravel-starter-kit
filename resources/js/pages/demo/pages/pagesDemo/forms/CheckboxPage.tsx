@@ -1,15 +1,13 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import {
-	BasicInput,
-	ClassicInput,
-	InputSizes,
-	InputRounded,
-	InputRequired,
-	InputValidationStyles,
-	InputWithAccessories,
-	HorizontalInput,
-	PasswordInput,
+	BasicCheckbox,
+	CheckboxSizing,
+	CheckboxRounded,
+	GroupCheckbox,
+	CheckboxValidationStyles,
+	CustomCheckbox,
+	CustomCheckboxGroup,
 } from '@/pages/demo/componentsDemo'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
@@ -47,30 +45,26 @@ export const CheckboxPage = ({ template }: Props) => {
 					<InternalNavbar
 						{...{
 							menu: [
-								{ key: 'basicInput', label: 'Basic input' },
-								{ key: 'classicInput', label: 'Classic style' },
-								{ key: 'inputSizes', label: 'Sizing' },
-								{ key: 'inputRounded', label: 'Border radius' },
-								{ key: 'inputRequired', label: 'Required' },
+								{ key: 'basicCheckbox', label: 'Basic checkbox' },
+								{ key: 'checkboxSizing', label: 'Sizing' },
+								{ key: 'checkboxRounded', label: 'Border radius' },
+								{ key: 'checkboxGroup', label: 'Checkbox group' },
 								{ key: 'validationStyles', label: 'Validation styles' },
-								{ key: 'inputWithAccessories', label: 'Accessories' },
-								{ key: 'horizontalInput', label: 'Horizontal input' },
-								{ key: 'passwordInput', label: 'Password input' },
+								{ key: 'customCheckbox', label: 'Custom checkbox' },
+								{ key: 'customCheckboxGroup', label: 'Custom checkbox group' },
 							],
 						}}
 					/>
 				}
 			>
-				<div className="flex-1 max-w-2xl space-y-28">
-					<BasicInput />
-					<ClassicInput />
-					<InputSizes />
-					<InputRounded />
-					<InputRequired />
-					<InputValidationStyles />
-					<InputWithAccessories />
-					<HorizontalInput />
-					<PasswordInput />
+				<div className="flex-1 max-w-xl space-y-28">
+					<BasicCheckbox />
+					<CheckboxSizing />
+					<CheckboxRounded />
+					<GroupCheckbox />
+					<CheckboxValidationStyles />
+					<CustomCheckbox />
+					<CustomCheckboxGroup />
 				</div>
 			</PageContent>
 		</>

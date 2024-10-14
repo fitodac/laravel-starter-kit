@@ -62,7 +62,7 @@ export const SelectPage = ({ template }: Props) => {
 					/>
 				}
 			>
-				<div className="flex-1 max-w-2xl space-y-28">
+				<div className="flex-1 max-w-xl space-y-28">
 					<BasicSelect />
 					<ClassicSelect />
 					<SelectSizes />

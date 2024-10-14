@@ -270,6 +270,7 @@ export const InputRequired = () => {
 					Classic required{' '}
 					<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
 				</label>
+
 				<Input
 					isRequired
 					description="Please don't forget to complete this field"
@@ -318,6 +319,7 @@ export const InputValidationStyles = () => {
 						Classic required{' '}
 						<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
 					</label>
+
 					<Input
 						isRequired
 						className="max-w-sm"
@@ -345,7 +347,7 @@ export const InputValidationStyles = () => {
 
 				<fieldset className="space-y-1">
 					<label className="text-xs">
-						Classic required{' '}
+						Classic valid{' '}
 						<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
 					</label>
 					<Input
