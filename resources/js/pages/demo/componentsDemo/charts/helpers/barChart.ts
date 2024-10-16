@@ -19,15 +19,6 @@ const options = {
 	tooltip: {
 		enabled: true,
 	},
-	// fill: {
-	// 	type: 'gradient',
-	// 	gradient: {
-	// 		shadeIntensity: 1,
-	// 		opacityFrom: 0.7,
-	// 		opacityTo: 0.2,
-	// 		stops: [0, 90, 100],
-	// 	},
-	// },
 }
 
 const series = [
@@ -45,4 +36,66 @@ const series = [
 	},
 ]
 
-export { options, series }
+const options2 = {
+	chart: {
+		height: 110,
+		type: 'bar',
+		toolbar: {
+			show: false,
+		},
+		sparkline: {
+			enabled: true,
+		},
+		events: {
+			click: function (chart, w, e) {},
+		},
+	},
+	plotOptions: {
+		bar: {
+			columnWidth: '10px',
+			distributed: true,
+			endingShape: 'rounded',
+			borderRadius: 5,
+		},
+	},
+	dataLabels: {
+		enabled: false,
+	},
+	legend: {
+		show: false,
+	},
+	xaxis: {
+		type: 'numeric',
+		lines: {
+			show: false,
+		},
+		axisBorder: {
+			show: false,
+		},
+		labels: {
+			show: false,
+		},
+	},
+	yaxis: [
+		{
+			y: 0,
+			offsetX: 0,
+			offsetY: 0,
+			labels: {
+				show: false,
+			},
+			padding: {
+				left: 0,
+				right: 0,
+			},
+		},
+	],
+}
+
+const series2 = [
+	{
+		data: [21, 22, 10, 28, 16, 21, 13, 30],
+	},
+]
+
+export { options, series, options2, series2 }

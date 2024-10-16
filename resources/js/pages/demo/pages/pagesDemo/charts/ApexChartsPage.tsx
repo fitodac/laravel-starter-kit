@@ -1,6 +1,11 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { LineAreaCharts, BarCharts } from '@/pages/demo/componentsDemo'
+import {
+	LineChart,
+	AreaCharts,
+	BarCharts,
+	DonutCharts,
+} from '@/pages/demo/componentsDemo'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
@@ -38,16 +43,20 @@ export const ApexChartsPage = ({ template }: Props) => {
 					<InternalNavbar
 						{...{
 							menu: [
-								{ key: 'lineArea', label: 'Line Area' },
-								{ key: 'barchart', label: 'Bar Chart' },
+								{ key: 'lineChart', label: 'Line' },
+								{ key: 'areaChart', label: 'Area' },
+								{ key: 'barChart', label: 'Bar' },
+								{ key: 'donutChart', label: 'Donut' },
 							],
 						}}
 					/>
 				}
 			>
 				<div className="flex-1 max-w-3xl space-y-28">
-					<LineAreaCharts />
+					<LineChart />
+					<AreaCharts />
 					<BarCharts />
+					<DonutCharts />
 				</div>
 			</PageContent>
 		</>

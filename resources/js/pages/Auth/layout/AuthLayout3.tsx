@@ -3,6 +3,7 @@ import { Head, usePage } from '@inertiajs/react'
 import { useColorMode } from '@/hooks'
 import { Toastify } from '@/components'
 import { theme } from '@/config'
+import { cn } from '@nextui-org/react'
 
 import Image from '@/assets/img/pexels-pramodtiwari-14127564.jpg'
 
@@ -23,8 +24,14 @@ export const AuthLayout3 = ({ children, pageTitle }: PropsLayout) => {
 			<Head title={pageTitle} />
 
 			<main className="bg-background w-full h-full min-h-screen grid place-content-center px-6 2xl:px-0">
-				<div className="w-full flex overflow-hidden md:border md:border-default md:rounded-2xl">
-					<section className="h-full hidden w-1/2 md:flex">
+				<div
+					className={cn(
+						'w-full flex overflow-hidden',
+						'md:max-w-6xl md:grid md:grid-cols-2 md:border md:border-default md:rounded-2xl',
+						'xl:grid-cols-5'
+					)}
+				>
+					<section className="h-full hidden md:flex xl:col-span-3">
 						<img
 							src={Image}
 							alt="Background image"
@@ -33,7 +40,7 @@ export const AuthLayout3 = ({ children, pageTitle }: PropsLayout) => {
 						/>
 					</section>
 
-					<section className="flex-1 flex justify-center p-14">
+					<section className="flex-1 flex justify-center p-14 xl:col-span-2">
 						<div className="max-w-lg">
 							<img
 								src={theme[colorMode].logo}

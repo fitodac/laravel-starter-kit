@@ -1,158 +1,159 @@
-// const options = {
-// 	chart: {
-// 		id: 'lineAreaChartDemo',
-// 		type: 'area',
-// 		parentHeightOffset: 0,
-// 		toolbar: {
-// 			show: false,
-// 		},
-// 	},
-// 	dataLabels: {
-// 		enabled: false,
-// 	},
-// 	stroke: {
-// 		show: false,
-// 		curve: 'straight',
-// 	},
-// 	legend: {
-// 		show: true,
-// 		position: 'top',
-// 		horizontalAlign: 'start',
-// 		labels: {
-// 			colors: '#888',
-// 			useSeriesColors: true,
-// 		},
-// 	},
-// 	grid: {
-// 		borderColor: '#888',
-// 		xaxis: {
-// 			lines: {
-// 				show: false,
-// 			},
-// 		},
-// 	},
-// 	colors: ['#29dac7', '#60f2ca', '#a5f8cd'],
-// 	xaxis: {
-// 		categories: [
-// 			'7/12',
-// 			'8/12',
-// 			'9/12',
-// 			'10/12',
-// 			'11/12',
-// 			'12/12',
-// 			'13/12',
-// 			'14/12',
-// 			'15/12',
-// 			'16/12',
-// 			'17/12',
-// 			'18/12',
-// 			'19/12',
-// 			'20/12',
-// 		],
-// 		axisBorder: {
-// 			show: false,
-// 		},
-// 		axisTicks: {
-// 			show: false,
-// 		},
-// 		labels: {
-// 			style: {
-// 				colors: '#888',
-// 				fontSize: '13px',
-// 			},
-// 		},
-// 	},
-// 	yaxis: {
-// 		labels: {
-// 			style: {
-// 				colors: '#888',
-// 				fontSize: '13px',
-// 			},
-// 		},
-// 	},
-// 	fill: {
-// 		opacity: 1,
-// 		type: 'solid',
-// 	},
-// 	tooltip: {
-// 		shared: false,
-// 	},
-// }
-
-// const series = [
-// 	{
-// 		name: 'Visits',
-// 		data: [100, 120, 90, 170, 130, 160, 140, 240, 220, 180, 270, 280, 375],
-// 	},
-// 	{
-// 		name: 'Clicks',
-// 		data: [60, 80, 70, 110, 80, 100, 90, 180, 160, 140, 200, 220, 275],
-// 	},
-// 	{
-// 		name: 'Sales',
-// 		data: [20, 40, 30, 70, 40, 60, 50, 140, 120, 100, 140, 180, 220],
-// 	},
-// ]
-
 const options = {
 	chart: {
-		type: 'line',
 		toolbar: { show: false },
-		zoom: { enabled: false }, // Disable zoom
+		zoom: { enabled: false },
 	},
 	stroke: {
-		curve: 'smooth', // Smooth curve for the line
+		curve: 'smooth',
 		width: 3,
+		color: 'red',
 	},
 	fill: {
 		type: 'gradient',
 		gradient: {
 			shadeIntensity: 1,
-			opacityFrom: 0.6, // Higher starting opacity
-			opacityTo: 0.1, // Lower ending opacity for a soft fade
-			stops: [0, 90, 100],
+			opacityFrom: 0.8,
+			opacityTo: 0,
+			stops: [0, 100],
 		},
 	},
-	markers: {
-		size: 0, // Remove the nodes (data markers)
-	},
+	markers: { size: 0 },
 	legend: { show: false },
-	dataLabels: {
-		enabled: false, // Disable the always-visible labels
-	},
-	colors: ['#2196F3'], // Blue color for the line
+	dataLabels: { enabled: false },
 	xaxis: {
-		labels: { show: false }, // Hide X-axis labels
-		axisBorder: { show: false }, // Hide X-axis border
-		axisTicks: { show: false }, // Hide X-axis ticks
+		labels: { show: false },
+		axisBorder: { show: false },
+		axisTicks: { show: false },
 	},
 	yaxis: {
-		show: false, // Hide Y-axis completely
+		min: (min: number) => min - 50,
+		max: (max: number) => max + 50,
+		forceNiceScale: true,
 	},
-	grid: {
-		show: false, // No gridlines
-	},
+	grid: { show: false },
 	tooltip: {
 		enabled: true,
 		intersect: false,
 		x: {
-			formatter: (idx) => years[idx - 1], // Show the year in the tooltip
+			formatter: (idx: number) => years[idx - 1],
 		},
 		y: {
 			title: {},
-			formatter: (val: number) => `${val.toFixed(2)}`, // Format the tooltip to show as sales amount
+			formatter: (val: number) => `${val.toFixed(2)}`,
 		},
 	},
 }
 
 const years = ['2015', '2016', '2017', '2018', '2019', '2020', '2021']
 
-// Replace the example data with your actual sales amounts
 const series = [
 	{
 		name: 'Sales',
-		data: [3000, 5000, 3500, 5000, 4000, 6000, 4500],
+		data: [3000, 5500, 4500, 6000, 8000, 6000, 9000],
 	},
 ]
 
-export { options, series }
+const options2 = {
+	chart: {
+		toolbar: {
+			show: false,
+		},
+		sparkline: {
+			enabled: true,
+		},
+	},
+	grid: {
+		show: false,
+		padding: {
+			left: 0,
+			right: 0,
+		},
+	},
+	dataLabels: {
+		enabled: false,
+	},
+	stroke: {
+		show: false,
+		curve: 'smooth',
+	},
+	fill: {
+		type: 'gradient',
+		gradient: {
+			shadeIntensity: 1,
+			opacityFrom: 0.7,
+			opacityTo: 0.9,
+			colorStops: [
+				[
+					{
+						offset: 70,
+						color: '#A5EEFD',
+						opacity: 0.5,
+					},
+					{
+						offset: 100,
+						color: '#A5EEFD',
+						opacity: 0,
+					},
+				],
+				[
+					{
+						offset: 70,
+						color: '#a2e9c1',
+						opacity: 0.5,
+					},
+					{
+						offset: 100,
+						color: '#a2e9c1',
+						opacity: 0,
+					},
+				],
+			],
+			stops: [0, 90, 100],
+		},
+	},
+	xaxis: {
+		type: 'numeric',
+		lines: {
+			show: false,
+		},
+		axisBorder: {
+			show: false,
+		},
+		labels: {
+			show: false,
+		},
+	},
+	yaxis: [
+		{
+			y: 0,
+			offsetX: 0,
+			offsetY: 0,
+			labels: {
+				show: false,
+			},
+			padding: {
+				left: 0,
+				right: 0,
+			},
+		},
+	],
+	tooltip: {
+		x: {
+			show: false,
+			format: 'dd/MM/yy HH:mm',
+		},
+	},
+}
+
+const series2 = [
+	{
+		name: 'series1',
+		data: [20, 45, 30, 75, 55, 85, 95],
+	},
+	{
+		name: 'series2',
+		data: [30, 40, 60, 68, 75, 78, 105],
+	},
+]
+
+export { options, series, options2, series2 }

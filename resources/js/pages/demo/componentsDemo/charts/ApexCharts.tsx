@@ -1,53 +1,110 @@
 import { useRef } from 'react'
 import Chart from 'react-apexcharts'
-import { commonColors, semanticColors } from '@nextui-org/theme'
-console.log('commonColors', commonColors)
-console.log('semanticColors', semanticColors)
 import * as config from './helpers'
 import { ApexOptions } from 'apexcharts'
 
-export const LineAreaCharts = () => {
+import { commonColors, semanticColors } from '@nextui-org/theme'
+console.log('commonColors', commonColors)
+console.log('semanticColors', semanticColors)
+
+export const LineChart = () => {
 	return (
-		<div className="space-y-6" id="lineArea">
-			<h3 className="font-semibold">Line Area</h3>
+		<div className="space-y-6" id="lineChart">
+			<h3 className="font-semibold">Line charts</h3>
+			<Chart
+				options={config.linechart.options as ApexOptions}
+				series={config.linechart.series}
+				type="line"
+				height={280}
+			/>
+
+			<Chart
+				options={config.linechart.options2 as ApexOptions}
+				series={config.linechart.series2}
+				type="line"
+				height={280}
+			/>
+
+			<p className="text-xs">XIXIXIXIXIXIXIXIX</p>
+		</div>
+	)
+}
+
+export const AreaCharts = () => {
+	return (
+		<div className="space-y-6" id="areaChart">
+			<h3 className="font-semibold">Area charts</h3>
 
 			<Chart
 				options={config.areachart.options as ApexOptions}
 				series={config.areachart.series}
 				type="area"
-				height={340}
+				height={280}
 			/>
 
-			<p className="text-xs">
-				With their mountain-like appearance, Area Charts are used to represent
-				quantitative variations. Be it examining the variation in the population
-				of a tribe or determining the average performance of the students. Area
-				charts differ from line charts because the area bounded by the plotted
-				data points is filled with shades or colors.
-			</p>
+			<Chart
+				options={config.areachart.options2 as ApexOptions}
+				series={config.areachart.series2}
+				type="area"
+				height={280}
+			/>
+
+			<p className="text-xs">XIXIXIXIXIXIX</p>
 		</div>
 	)
 }
 
 export const BarCharts = () => {
 	return (
-		<div className="space-y-6" id="barchart">
-			<h3 className="font-semibold">Bar Chart</h3>
+		<div className="space-y-6" id="barChart">
+			<h3 className="font-semibold">Bar chart</h3>
 
 			<Chart
 				options={config.barchart.options as ApexOptions}
 				series={config.barchart.series}
 				type="bar"
-				height={340}
+				height={280}
 			/>
 
-			<p className="text-xs">
-				With their mountain-like appearance, Area Charts are used to represent
-				quantitative variations. Be it examining the variation in the population
-				of a tribe or determining the average performance of the students. Area
-				charts differ from line charts because the area bounded by the plotted
-				data points is filled with shades or colors.
-			</p>
+			<Chart
+				options={config.barchart.options2 as ApexOptions}
+				series={config.barchart.series2}
+				type="bar"
+				height={280}
+			/>
+
+			<p className="text-xs">XIXIXIXIXIXIX</p>
+		</div>
+	)
+}
+
+export const DonutCharts = () => {
+	return (
+		<div className="space-y-6" id="donutChart">
+			<h3 className="font-semibold">Donut chart</h3>
+
+			<Chart
+				options={config.donutchart.options as ApexOptions}
+				series={config.donutchart.series}
+				type="radialBar"
+				height={300}
+			/>
+
+			<Chart
+				options={config.donutchart.options2 as ApexOptions}
+				series={config.donutchart.series2}
+				type="radialBar"
+				height={230}
+			/>
+
+			<Chart
+				options={config.donutchart.options3 as ApexOptions}
+				series={config.donutchart.series3}
+				type="donut"
+				height={240}
+			/>
+
+			<p className="text-xs">XIXIXIXIXIXIX</p>
 		</div>
 	)
 }
