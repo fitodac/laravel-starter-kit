@@ -1,6 +1,6 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { SwitchComponent } from '@/pages/demo/componentsDemo'
+
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -37,9 +37,7 @@ export const FormComponentsPage = ({ template }: Props) => {
 
 			<PageContent className={contentClassName}>
 				<div className="space-y-10">
-					<div className="grid grid-cols-2 gap-10">
-						<SwitchComponent />
-					</div>
+					<div className="grid grid-cols-2 gap-10"></div>
 				</div>
 
 				<div className="h-20"></div>

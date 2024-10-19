@@ -211,11 +211,7 @@ class AdminNavbarProvider extends ServiceProvider
 						[
 							'label' => 'Wysiwyg',
 							'route' => 'dashboard.corporate.form.wysiwyg'
-						],
-						[
-							'label' => 'Components (old)',
-							'route' => 'dashboard.corporate.form.components'
-						],
+						]
 					]
 				],
 

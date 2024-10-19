@@ -211,11 +211,7 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 						[
 							'label' => 'Wysiwyg',
 							'route' => 'dashboard.executive.form.wysiwyg'
-						],
-						[
-							'label' => 'Components (old)',
-							'route' => 'dashboard.executive.form.components'
-						],
+						]
 					]
 				],
 

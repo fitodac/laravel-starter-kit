@@ -44,7 +44,6 @@ $pages = [
 		'datepicker' => 'Date Picker',
 		'layouts' => 'Form layouts',
 		'wysiwyg' => 'Wysiwyg',
-		'components' => 'Form components',
 	],
 	'tables' => [
 		'styles' => 'Tables styles',

@@ -1,15 +1,12 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import {
-	BasicInput,
-	ClassicInput,
-	InputSizes,
-	InputRounded,
-	InputRequired,
-	InputValidationStyles,
-	InputWithAccessories,
-	HorizontalInput,
-	PasswordInput,
+	BasicSwitch,
+	SwitchSizing,
+	SwitchColors,
+	CustomLabelsSwitch,
+	SwitchWithIcons,
+	CustomSwitch,
 } from '@/pages/demo/componentsDemo'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
@@ -47,30 +44,24 @@ export const SwitchPage = ({ template }: Props) => {
 					<InternalNavbar
 						{...{
 							menu: [
-								{ key: 'basicInput', label: 'Basic input' },
-								{ key: 'classicInput', label: 'Classic style' },
-								{ key: 'inputSizes', label: 'Sizing' },
-								{ key: 'inputRounded', label: 'Border radius' },
-								{ key: 'inputRequired', label: 'Required' },
-								{ key: 'validationStyles', label: 'Validation styles' },
-								{ key: 'inputWithAccessories', label: 'Accessories' },
-								{ key: 'horizontalInput', label: 'Horizontal input' },
-								{ key: 'passwordInput', label: 'Password input' },
+								{ key: 'basicSwitch', label: 'Basic switch' },
+								{ key: 'switchSizing', label: 'Sizes' },
+								{ key: 'switchColors', label: 'Semantic colors' },
+								{ key: 'customLabelsSwitch', label: 'Custom labels' },
+								{ key: 'switchWithIcons', label: 'Icons' },
+								{ key: 'customSwitch', label: 'Custom implementation' },
 							],
 						}}
 					/>
 				}
 			>
 				<div className="flex-1 max-w-2xl space-y-28">
-					<BasicInput />
-					<ClassicInput />
-					<InputSizes />
-					<InputRounded />
-					<InputRequired />
-					<InputValidationStyles />
-					<InputWithAccessories />
-					<HorizontalInput />
-					<PasswordInput />
+					<BasicSwitch />
+					<SwitchSizing />
+					<SwitchColors />
+					<CustomLabelsSwitch />
+					<SwitchWithIcons />
+					<CustomSwitch />
 				</div>
 			</PageContent>
 		</>
