@@ -205,13 +205,13 @@ class AdminNavbarProvider extends ServiceProvider
 							'route' => 'dashboard.corporate.form.datepicker'
 						],
 						[
+							'label' => 'Wysiwyg',
+							'route' => 'dashboard.corporate.form.wysiwyg'
+						],
+						[
 							'label' => 'Form layouts',
 							'route' => 'dashboard.corporate.form.layouts'
 						],
-						[
-							'label' => 'Wysiwyg',
-							'route' => 'dashboard.corporate.form.wysiwyg'
-						]
 					]
 				],
 

@@ -1,15 +1,13 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import {
-	BasicInput,
-	ClassicInput,
-	InputSizes,
-	InputRounded,
-	InputRequired,
-	InputValidationStyles,
-	InputWithAccessories,
-	HorizontalInput,
-	PasswordInput,
+	BasicSlider,
+	SliderSizing,
+	VerticalSlider,
+	SliderNodes,
+	SliderMarks,
+	RangeSlider,
+	TooltipSlider
 } from '@/pages/demo/componentsDemo'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
@@ -47,30 +45,26 @@ export const SliderPage = ({ template }: Props) => {
 					<InternalNavbar
 						{...{
 							menu: [
-								{ key: 'basicInput', label: 'Basic input' },
-								{ key: 'classicInput', label: 'Classic style' },
-								{ key: 'inputSizes', label: 'Sizing' },
-								{ key: 'inputRounded', label: 'Border radius' },
-								{ key: 'inputRequired', label: 'Required' },
-								{ key: 'validationStyles', label: 'Validation styles' },
-								{ key: 'inputWithAccessories', label: 'Accessories' },
-								{ key: 'horizontalInput', label: 'Horizontal input' },
-								{ key: 'passwordInput', label: 'Password input' },
+								{ key: 'basicSlider', label: 'Basic slider' },
+								{ key: 'sliderSizing', label: 'Sizing' },
+								{ key: 'verticalSlider', label: 'Vertical' },
+								{ key: 'sliderNodes', label: 'Visible nodes' },
+								{ key: 'sliderMarks', label: 'Marks' },
+								{ key: 'rangeSlider', label: 'Range' },
+								{ key: 'tooltipSlider', label: 'Tooltip' },
 							],
 						}}
 					/>
 				}
 			>
-				<div className="flex-1 max-w-2xl space-y-28">
-					<BasicInput />
-					<ClassicInput />
-					<InputSizes />
-					<InputRounded />
-					<InputRequired />
-					<InputValidationStyles />
-					<InputWithAccessories />
-					<HorizontalInput />
-					<PasswordInput />
+				<div className="flex-1 max-w-xl space-y-28">
+					<BasicSlider />
+					<SliderSizing />
+					<VerticalSlider />
+					<SliderNodes />
+					<SliderMarks />
+					<RangeSlider />
+					<TooltipSlider />
 				</div>
 			</PageContent>
 		</>

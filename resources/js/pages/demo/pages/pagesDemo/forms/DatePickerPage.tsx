@@ -1,14 +1,14 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import {
-	BasicInput,
-	ClassicInput,
-	InputSizes,
-	InputRounded,
-	InputRequired,
-	InputValidationStyles,
-	InputWithAccessories,
-	HorizontalInput,
+	BasicDatePicker,
+	ClassicDatePicker,
+	MonthsYearsDatePicker,
+	DateTimePicker,
+	MinAndMaxDatePicker,
+	BasicDateRangePicker,
+	DateRangePickerWithMonths,
+	InlineCalendar,
 	PasswordInput,
 } from '@/pages/demo/componentsDemo'
 import { InternalNavbar } from './components'
@@ -47,30 +47,34 @@ export const DatePickerPage = ({ template }: Props) => {
 					<InternalNavbar
 						{...{
 							menu: [
-								{ key: 'basicInput', label: 'Basic input' },
-								{ key: 'classicInput', label: 'Classic style' },
-								{ key: 'inputSizes', label: 'Sizing' },
-								{ key: 'inputRounded', label: 'Border radius' },
-								{ key: 'inputRequired', label: 'Required' },
-								{ key: 'validationStyles', label: 'Validation styles' },
-								{ key: 'inputWithAccessories', label: 'Accessories' },
-								{ key: 'horizontalInput', label: 'Horizontal input' },
-								{ key: 'passwordInput', label: 'Password input' },
+								{ key: 'basicDatepicker', label: 'Basic datepicker' },
+								{ key: 'classicDatepicker', label: 'Classic style' },
+								{
+									key: 'MonthsYearsDatepicker',
+									label: 'Months and years datepicker',
+								},
+								{ key: 'dateTimePicker', label: 'Date time picker' },
+								{ key: 'minMaxDate', label: 'Min and max date' },
+								{ key: 'basicDateRangePicker', label: 'Date range picker' },
+								{
+									key: 'dateRangePickerMonths',
+									label: 'Date range picker months',
+								},
+								{ key: 'inlineCalendar', label: 'Inline calendar' },
 							],
 						}}
 					/>
 				}
 			>
-				<div className="flex-1 max-w-2xl space-y-28">
-					<BasicInput />
-					<ClassicInput />
-					<InputSizes />
-					<InputRounded />
-					<InputRequired />
-					<InputValidationStyles />
-					<InputWithAccessories />
-					<HorizontalInput />
-					<PasswordInput />
+				<div className="flex-1 max-w-xl space-y-28">
+					<BasicDatePicker />
+					<ClassicDatePicker />
+					<MonthsYearsDatePicker />
+					<DateTimePicker />
+					<MinAndMaxDatePicker />
+					<BasicDateRangePicker />
+					<DateRangePickerWithMonths />
+					<InlineCalendar />
 				</div>
 			</PageContent>
 		</>

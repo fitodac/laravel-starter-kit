@@ -8,7 +8,6 @@ import {
 	SwitchPage,
 	SliderPage,
 	DatePickerPage,
-	FormComponentsPage,
 	FormLayoutsPage,
 	TipTapPage,
 } from '@/pages/demo/pages/pagesDemo/forms'
@@ -40,8 +39,6 @@ export const Page = ({ title }: Props) => {
 			return <FormLayoutsPage {...{ template: 'corporate' }} />
 		case 'Wysiwyg':
 			return <TipTapPage {...{ template: 'corporate' }} />
-		case 'Form components':
-			return <FormComponentsPage {...{ template: 'corporate' }} />
 		default:
 			return null
 	}

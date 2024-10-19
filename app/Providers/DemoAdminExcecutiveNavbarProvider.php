@@ -205,13 +205,13 @@ class DemoAdminExcecutiveNavbarProvider extends ServiceProvider
 							'route' => 'dashboard.executive.form.datepicker'
 						],
 						[
+							'label' => 'Wysiwyg',
+							'route' => 'dashboard.executive.form.wysiwyg'
+						],
+						[
 							'label' => 'Form layouts',
 							'route' => 'dashboard.executive.form.layouts'
 						],
-						[
-							'label' => 'Wysiwyg',
-							'route' => 'dashboard.executive.form.wysiwyg'
-						]
 					]
 				],
 

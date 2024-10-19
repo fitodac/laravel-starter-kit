@@ -31,16 +31,7 @@ export const TipTapPage = ({ template }: Props) => {
 				</p>
 			</PageHeader>
 
-			<PageContent
-				className={contentClassName}
-				aside={
-					<ul>
-						<li>Solid button</li>
-						<li>Small button</li>
-						<li>Large button</li>
-					</ul>
-				}
-			>
+			<PageContent className={contentClassName} aside={<></>}>
 				<div className="flex-1 max-w-xl space-y-14">
 					<Wysiwyg
 						{...{

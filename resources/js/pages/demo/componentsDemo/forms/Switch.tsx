@@ -6,6 +6,16 @@ import {
 	Button,
 } from '@nextui-org/react'
 
+/**
+ * BasicSwitch
+ *
+ * A basic switch component.
+ *
+ * This component can be used as a simple on/off toggle.
+ *
+ * @example
+ * <BasicSwitch />
+ */
 export const BasicSwitch = () => {
 	return (
 		<div className="space-y-6" id="basicSwitch">
@@ -28,6 +38,16 @@ export const BasicSwitch = () => {
 	)
 }
 
+/**
+ * SwitchSizing
+ *
+ * A component that shows how to use the `size` prop to control the size of the switch component.
+ *
+ * This component can be used to create a switch component with a small, medium, or large size.
+ *
+ * @example
+ * <SwitchSizing />
+ */
 export const SwitchSizing = () => {
 	return (
 		<div className="space-y-6" id="switchSizing">
@@ -58,6 +78,16 @@ export const SwitchSizing = () => {
 	)
 }
 
+/**
+ * SwitchColors
+ *
+ * A component that shows how to use the `color` prop to control the semantic color of the switch component.
+ *
+ * This component can be used to create a switch component with a default, primary, secondary, success, warning, or danger color.
+ *
+ * @example
+ * <SwitchColors />
+ */
 export const SwitchColors = () => {
 	return (
 		<div className="space-y-6" id="switchColors">
@@ -136,6 +166,16 @@ export const SwitchColors = () => {
 	)
 }
 
+/**
+ * CustomLabelsSwitch
+ *
+ * A component that shows how to use the `startContent` and `endContent` props to customize the content of the switch component.
+ *
+ * This component shows a switch component with a custom start content and end content.
+ *
+ * @example
+ * <CustomLabelsSwitch />
+ */
 export const CustomLabelsSwitch = () => {
 	return (
 		<div className="space-y-6" id="customLabelsSwitch">
@@ -175,6 +215,17 @@ export const CustomLabelsSwitch = () => {
 	)
 }
 
+/**
+ * SwitchWithIcons
+ *
+ * A component that shows how to use the `thumbIcon` prop to create a custom thumb icon for the switch component,
+ * and the `startContent` and `endContent` props to add custom content to the start and end of the switch component.
+ *
+ * This component can be used to create a switch component with a custom icon, and a custom content at the start and end of the switch.
+ *
+ * @example
+ * <SwitchWithIcons />
+ */
 export const SwitchWithIcons = () => {
 	return (
 		<div className="space-y-6" id="switchWithIcons">
@@ -220,6 +271,16 @@ export const SwitchWithIcons = () => {
 	)
 }
 
+/**
+ * CustomSwitch
+ *
+ * A component that shows how to use the `useSwitch` hook to create a custom switch component.
+ *
+ * This component uses the `useSwitch` hook to create a custom switch component with a custom design.
+ *
+ * @example
+ * <CustomSwitch />
+ */
 export const CustomSwitch = () => {
 	const {
 		Component,

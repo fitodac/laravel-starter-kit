@@ -1,6 +1,5 @@
 export * from './CheckboxPage'
 export * from './DatePickerPage'
-export * from './FormComponentsPage'
 export * from './FormLayoutsPage'
 export * from './InputPage'
 export * from './RadioButtonPage'

@@ -4,6 +4,8 @@ export * from './forms/Textarea'
 export * from './forms/Checkbox'
 export * from './forms/RadioButtons'
 export * from './forms/Switch'
+export * from './forms/Slider'
+export * from './forms/DatePicker'
 
 export * from './forms/layouts/CompactFormLayout'
 export * from './forms/layouts/VerticalFormLayout'
