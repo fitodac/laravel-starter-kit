@@ -25,7 +25,7 @@ class RoleTest extends TestCase
 
 		// Create a user with roles and permissions
 		$this->user = User::factory()->create();
-		$userRole = Role::create(['name' => 'Super Admin']);
+		Role::create(['name' => 'Super Admin']);
 
 		$this->user->assignRole('Super Admin');
 	}
