@@ -24,8 +24,9 @@ class NotifyAdminOfNewUserRegistration
 
 		$admin = User::role('Super Admin')->first();
 
-		if ($admin) {
-			$admin->notify(new NewUserRegisteredNotification($event->user));
-		}
+		if (!config('settings.general.new_user_superadmin_notification')) return;
+		if (!$admin) return;
+
+		$admin->notify(new NewUserRegisteredNotification($event->user));
 	}
 }

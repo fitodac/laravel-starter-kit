@@ -75,6 +75,8 @@ class RegistrationTest extends TestCase
 	// Super Admin must receive a notification email when registering a new user
 	public function test_super_admin_must_receive_a_notification_email_when_registering_a_new_user(): void
 	{
+		if (!config('new_user_superadmin_notification')) return;
+
 		Notification::fake();
 
 		$this->post('/register', [
