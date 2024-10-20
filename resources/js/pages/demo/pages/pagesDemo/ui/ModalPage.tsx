@@ -1,24 +1,19 @@
 import { useState } from 'react'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
+import { ModalPosition, ModalSizing } from '@/pages/demo/componentsDemo'
 import {
+	Button,
 	Modal,
 	ModalBody,
 	ModalContent,
+	ModalFooter,
 	ModalHeader,
 	useDisclosure,
 } from '@nextui-org/react'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
-
-type placement =
-	| 'auto'
-	| 'center'
-	| 'top'
-	| 'top-center'
-	| 'bottom'
-	| 'bottom-center'
 
 interface Props {
 	template?: Template
@@ -30,6 +25,7 @@ export const ModalPage = ({ template }: Props) => {
 
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 	const [modalPlacement, setModalPlacement] = useState<placement>('auto')
+	const [modalSize, setModalSize] = useState<sizing>('sm')
 
 	return (
 		<>
@@ -55,99 +51,53 @@ export const ModalPage = ({ template }: Props) => {
 					<InternalNavbar
 						{...{
 							menu: [
-								// { key: 'solidButton', label: 'Solid button' },
+								{ key: 'modalPositions', label: 'Positions' },
+								{ key: 'modalSizing', label: 'Sizing' },
 							],
 						}}
 					/>
 				}
 			>
-				<div className="max-w-2xl space-y-10">
-					<div className="text-xl">Position</div>
-
-					<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-						<div>
-							<button
-								className="bg-indigo-400 text-white w-32 aspect-square grid place-content-center rounded"
-								onClick={() => {
-									setModalPlacement('auto')
-									onOpen()
-								}}
-							>
-								<span>Auto</span>
-							</button>
-						</div>
-
-						<div>
-							<button
-								className="bg-indigo-400 text-white w-32 aspect-square grid place-content-center rounded"
-								onClick={() => {
-									setModalPlacement('top')
-									onOpen()
-								}}
-							>
-								<span>Top</span>
-							</button>
-						</div>
-
-						<div>
-							<button
-								className="bg-indigo-400 text-white w-32 aspect-square grid place-content-center rounded"
-								onClick={() => {
-									setModalPlacement('bottom')
-									onOpen()
-								}}
-							>
-								<span>Bottom</span>
-							</button>
-						</div>
-
-						<div>
-							<button
-								className="bg-indigo-400 text-white w-32 aspect-square grid place-content-center rounded"
-								onClick={() => {
-									setModalPlacement('center')
-									onOpen()
-								}}
-							>
-								<span>Center</span>
-							</button>
-						</div>
-
-						<div>
-							<button
-								className="bg-indigo-400 text-white w-32 aspect-square grid place-content-center rounded"
-								onClick={() => {
-									setModalPlacement('top-center')
-									onOpen()
-								}}
-							>
-								<span>Top Center</span>
-							</button>
-						</div>
-
-						<div>
-							<button
-								className="bg-indigo-400 text-white w-32 aspect-square grid place-content-center rounded"
-								onClick={() => {
-									setModalPlacement('bottom-center')
-									onOpen()
-								}}
-							>
-								<span>Bottom Center</span>
-							</button>
-						</div>
-					</div>
+				<div className="w-full max-w-xl space-y-28">
+					<ModalPosition {...{ onOpen, setModalPlacement, setModalSize }} />
+					<ModalSizing {...{ onOpen, setModalPlacement, setModalSize }} />
 				</div>
-
-				<div className="h-20"></div>
 			</PageContent>
 
-			<Modal {...{ isOpen, placement: modalPlacement, onOpenChange }}>
+			<Modal
+				{...{
+					isOpen,
+					placement: modalPlacement,
+					onOpenChange,
+					size: modalSize,
+				}}
+			>
 				<ModalContent>
 					{(onClose) => (
 						<>
-							<ModalHeader>Modal...</ModalHeader>
-							<ModalBody>Hola Mundo!</ModalBody>
+							<ModalHeader>Modal header</ModalHeader>
+							<ModalBody className="text-sm">
+								<p>
+									A modal window enhances user experience by allowing focused
+									interaction without leaving the current page. It’s perfect for
+									capturing attention, displaying critical information, or
+									prompting users to take action.
+								</p>
+								<p>
+									Modals are also versatile; they can be used for forms,
+									notifications, or confirmation dialogs, making them a powerful
+									tool in UI design. Moreover, they help maintain context,
+									reducing unnecessary navigation and improving usability.
+								</p>
+							</ModalBody>
+							<ModalFooter>
+								<Button color="danger" variant="light" onPress={onClose}>
+									Close
+								</Button>
+								<Button color="primary" onPress={onClose}>
+									Action
+								</Button>
+							</ModalFooter>
 						</>
 					)}
 				</ModalContent>
@@ -155,3 +105,23 @@ export const ModalPage = ({ template }: Props) => {
 		</>
 	)
 }
+
+type sizing =
+	| 'sm'
+	| 'xs'
+	| 'md'
+	| 'lg'
+	| 'xl'
+	| '2xl'
+	| '3xl'
+	| '4xl'
+	| '5xl'
+	| 'full'
+
+type placement =
+	| 'auto'
+	| 'center'
+	| 'top'
+	| 'top-center'
+	| 'bottom'
+	| 'bottom-center'

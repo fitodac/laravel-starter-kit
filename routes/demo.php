@@ -60,7 +60,7 @@ $pages = [
 /**
  * Corporate
  */
-Route::middleware('auth')
+Route::middleware(['auth', 'verified'])
 	->prefix('dashboard/corporate')
 	->name('dashboard.')
 	->group(function () use ($pages) {
@@ -113,7 +113,7 @@ Route::middleware('auth')
 /**
  * Executive
  */
-Route::middleware('auth')
+Route::middleware(['auth', 'verified'])
 	->prefix('dashboard/executive')
 	->name('dashboard.')
 	->group(function () use ($pages) {

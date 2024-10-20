@@ -4,7 +4,7 @@ import {
 	BasicSpinner,
 	BasicSkeleton,
 	Progress,
-	ProgressWithValue
+	ProgressWithValue,
 } from '@/pages/demo/componentsDemo'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
@@ -48,13 +48,16 @@ export const LoadingIndicatorsPage = ({ template }: Props) => {
 								{ key: 'basicSpinner', label: 'Spinner' },
 								{ key: 'basicSkeleton', label: 'Skeleton' },
 								{ key: 'circularProgress', label: 'Circular progress' },
-								{ key: 'circularProgressWithValue', label: 'Progress with value' },
+								{
+									key: 'circularProgressWithValue',
+									label: 'Progress with value',
+								},
 							],
 						}}
 					/>
 				}
 			>
-				<div className="flex-1 max-w-xl space-y-28">
+				<div className="w-full max-w-xl space-y-28">
 					<BasicSpinner />
 					<BasicSkeleton />
 					<Progress />

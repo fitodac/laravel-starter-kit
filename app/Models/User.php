@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Lab404\Impersonate\Models\Impersonate;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-	use HasFactory, Notifiable, HasRoles;
+	use HasFactory, Notifiable, HasRoles, Impersonate;
 
 	/**
 	 * The attributes that are mass assignable.
@@ -45,20 +46,17 @@ class User extends Authenticatable implements MustVerifyEmail
 		'status',
 	];
 
-	/**
-	 * The attributes that should be hidden for serialization.
-	 *
-	 * @var array<int, string>
-	 */
+
 	protected $hidden = [
 		'password',
 		'remember_token',
 	];
 
+
 	/**
-	 * Get the attributes that should be cast.
+	 * The attributes that should be cast to native types.
 	 *
-	 * @return array<string, string>
+	 * @return array
 	 */
 	protected function casts(): array
 	{
@@ -68,11 +66,21 @@ class User extends Authenticatable implements MustVerifyEmail
 		];
 	}
 
+	/**
+	 * Get the sessions associated with the user.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function sessions()
 	{
 		return $this->hasMany(Session::class);
 	}
 
+	/**
+	 * Get the user's permissions.
+	 *
+	 * @return \Illuminate\Support\Collection<int, string>
+	 */
 	public function getPermissionsAttribute()
 	{
 		if ($this->id) {
@@ -80,5 +88,20 @@ class User extends Authenticatable implements MustVerifyEmail
 		}
 
 		return [];
+	}
+
+
+	/**
+	 * Determine if the user can impersonate other users.
+	 *
+	 * @return bool True if the user has impersonation rights, false otherwise.
+	 */
+	public function canImpersonate(): bool
+	{
+		if (config('settings.general.admin_can_impersonate')) {
+			return $this->hasRole(['Admin', 'Super Admin']);
+		} else {
+			return $this->hasRole('Super Admin');
+		}
 	}
 }

@@ -15,4 +15,9 @@ return [
 	'og_image' => env('VITE_OG_IMAGE', 'og-image.jpg'),
 	'x_user' => env('VITE_X_USER', '@twitter_X_user'),
 	'msapplication_color' => env('VITE_MSAPPLICATION_COLOR', '#000000'),
+
+
+	// Determine if the admin should be able to impersonate other users.
+	// @link https://github.com/lab404/laravel-impersonate
+	'admin_can_impersonate' => env('ADMIN_CAN_IMPERSONATE', false),
 ];

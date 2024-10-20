@@ -6,6 +6,7 @@ import {
 	DropdownSection,
 	User,
 	Avatar,
+	Input,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { usePage, router } from '@inertiajs/react'
@@ -88,6 +89,13 @@ export const ProfileDropdown = ({
 							startContent={<i className="ri-profile-line ri-lg" />}
 						>
 							{t('My account')}
+						</DropdownItem>
+
+						<DropdownItem
+							startContent={<i className="ri-user-received-line ri-lg" />}
+							endContent={<Input className="w-10" size="sm" />}
+						>
+							{t('Impersonate')}
 						</DropdownItem>
 					</DropdownSection>
 

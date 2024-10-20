@@ -8,17 +8,18 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Middleware\CheckRoleAccess;
 
-/**
- * Users
- * 
- * 
- * 
- */
-Route::middleware(['auth', 'can:Admin Access'])
+
+Route::middleware(['auth', 'verified', 'can:Admin Access'])
 	->prefix('dashboard/corporate')
 	->name('dashboard.')
 	->group(function () {
 
+		/**
+		 * Users
+		 * 
+		 * 
+		 * 
+		 */
 		Route::get('users', [UserController::class, 'index'])->name('users.list');
 		Route::get('users/create', [UserController::class, 'create'])->name('user.create');
 		Route::post('users', [UserController::class, 'store'])->name('user.store');
@@ -32,10 +33,20 @@ Route::middleware(['auth', 'can:Admin Access'])
 		Route::post('users/image-profile/{user}', [UserController::class, 'update_image_profile'])->name('user.update_image_profile');
 		Route::delete('users/image-profile/{user}', [UserController::class, 'remove_image_profile'])->name('user.remove_image_profile');
 
-		// Sessions
+		/**
+		 * Sessions
+		 * 
+		 * 
+		 * 
+		 */
 		Route::delete('session/{id}/invalidate', [UserController::class, 'invalidate_session'])->name('session.invalidate');
 
-		// Notifications
+		/**
+		 * Notifications
+		 * 
+		 * 
+		 * 
+		 */
 		Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.list');
 		Route::post('/notifications', [NotificationController::class, 'store'])->name('notification.store');
 		Route::match(['put', 'patch'], 'notifications/{notification}', [NotificationController::class, 'update'])->name('notification.update');
@@ -90,3 +101,5 @@ Route::middleware(['auth', 'role:Super Admin'])
 		// Route::match(['put', 'patch'], 'administrator/{user}', [UserAdminController::class, 'update'])->name('admin.update');
 		// Route::delete('administrator/{user}', [UserAdminController::class, 'destroy'])->name('admin.destroy');
 	});
+
+Route::impersonate();
