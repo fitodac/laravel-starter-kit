@@ -1,6 +1,6 @@
 import { FormEventHandler } from 'react'
 import { t } from '@/i18n'
-import { Link, useForm } from '@inertiajs/react'
+import { useForm } from '@inertiajs/react'
 import { Button } from '@nextui-org/react'
 import { AuthLayout1, AuthLayout2, AuthLayout3 } from './layout'
 import { StatusMessage } from './components'
@@ -44,19 +44,6 @@ const Page = ({ status, layout }: Props) => {
 						{t('Resend Verification Email')}
 					</Button>
 				</form>
-			</div>
-
-			<div className="text-center">
-				<Button
-					as={Link}
-					disableRipple
-					color="primary"
-					variant="light"
-					className="p-0 h-auto hover:!bg-transparent"
-					href={route('login')}
-				>
-					{t('Already registered?')}
-				</Button>
 			</div>
 		</>
 	)
