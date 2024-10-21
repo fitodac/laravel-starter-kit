@@ -1,15 +1,18 @@
+import { useRef } from 'react'
 import {
+	cn,
+	User,
+	Avatar,
 	Dropdown,
 	DropdownTrigger,
 	DropdownMenu,
 	DropdownItem,
 	DropdownSection,
-	User,
-	Avatar,
-	Input,
+	useDisclosure,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { usePage, router } from '@inertiajs/react'
+import { ModalImpersonate } from './ModalImpersonate'
 
 import type { PageProps } from '@/types'
 
@@ -19,12 +22,30 @@ interface Props {
 	showNameInDropdown?: boolean
 }
 
+let can_impersonate = false
+
 export const ProfileDropdown = ({
 	showName,
 	showOnlyName,
 	showNameInDropdown = true,
 }: Props) => {
+	const { onOpen, isOpen, onOpenChange } = useDisclosure()
 	const user = usePage<PageProps>().props.auth.user
+	const props = usePage<PageProps>().props
+
+	const is_superadmin = useRef(
+		user.roles && user.roles.filter((e) => e.name === 'Super Admin').length > 0
+	)
+	const is_admin = useRef(
+		user.roles && user.roles.filter((e) => e.name === 'Admin').length > 0
+	)
+
+	if (
+		(is_admin.current && props.admin_can_impersonate) ||
+		is_superadmin.current
+	) {
+		can_impersonate = true
+	}
 
 	return (
 		<>
@@ -41,7 +62,9 @@ export const ProfileDropdown = ({
 								size: 'sm',
 								color: 'primary',
 								name: user.username[0] + user.username[1],
-								src: `/storage/img/users/avatars/${user.profile_picture}`,
+								src: user.profile_picture
+									? `/storage/img/users/avatars/${user.profile_picture}`
+									: '',
 							}}
 							classNames={{
 								base: 'rounded-none flex-row-reverse',
@@ -55,7 +78,9 @@ export const ProfileDropdown = ({
 								size: 'sm',
 								color: 'primary',
 								name: user.username[0] + user.username[1],
-								src: `/storage/img/users/avatars/${user.profile_picture}`,
+								src: user.profile_picture
+									? `/storage/img/users/avatars/${user.profile_picture}`
+									: '',
 							}}
 						/>
 					)}
@@ -92,11 +117,13 @@ export const ProfileDropdown = ({
 						</DropdownItem>
 
 						<DropdownItem
-							startContent={<i className="ri-user-received-line ri-lg" />}
-							endContent={<Input className="w-10" size="sm" />}
-						>
-							{t('Impersonate')}
-						</DropdownItem>
+							children={can_impersonate ? t('Impersonate') : <></>}
+							startContent={
+								can_impersonate && <i className="ri-user-received-line ri-lg" />
+							}
+							className={cn(!can_impersonate && 'hidden')}
+							onPress={() => can_impersonate && onOpen()}
+						/>
 					</DropdownSection>
 
 					<DropdownSection>
@@ -112,6 +139,8 @@ export const ProfileDropdown = ({
 					</DropdownSection>
 				</DropdownMenu>
 			</Dropdown>
+
+			<ModalImpersonate {...{ onOpen, isOpen, onOpenChange }} />
 		</>
 	)
 }

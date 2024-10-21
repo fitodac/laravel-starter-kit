@@ -621,6 +621,41 @@ export const PasswordInput = () => {
 	)
 }
 
+export const InputTypes = () => {
+	const [variant, setVariant] = useState('flat')
+
+	return (
+		<div className="space-y-6" id="inputTypes">
+			<div className="space-y-2">
+				<h3 className="font-semibold">Input types</h3>
+				<FlavorSelector {...{ setVariant }} />
+			</div>
+
+			<h4 className="text-sm font-semibold">Number</h4>
+
+			<Input
+				type="number"
+				label="Number"
+				className="max-w-sm"
+				// @ts-ignore
+				variant={variant}
+			/>
+
+			<fieldset className="space-y-1">
+				<label className="text-xs">Number</label>
+				<Input
+					type="number"
+					className="max-w-sm"
+					// @ts-ignore
+					variant={variant}
+				/>
+			</fieldset>
+
+			<p className="text-xs">XIXIXIXIXIXIXIXIXIXIXIXIX</p>
+		</div>
+	)
+}
+
 const flavors = {
 	flat: 'Flat',
 	bordered: 'Bordered',

@@ -1,8 +1,11 @@
 <?php
 
+/**
+ * All environment variables must being with VITE_
+ */
 return [
 	// Determine if the super admin should be notified when a new user registers.
-	'new_user_superadmin_notification' => env('NEW_USER_SUPERADMIN_NOTIFICATION', true),
+	'new_user_superadmin_notification' => env('VITE_NEW_USER_SUPERADMIN_NOTIFICATION', true),
 
 	// Determine if the site is in light or dark mode.
 	'color_mode' => env('VITE_COLOR_MODE', 'light'),
@@ -19,5 +22,5 @@ return [
 
 	// Determine if the admin should be able to impersonate other users.
 	// @link https://github.com/lab404/laravel-impersonate
-	'admin_can_impersonate' => env('ADMIN_CAN_IMPERSONATE', false),
+	'admin_can_impersonate' => env('VITE_ADMIN_CAN_IMPERSONATE', false),
 ];

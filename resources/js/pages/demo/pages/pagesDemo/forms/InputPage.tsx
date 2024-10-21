@@ -10,6 +10,7 @@ import {
 	InputWithAccessories,
 	HorizontalInput,
 	PasswordInput,
+	InputTypes
 } from '@/pages/demo/componentsDemo'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
@@ -56,6 +57,7 @@ export const InputPage = ({ template }: Props) => {
 								{ key: 'inputWithAccessories', label: 'Accessories' },
 								{ key: 'horizontalInput', label: 'Horizontal input' },
 								{ key: 'passwordInput', label: 'Password input' },
+								{ key: 'inputTypes', label: 'Input types' },
 							],
 						}}
 					/>
@@ -71,6 +73,7 @@ export const InputPage = ({ template }: Props) => {
 					<InputWithAccessories />
 					<HorizontalInput />
 					<PasswordInput />
+					<InputTypes />
 				</div>
 			</PageContent>
 		</>
