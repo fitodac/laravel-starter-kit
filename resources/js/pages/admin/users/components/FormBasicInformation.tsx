@@ -1,8 +1,7 @@
 import { FormEvent } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
-import { ClassicInput } from '@/components/form'
-import { Button, ButtonGroup, Divider, Switch } from '@nextui-org/react'
+import { Input, Button, ButtonGroup, Divider, Switch } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 
 import type { PageProps, User, InertiaResponse } from '@/types'
@@ -48,9 +47,13 @@ export const FormBasicInformation = () => {
 
 					<div className="grid grid-cols-2 gap-x-6 gap-y-5">
 						<fieldset>
-							<ClassicInput
+							<label htmlFor="" className="text-sm">
+								{t('Name')}{' '}
+								<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+							</label>
+
+							<Input
 								isRequired
-								label={t('Name')}
 								variant="faded"
 								value={data.name}
 								isInvalid={errors.name ? true : false}
@@ -62,9 +65,13 @@ export const FormBasicInformation = () => {
 						</fieldset>
 
 						<fieldset>
-							<ClassicInput
+							<label htmlFor="" className="text-sm">
+								{t('Lastname')}{' '}
+								<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+							</label>
+
+							<Input
 								isRequired
-								label={t('Lastname')}
 								variant="faded"
 								value={data.lastname}
 								isInvalid={errors.lastname ? true : false}
@@ -76,9 +83,13 @@ export const FormBasicInformation = () => {
 						</fieldset>
 
 						<fieldset>
-							<ClassicInput
+							<label htmlFor="" className="text-sm">
+								{t('Username')}{' '}
+								<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+							</label>
+
+							<Input
 								isRequired
-								label={t('Username')}
 								variant="faded"
 								value={data.username}
 								isInvalid={errors.username ? true : false}
@@ -90,9 +101,13 @@ export const FormBasicInformation = () => {
 						</fieldset>
 
 						<fieldset>
-							<ClassicInput
+							<label htmlFor="" className="text-sm">
+								{t('Email')}{' '}
+								<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+							</label>
+
+							<Input
 								isRequired
-								label={t('Email')}
 								variant="faded"
 								value={data.email}
 								isInvalid={errors.email ? true : false}

@@ -1,8 +1,7 @@
 import { FormEvent } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
-import { ClassicInput } from '@/components/form'
-import { Button, Textarea, Divider } from '@nextui-org/react'
+import { Input, Button, Textarea, Divider } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 
 import type { PageProps, User, InertiaResponse } from '@/types'
@@ -10,12 +9,13 @@ import type { PageProps, User, InertiaResponse } from '@/types'
 export const FormProfessionalInformation = () => {
 	const { user } = usePage<PageProps<{ user: User }>>().props
 
-	const { data, setData, patch, processing, errors, clearErrors, isDirty } = useForm({
-		id: user.id,
-		job_title: user.job_title,
-		company: user.company,
-		bio: user.bio,
-	})
+	const { data, setData, patch, processing, errors, clearErrors, isDirty } =
+		useForm({
+			id: user.id,
+			job_title: user.job_title,
+			company: user.company,
+			bio: user.bio,
+		})
 
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
@@ -42,9 +42,13 @@ export const FormProfessionalInformation = () => {
 					</div>
 
 					<div className="grid grid-cols-2 gap-x-6 gap-y-5">
-						<fieldset>
-							<ClassicInput
-								label={t('Job title')}
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Job title')}{' '}
+								<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+							</label>
+
+							<Input
 								variant="faded"
 								value={data.job_title}
 								isInvalid={errors.job_title ? true : false}
@@ -55,9 +59,13 @@ export const FormProfessionalInformation = () => {
 							/>
 						</fieldset>
 
-						<fieldset>
-							<ClassicInput
-								label={t('Company')}
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Company')}{' '}
+								<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+							</label>
+
+							<Input
 								variant="faded"
 								value={data.company}
 								isInvalid={errors.company ? true : false}
@@ -68,7 +76,7 @@ export const FormProfessionalInformation = () => {
 							/>
 						</fieldset>
 
-						<fieldset className="col-span-2">
+						<fieldset className="col-span-2 space-y-1">
 							<Textarea
 								label={t('Biography')}
 								variant="faded"

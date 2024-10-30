@@ -2,7 +2,7 @@ import { useEffect, useState, FormEventHandler } from 'react'
 import { t } from '@/i18n'
 import { Link, useForm } from '@inertiajs/react'
 import { Input, Button } from '@nextui-org/react'
-import { AuthLayout1, AuthLayout2, AuthLayout3 } from './layout'
+import { AuthLayout1, AuthLayout2, AuthLayout3 } from '@/layouts/auth'
 
 const pageTitle = t('Register').toString()
 

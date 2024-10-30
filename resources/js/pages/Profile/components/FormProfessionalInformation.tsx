@@ -1,8 +1,7 @@
 import { FormEvent } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
-import { ClassicInput } from '@/components/form'
-import { Button, Textarea, Divider } from '@nextui-org/react'
+import { Input, Button, Textarea, Divider } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 
 import type { PageProps, User, InertiaResponse } from '@/types'
@@ -43,9 +42,12 @@ export const FormProfessionalInformation = () => {
 					</div>
 
 					<div className="grid grid-cols-2 gap-x-6 gap-y-5">
-						<fieldset>
-							<ClassicInput
-								label={t('Job title')}
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Job title')}
+							</label>
+
+							<Input
 								variant="faded"
 								value={data.job_title}
 								isInvalid={errors.job_title ? true : false}
@@ -56,9 +58,12 @@ export const FormProfessionalInformation = () => {
 							/>
 						</fieldset>
 
-						<fieldset>
-							<ClassicInput
-								label={t('Company')}
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Company')}
+							</label>
+
+							<Input
 								variant="faded"
 								value={data.company}
 								isInvalid={errors.company ? true : false}
@@ -69,9 +74,12 @@ export const FormProfessionalInformation = () => {
 							/>
 						</fieldset>
 
-						<fieldset className="col-span-2">
+						<fieldset className="col-span-2 space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Biography')}
+							</label>
+
 							<Textarea
-								label={t('Biography')}
 								variant="faded"
 								value={data.bio}
 								isInvalid={errors.bio ? true : false}
@@ -79,7 +87,7 @@ export const FormProfessionalInformation = () => {
 								onKeyUp={() => clearErrors('bio')}
 								isDisabled={processing}
 								onValueChange={(e) => setData('bio', e)}
-							></Textarea>
+							/>
 						</fieldset>
 					</div>
 

@@ -1,8 +1,7 @@
 import { useContext, useRef } from 'react'
 import {
+	Input,
 	Button,
-	CheckboxGroup,
-	Checkbox,
 	Divider,
 	cn,
 	Spinner,
@@ -12,7 +11,6 @@ import {
 } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { RoleContext } from '../providers/RoleProvider'
-import { ClassicInput } from '@/components/form'
 import { useActions } from '../hooks/useActions'
 import { usePage } from '@inertiajs/react'
 
@@ -64,51 +62,36 @@ export const CreateEditForm = () => {
 
 				<form
 					onSubmit={submit}
-					className="pb-10 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0"
+					className="pb-10 lg:grid lg:grid-cols-2 lg:gap-x-6 lg:gap-y-4 lg:space-y-0"
 				>
-					<fieldset>
-						<ClassicInput
+					<fieldset className="space-y-1">
+						<label htmlFor="" className="text-sm">
+							{t('Role name')}{' '}
+							<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+						</label>
+
+						<Input
 							isRequired
 							ref={inputName}
 							variant="faded"
 							value={data.name}
-							label={t('Role name')}
 							isInvalid={errors.name ? true : false}
 							errorMessage={errors.name}
 							onKeyUp={() => clearErrors('name')}
 							isDisabled={isProtected.current || processing}
 							onValueChange={(e) => setData('name', e)}
 						/>
-
-						<div className="flex justify-end gap-5 mt-8">
-							<Button
-								isDisabled={processing}
-								onPress={() => {
-									dispatch({ type: 'closeDrawer' })
-									dispatch({ type: 'setSelectedRole', payload: null })
-									reset()
-								}}
-								className="w-32"
-							>
-								{t('Cancel')}
-							</Button>
-
-							<Button
-								type="submit"
-								color="primary"
-								className="w-32"
-								isLoading={processing}
-							>
-								{t('Save')}
-							</Button>
-						</div>
 					</fieldset>
 
 					<>
 						{webPermissions && (
-							<fieldset className="space-y-6">
+							<fieldset className="space-y-1">
+								<label htmlFor="" className="text-sm">
+									{t('Permissions')}
+								</label>
+
 								<Select
-									label={t('Permissions')}
+									aria-label="Permissions"
 									selectionMode="multiple"
 									selectedKeys={data.permissions}
 									isMultiline={true}
@@ -129,6 +112,29 @@ export const CreateEditForm = () => {
 							</fieldset>
 						)}
 					</>
+
+					<div className="flex justify-end gap-5">
+						<Button
+							isDisabled={processing}
+							onPress={() => {
+								dispatch({ type: 'closeDrawer' })
+								dispatch({ type: 'setSelectedRole', payload: null })
+								reset()
+							}}
+							className="w-32"
+						>
+							{t('Cancel')}
+						</Button>
+
+						<Button
+							type="submit"
+							color="primary"
+							className="w-32"
+							isLoading={processing}
+						>
+							{t('Save')}
+						</Button>
+					</div>
 				</form>
 			</div>
 

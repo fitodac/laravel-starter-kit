@@ -56,8 +56,6 @@ export const AuthLayout3 = ({ children, pageTitle }: PropsLayout) => {
 					</section>
 				</div>
 			</main>
-
-			<Toastify />
 		</>
 	)
 }

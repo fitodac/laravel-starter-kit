@@ -10,7 +10,7 @@ import {
 	InputWithAccessories,
 	HorizontalInput,
 	PasswordInput,
-	InputTypes
+	InputTypes,
 } from '@/pages/demo/componentsDemo'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'

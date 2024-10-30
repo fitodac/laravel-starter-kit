@@ -104,4 +104,22 @@ class User extends Authenticatable implements MustVerifyEmail
 			return $this->hasRole('Super Admin');
 		}
 	}
+
+
+
+	/**
+	 * Get the user's preferences.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function preferences()
+	{
+		return $this->hasMany(UserPreference::class);
+	}
+
+	public function getPreferencesAttribute()
+	{
+		$modelPreferences = $this->load('preferences')->getRelation('preferences')->pluck('value', 'key')->toArray();
+		return $modelPreferences;
+	}
 }

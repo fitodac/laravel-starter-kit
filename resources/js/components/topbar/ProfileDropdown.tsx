@@ -41,7 +41,7 @@ export const ProfileDropdown = ({
 	)
 
 	if (
-		(is_admin.current && props.admin_can_impersonate) ||
+		(is_admin.current && props.adminCanImpersonate) ||
 		is_superadmin.current
 	) {
 		can_impersonate = true

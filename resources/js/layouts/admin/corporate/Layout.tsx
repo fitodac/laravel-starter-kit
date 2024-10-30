@@ -8,7 +8,7 @@ interface Props extends PropsWithChildren {
 	pageTitle: string
 }
 
-export const Layout = ({ children, pageTitle }: Props) => {
+export const LayoutCorporate = ({ children, pageTitle }: Props) => {
 	const { sidebarOpen, setSidebarOpen } = useMainStore()
 	const { windowWidth } = useWindowWidth()
 
@@ -24,15 +24,13 @@ export const Layout = ({ children, pageTitle }: Props) => {
 		<>
 			<Head title={pageTitle} />
 
-			<main className="bg-background min-h-screen">
-				<Header />
+			<Header />
 
-				<div className="flex min-h-svh">
-					<Sidebar />
+			<div className="flex min-h-svh">
+				<Sidebar />
 
-					<div className="flex-1">{children}</div>
-				</div>
-			</main>
+				<div className="flex-1">{children}</div>
+			</div>
 		</>
 	)
 }

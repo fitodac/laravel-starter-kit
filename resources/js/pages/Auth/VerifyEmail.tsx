@@ -2,7 +2,7 @@ import { FormEventHandler } from 'react'
 import { t } from '@/i18n'
 import { useForm } from '@inertiajs/react'
 import { Button } from '@nextui-org/react'
-import { AuthLayout1, AuthLayout2, AuthLayout3 } from './layout'
+import { AuthLayout1, AuthLayout2, AuthLayout3 } from '@/layouts/auth'
 import { StatusMessage } from './components'
 
 interface Props {

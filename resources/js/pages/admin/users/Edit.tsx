@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Layout } from '@/layouts/admin/corporate/Layout'
+import { Layout } from '@/layouts/admin/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { router, Link } from '@inertiajs/react'

@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEventHandler } from 'react'
 import { useForm } from '@inertiajs/react'
 import { t } from '@/i18n'
 import { Input, Button } from '@nextui-org/react'
-import { AuthLayout1, AuthLayout2, AuthLayout3 } from './layout'
+import { AuthLayout1, AuthLayout2, AuthLayout3 } from '@/layouts/auth'
 
 interface Props {
 	token: string

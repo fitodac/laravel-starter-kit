@@ -25,8 +25,6 @@ class AppServiceProvider extends ServiceProvider
 		// 	return $user->hasRole('Super Admin') ? true : null;
 		// });
 
-		Inertia::share([
-			'admin_can_impersonate' => config('settings.general.admin_can_impersonate')
-		]);
+
 	}
 }

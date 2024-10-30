@@ -49,22 +49,6 @@ class UsersSeeder extends Seeder
 		}
 
 
-		// Create a super admin user
-		User::factory()->create([
-			'name' => 'Max',
-			'lastname' => 'Masterson',
-			'username' => 'maxmasterson',
-			'email' => 'superadmin@local.com'
-		])
-			->assignRole('Super Admin');
-
-		User::factory()->create([
-			'name' => 'Emma',
-			'lastname' => 'Smith',
-			'username' => 'real_emma',
-			'email' => 'admin@local.com'
-		])->assignRole('Admin');
-
 		User::factory()->create([
 			'name' => 'John',
 			'lastname' => 'Doe',

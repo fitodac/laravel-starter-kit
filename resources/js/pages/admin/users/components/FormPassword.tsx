@@ -1,8 +1,7 @@
 import { FormEvent, useState } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
-import { ClassicInput } from '@/components/form'
-import { Button, Divider } from '@nextui-org/react'
+import { Input, Button, Divider } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 import { useGeneratePassword } from '@/hooks'
 
@@ -51,10 +50,14 @@ export const FormPassword = () => {
 					</div>
 
 					<div className="grid gap-x-6 lg:grid-cols-2">
-						<fieldset>
-							<ClassicInput
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Password')}{' '}
+								<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+							</label>
+
+							<Input
 								isRequired
-								label={t('Password')}
 								variant="faded"
 								value={data.password}
 								errorMessage={errors.password}

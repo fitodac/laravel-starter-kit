@@ -1,9 +1,8 @@
 import { ToastContainer, Slide } from 'react-toastify'
-import { useMainStore } from '@/store'
 
-export const Toastify = (): JSX.Element => {
-	const { colorMode } = useMainStore()
+type Props = { colorMode: string }
 
+export const Toastify = ({ colorMode }: Props): JSX.Element => {
 	return (
 		<ToastContainer
 			position="bottom-right"

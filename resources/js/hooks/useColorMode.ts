@@ -1,22 +1,20 @@
 import { useEffect } from 'react'
-import { useMainStore } from '@/store'
+import { usePage } from '@inertiajs/react'
+
+import type { PageProps } from '@/types'
 
 export const useColorMode = () => {
-	const { colorMode, setColorMode } = useMainStore()
+	const { auth, colorMode } = usePage().props as unknown as PageProps
+
+	if (!auth) return { colorMode }
+
+	const { user, preferences } = auth
+
+	const mode = user ? preferences.colorMode ?? 'light' : colorMode
 
 	useEffect(() => {
-		if (colorMode === 'dark') {
-			document.querySelector('html')?.classList.add('dark')
-		} else {
-			document.querySelector('html')?.classList.remove('dark')
-		}
+		document.querySelector('html')?.classList.add(mode)
 	}, [colorMode])
 
-	const changeColorMode = () => {
-		if (setColorMode) {
-			colorMode === 'light' ? setColorMode('dark') : setColorMode('light')
-		}
-	}
-
-	return { colorMode, changeColorMode }
+	return { colorMode }
 }

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Layout } from '@/layouts/admin/corporate/Layout'
+import { Layout } from '@/layouts/admin/Layout'
 import { PageHeader, PageContent } from '@/components'
 import { Button } from '@nextui-org/react'
 import { t } from '@/i18n'

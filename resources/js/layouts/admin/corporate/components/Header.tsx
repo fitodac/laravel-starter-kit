@@ -1,12 +1,14 @@
-import { ColorModeToggler, ProfileDropdown } from '@/components'
-import { Button, cn, Navbar, Divider } from '@nextui-org/react'
+import { ProfileDropdown } from '@/components'
+import { Button, cn, Navbar } from '@nextui-org/react'
 import { templates, theme } from '@/config'
 import { useMainStore } from '@/store'
+import { useColorMode } from '@/hooks'
 
 const { corporate: template } = templates
 
 export const Header = () => {
-	const { sidebarOpen, setSidebarOpen, colorMode } = useMainStore()
+	const { sidebarOpen, setSidebarOpen } = useMainStore()
+	const { colorMode } = useColorMode()
 
 	return (
 		<Navbar
@@ -28,8 +30,7 @@ export const Header = () => {
 					</div>
 
 					<div className="flex items-center gap-x-3 h-full">
-						<ColorModeToggler />
-						<Divider orientation="vertical" className="h-5" />
+						{/* <Divider orientation="vertical" className="h-5" /> */}
 						<ProfileDropdown />
 
 						<Button

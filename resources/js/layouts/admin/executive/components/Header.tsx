@@ -1,4 +1,4 @@
-import { ColorModeToggler, ProfileDropdown } from '@/components'
+import { ProfileDropdown } from '@/components'
 import {
 	Button,
 	cn,
@@ -30,10 +30,10 @@ export const Header = () => {
 	const { sidebarOpen, setSidebarOpen, colorMode } = useMainStore()
 
 	const {
-		props: { demoExecutiveAdminNavbar },
+		props: { adminNavbar },
 	} = usePage<PageProps>()
 
-	const adminNavbar = demoExecutiveAdminNavbar as NavbarProps
+	// const adminNavbar = demoExecutiveAdminNavbar as NavbarProps
 
 	return (
 		<Navbar
@@ -60,8 +60,7 @@ export const Header = () => {
 				</div>
 
 				<div className="flex items-center gap-x-3 h-full">
-					<ColorModeToggler />
-					<Divider orientation="vertical" className="h-5" />
+					{/* <Divider orientation="vertical" className="h-5" /> */}
 					<ProfileDropdown />
 
 					<Button

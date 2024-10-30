@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import {
-	Checkbox,
+	Input,
 	Textarea,
 	Button,
 	Divider,
@@ -9,7 +9,6 @@ import {
 } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { NotificationContext } from '../providers/NotificationProvider'
-import { ClassicInput } from '@/components/form'
 import { useActions } from '../hooks/useActions'
 
 import type { NotificationContextProps } from '@/types/notifications'
@@ -49,11 +48,14 @@ export const CreateEditForm = () => {
 				<Divider className="my-4" />
 
 				<form onSubmit={submit} className="pb-10 space-y-5">
-					<fieldset>
-						<ClassicInput
+					<fieldset className="space-y-1">
+						<label htmlFor="" className="text-sm">
+							{t('Title')}
+						</label>
+
+						<Input
 							variant="faded"
 							ref={inputName}
-							label={t('Title')}
 							value={data.title}
 							isInvalid={errors.title ? true : false}
 							placeholder={t('What are you notifying about?').toString()}
@@ -64,11 +66,15 @@ export const CreateEditForm = () => {
 						/>
 					</fieldset>
 
-					<fieldset>
+					<fieldset className="space-y-1">
+						<label htmlFor="" className="text-sm">
+							{t('Body')}{' '}
+							<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+						</label>
+
 						<Textarea
 							isRequired
 							variant="faded"
-							label={t('Body')}
 							value={data.body}
 							errorMessage={errors.body}
 							isInvalid={errors.body ? true : false}

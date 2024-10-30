@@ -1,16 +1,16 @@
 import { type FormEvent, useState } from 'react'
-import { Layout } from '@/layouts/admin/corporate/Layout'
+import { Layout } from '@/layouts/admin/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { useForm } from '@inertiajs/react'
 import {
+	Input,
 	Button,
 	ButtonGroup,
 	Checkbox,
 	Divider,
 	Switch,
 } from '@nextui-org/react'
-import { ClassicInput } from '@/components/form'
 import { toast } from 'react-toastify'
 import { useGeneratePassword } from '@/hooks'
 
@@ -82,10 +82,14 @@ export const Page = ({ user }: Props) => {
 							</div>
 
 							<div className="grid gap-x-6 gap-y-5 lg:grid-cols-2">
-								<fieldset>
-									<ClassicInput
+								<fieldset className="space-y-1">
+									<label htmlFor="" className="text-sm">
+										{t('Username')}{' '}
+										<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+									</label>
+
+									<Input
 										isRequired
-										label={t('Username')}
 										variant="faded"
 										value={data.username}
 										isInvalid={errors.username ? true : false}
@@ -98,10 +102,14 @@ export const Page = ({ user }: Props) => {
 
 								<fieldset></fieldset>
 
-								<fieldset>
-									<ClassicInput
+								<fieldset className='space-y-1'>
+									<label htmlFor="" className="text-sm">
+										{t('Name')}{' '}
+										<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+									</label>
+
+									<Input
 										isRequired
-										label={t('Name')}
 										variant="faded"
 										value={data.name}
 										isInvalid={errors.name ? true : false}
@@ -112,10 +120,14 @@ export const Page = ({ user }: Props) => {
 									/>
 								</fieldset>
 
-								<fieldset>
-									<ClassicInput
+								<fieldset className='space-y-1'>
+									<label htmlFor="" className="text-sm">
+										{t('Lastname')}{' '}
+										<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+									</label>
+
+									<Input
 										isRequired
-										label={t('Lastname')}
 										variant="faded"
 										value={data.lastname}
 										isInvalid={errors.lastname ? true : false}
@@ -126,10 +138,14 @@ export const Page = ({ user }: Props) => {
 									/>
 								</fieldset>
 
-								<fieldset>
-									<ClassicInput
+								<fieldset className='space-y-1'>
+									<label htmlFor="" className="text-sm">
+										{t('Email')}{' '}
+										<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+									</label>
+
+									<Input
 										isRequired
-										label={t('Email')}
 										variant="faded"
 										value={data.email}
 										isInvalid={errors.email ? true : false}
@@ -181,10 +197,14 @@ export const Page = ({ user }: Props) => {
 							</div>
 
 							<div className="grid gap-x-6 lg:grid-cols-2">
-								<fieldset>
-									<ClassicInput
+								<fieldset className='space-y-1'>
+									<label htmlFor="" className="text-sm">
+										{t('Password')}{' '}
+										<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+									</label>
+
+									<Input
 										isRequired
-										label={t('Password')}
 										variant="faded"
 										value={data.password}
 										errorMessage={errors.password}

@@ -16,7 +16,7 @@ class TablesController extends Controller
 	 * 
 	 * 
 	 */
-	public function index(Request $request, $template)
+	public function index(Request $request)
 	{
 		$per_page = 16;
 		$orderBy = $request->dir === 'ascending' ? 'asc' : 'desc';
@@ -39,7 +39,7 @@ class TablesController extends Controller
 		// dd($s, $cat);
 
 		return Inertia::render(
-			"demo/pages/$template/RealDataTablesPage",
+			"demo/pages/RealDataTablesPage",
 			compact(
 				'products',
 				'categories',

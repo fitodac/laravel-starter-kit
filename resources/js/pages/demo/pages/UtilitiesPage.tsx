@@ -1,5 +1,9 @@
-import { Layout } from '@/layouts/admin/executive/Layout'
-import { TableStylesPage } from '@/pages/demo/pages/pagesDemo/tables'
+import { Layout } from '@/layouts/admin/Layout'
+import {
+	ImageUploaderPage,
+	IconsPage,
+	ColorsPage,
+} from '@/pages/demo/pages/pagesDemo/utilities'
 import { t } from '@/i18n'
 
 interface Props {
@@ -8,8 +12,12 @@ interface Props {
 
 export const Page = ({ title }: Props) => {
 	switch (title) {
-		case 'Tables styles':
-			return <TableStylesPage {...{ template: 'executive' }} />
+		case 'Image uploader':
+			return <ImageUploaderPage />
+		case 'Icons':
+			return <IconsPage />
+		case 'Color':
+			return <ColorsPage />
 		default:
 			return null
 	}

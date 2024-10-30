@@ -1,4 +1,4 @@
-import { Layout } from '@/layouts/admin/corporate/Layout'
+import { Layout } from '@/layouts/admin/Layout'
 import {
 	AccordionPage,
 	AlertsPage,

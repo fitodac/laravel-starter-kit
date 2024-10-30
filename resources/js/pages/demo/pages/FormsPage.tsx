@@ -1,4 +1,4 @@
-import { Layout } from '@/layouts/admin/executive/Layout'
+import { Layout } from '@/layouts/admin/Layout'
 import {
 	InputPage,
 	SelectPage,
@@ -20,25 +20,25 @@ interface Props {
 export const Page = ({ title }: Props) => {
 	switch (title) {
 		case 'Input':
-			return <InputPage {...{ template: 'executive' }} />
+			return <InputPage {...{ template: 'corporate' }} />
 		case 'Select':
-			return <SelectPage {...{ template: 'executive' }} />
+			return <SelectPage {...{ template: 'corporate' }} />
 		case 'Textarea':
-			return <TextareaPage {...{ template: 'executive' }} />
+			return <TextareaPage {...{ template: 'corporate' }} />
 		case 'Checkbox':
-			return <CheckboxPage {...{ template: 'executive' }} />
+			return <CheckboxPage {...{ template: 'corporate' }} />
 		case 'Radio Button':
-			return <RadioButtonPage {...{ template: 'executive' }} />
+			return <RadioButtonPage {...{ template: 'corporate' }} />
 		case 'Switch':
-			return <SwitchPage {...{ template: 'executive' }} />
+			return <SwitchPage {...{ template: 'corporate' }} />
 		case 'Slider':
-			return <SliderPage {...{ template: 'executive' }} />
+			return <SliderPage {...{ template: 'corporate' }} />
 		case 'Date Picker':
-			return <DatePickerPage {...{ template: 'executive' }} />
+			return <DatePickerPage {...{ template: 'corporate' }} />
 		case 'Form layouts':
-			return <FormLayoutsPage {...{ template: 'executive' }} />
+			return <FormLayoutsPage {...{ template: 'corporate' }} />
 		case 'Wysiwyg':
-			return <TipTapPage {...{ template: 'executive' }} />
+			return <TipTapPage {...{ template: 'corporate' }} />
 		default:
 			return null
 	}

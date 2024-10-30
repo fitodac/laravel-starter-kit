@@ -41,7 +41,7 @@ class AdminNavbarProvider extends ServiceProvider
 			'menu' => [
 				[
 					'label' => 'Dashboard',
-					'route' => 'dashboard.corporate',
+					'route' => 'dashboard',
 					'icon' => 'ri-home-5-fill'
 				]
 			]
@@ -90,79 +90,79 @@ class AdminNavbarProvider extends ServiceProvider
 					'submenu' => [
 						[
 							'label' => 'Accordion',
-							'route' => 'dashboard.corporate.ui.accordion'
+							'route' => 'dashboard.ui.accordion'
 						],
 						[
 							'label' => 'Alerts',
-							'route' => 'dashboard.corporate.ui.alerts'
+							'route' => 'dashboard.ui.alerts'
 						],
 						[
 							'label' => 'Avatar',
-							'route' => 'dashboard.corporate.ui.avatar'
+							'route' => 'dashboard.ui.avatar'
 						],
 						[
 							'label' => 'Breadcrumbs',
-							'route' => 'dashboard.corporate.ui.breadcrumbs'
+							'route' => 'dashboard.ui.breadcrumbs'
 						],
 						[
 							'label' => 'Buttons',
-							'route' => 'dashboard.corporate.ui.buttons'
+							'route' => 'dashboard.ui.buttons'
 						],
 						[
 							'label' => 'Cards',
-							'route' => 'dashboard.corporate.ui.cards'
+							'route' => 'dashboard.ui.cards'
 						],
 						[
 							'label' => 'Chips',
-							'route' => 'dashboard.corporate.ui.chips'
+							'route' => 'dashboard.ui.chips'
 						],
 						[
 							'label' => 'Drawer',
-							'route' => 'dashboard.corporate.ui.drawer'
+							'route' => 'dashboard.ui.drawer'
 						],
 						[
 							'label' => 'Dropdown',
-							'route' => 'dashboard.corporate.ui.dropdown'
+							'route' => 'dashboard.ui.dropdown'
 						],
 						[
 							'label' => 'Image',
-							'route' => 'dashboard.corporate.ui.image'
+							'route' => 'dashboard.ui.image'
 						],
 						[
 							'label' => 'ListBox',
-							'route' => 'dashboard.corporate.ui.listbox'
+							'route' => 'dashboard.ui.listbox'
 						],
 						[
 							'label' => 'Loading indicators',
-							'route' => 'dashboard.corporate.ui.loading'
+							'route' => 'dashboard.ui.loading'
 						],
 						[
 							'label' => 'Modal',
-							'route' => 'dashboard.corporate.ui.modal'
+							'route' => 'dashboard.ui.modal'
 						],
 						[
 							'label' => 'Pagination',
-							'route' => 'dashboard.corporate.ui.pagination'
+							'route' => 'dashboard.ui.pagination'
 						],
 						[
 							'label' => 'Popover',
-							'route' => 'dashboard.corporate.ui.popover'
+							'route' => 'dashboard.ui.popover'
 						],
 						[
 							'label' => 'Progress',
-							'route' => 'dashboard.corporate.ui.progress'
+							'route' => 'dashboard.ui.progress'
 						],
 						[
 							'label' => 'Tabs',
-							'route' => 'dashboard.corporate.ui.tabs'
+							'route' => 'dashboard.ui.tabs'
 						],
 						[
 							'label' => 'Toasts',
-							'route' => 'dashboard.corporate.ui.toasts'
+							'route' => 'dashboard.ui.toasts'
 						],
 						[
 							'label' => 'Tooltips',
-							'route' => 'dashboard.corporate.ui.tooltips'
+							'route' => 'dashboard.ui.tooltips'
 						],
 					]
 				],
@@ -174,43 +174,43 @@ class AdminNavbarProvider extends ServiceProvider
 					'submenu' => [
 						[
 							'label' => 'Input',
-							'route' => 'dashboard.corporate.form.input'
+							'route' => 'dashboard.form.input'
 						],
 						[
 							'label' => 'Select',
-							'route' => 'dashboard.corporate.form.select'
+							'route' => 'dashboard.form.select'
 						],
 						[
 							'label' => 'Textarea',
-							'route' => 'dashboard.corporate.form.textarea'
+							'route' => 'dashboard.form.textarea'
 						],
 						[
 							'label' => 'Checkbox',
-							'route' => 'dashboard.corporate.form.checkbox'
+							'route' => 'dashboard.form.checkbox'
 						],
 						[
 							'label' => 'Radio Button',
-							'route' => 'dashboard.corporate.form.radio'
+							'route' => 'dashboard.form.radio'
 						],
 						[
 							'label' => 'Switch',
-							'route' => 'dashboard.corporate.form.switch'
+							'route' => 'dashboard.form.switch'
 						],
 						[
 							'label' => 'Slider',
-							'route' => 'dashboard.corporate.form.slider'
+							'route' => 'dashboard.form.slider'
 						],
 						[
 							'label' => 'Date Picker',
-							'route' => 'dashboard.corporate.form.datepicker'
+							'route' => 'dashboard.form.datepicker'
 						],
 						[
 							'label' => 'Wysiwyg',
-							'route' => 'dashboard.corporate.form.wysiwyg'
+							'route' => 'dashboard.form.wysiwyg'
 						],
 						[
 							'label' => 'Form layouts',
-							'route' => 'dashboard.corporate.form.layouts'
+							'route' => 'dashboard.form.layouts'
 						],
 					]
 				],
@@ -222,15 +222,15 @@ class AdminNavbarProvider extends ServiceProvider
 					'submenu' => [
 						[
 							'label' => 'Color',
-							'route' => 'dashboard.corporate.utilities.color'
+							'route' => 'dashboard.utilities.color'
 						],
 						[
 							'label' => 'Image uploader',
-							'route' => 'dashboard.corporate.utilities.image-uploader'
+							'route' => 'dashboard.utilities.image-uploader'
 						],
 						[
 							'label' => 'Icons',
-							'route' => 'dashboard.corporate.utilities.icons'
+							'route' => 'dashboard.utilities.icons'
 						]
 					]
 				],
@@ -242,18 +242,18 @@ class AdminNavbarProvider extends ServiceProvider
 					'submenu' => [
 						[
 							'label' => 'Table styles',
-							'route' => 'dashboard.corporate.tables.styles'
+							'route' => 'dashboard.tables.styles'
 						],
 						[
 							'label' => 'Real data table',
-							'route' => 'dashboard.corporate.tables.real-data'
+							'route' => 'dashboard.tables.real-data'
 						]
 					]
 				],
 
 				[
 					'label' => 'Apex Charts',
-					'route' => 'dashboard.corporate.charts.apexcharts',
+					'route' => 'dashboard.charts.apexcharts',
 					'icon' => 'ri-pie-chart-fill'
 				]
 			],

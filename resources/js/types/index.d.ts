@@ -50,20 +50,20 @@ export interface Users {
 	}[]
 }
 
-export type PageProps<
-	T extends Record<string, unknown> = Record<string, unknown>
-> = T & {
-	auth: {
-		user: User
-		permissions?: string[]
-	}
-	ziggy: Config & { location: string }
-	flash?: FlashMessages
-	adminNavbar?: NavbarProps
-	settings: {
-		logo: string
-	}
-}
+// export type PageProps<
+// 	T extends Record<string, unknown> = Record<string, unknown>
+// > = T & {
+// 	auth: {
+// 		user: User
+// 		permissions?: string[]
+// 	}
+// 	ziggy: Config & { location: string }
+// 	flash?: FlashMessages
+// 	adminNavbar?: NavbarProps
+// 	settings: {
+// 		logo: string
+// 	}
+// }
 
 interface FlashMessages {
 	success?: string
@@ -71,12 +71,28 @@ interface FlashMessages {
 	info?: string
 }
 
-interface PageProps {
-	flash?: FlashMessages
-	errors?: {
-		[key: string]: string[]
+export interface PageProps {
+	auth: {
+		user: User | null
+		permissions?: string[]
+		preferences: {
+			colorMode: string
+			[key: String]: any
+		}
 	}
-	[key: string]: any
+	adminNavbar?: NavbarProps
+	settings: {
+		logo: string
+	}
+	adminCanImpersonate: boolean
+	canResetPassword: boolean
+	adminLayout: string
+	authLayout: string
+	colorMode: string
+	flash?: FlashMessages
+	status: any
+	ziggy: Config & { location: string }
+	[key: String]: any
 }
 
 interface InertiaResponse {

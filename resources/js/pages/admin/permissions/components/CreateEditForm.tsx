@@ -1,8 +1,7 @@
 import { useContext } from 'react'
-import { Button, Divider, cn, Spinner } from '@nextui-org/react'
+import { Input, Button, Divider, cn, Spinner } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { PermissionContext } from '../providers/PermissionProvider'
-import { ClassicInput } from '@/components/form'
 import { useActions } from '../hooks/useActions'
 
 import type { PermissionContextProps } from '@/types/permissions'
@@ -39,12 +38,16 @@ export const CreateEditForm = () => {
 				<Divider className="my-4" />
 
 				<form onSubmit={submit} className="pb-10 space-y-5">
-					<fieldset>
-						<ClassicInput
+					<fieldset className="space-y-1">
+						<label className="text-sm">
+							{t('Permission name')}{' '}
+							<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+						</label>
+
+						<Input
 							isRequired
 							variant="faded"
 							ref={inputName}
-							label={t('Permission name')}
 							value={data.name}
 							isInvalid={errors.name ? true : false}
 							errorMessage={errors.name}

@@ -1,8 +1,7 @@
 import { FormEvent, useRef, useState } from 'react'
 import { t } from '@/i18n'
 import { useForm } from '@inertiajs/react'
-import { ClassicInput } from '@/components/form'
-import { Button, Divider } from '@nextui-org/react'
+import { Input, Button, Divider } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 
 import type { InertiaResponse } from '@/types'
@@ -67,11 +66,15 @@ export const FormPassword = () => {
 					</div>
 
 					<div className="grid gap-x-6 gap-y-5 lg:grid-cols-2">
-						<fieldset>
-							<ClassicInput
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Current Password')}{' '}
+								<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+							</label>
+
+							<Input
 								isRequired
 								ref={currentPasswordInput}
-								label={t('Current Password')}
 								variant="faded"
 								value={data.current_password}
 								errorMessage={errors.current_password}
@@ -103,11 +106,15 @@ export const FormPassword = () => {
 
 						<fieldset></fieldset>
 
-						<fieldset>
-							<ClassicInput
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('New Password')}{' '}
+								<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+							</label>
+
+							<Input
 								isRequired
 								ref={passwordInput}
-								label={t('New Password')}
 								variant="faded"
 								value={data.password}
 								errorMessage={errors.password}
@@ -137,10 +144,14 @@ export const FormPassword = () => {
 							/>
 						</fieldset>
 
-						<fieldset>
-							<ClassicInput
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Confirm Password')}{' '}
+								<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
+							</label>
+
+							<Input
 								isRequired
-								label={t('Confirm Password')}
 								variant="faded"
 								value={data.password_confirmation}
 								errorMessage={errors.password_confirmation}

@@ -1,4 +1,4 @@
-import { Layout } from '@/layouts/admin/corporate/Layout'
+import { Layout } from '@/layouts/admin/Layout'
 import { TableStylesPage } from '@/pages/demo/pages/pagesDemo/tables'
 import { t } from '@/i18n'
 

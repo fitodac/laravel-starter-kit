@@ -1,8 +1,7 @@
 import { FormEvent } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
-import { ClassicInput } from '@/components/form'
-import { Button, Divider } from '@nextui-org/react'
+import { Input, Button, Divider } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 
 import type { PageProps, User, InertiaResponse } from '@/types'
@@ -47,9 +46,12 @@ export const FormPersonalInformation = () => {
 					</div>
 
 					<div className="grid grid-cols-2 gap-x-6 gap-y-5">
-						<fieldset>
-							<ClassicInput
-								label={t('Phone')}
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Phone')}
+							</label>
+
+							<Input
 								variant="faded"
 								value={data.phone}
 								isInvalid={errors.phone ? true : false}
@@ -60,9 +62,12 @@ export const FormPersonalInformation = () => {
 							/>
 						</fieldset>
 
-						<fieldset>
-							<ClassicInput
-								label={t('Birth date')}
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Birth date')}
+							</label>
+
+							<Input
 								variant="faded"
 								value={data.birth_date}
 								isInvalid={errors.birth_date ? true : false}
@@ -73,9 +78,12 @@ export const FormPersonalInformation = () => {
 							/>
 						</fieldset>
 
-						<fieldset>
-							<ClassicInput
-								label={t('Address')}
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Address')}
+							</label>
+
+							<Input
 								variant="faded"
 								value={data.address}
 								isInvalid={errors.address ? true : false}
@@ -86,9 +94,12 @@ export const FormPersonalInformation = () => {
 							/>
 						</fieldset>
 
-						<fieldset>
-							<ClassicInput
-								label={t('City')}
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('City')}
+							</label>
+
+							<Input
 								variant="faded"
 								value={data.city}
 								isInvalid={errors.city ? true : false}
@@ -99,9 +110,12 @@ export const FormPersonalInformation = () => {
 							/>
 						</fieldset>
 
-						<fieldset>
-							<ClassicInput
-								label={t('Country')}
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Country')}
+							</label>
+
+							<Input
 								variant="faded"
 								value={data.country}
 								isInvalid={errors.country ? true : false}
@@ -112,9 +126,12 @@ export const FormPersonalInformation = () => {
 							/>
 						</fieldset>
 
-						<fieldset>
-							<ClassicInput
-								label={t('Zip')}
+						<fieldset className="space-y-1">
+							<label htmlFor="" className="text-sm">
+								{t('Zip')}
+							</label>
+
+							<Input
 								variant="faded"
 								value={data.zip}
 								isInvalid={errors.zip ? true : false}

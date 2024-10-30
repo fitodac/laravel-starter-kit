@@ -61,102 +61,49 @@ $pages = [
  * Corporate
  */
 Route::middleware(['auth', 'verified'])
-	->prefix('dashboard/corporate')
+	->prefix('dashboard')
 	->name('dashboard.')
 	->group(function () use ($pages) {
-		Route::inertia('/', 'demo/pages/corporate/DashboardPage')->name('corporate');
 
 
 		foreach ($pages as $group => $page_group) {
 			if ($group === 'ui') {
 				foreach ($page_group as $page => $title) {
-					Route::inertia("/$group/$page", "demo/pages/corporate/UiElementsPage", ['title' => $title])
-						->name("corporate.$group.$page");
+					Route::inertia("/$group/$page", "demo/pages/UiElementsPage", ['title' => $title])
+						->name("$group.$page");
 				}
 			}
 
 			if ($group === 'form') {
 				foreach ($page_group as $page => $title) {
-					Route::inertia("/$group/$page", "demo/pages/corporate/FormsPage", ['title' => $title])
-						->name("corporate.$group.$page");
+					Route::inertia("/$group/$page", "demo/pages/FormsPage", ['title' => $title])
+						->name("$group.$page");
 				}
 			}
 
 			if ($group === 'utilities') {
 				foreach ($page_group as $page => $title) {
-					Route::inertia("/$group/$page", "demo/pages/corporate/UtilitiesPage", ['title' => $title])
-						->name("corporate.$group.$page");
+					Route::inertia("/$group/$page", "demo/pages/UtilitiesPage", ['title' => $title])
+						->name("$group.$page");
 				}
 			}
 
 			if ($group === 'tables') {
 				foreach ($page_group as $page => $title) {
-					Route::inertia("/$group/$page", "demo/pages/corporate/TablesPage", ['title' => $title])
-						->name("corporate.$group.$page");
+					Route::inertia("/$group/$page", "demo/pages/TablesPage", ['title' => $title])
+						->name("$group.$page");
 				}
 			}
 
 			if ($group === 'charts') {
 				foreach ($page_group as $page => $title) {
-					Route::inertia("/$group/$page", "demo/pages/corporate/ChartsPage", ['title' => $title])
-						->name("corporate.$group.$page");
+					Route::inertia("/$group/$page", "demo/pages/ChartsPage", ['title' => $title])
+						->name("$group.$page");
 				}
 			}
 		}
 
 		Route::get("/tables/real-data", [TablesController::class, 'index'])
-			->name('corporate.tables.real-data')
+			->name('tables.real-data')
 			->defaults('template', 'corporate');
-	});
-
-
-/**
- * Executive
- */
-Route::middleware(['auth', 'verified'])
-	->prefix('dashboard/executive')
-	->name('dashboard.')
-	->group(function () use ($pages) {
-		Route::inertia('/', "demo/pages/executive/DashboardPage")->name('executive');
-
-		foreach ($pages as $group => $page_group) {
-			if ($group === 'ui') {
-				foreach ($page_group as $page => $title) {
-					Route::inertia("/$group/$page", "demo/pages/executive/UiElementsPage", ['title' => $title])
-						->name("executive.$group.$page");
-				}
-			}
-
-			if ($group === 'form') {
-				foreach ($page_group as $page => $title) {
-					Route::inertia("/$group/$page", "demo/pages/executive/FormsPage", ['title' => $title])
-						->name("executive.$group.$page");
-				}
-			}
-
-			if ($group === 'utilities') {
-				foreach ($page_group as $page => $title) {
-					Route::inertia("/$group/$page", "demo/pages/executive/UtilitiesPage", ['title' => $title])
-						->name("executive.$group.$page");
-				}
-			}
-
-			if ($group === 'tables') {
-				foreach ($page_group as $page => $title) {
-					Route::inertia("/$group/$page", "demo/pages/executive/TablesPage", ['title' => $title])
-						->name("executive.$group.$page");
-				}
-			}
-
-			if ($group === 'charts') {
-				foreach ($page_group as $page => $title) {
-					Route::inertia("/$group/$page", "demo/pages/executive/ChartsPage", ['title' => $title])
-						->name("executive.$group.$page");
-				}
-			}
-		}
-
-		Route::get("/tables/real-data", [TablesController::class, 'index'])
-			->name('executive.tables.real-data')
-			->defaults('template', 'executive');
 	});

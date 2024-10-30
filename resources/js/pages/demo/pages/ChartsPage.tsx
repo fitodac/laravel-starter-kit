@@ -1,4 +1,4 @@
-import { Layout } from '@/layouts/admin/corporate/Layout'
+import { Layout } from '@/layouts/admin/Layout'
 import { ApexChartsPage } from '@/pages/demo/pages/pagesDemo/charts'
 import { t } from '@/i18n'
 
