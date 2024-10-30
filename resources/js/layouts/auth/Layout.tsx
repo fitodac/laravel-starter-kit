@@ -15,8 +15,6 @@ export const Layout = ({ children, pageTitle }: PropsLayout) => {
 	const { colorMode } = useColorMode()
 	const { authLayout } = usePage().props as unknown as PageProps
 
-	console.log(authLayout)
-
 	switch (authLayout) {
 		case 'layout2':
 			return (
