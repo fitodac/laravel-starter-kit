@@ -11,6 +11,8 @@ import {
 	ModalFooter,
 	useDisclosure,
 	Divider,
+	Card,
+	CardBody,
 } from '@nextui-org/react'
 
 export const DeleteAccount = (): JSX.Element => {
@@ -41,10 +43,19 @@ export const DeleteAccount = (): JSX.Element => {
 
 	return (
 		<>
-			<div className="space-y-3">
-				<Divider />
+			<div className="space-y-5">
+				<div className="text-sm font-medium flex gap-5 items-center">
+					{t('Delete account')}
+					<Divider className="flex-1" />
+				</div>
 
-				<Button color="danger" variant="light" onPress={onOpen}>
+				<Card shadow="none" className="bg-danger-50 text-danger-500">
+					<CardBody className="text-sm font-light">
+						{t('Deleted accounts cannot be restored!')}
+					</CardBody>
+				</Card>
+
+				<Button color="danger" onPress={onOpen}>
 					{t('Delete account')}
 				</Button>
 			</div>

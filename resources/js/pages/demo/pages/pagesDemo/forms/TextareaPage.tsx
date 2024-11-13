@@ -17,6 +17,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Textarea'))
+
 export const TextareaPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -24,7 +26,7 @@ export const TextareaPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Textarea')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

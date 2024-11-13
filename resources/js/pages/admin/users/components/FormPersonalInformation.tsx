@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import type { PageProps, User, InertiaResponse } from '@/types'
 
 export const FormPersonalInformation = () => {
-	const { user } = usePage<PageProps<{ user: User }>>().props
+	const { user } = usePage<PageProps>().props
 
 	const { data, setData, patch, processing, errors, clearErrors, isDirty } =
 		useForm({

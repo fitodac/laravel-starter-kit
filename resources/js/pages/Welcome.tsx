@@ -5,9 +5,7 @@ import { PageProps } from '@/types'
 import { Button } from '@nextui-org/react'
 import { useColorMode } from '@/hooks'
 
-const Welcome = ({
-	auth,
-}: PageProps<{ laravelVersion: string; phpVersion: string }>) => {
+const Welcome = ({ auth }: PageProps) => {
 	useColorMode()
 
 	return (

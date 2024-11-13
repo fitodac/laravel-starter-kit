@@ -1,11 +1,11 @@
 import { Avatar, AvatarGroup, Divider } from '@nextui-org/react'
 
-import User1 from '@/assets/img/users/avatars/1.jpg'
-import User2 from '@/assets/img/users/avatars/2.jpg'
-import User3 from '@/assets/img/users/avatars/3.jpg'
-import User4 from '@/assets/img/users/avatars/4.jpg'
-import User5 from '@/assets/img/users/avatars/5.jpg'
-import User6 from '@/assets/img/users/avatars/6.jpg'
+import User1 from '@/../../public/img/demo/users/avatars/1.jpg'
+import User2 from '@/../../public/img/demo/users/avatars/2.jpg'
+import User3 from '@/../../public/img/demo/users/avatars/3.jpg'
+import User4 from '@/../../public/img/demo/users/avatars/4.jpg'
+import User5 from '@/../../public/img/demo/users/avatars/5.jpg'
+import User6 from '@/../../public/img/demo/users/avatars/6.jpg'
 
 export const BasicAvatar = () => {
 	return (

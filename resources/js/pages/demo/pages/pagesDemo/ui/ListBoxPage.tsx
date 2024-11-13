@@ -15,6 +15,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('ListBox'))
+
 export const ListBoxPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -22,7 +24,7 @@ export const ListBoxPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('ListBox')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

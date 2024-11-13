@@ -1,5 +1,5 @@
 import { t } from '@/i18n'
-import { router, useForm, usePage } from '@inertiajs/react'
+import { useForm, usePage } from '@inertiajs/react'
 import dayjs from 'dayjs'
 import {
 	Button,
@@ -7,21 +7,18 @@ import {
 	CardBody,
 	CardFooter,
 	CardHeader,
-	Divider,
 } from '@nextui-org/react'
 
 import type {
 	Sessions as SessionsProps,
 	PageProps,
-	User,
 	InertiaResponse,
 } from '@/types'
 
 import { toast } from 'react-toastify'
 
 export const SessionsManager = () => {
-	const { sessions, user } =
-		usePage<PageProps<{ sessions: SessionsProps; user: User }>>().props
+	const { sessions } = usePage<PageProps>().props
 
 	const { delete: destroy } = useForm()
 

@@ -1,13 +1,21 @@
 import { FormEvent } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
-import { Input, Button, ButtonGroup, Divider, Switch } from '@nextui-org/react'
+import {
+	Input,
+	Button,
+	ButtonGroup,
+	Divider,
+	Switch,
+	Chip,
+} from '@nextui-org/react'
 import { toast } from 'react-toastify'
+import { FormProfileImage } from './FormProfileImage'
 
-import type { PageProps, User, InertiaResponse } from '@/types'
+import type { PageProps, InertiaResponse } from '@/types'
 
 export const FormBasicInformation = () => {
-	const { user, permission } = usePage<PageProps<{ user: User }>>().props
+	const { user, permission } = usePage<PageProps>().props
 
 	const { data, setData, patch, processing, errors, clearErrors, isDirty } =
 		useForm({
@@ -43,6 +51,37 @@ export const FormBasicInformation = () => {
 					<div className="font-medium flex gap-5 items-center">
 						{t('Basic information')}
 						<Divider className="flex-1" />
+					</div>
+
+					<FormProfileImage />
+
+					<div className="flex gap-4 pt-5">
+						<div className="flex items-center gap-3">
+							<span className="text-foreground-500 text-xs">{t('Role')}</span>
+							<Chip
+								size="sm"
+								color="primary"
+								variant="flat"
+								className="h-5 px-1.5"
+							>
+								{user.role}
+							</Chip>
+						</div>
+
+						<Divider orientation="vertical" className="h-8" />
+
+						<div className="flex items-center gap-3">
+							<span className="text-foreground-500 text-xs">{t('Status')}</span>
+							<span>
+								<Chip
+									size="sm"
+									variant="dot"
+									color={user.status === 'enabled' ? 'success' : 'danger'}
+								>
+									{user.status}
+								</Chip>
+							</span>
+						</div>
 					</div>
 
 					<div className="grid grid-cols-2 gap-x-6 gap-y-5">

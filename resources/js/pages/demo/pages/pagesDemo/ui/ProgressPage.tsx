@@ -13,6 +13,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Progress'))
+
 export const ProgressPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -20,7 +22,7 @@ export const ProgressPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Progress')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

@@ -14,6 +14,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Apex Charts'))
+
 export const ApexChartsPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -21,7 +23,7 @@ export const ApexChartsPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Apex Charts')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

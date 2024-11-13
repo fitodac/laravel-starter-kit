@@ -1,5 +1,5 @@
-import { FormEvent, useEffect, useRef, useContext, useCallback } from 'react'
-import { usePage, useForm, router } from '@inertiajs/react'
+import { FormEvent, useEffect, useRef, useContext } from 'react'
+import { useForm, router } from '@inertiajs/react'
 import { NotificationContext } from '../providers/NotificationProvider'
 import { toast } from 'react-toastify'
 import { t } from '@/i18n'

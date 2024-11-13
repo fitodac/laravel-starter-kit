@@ -14,6 +14,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Radio Button'))
+
 export const RadioButtonPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -21,7 +23,7 @@ export const RadioButtonPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Radio Button')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

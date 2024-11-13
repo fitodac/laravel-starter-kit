@@ -102,7 +102,7 @@ export const Page = ({ user }: Props) => {
 
 								<fieldset></fieldset>
 
-								<fieldset className='space-y-1'>
+								<fieldset className="space-y-1">
 									<label htmlFor="" className="text-sm">
 										{t('Name')}{' '}
 										<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
@@ -120,7 +120,7 @@ export const Page = ({ user }: Props) => {
 									/>
 								</fieldset>
 
-								<fieldset className='space-y-1'>
+								<fieldset className="space-y-1">
 									<label htmlFor="" className="text-sm">
 										{t('Lastname')}{' '}
 										<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
@@ -138,7 +138,7 @@ export const Page = ({ user }: Props) => {
 									/>
 								</fieldset>
 
-								<fieldset className='space-y-1'>
+								<fieldset className="space-y-1">
 									<label htmlFor="" className="text-sm">
 										{t('Email')}{' '}
 										<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
@@ -197,7 +197,7 @@ export const Page = ({ user }: Props) => {
 							</div>
 
 							<div className="grid gap-x-6 lg:grid-cols-2">
-								<fieldset className='space-y-1'>
+								<fieldset className="space-y-1">
 									<label htmlFor="" className="text-sm">
 										{t('Password')}{' '}
 										<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
@@ -308,7 +308,7 @@ Page.layout = (page: JSX.Element) => (
 	<Layout
 		{...{
 			children: page,
-			pageTitle: `${t('User')} ${page.props.user && page.props.user.username}`,
+			pageTitle: String(t('User')),
 		}}
 	/>
 )

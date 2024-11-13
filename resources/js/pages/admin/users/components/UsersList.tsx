@@ -21,10 +21,7 @@ import { Link, router, usePage } from '@inertiajs/react'
 import type { PageProps, User, Users } from '@/types'
 
 export const UsersList = () => {
-	const { users, total } = usePage<PageProps>().props as unknown as {
-		users: Users
-		total: number
-	}
+	const { users, total } = usePage<PageProps>().props
 
 	// console.log(users)
 	// const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))

@@ -8,6 +8,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Wysiwyg'))
+
 export const TipTapPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -15,7 +17,7 @@ export const TipTapPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Wysiwyg')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

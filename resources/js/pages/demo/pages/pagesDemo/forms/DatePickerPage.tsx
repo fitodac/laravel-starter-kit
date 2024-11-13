@@ -19,6 +19,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Date Picker'))
+
 export const DatePickerPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -26,7 +28,7 @@ export const DatePickerPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Date Picker')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

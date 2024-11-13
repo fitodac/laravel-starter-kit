@@ -12,7 +12,7 @@ interface Props extends PropsWithChildren {
 }
 
 export const Layout = ({ children, pageTitle }: Props) => {
-	const { adminLayout } = usePage().props as unknown as PageProps
+	const { adminLayout } = usePage<PageProps>().props
 	const { colorMode } = useColorMode()
 
 	switch (adminLayout) {

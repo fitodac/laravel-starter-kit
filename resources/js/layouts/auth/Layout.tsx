@@ -13,7 +13,7 @@ interface PropsLayout extends PropsWithChildren {
 
 export const Layout = ({ children, pageTitle }: PropsLayout) => {
 	const { colorMode } = useColorMode()
-	const { authLayout } = usePage().props as unknown as PageProps
+	const { authLayout } = usePage<PageProps>().props
 
 	switch (authLayout) {
 		case 'layout2':

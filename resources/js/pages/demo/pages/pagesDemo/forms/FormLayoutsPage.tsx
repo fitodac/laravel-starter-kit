@@ -17,6 +17,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Form Layouts'))
+
 export const FormLayoutsPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -24,7 +26,7 @@ export const FormLayoutsPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={`${t('Form Layouts')}`}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

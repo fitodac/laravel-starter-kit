@@ -78,6 +78,8 @@ const data = [
 	},
 ]
 
+const pageTitle = String(t('Color'))
+
 export const ColorsPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -85,7 +87,7 @@ export const ColorsPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Color')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

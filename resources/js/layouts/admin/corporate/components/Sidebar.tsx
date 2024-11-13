@@ -19,7 +19,7 @@ const { corporate: template } = templates
 export const Sidebar = () => {
 	const { sidebarOpen, setSidebarOpen } = useMainStore()
 	const { windowWidth } = useWindowWidth()
-	const { adminNavbar, auth } = usePage<PageProps>().props
+	const { adminNavbar } = usePage<PageProps>().props
 
 	return (
 		<>
@@ -39,7 +39,7 @@ export const Sidebar = () => {
 				>
 					{/* Top spacer */}
 					<div className={template.sidebar.cn.topSpacer}></div>
-					
+
 					{adminNavbar &&
 						adminNavbar.map((nav) => (
 							<Fragment key={nav.key}>

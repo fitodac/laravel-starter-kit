@@ -30,8 +30,10 @@ export const ProfileDropdown = ({
 	showNameInDropdown = true,
 }: Props) => {
 	const { onOpen, isOpen, onOpenChange } = useDisclosure()
-	const user = usePage<PageProps>().props.auth.user
-	const props = usePage<PageProps>().props
+	const { auth, adminCanImpersonate } = usePage<PageProps>().props
+	const { user } = auth
+
+	if (!user) return null
 
 	const is_superadmin = useRef(
 		user.roles && user.roles.filter((e) => e.name === 'Super Admin').length > 0
@@ -40,10 +42,7 @@ export const ProfileDropdown = ({
 		user.roles && user.roles.filter((e) => e.name === 'Admin').length > 0
 	)
 
-	if (
-		(is_admin.current && props.adminCanImpersonate) ||
-		is_superadmin.current
-	) {
+	if ((is_admin.current && adminCanImpersonate) || is_superadmin.current) {
 		can_impersonate = true
 	}
 

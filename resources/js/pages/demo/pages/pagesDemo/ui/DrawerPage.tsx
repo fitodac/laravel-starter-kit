@@ -29,10 +29,12 @@ export const DrawerPage = ({ template }: Props) => {
 		}, 500)
 	}
 
+	const pageTitle = String(t('Drawer'))
+
 	return (
 		<>
 			<PageHeader
-				title={t('Drawer')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

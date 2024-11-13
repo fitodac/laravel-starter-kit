@@ -15,6 +15,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Image'))
+
 export const ImagePage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -25,7 +27,7 @@ export const ImagePage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Image')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

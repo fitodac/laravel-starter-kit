@@ -7,7 +7,9 @@ import { toast } from 'react-toastify'
 import type { PageProps, User, InertiaResponse } from '@/types'
 
 export const FormProfessionalInformation = () => {
-	const user = usePage<PageProps<{ user: User }>>().props.auth.user
+	const user = usePage<PageProps>().props.auth.user
+
+	if (!user) return null
 
 	const { data, setData, patch, processing, errors, clearErrors, isDirty } =
 		useForm({
@@ -36,7 +38,7 @@ export const FormProfessionalInformation = () => {
 		<>
 			<form onSubmit={submit}>
 				<section className="space-y-5">
-					<div className="font-medium flex gap-5 items-center">
+					<div className="text-sm font-medium flex gap-5 items-center">
 						{t('Professional information')}
 						<Divider className="flex-1" />
 					</div>
@@ -86,6 +88,7 @@ export const FormProfessionalInformation = () => {
 								errorMessage={errors.bio}
 								onKeyUp={() => clearErrors('bio')}
 								isDisabled={processing}
+								classNames={{ input: 'min-h-32' }}
 								onValueChange={(e) => setData('bio', e)}
 							/>
 						</fieldset>

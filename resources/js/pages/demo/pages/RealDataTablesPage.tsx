@@ -9,10 +9,12 @@ interface Props extends PageProps {
 	products: ProductsProps
 }
 
+const pageTitle = String(t('Real data table'))
+
 export const Page = ({ products }: Props) => {
 	return (
 		<>
-			<PageHeader title={t('Real data table')}>
+			<PageHeader title={pageTitle}>
 				<p className="text-sm">
 					This table uses Inertia.js to fetch data from the database, presenting
 					real-world information in an effective and fast manner. Inertia.js
@@ -39,7 +41,7 @@ export const Page = ({ products }: Props) => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: String(t('Real data table')) }} />
+	<Layout {...{ children: page, pageTitle }} />
 )
 
 export default Page

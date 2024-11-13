@@ -8,7 +8,7 @@ import { useGeneratePassword } from '@/hooks'
 import type { PageProps, User, InertiaResponse } from '@/types'
 
 export const FormPassword = () => {
-	const { user } = usePage<PageProps<{ user: User }>>().props
+	const { user } = usePage<PageProps>().props
 
 	const [pwdVisibility, setPwdVisibility] = useState(false)
 	const { generatePassword } = useGeneratePassword(16)

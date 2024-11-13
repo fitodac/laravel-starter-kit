@@ -13,6 +13,8 @@ import {
 
 import { NotificationContextProps } from '@/types/notifications'
 
+const pageTitle = String(t('Notifications'))
+
 const Page = () => {
 	const { state, dispatch } = useContext(
 		NotificationContext
@@ -20,7 +22,7 @@ const Page = () => {
 
 	return (
 		<>
-			<PageHeader title={t('Notifications')}>
+			<PageHeader title={pageTitle}>
 				<div className="flex justify-end">
 					<Button
 						size="sm"
@@ -59,7 +61,7 @@ const Page = () => {
 
 Page.layout = (page: JSX.Element) => (
 	<NotificationProvider>
-		<Layout {...{ children: page, pageTitle: String(t('Notifications')) }} />
+		<Layout {...{ children: page, pageTitle }} />
 	</NotificationProvider>
 )
 

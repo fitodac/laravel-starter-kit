@@ -17,6 +17,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Checkbox'))
+
 export const CheckboxPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -24,7 +26,7 @@ export const CheckboxPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Checkbox')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

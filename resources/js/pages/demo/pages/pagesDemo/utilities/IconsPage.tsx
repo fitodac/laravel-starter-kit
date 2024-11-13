@@ -20,6 +20,8 @@ const copyIcon = (cn: string) => {
 	}
 }
 
+const pageTitle = String(t('Icons'))
+
 export const IconsPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -27,7 +29,7 @@ export const IconsPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Icons')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

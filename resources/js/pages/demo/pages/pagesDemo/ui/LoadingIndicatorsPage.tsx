@@ -14,6 +14,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Loading indicators'))
+
 export const LoadingIndicatorsPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -21,7 +23,7 @@ export const LoadingIndicatorsPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Loading indicators')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

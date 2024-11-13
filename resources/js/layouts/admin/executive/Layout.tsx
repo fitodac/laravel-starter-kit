@@ -1,5 +1,5 @@
 import { type PropsWithChildren, useEffect } from 'react'
-import { Head, usePage } from '@inertiajs/react'
+import { Head } from '@inertiajs/react'
 import { useMainStore } from '@/store'
 import { useWindowWidth } from '@/hooks'
 import { Header, Sidebar } from './components'

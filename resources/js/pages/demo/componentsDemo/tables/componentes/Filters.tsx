@@ -5,6 +5,8 @@ import { useState } from 'react'
 
 type Props = { categories: { category: string }[]; s: string; cat: string }
 
+import type { PageProps } from '@/types'
+
 const filterSearch = (val: string | null) => {
 	if (!val) {
 		router.reload({
@@ -34,9 +36,8 @@ const filterCategory = (val: string | null) => {
 }
 
 export const Filters = () => {
-	const {
-		props: { categories, s, cat },
-	} = usePage() as { props: Props }
+	const { props } = usePage<PageProps>().props
+	const { categories, s, cat } = props as Props
 
 	const [filters, setFilters] = useState({ s: s ?? '', cat: cat ?? '' })
 

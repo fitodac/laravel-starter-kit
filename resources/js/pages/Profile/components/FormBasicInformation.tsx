@@ -3,11 +3,14 @@ import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
 import { Input, Button, Divider } from '@nextui-org/react'
 import { toast } from 'react-toastify'
+import { FormProfileImage } from './FormProfileImage'
 
-import type { PageProps, User, InertiaResponse } from '@/types'
+import type { PageProps, InertiaResponse } from '@/types'
 
 export const FormBasicInformation = () => {
-	const user = usePage<PageProps<{ user: User }>>().props.auth.user
+	const user = usePage<PageProps>().props.auth.user
+
+	if (!user) return null
 
 	const { data, setData, patch, processing, errors, clearErrors, isDirty } =
 		useForm({
@@ -38,10 +41,12 @@ export const FormBasicInformation = () => {
 		<>
 			<form onSubmit={submit}>
 				<section className="space-y-5">
-					<div className="font-medium flex gap-5 items-center">
+					<div className="text-sm font-medium flex gap-5 items-center">
 						{t('Basic information')}
 						<Divider className="flex-1" />
 					</div>
+
+					<FormProfileImage />
 
 					<div className="grid grid-cols-2 gap-x-6 gap-y-5">
 						<fieldset className="space-y-1">

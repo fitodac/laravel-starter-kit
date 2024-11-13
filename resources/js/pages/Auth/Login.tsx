@@ -13,7 +13,7 @@ interface Props {
 
 const pageTitle = t('Log in').toString()
 
-const Page = ({ status, canResetPassword, layout = 'layout1' }: Props) => {
+const Page = ({ status, canResetPassword }: Props) => {
 	const { data, setData, post, processing, errors, reset } = useForm({
 		login: '',
 		password: '',

@@ -13,6 +13,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Popovers'))
+
 export const PopoverPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -20,7 +22,7 @@ export const PopoverPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Popovers')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

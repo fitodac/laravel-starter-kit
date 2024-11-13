@@ -34,7 +34,7 @@ class UsersSeeder extends Seeder
 		/**
 		 * Copy new images
 		 */
-		$dir = resource_path('js/assets/img/users/avatars');
+		$dir = public_path('img/demo/users/avatars');
 		$destination = storage_path('app/public/img/users/avatars');
 
 		if (!is_dir($destination)) {

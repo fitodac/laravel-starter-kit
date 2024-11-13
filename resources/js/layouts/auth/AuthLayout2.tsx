@@ -1,22 +1,16 @@
 import { PropsWithChildren } from 'react'
-import { Head, usePage } from '@inertiajs/react'
+import { Head } from '@inertiajs/react'
 import { useColorMode } from '@/hooks'
-import { Toastify } from '@/components'
 import { theme } from '@/config'
 
 import Image from '@/assets/img/pexels-pramodtiwari-14127564.jpg'
-
-import type { PageProps } from '@/types'
 
 interface PropsLayout extends PropsWithChildren {
 	pageTitle: string
 }
 
 export const AuthLayout2 = ({ children, pageTitle }: PropsLayout) => {
-	const { colorMode, changeColorMode } = useColorMode()
-	const {
-		props: { settings },
-	} = usePage<PageProps>()
+	const { colorMode } = useColorMode()
 
 	return (
 		<>

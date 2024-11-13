@@ -16,6 +16,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Accordion'))
+
 export const AccordionPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -23,7 +25,7 @@ export const AccordionPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Accordion')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

@@ -10,12 +10,14 @@ import { RoleProvider, RoleContext } from './providers/RoleProvider'
 
 import type { RoleContextProps } from '@/types/roles'
 
+const pageTitle = String(t('Roles'))
+
 export const Page = () => {
 	const { state, dispatch } = useContext(RoleContext) as RoleContextProps
 
 	return (
 		<>
-			<PageHeader title={t('Roles')}>
+			<PageHeader title={pageTitle}>
 				<div className="flex justify-end">
 					<Button
 						size="sm"
@@ -54,7 +56,7 @@ export const Page = () => {
 
 Page.layout = (page: JSX.Element) => (
 	<RoleProvider>
-		<Layout {...{ children: page, pageTitle: String(t('Roles')) }} />
+		<Layout {...{ children: page, pageTitle }} />
 	</RoleProvider>
 )
 

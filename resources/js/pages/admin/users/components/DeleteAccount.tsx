@@ -1,30 +1,36 @@
 import { useForm, usePage } from '@inertiajs/react'
 import {
 	Button,
-	Divider,
 	Modal,
 	ModalContent,
 	ModalHeader,
 	ModalBody,
 	ModalFooter,
 	useDisclosure,
+	Card,
+	CardBody,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { toast } from 'react-toastify'
 
-import type { PageProps, User, InertiaResponse } from '@/types'
+import type { PageProps, InertiaResponse } from '@/types'
 
 export const DeleteAccount = () => {
-	const { user } = usePage<PageProps<{ user: User }>>().props
+	const { user } = usePage<PageProps>().props
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
 	const { delete: destroy } = useForm()
 
 	return (
 		<>
-			<div className="space-y-3">
-				<Divider />
-				<Button color="danger" variant="light" onPress={onOpen}>
+			<div className="space-y-5">
+				<Card shadow="none" className="bg-danger-50 text-danger-500">
+					<CardBody className="text-sm font-light">
+						{t('Deleted accounts cannot be restored!')}
+					</CardBody>
+				</Card>
+
+				<Button color="danger" onPress={onOpen}>
 					{t('Delete account')}
 				</Button>
 			</div>

@@ -18,6 +18,7 @@ import {
 } from '@nextui-org/react'
 import { templates, theme } from '@/config'
 import { useMainStore } from '@/store'
+import { useColorMode } from '@/hooks'
 import { Link, usePage } from '@inertiajs/react'
 import { Fragment } from 'react/jsx-runtime'
 
@@ -27,13 +28,12 @@ import type { NavbarProps } from '@/types/navbar'
 const { executive: template } = templates
 
 export const Header = () => {
-	const { sidebarOpen, setSidebarOpen, colorMode } = useMainStore()
+	const { sidebarOpen, setSidebarOpen } = useMainStore()
+	const { colorMode } = useColorMode()
 
 	const {
 		props: { adminNavbar },
 	} = usePage<PageProps>()
-
-	// const adminNavbar = demoExecutiveAdminNavbar as NavbarProps
 
 	return (
 		<Navbar

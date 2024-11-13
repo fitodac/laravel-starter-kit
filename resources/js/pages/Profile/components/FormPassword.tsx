@@ -60,7 +60,7 @@ export const FormPassword = () => {
 		<>
 			<form onSubmit={submit}>
 				<section className="space-y-5">
-					<div className="font-medium flex gap-5 items-center">
+					<div className="text-sm font-medium flex gap-5 items-center">
 						{t('Security')}
 						<Divider className="flex-1" />
 					</div>

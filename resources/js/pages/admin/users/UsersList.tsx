@@ -5,10 +5,12 @@ import { UsersList } from './components/UsersList'
 import { Button } from '@nextui-org/react'
 import { Link } from '@inertiajs/react'
 
+const pageTitle = String(t('Users'))
+
 export const Page = () => {
 	return (
 		<>
-			<PageHeader title={t('Users')}>
+			<PageHeader title={pageTitle}>
 				<div className="flex justify-end">
 					<Button
 						size="sm"
@@ -33,7 +35,7 @@ export const Page = () => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: String(t('Users')) }} />
+	<Layout {...{ children: page, pageTitle }} />
 )
 
 export default Page

@@ -1,8 +1,6 @@
 import { Layout } from '@/layouts/admin/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { Link } from '@inertiajs/react'
-import { Image } from '@nextui-org/react'
 
 const pageTitle = String(t('Dashboard'))
 

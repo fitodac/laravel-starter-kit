@@ -4,10 +4,10 @@ import { useForm, usePage } from '@inertiajs/react'
 import { Input, Button, Textarea, Divider } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 
-import type { PageProps, User, InertiaResponse } from '@/types'
+import type { PageProps, InertiaResponse } from '@/types'
 
 export const FormProfessionalInformation = () => {
-	const { user } = usePage<PageProps<{ user: User }>>().props
+	const { user } = usePage<PageProps>().props
 
 	const { data, setData, patch, processing, errors, clearErrors, isDirty } =
 		useForm({

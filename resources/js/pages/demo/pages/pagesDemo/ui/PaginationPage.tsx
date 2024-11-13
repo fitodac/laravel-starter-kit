@@ -13,6 +13,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Pagination'))
+
 export const PaginationPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -20,7 +22,7 @@ export const PaginationPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Pagination')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

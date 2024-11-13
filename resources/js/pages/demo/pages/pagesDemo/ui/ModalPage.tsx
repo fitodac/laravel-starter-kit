@@ -19,6 +19,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Modal'))
+
 export const ModalPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -30,7 +32,7 @@ export const ModalPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Modal')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

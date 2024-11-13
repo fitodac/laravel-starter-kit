@@ -47,7 +47,7 @@ const options2 = {
 			enabled: true,
 		},
 		events: {
-			click: function (chart, w, e) {},
+			click: function (chart: any, w: any, e: any) {},
 		},
 	},
 	plotOptions: {

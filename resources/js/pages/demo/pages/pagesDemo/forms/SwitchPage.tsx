@@ -16,6 +16,8 @@ interface Props {
 	template?: Template
 }
 
+const pageTitle = String(t('Switch'))
+
 export const SwitchPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
 		useConditionalClassName(template)
@@ -23,7 +25,7 @@ export const SwitchPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={t('Switch')}
+				title={pageTitle}
 				classNames={{
 					wrapper: headerClassName,
 				}}

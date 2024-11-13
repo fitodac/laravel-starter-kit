@@ -4,7 +4,7 @@ import { usePage } from '@inertiajs/react'
 import type { PageProps } from '@/types'
 
 export const useColorMode = () => {
-	const { auth, colorMode } = usePage().props as unknown as PageProps
+	const { auth, colorMode } = usePage<PageProps>().props
 
 	if (!auth) return { colorMode }
 
