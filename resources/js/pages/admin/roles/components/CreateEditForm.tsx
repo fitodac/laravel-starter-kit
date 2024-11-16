@@ -24,7 +24,7 @@ export const CreateEditForm = () => {
 		props: { protected_roles, permissions },
 	} = usePage<PageProps>()
 
-	const { web: webPermissions } = permissions as WebPermissions
+	const { web: webPermissions } = permissions as { web: Permission[] }
 
 	const undeletableRoles = protected_roles as string[]
 
