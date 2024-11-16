@@ -17,8 +17,7 @@ class RoleDeleted extends Notification
 	 */
 	public function __construct(
 		private readonly Role $role
-	)
-	{
+	) {
 		//
 	}
 
@@ -29,7 +28,11 @@ class RoleDeleted extends Notification
 	 */
 	public function via(object $notifiable): array
 	{
-		return ['mail', 'database'];
+		return [
+			'mail',
+			'database',
+			'broadcast'
+		];
 	}
 
 	/**

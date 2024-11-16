@@ -17,8 +17,7 @@ class PermissionDeleted extends Notification
 	 */
 	public function __construct(
 		private readonly Permission $permission
-	)
-	{
+	) {
 		//
 	}
 
@@ -29,7 +28,11 @@ class PermissionDeleted extends Notification
 	 */
 	public function via(object $notifiable): array
 	{
-		return ['mail', 'database'];
+		return [
+			'mail',
+			'database',
+			'broadcast'
+		];
 	}
 
 	/**
