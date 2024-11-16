@@ -41,7 +41,7 @@ class SendUserDetails extends Mailable
 	public function content(): Content
 	{
 		return new Content(
-			view: 'email.user-details',
+			view: 'mail.user-details',
 			with: [
 				'username' => $this->user->username,
 				'email' => $this->user->email,

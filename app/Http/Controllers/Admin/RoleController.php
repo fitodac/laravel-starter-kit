@@ -7,27 +7,20 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
-use App\Models\User;
+
+use App\Services\RoleService;
 
 class RoleController extends Controller
 {
 
-	/**
-	 * getPermissionsByGuard
-	 */
-	protected function getPermissionsByGuard()
+	private RoleService $roleService;
+
+	public function __construct(RoleService $roleService)
 	{
-		$guards = config('settings.auth.guard_permissions');
-		$permissions = [];
-
-		foreach ($guards as $guard_name) {
-			$permissions[$guard_name] = Permission::where('guard_name', $guard_name)->get();
-		}
-
-		return $permissions;
+		$this->roleService = $roleService;
 	}
+
 
 	/**
 	 * LIST
@@ -37,22 +30,9 @@ class RoleController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		$per_page = 15;
-
-		$roles = Role::with('permissions')
-			->withCount('users')
-			->orderBy($request->order ?? 'created_at', $request->dir === 'ascending' ? 'asc' : 'desc')
-			->paginate($per_page);
-		$protected_roles = config('settings.auth.protected_roles');
-		$permissions = $this->getPermissionsByGuard();
-
 		return Inertia::render(
 			'admin/roles/Roles',
-			compact(
-				'roles',
-				'protected_roles',
-				'permissions'
-			)
+			$this->roleService->roleList($request)
 		);
 	}
 
@@ -65,22 +45,13 @@ class RoleController extends Controller
 	public function store(Request $request): RedirectResponse
 	{
 
-		$request->validate([
-			'name' => 'required|unique:roles,name',
-		], [
-			'name.required' => 'Role name is required.',
-			'name.unique' => 'Role name already exists.'
-		]);
+		$role = $this->roleService->storeRole($request);
 
-		$name = preg_replace('/\s+/', ' ', $request->name);
-		$name = preg_replace('/[^A-Za-z0-9\s]/', '', $name);
+		if (!$role) return back()->with('error', 'Role creation failed.');
 
-		$role = Role::create([
-			'name' => trim($name)
-		]);
-		$role->givePermissionTo($request->permissions);
-
-		return redirect()->route('dashboard.role.list')->with('success', 'Role created successfully.');
+		return redirect()
+			->route('dashboard.role.list')
+			->with('success', 'Role created successfully.');
 	}
 
 	/**
@@ -89,25 +60,15 @@ class RoleController extends Controller
 	 * 
 	 * 
 	 */
-	public function update(Request $request, string $id): RedirectResponse
+	public function update(Request $request, Role $role): RedirectResponse
 	{
+		$role = $this->roleService->updateRole($request, $role);
 
-		$request->validate([
-			'name' => 'required|unique:roles,name,' . $id,
-		], [
-			'name.required' => 'Role name is required.',
-			'name.unique' => 'Role name already exists.',
-		]);
+		if (!$role) return back()->with('error', 'Role update failed.');
 
-		$role = Role::find($id);
-
-		$name = preg_replace('/\s+/', ' ', $request->name);
-		$name = preg_replace('/[^A-Za-z0-9\s]/', '', $name);
-
-		$role->update(['name' => trim($name)]);
-		$role->syncPermissions($request->permissions);
-
-		return redirect()->route('dashboard.role.list')->with('success', 'Role updated successfully.');
+		return redirect()
+			->route('dashboard.role.list')
+			->with('success', 'Role updated successfully.');
 	}
 
 	/**
@@ -116,10 +77,14 @@ class RoleController extends Controller
 	 * 
 	 * 
 	 */
-	public function destroy(string $id): RedirectResponse
+	public function destroy(Role $role): RedirectResponse
 	{
-		$role = Role::find($id);
-		$role->delete();
-		return redirect()->route('dashboard.role.list')->with('success', 'Role deleted successfully.');
+		$role = $this->roleService->destroyRole($role);
+
+		if (!$role) return back()->with('error', 'Role delete failed.');
+
+		return redirect()
+			->route('dashboard.role.list')
+			->with('success', 'Role deleted successfully.');
 	}
 }

@@ -1,3 +1,5 @@
+import { Role } from './roles'
+
 export type PermissionContextProps = {
 	state: State
 	dispatch: Dispatch<any>
@@ -30,6 +32,5 @@ export interface Permission {
 	id: number
 	name: string
 	guard_name: string
-	created_at?: any
-	updated_at?: any
+	roles: Role[]
 }

@@ -16,6 +16,7 @@ import { DeletePermission } from './DeletePermission'
 import { PermissionContext } from '../providers/PermissionProvider'
 
 import type { PageProps } from '@/types'
+import type { Role } from '@/types/roles'
 import type {
 	Permissions,
 	Permission,
@@ -24,7 +25,7 @@ import type {
 
 export const PermissionsList = () => {
 	const {
-		props: { permissions, protected_permissions },
+		props: { permissions, protected_permissions, roles },
 	} = usePage<PageProps>()
 
 	const { links, current_page, data } = permissions as Permissions
@@ -39,6 +40,16 @@ export const PermissionsList = () => {
 	useEffect(() => {
 		if (data) dispatch({ type: 'setListLoading', payload: false })
 	}, [data])
+
+	useEffect(() => {
+		if (!columns.find((e) => e.key === 'actions')) {
+			roles.forEach((role: Role) => {
+				columns.push({ key: role.name, label: role.name, allowsSorting: false })
+			})
+
+			columns.push({ key: 'actions', label: '', allowsSorting: false })
+		}
+	}, [])
 
 	return (
 		<>
@@ -103,12 +114,10 @@ export const PermissionsList = () => {
 }
 
 const columns = [
-	{ key: 'name', label: t('Name'), allowsSorting: true },
-	{ key: 'guard_name', label: t('Guard') },
-	{ key: 'actions', label: '' },
+	{ key: 'name', label: t('Name'), allowsSorting: true, width: 500 },
 ] as {
 	key: string
 	label: string
 	allowsSorting?: boolean
-	width: number | null
+	width?: number | null
 }[]

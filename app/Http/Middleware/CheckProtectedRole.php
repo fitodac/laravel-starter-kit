@@ -17,9 +17,7 @@ class CheckProtectedRole
 	public function handle(Request $request, Closure $next): Response
 	{
 
-		$roleId = $request->route('role');
-		$role = Role::findOrFail($roleId);
-		// dd($role);
+		$role = $request->route('role');
 
 		$protectedRoles = config('settings.auth.protected_roles', []);
 

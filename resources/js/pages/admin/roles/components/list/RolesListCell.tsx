@@ -58,7 +58,7 @@ export const RolesListCell = ({
 			)
 
 		case 'actions':
-			return !protected_roles.includes(item.name) ? (
+			return (
 				<div className="flex justify-end">
 					<Dropdown placement="bottom-end">
 						<DropdownTrigger>
@@ -102,18 +102,76 @@ export const RolesListCell = ({
 						</DropdownMenu>
 					</Dropdown>
 				</div>
-			) : (
-				<></>
 			)
+		// return !protected_roles.includes(item.name) ? (
+		// 	<div className="flex justify-end">
+		// 		<Dropdown placement="bottom-end">
+		// 			<DropdownTrigger>
+		// 				<Button isIconOnly size="sm" radius="lg" variant="light">
+		// 					<i className="ri-more-2-line ri-xl" />
+		// 				</Button>
+		// 			</DropdownTrigger>
+		// 			<DropdownMenu
+		// 				aria-label="Static Actions"
+		// 				onAction={(key) => {
+		// 					switch (key) {
+		// 						case 'edit':
+		// 							{
+		// 								dispatch({ type: 'setSelectedRole', payload: item })
+		// 								dispatch({ type: 'openDrawer' })
+		// 							}
+		// 							break
+		// 						case 'delete':
+		// 							dispatch({ type: 'setSelectedRole', payload: item })
+		// 							onOpen()
+
+		// 							break
+		// 					}
+		// 				}}
+		// 			>
+		// 				<DropdownItem key="edit">{t('Edit')}</DropdownItem>
+
+		// 				<DropdownItem
+		// 					key="delete"
+		// 					className={cn(
+		// 						'text-danger',
+		// 						protected_roles.includes(item.name) && 'opacity-20'
+		// 					)}
+		// 					color="danger"
+		// 					variant={
+		// 						protected_roles.includes(item.name) ? 'light' : 'solid'
+		// 					}
+		// 				>
+		// 					{t('Delete')}
+		// 				</DropdownItem>
+		// 			</DropdownMenu>
+		// 		</Dropdown>
+		// 	</div>
+		// ) : (
+		// 	<div className="h-7" />
+		// )
 
 		case 'permissions':
 			return (
 				<div className="flex gap-2">
-					{item.permissions.map((permission) => (
-						<Chip key={permission.id} size="sm" color="primary" variant="flat">
-							{permission.name}
+					{item.permissions.length > 2 ? (
+						<Chip size="sm" color="primary" variant="light">
+							{item.permissions.length} {t('permissions')}
 						</Chip>
-					))}
+					) : (
+						<>
+							{item.permissions.map((permission) => (
+								<Chip
+									key={permission.id}
+									size="sm"
+									color="primary"
+									variant="flat"
+								>
+									{permission.name}
+								</Chip>
+							))}
+						</>
+					)}
 				</div>
 			)
 

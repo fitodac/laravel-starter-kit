@@ -18,7 +18,6 @@ export const useActions = () => {
 
 	useEffect(() => {
 		if (state.selectedRole) {
-			console.log('selectedRole', state.selectedRole)
 			setData({
 				name: state.selectedRole.name,
 				permissions: state.selectedRole.permissions.map(

@@ -14,6 +14,8 @@ return [
 	// Determine if the site is in light or dark mode.
 	'color_mode' => env('VITE_COLOR_MODE', 'light'),
 
+	'per_page' => 15,
+
 	// Configure Open Graph settings for the site.
 	'og_description' => env('VITE_OG_DESCRIPTION', 'Laravel Vite Boilerplate'),
 	'og_image' => env('VITE_OG_IMAGE', 'og-image.jpg'),

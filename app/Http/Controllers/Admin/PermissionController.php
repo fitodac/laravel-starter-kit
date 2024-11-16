@@ -7,9 +7,17 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Permission;
+use App\Services\PermissionService;
 
 class PermissionController extends Controller
 {
+
+	private PermissionService $permissionService;
+
+	public function __construct(PermissionService $permissionService)
+	{
+		$this->permissionService = $permissionService;
+	}
 
 	/**
 	 * LIST
@@ -19,19 +27,9 @@ class PermissionController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		$per_page = 15;
-
-		$permissions = Permission::orderBy($request->order ?? 'created_at', $request->dir === 'ascending' ? 'asc' : 'desc')->paginate($per_page);
-		$guards = config('settings.auth.guard_permissions');
-		$protected_permissions = config('settings.auth.protected_permissions');
-
 		return Inertia::render(
 			'admin/permissions/Permissions',
-			compact(
-				'permissions',
-				'guards',
-				'protected_permissions'
-			)
+			$this->permissionService->permissionList($request)
 		);
 	}
 
@@ -44,19 +42,13 @@ class PermissionController extends Controller
 	public function store(Request $request): RedirectResponse
 	{
 
-		$request->validate([
-			'name' => 'required|unique:permissions,name'
-		], [
-			'name.required' => 'Permission name is required.',
-			'name.unique' => 'Permission name already exists.',
-		]);
+		$permission = $this->permissionService->storePermission($request);
 
-		$name = preg_replace('/\s+/', ' ', $request->name);
-		$name = preg_replace('/[^A-Za-z0-9\s]/', '', $name);
+		if (!$permission) return back()->with('error', 'Permission creation failed.');
 
-		Permission::create(['name' => $name]);
-
-		return back()->with('success', 'Permission created successfully.');
+		return redirect()
+			->route('dashboard.permission.list')
+			->with('success', 'Permission created successfully.');
 	}
 
 	/**
@@ -68,21 +60,13 @@ class PermissionController extends Controller
 	public function update(Request $request, Permission $permission): RedirectResponse
 	{
 
-		$request->validate([
-			'name' => 'required|unique:permissions,name',
-		], [
-			'name.required' => 'Permission name is required.',
-			'name.unique' => 'Permission name already exists.'
-		]);
+		$permission = $this->permissionService->updatePermission($request, $permission);
 
-		$name = preg_replace('/\s+/', ' ', $request->name);
-		$name = preg_replace('/[^A-Za-z0-9\s]/', '', $name);
+		if (!$permission) return back()->with('error', 'Permission update failed.');
 
-		$permission->update([
-			'name' => $name,
-		]);
-
-		return back()->with('success', 'Permission updated successfully.');
+		return redirect()
+			->route('dashboard.permission.list')
+			->with('success', 'Permission updated successfully.');
 	}
 
 	/**
@@ -93,7 +77,12 @@ class PermissionController extends Controller
 	 */
 	public function destroy(Permission $permission): RedirectResponse
 	{
-		$permission->delete();
-		return back()->with('success', 'Permission deleted successfully.');
+		$permission = $this->permissionService->destroyPermission($permission);
+
+		if (!$permission) return back()->with('error', 'Permission delete failed.');
+
+		return redirect()
+			->route('dashboard.permission.list')
+			->with('success', 'Permission deleted successfully.');
 	}
 }

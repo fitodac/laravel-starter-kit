@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\demo\UsersSeeder;
 use Database\Seeders\demo\ProductsSeeder;
 use Database\Seeders\RoleSeeder;
+use Database\Seeders\PermissionSeeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\MediaManagerSeeder;
 
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
 		$this->call([
 			RoleSeeder::class,
+			PermissionSeeder::class,
 			AdminSeeder::class,
 			UsersSeeder::class,
 			ProductsSeeder::class,

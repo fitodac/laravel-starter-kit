@@ -5,9 +5,8 @@ import {
 	Divider,
 	cn,
 	Spinner,
-	Select,
-	SelectItem,
-	Chip,
+	CheckboxGroup,
+	Checkbox,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { RoleContext } from '../providers/RoleProvider'
@@ -15,7 +14,7 @@ import { useActions } from '../hooks/useActions'
 import { usePage } from '@inertiajs/react'
 
 import type { PageProps } from '@/types'
-import type { Role, RoleContextProps, WebPermissions } from '@/types/roles'
+import type { RoleContextProps, WebPermissions } from '@/types/roles'
 import { Permission } from '@/types/permissions'
 
 export const CreateEditForm = () => {
@@ -53,17 +52,14 @@ export const CreateEditForm = () => {
 				'w-full flex justify-center items-center'
 			)}
 		>
-			<div className="p-6 lg:px-10">
+			<div className="max-w-screen-sm p-6 lg:px-10">
 				<div className="text-lg">
 					{state.selectedRole ? t('Edit role') : t('New role')}
 				</div>
 
 				<Divider className="my-4" />
 
-				<form
-					onSubmit={submit}
-					className="pb-10 lg:grid lg:grid-cols-2 lg:gap-x-6 lg:gap-y-4 lg:space-y-0"
-				>
+				<form onSubmit={submit} className="pb-10 space-y-5">
 					<fieldset className="space-y-1">
 						<label htmlFor="" className="text-sm">
 							{t('Role name')}{' '}
@@ -85,30 +81,22 @@ export const CreateEditForm = () => {
 
 					<>
 						{webPermissions && (
-							<fieldset className="space-y-1">
+							<fieldset className="space-y-1 max-h-52 scrollbar-thin overflow-y-scroll">
 								<label htmlFor="" className="text-sm">
 									{t('Permissions')}
 								</label>
 
-								<Select
-									aria-label="Permissions"
-									selectionMode="multiple"
-									selectedKeys={data.permissions}
-									isMultiline={true}
-									onSelectionChange={(values) => {
-										setData(
-											'permissions',
-											Array.from(values).map((e) => e.toString())
-										)
-									}}
-									description={`${data.permissions.length} ${t(
-										'items selected'
-									)}`}
+								<CheckboxGroup
+									value={data.permissions}
+									size="sm"
+									onValueChange={(e) => setData('permissions', e)}
 								>
-									{webPermissions.map((e: Permission) => {
-										return <SelectItem key={e.name}>{e.name}</SelectItem>
-									})}
-								</Select>
+									{webPermissions.map((e: Permission) => (
+										<Checkbox key={e.name} value={e.name}>
+											{e.name}
+										</Checkbox>
+									))}
+								</CheckboxGroup>
 							</fieldset>
 						)}
 					</>

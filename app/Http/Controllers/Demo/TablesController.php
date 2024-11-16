@@ -18,7 +18,8 @@ class TablesController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		$per_page = 16;
+		$per_page = config('settings.general.per_page');
+
 		$orderBy = $request->dir === 'ascending' ? 'asc' : 'desc';
 		$categories = Product::select('category')->distinct()->get();
 

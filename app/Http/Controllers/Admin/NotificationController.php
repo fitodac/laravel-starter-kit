@@ -19,7 +19,7 @@ class NotificationController extends Controller
 	 */
 	public function index(Request $request): Response
 	{
-		$per_page = 15;
+		$per_page = config('settings.general.per_page');
 
 		$notifications = InAppNotification::orderBy($request->order ?? 'id', $request->dir === 'ascending' ? 'asc' : 'desc')
 			->paginate($per_page);

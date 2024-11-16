@@ -18,7 +18,7 @@ class UserAdminController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		$per_page = 15;
+		$per_page = config('settings.general.per_page');
 
 		$users = User::role('Admin')->paginate($per_page);
 		$total = User::count();

@@ -1,5 +1,9 @@
-import { ProfileDropdown } from '@/components'
-import { Button, cn, Navbar } from '@nextui-org/react'
+import {
+	ProfileDropdown,
+	TopbarNotifications,
+	TopbarLanguage,
+} from '@/components'
+import { Button, cn, Navbar, Divider } from '@nextui-org/react'
 import { templates, theme } from '@/config'
 import { useMainStore } from '@/store'
 import { useColorMode } from '@/hooks'
@@ -30,7 +34,14 @@ export const Header = () => {
 					</div>
 
 					<div className="flex items-center gap-x-3 h-full">
-						{/* <Divider orientation="vertical" className="h-5" /> */}
+						<TopbarNotifications />
+
+						<Divider orientation="vertical" className="h-5" />
+
+						<TopbarLanguage />
+
+						<Divider orientation="vertical" className="h-5" />
+
 						<ProfileDropdown />
 
 						<Button
