@@ -53,8 +53,9 @@ export const TopbarNotifications = () => {
 
 				<DropdownMenu
 					aria-label="Profile dropdown"
-					color="primary"
+					// color="primary"
 					variant="light"
+					className="min-w-72"
 				>
 					{notifications.length > 0 ? (
 						notifications.map((notification) => (
@@ -72,7 +73,11 @@ export const TopbarNotifications = () => {
 									</ReactSafelySetInnerHTML>
 								}
 							>
-								{notification.data.title}
+								<div className="text-xs font-medium">
+									<ReactSafelySetInnerHTML>
+										{notification.data.title}
+									</ReactSafelySetInnerHTML>
+								</div>
 							</DropdownItem>
 						))
 					) : (
@@ -93,13 +98,20 @@ const TriggerButton = ({ notifications = [] }: { notifications?: any[] }) => {
 		)
 
 	return (
-		<Button radius="full" isIconOnly variant="light">
+		<Button
+			radius="full"
+			isIconOnly
+			variant="light"
+			disableAnimation
+			disableRipple
+			className="pointer-events-none"
+		>
 			<i className="ri-notification-2-line" />
 
 			{notifications &&
 				Array.isArray(notifications) &&
 				notifications.length > 0 && (
-					<span className="bg-danger w-2.5 h-2.5 absolute top-0 -right-1 rounded-full animate-pulse" />
+					<span className="bg-danger w-2.5 h-2.5 absolute top-2 right-2 rounded-full animate-pulse z-20" />
 				)}
 		</Button>
 	)

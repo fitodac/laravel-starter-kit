@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\User;
 
 class UserUpdated extends Notification
 {
@@ -14,8 +15,9 @@ class UserUpdated extends Notification
 	/**
 	 * Create a new notification instance.
 	 */
-	public function __construct()
-	{
+	public function __construct(
+		private readonly User $user
+	) {
 		//
 	}
 

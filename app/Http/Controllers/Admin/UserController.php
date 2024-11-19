@@ -93,9 +93,9 @@ class UserController extends Controller
 	 * 
 	 * 
 	 */
-	public function update(UpdateUserRequest $request, User $user): RedirectResponse
+	public function update(UpdateUserRequest $request): RedirectResponse
 	{
-		$user = $this->userService->updateUser($request, $user);
+		$user = $this->userService->updateUser($request);
 
 		if (!$user) return back()->with('error', 'User not updated.');
 
@@ -145,8 +145,7 @@ class UserController extends Controller
 	 */
 	public function destroy(User $user): RedirectResponse
 	{
-		$this->userService->removeImageProfile($user);
-		$user->delete();
+		
 		return redirect()
 			->route('dashboard.users.list')
 			->with('success', 'The account was deleted.');

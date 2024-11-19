@@ -8,13 +8,9 @@ import {
 	FormProfessionalInformation,
 	FormPassword,
 	DeleteAccount,
+	MustVerifyEmail,
 } from './components'
-import { Button, Card, CardBody, Tabs, Tab } from '@nextui-org/react'
-import { router } from '@inertiajs/react'
-
-const sendEmailAccountConfirmation = () => {
-	router.post(route('verification.send'))
-}
+import { Tabs, Tab } from '@nextui-org/react'
 
 const pageTitle = String(t('My profile'))
 
@@ -29,45 +25,7 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: PageProps) => {
 				<div className="flex flex-col flex-1">
 					<div>
 						{mustVerifyEmail && user.email_verified_at === null && (
-							<>
-								{status !== 'verification-link-sent' ? (
-									<Card
-										shadow="none"
-										className="bg-danger-50 text-danger-500 pl-14 pr-6 py-6"
-									>
-										<i className="ri-mail-unread-line ri-2x left-3 top-4 absolute" />
-										<CardBody className="p-0">
-											<div className="flex justify-between items-center">
-												<p className="text-danger font-light">
-													{t('Your email address is unverified')}
-												</p>
-
-												<div>
-													<Button
-														size="sm"
-														color="danger"
-														onPress={sendEmailAccountConfirmation}
-													>
-														{t('email-verify-link')}
-													</Button>
-												</div>
-											</div>
-										</CardBody>
-									</Card>
-								) : (
-									<>
-										<Card
-											shadow="none"
-											className="bg-success-50 text-success-500 pl-14 pr-6 py-6"
-										>
-											<i className="ri-mail-check-line ri-2x left-3 top-3 absolute" />
-											<CardBody className="text-sm font-light p-0">
-												{t('verification-link-sent-notice')}
-											</CardBody>
-										</Card>
-									</>
-								)}
-							</>
+							<MustVerifyEmail {...{ status }} />
 						)}
 					</div>
 
@@ -108,7 +66,7 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: PageProps) => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle: String(t('My account')) }} />
+	<Layout {...{ children: page, pageTitle }} />
 )
 
 export default Page

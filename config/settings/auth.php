@@ -24,10 +24,6 @@ return [
 		'User'
 	],
 	'protected_permissions' => [
-		'Super Admin Access',
-		'Admin Access',
-		'Private Access',
-
 		'Can see users',
 		'Can create new user',
 		'Can edit user',

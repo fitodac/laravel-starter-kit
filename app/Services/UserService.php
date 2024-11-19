@@ -13,6 +13,9 @@ use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Http\Requests\Admin\CreateUserRequest;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
+use App\Notifications\UserCreated;
+use App\Notifications\UserUpdated;
+use App\Notifications\UserDeleted;
 
 
 class UserService
@@ -23,7 +26,7 @@ class UserService
 	 *
 	 * @return array
 	 */
-	public function userList()
+	public function userList(): array
 	{
 		$per_page = config('settings.general.per_page');
 
@@ -34,7 +37,13 @@ class UserService
 	}
 
 
-	public function storeUser(CreateUserRequest $request)
+	/**
+	 * Store a newly created user in storage.
+	 *
+	 * @param CreateUserRequest $request
+	 * @return User
+	 */
+	public function storeUser(CreateUserRequest $request): User
 	{
 		$user = User::create($request->validated());
 
@@ -47,11 +56,20 @@ class UserService
 			Mail::to($user->email)->send(new SendUserDetails($user, $request->password));
 		}
 
+		$this->notificationsForSuperAdmins('create', $user);
+
 		return $user;
 	}
 
 
-	public function editUser(User $user)
+	/**
+	 * Get the user, sessions, permission and roles.
+	 * This method is used to display the user details page.
+	 *
+	 * @param User $user
+	 * @return array
+	 */
+	public function editUser(User $user): array
 	{
 		$auth = Auth::user();
 		$permission = $auth->getPermissionsViaRoles()->pluck('name')->first();
@@ -66,7 +84,14 @@ class UserService
 	}
 
 
-	public function updateUser(UpdateUserRequest $request, User $user)
+	/**
+	 * Update the specified user in storage.
+	 *
+	 * @param UpdateUserRequest $request
+	 * @param User $user
+	 * @return User
+	 */
+	public function updateUser(UpdateUserRequest $request): User
 	{
 		$data = $request->validated();
 
@@ -74,6 +99,8 @@ class UserService
 		if (!empty($data['password'])) {
 			$data['password'] = bcrypt($data['password']);
 		}
+
+		$user = $request->user();
 
 		$user->update($data);
 
@@ -83,18 +110,42 @@ class UserService
 			$user->syncRoles([$role]);
 		}
 
+		$this->notificationsForSuperAdmins('update', $user);
+
 		return $user;
 	}
 
 
-	public function updateImageProfile(User $user, Request $request)
+	/**
+	 * Delete the specified user from storage.
+	 *
+	 * @param User $user
+	 * @return bool
+	 */
+	public function destroyUser(User $user): bool
+	{
+		$this->removeImageProfile($user);
+		$deletedUser = $user->delete();
+		if ($deletedUser) $this->notificationsForSuperAdmins('delete', $user);
+
+		return $deletedUser;
+	}
+
+
+	/**
+	 * Update the user's profile picture and save it to the users/avatars directory.
+	 *
+	 * @param User $user
+	 * @param Request $request
+	 * @return void
+	 */
+	public function updateImageProfile(User $user, Request $request): void
 	{
 		if ($request->hasFile('profile_picture')) {
 			$currentImagePath = '/public/img/users/avatars/' . $user->profile_picture;
 			if (Storage::exists($currentImagePath)) {
 				Storage::delete($currentImagePath);
 			}
-
 
 			$file = $request->file('profile_picture');
 			$filename = time() . '.webp';
@@ -107,12 +158,21 @@ class UserService
 			if ($filename) {
 				$user->update(['profile_picture' => $filename]);
 			}
+
+			$this->notificationsForSuperAdmins('update', $user);
 		}
 	}
 
 
 
-	public function removeImageProfile(User $user){
+	/**
+	 * Remove the user's profile picture if it exists
+	 * 
+	 * @param User $user
+	 * @return void
+	 */
+	public function removeImageProfile(User $user): void
+	{
 		$imagePath = '/public/img/users/avatars/' . $user->profile_picture;
 
 		if (Storage::exists($imagePath)) {
@@ -120,11 +180,18 @@ class UserService
 		}
 
 		$user->update(['profile_picture' => null]);
+
+		$this->notificationsForSuperAdmins('update', $user);
 	}
 
 
 
-	public function adminList()
+	/**
+	 * Retrieve a list of users with the 'Admin' role.
+	 *
+	 * @return array
+	 */
+	public function adminList(): array
 	{
 		$per_page = config('settings.general.per_page');
 
@@ -132,5 +199,40 @@ class UserService
 		$total = User::count();
 
 		return compact('users', 'total');
+	}
+
+
+	/**
+	 * Send a notification to the users with the 'Super Admin' role for the following cases:
+	 * 
+	 *  - create: when a new role is created
+	 *  - update: when a role is updated
+	 *  - delete: when a role is deleted
+	 * 
+	 * @param string $case One of the above cases
+	 * @param Role $role The role that was created, updated or deleted
+	 * @return void
+	 */
+	protected function notificationsForSuperAdmins($case, User $user): void
+	{
+		$superadmin = Role::findByName('Super Admin');
+
+		switch ($case) {
+			case 'create':
+				foreach ($superadmin->users as $user) {
+					$user->notify(new UserCreated($user));
+				}
+				break;
+			case 'update':
+				foreach ($superadmin->users as $user) {
+					$user->notify(new UserUpdated($user));
+				}
+				break;
+			case 'delete':
+				foreach ($superadmin->users as $user) {
+					$user->notify(new UserDeleted($user));
+				}
+				break;
+		}
 	}
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\MediaManagerController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::delete('profile/image-profile', [ProfileController::class, 'remove_image'])
 		->name('profile.remove_image');
+
+	Route::get('account', [AccountController::class, 'edit'])
+		->name('account.edit');
+
+	Route::match(['put', 'patch'], 'account', [AccountController::class, 'update'])
+		->name('account.update');
 
 	// Image uploader
 	Route::post('media', [MediaManagerController::class, 'store'])->name('media.upload');

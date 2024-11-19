@@ -4,19 +4,20 @@ import { usePage } from '@inertiajs/react'
 import type { PageProps } from '@/types'
 
 export const useColorMode = () => {
-	const { auth, colorMode } = usePage<PageProps>().props
+	const { props } = usePage<PageProps>()
+	const { auth, colorMode } = props
 
 	if (!auth) return { colorMode }
 
-	const { user } = auth ?? []
+	const { user } = auth
 
-	const mode = Array.isArray(user)
-		? (user.account && user.account.colorMode) ?? 'light'
-		: colorMode
+	const mode = user?.account?.colorMode ?? colorMode
 
 	useEffect(() => {
-		document.querySelector('html')?.classList.add(mode)
-	}, [colorMode])
+		mode === 'dark'
+			? document.querySelector('html')?.classList.add('dark')
+			: document.querySelector('html')?.classList.remove('dark')
+	}, [props])
 
 	return { colorMode }
 }

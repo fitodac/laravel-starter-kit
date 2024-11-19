@@ -23,8 +23,6 @@ class DemoRoutesTest extends TestCase
 		// Create a user with roles and permissions
 		$this->user = User::factory()->create();
 		$userRole = Role::create(['name' => 'User']);
-		$privateAccess = Permission::create(['name' => 'Private Access']);
-		$userRole->givePermissionTo($privateAccess);
 		$this->user->assignRole('User');
 	}
 

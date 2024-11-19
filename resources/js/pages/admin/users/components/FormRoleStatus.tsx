@@ -9,7 +9,6 @@ import type { Role } from '@/types/roles'
 
 export const FormRoleStatus = () => {
 	const { user, permission, roles } = usePage<PageProps>().props
-	console.log('roles', roles)
 
 	const { data, setData, patch, processing, errors, clearErrors, isDirty } =
 		useForm({

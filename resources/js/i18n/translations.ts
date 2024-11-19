@@ -101,7 +101,7 @@ const translations: Translations = {
 		Company: 'Company',
 		Biography: 'Biography',
 	},
-	es: {
+	sp: {
 		Welcome: 'Bienvenido',
 		'Log in': 'Entrar',
 		'Log out': 'Salir',

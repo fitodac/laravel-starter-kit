@@ -93,7 +93,7 @@ export const ProfileDropdown = ({
 					<DropdownSection showDivider>
 						{showNameInDropdown ? (
 							<DropdownItem
-								textValue={String(t('My account'))}
+								textValue={String(t('My profile'))}
 								isReadOnly
 								className="select-none cursor-default"
 							>
@@ -110,9 +110,17 @@ export const ProfileDropdown = ({
 						<DropdownItem
 							textValue={String(t('My profile'))}
 							onClick={() => router.visit(route('profile.edit'))}
-							startContent={<i className="ri-profile-line ri-lg" />}
+							startContent={<i className="ri-account-circle-line ri-lg" />}
 						>
 							{t('My profile')}
+						</DropdownItem>
+
+						<DropdownItem
+							textValue={String(t('My account'))}
+							onClick={() => router.visit(route('account.edit'))}
+							startContent={<i className="ri-profile-line ri-lg" />}
+						>
+							{t('My account')}
 						</DropdownItem>
 
 						<DropdownItem

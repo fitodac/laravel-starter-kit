@@ -22,8 +22,6 @@ class RegistrationTest extends TestCase
 
 		// Create roles and permissions
 		$userRole = Role::create(['name' => 'User']);
-		$privateAccess = Permission::create(['name' => 'Private Access']);
-		$userRole->givePermissionTo($privateAccess);
 
 		// Create a user with roles and permissions
 		$this->superadmin = User::factory()->create();

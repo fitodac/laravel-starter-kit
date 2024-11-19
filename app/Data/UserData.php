@@ -27,6 +27,6 @@ class UserData extends Data
 		public bool $status,
 		// public string $remember_token,
 		public ?array $roles = [],
-		// public ?AccountData $account,
+		public ?AccountData $account,
 	) {}
 }

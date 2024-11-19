@@ -73,7 +73,7 @@ class RoleService
 		$role = Role::create(['name' => trim($name)]);
 		$role->givePermissionTo($request->permissions);
 
-		$this->notifyByMail('create', $role);
+		$this->notificationsForSuperAdmins('create', $role);
 
 		return $role;
 	}
@@ -104,7 +104,7 @@ class RoleService
 		]);
 		$role->syncPermissions($request->permissions);
 
-		$this->notifyByMail('update', $role);
+		$this->notificationsForSuperAdmins('update', $role);
 
 		return $role;
 	}
@@ -120,7 +120,7 @@ class RoleService
 	public function destroyRole(Role $role): bool
 	{
 		$deletedRole = $role->delete();
-		if ($deletedRole) $this->notifyByMail('delete', $role);
+		if ($deletedRole) $this->notificationsForSuperAdmins('delete', $role);
 
 		return $deletedRole;
 	}
@@ -139,7 +139,7 @@ class RoleService
 	 * @param Role $role The role that was created, updated or deleted
 	 * @return void
 	 */
-	protected function notifyByMail($case, Role $role)
+	protected function notificationsForSuperAdmins($case, Role $role)
 	{
 		$superadmin = Role::findByName('Super Admin');
 
