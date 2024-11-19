@@ -27,7 +27,11 @@ class NewUserRegisteredNotification extends Notification
 	 */
 	public function via(object $notifiable): array
 	{
-		return ['mail'];
+		return [
+			'mail',
+			'database',
+			'broadcast'
+		];
 	}
 
 	/**
@@ -52,7 +56,8 @@ class NewUserRegisteredNotification extends Notification
 	public function toArray(object $notifiable): array
 	{
 		return [
-			//
+			'title' => 'New User Registered',
+			'content' => 'A new user has registered.'
 		];
 	}
 }

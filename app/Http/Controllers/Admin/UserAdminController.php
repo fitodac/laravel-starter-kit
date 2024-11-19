@@ -6,9 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Inertia\Inertia;
+use Inertia\Response;
+use App\Services\UserService;
 
 class UserAdminController extends Controller
 {
+
+	private UserService $userService;
+
+	public function __construct(UserService $userService)
+	{
+		$this->userService = $userService;
+	}
 
 	/**
 	 * LIST
@@ -16,13 +25,13 @@ class UserAdminController extends Controller
 	 * 
 	 * 
 	 */
-	public function index(Request $request)
+	public function index(): Response
 	{
-		$per_page = config('settings.general.per_page');
 
-		$users = User::role('Admin')->paginate($per_page);
-		$total = User::count();
-		return Inertia::render('admin/users/AdministratorsList', compact('users', 'total'));
+		return Inertia::render(
+			'admin/users/AdministratorsList',
+			$this->userService->adminList()
+		);
 	}
 
 	/**
@@ -31,7 +40,7 @@ class UserAdminController extends Controller
 	 * 
 	 * 
 	 */
-	public function show(User $user)
+	public function show(User $user): Response
 	{
 		$user['role'] = $user->roles->pluck('name')->first();
 		return Inertia::render('admin/users/Edit', compact('user'));

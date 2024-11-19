@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\UserPreference;
 
 class AdminSeeder extends Seeder
 {
@@ -22,16 +21,22 @@ class AdminSeeder extends Seeder
 			'email' => 'superadmin@local.com'
 		])->assignRole('Super Admin');
 
-		$superadmin->preferences()->create(['key' => 'colorMode', 'value' => 'dark']);
-		$superadmin->preferences()->create(['key' => 'language', 'value' => 'en']);
+		$superadmin->account()->create([
+			'colorMode' => 'dark',
+			'language' => 'en'
+		]);
 
 
-
-		User::factory()->create([
+		$admin = User::factory()->create([
 			'name' => 'Emma',
 			'lastname' => 'Smith',
 			'username' => 'real_emma',
 			'email' => 'admin@local.com'
 		])->assignRole('Admin');
+
+		$admin->account()->create([
+			'colorMode' => 'dark',
+			'language' => 'en'
+		]);
 	}
 }

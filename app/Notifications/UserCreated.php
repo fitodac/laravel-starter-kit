@@ -7,20 +7,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class InAppNotification extends Notification
+class UserCreated extends Notification
 {
 	use Queueable;
-
-	private $title;
-	private $body;
 
 	/**
 	 * Create a new notification instance.
 	 */
-	public function __construct(string $title, string $body)
+	public function __construct()
 	{
-		$this->title = $title;
-		$this->body = $body;
+		//
 	}
 
 	/**
@@ -30,18 +26,21 @@ class InAppNotification extends Notification
 	 */
 	public function via(object $notifiable): array
 	{
-		return ['database'];
+		return [
+			'mail',
+			'database',
+			'broadcast'
+		];
 	}
 
 	/**
 	 * Get the mail representation of the notification.
 	 */
-	public function toMail(object $notifiable): void
+	public function toMail(object $notifiable): MailMessage
 	{
-		// return (new MailMessage)
-		// 	->line('The introduction to the notification.')
-		// 	->action('Notification Action', url('/'))
-		// 	->line('Thank you for using our application!');
+		return (new MailMessage)
+			->subject('User created')
+			->view('mail.user');
 	}
 
 	/**
@@ -52,8 +51,8 @@ class InAppNotification extends Notification
 	public function toArray(object $notifiable): array
 	{
 		return [
-			'title' => $this->title,
-			'body' => $this->body,
+			'title' => 'User created',
+			'content' => 'A new user has been created.'
 		];
 	}
 }

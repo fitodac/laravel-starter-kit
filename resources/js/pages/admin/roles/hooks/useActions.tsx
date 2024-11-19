@@ -10,11 +10,20 @@ import { Permission } from '@/types/permissions'
 export const useActions = () => {
 	const { state, dispatch } = useContext(RoleContext) as RoleContextProps
 
-	const { data, post, patch, errors, setData, processing, clearErrors, reset } =
-		useForm({
-			name: '',
-			permissions: [] as string[],
-		})
+	const {
+		data,
+		post,
+		patch,
+		errors,
+		setData,
+		processing,
+		clearErrors,
+		reset,
+		isDirty,
+	} = useForm({
+		name: '',
+		permissions: [] as string[],
+	})
 
 	useEffect(() => {
 		if (state.selectedRole) {
@@ -29,6 +38,8 @@ export const useActions = () => {
 
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
+
+		if (!isDirty) return
 
 		if (state.selectedRole) {
 			patch(

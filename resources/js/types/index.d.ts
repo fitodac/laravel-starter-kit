@@ -27,6 +27,10 @@ export interface User {
 		id: number
 		name: string
 	}[]
+	account: {
+		colorMode: string
+		language: string
+	}
 	sessions?: Sessions
 }
 
@@ -60,10 +64,7 @@ export interface PageProps {
 	auth: {
 		user: User | null
 		permissions?: string[]
-		preferences: {
-			colorMode: string
-			[key: String]: any
-		}
+		notifications: Notification[]
 	}
 	adminNavbar: NavbarProps
 	settings: {
@@ -99,3 +100,9 @@ export type Sessions = {
 	user_agent: string
 	user_id: number
 }[]
+
+export type Notification = {
+	id: string
+	read_at: string
+	data: any
+}

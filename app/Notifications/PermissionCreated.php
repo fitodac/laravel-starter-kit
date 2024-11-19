@@ -53,7 +53,7 @@ class PermissionCreated extends Notification
 	public function toArray(object $notifiable): array
 	{
 		return [
-			'title' => 'Permission updated',
+			'title' => 'Permission created',
 			'content' => 'A new permission has been created.'
 		];
 	}

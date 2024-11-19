@@ -49,19 +49,34 @@ class UsersSeeder extends Seeder
 		}
 
 
-		User::factory()->create([
+		$user = User::factory()->create([
 			'name' => 'John',
 			'lastname' => 'Doe',
 			'username' => 'johndoe',
 			'email' => 'user@local.com'
 		])->assignRole('User');
 
+		$user->account()->create([
+			'colorMode' => 'dark',
+			'language' => 'en'
+		]);
+
 		User::factory(9)->create()->each(function ($user) {
 			$user->assignRole('Admin');
+
+			$user->account()->create([
+				'colorMode' => 'dark',
+				'language' => 'en'
+			]);
 		});
 
 		User::factory(30)->create()->each(function ($user) {
 			$user->assignRole('User');
+
+			$user->account()->create([
+				'colorMode' => 'dark',
+				'language' => 'en'
+			]);
 		});
 	}
 }

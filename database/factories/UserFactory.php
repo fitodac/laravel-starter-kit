@@ -44,7 +44,7 @@ class UserFactory extends Factory
 			'job_title' => fake()->jobTitle(),
 			'company' => fake()->company(),
 
-			// Prefferences and settions
+			// Settings
 			'bio' => fake()->text(200),
 			'profile_picture' => rand(1, 30) . '.jpg',
 			'status' => fake()->randomElement(['enabled', 'disabled']),
@@ -58,7 +58,7 @@ class UserFactory extends Factory
 	 */
 	public function unverified(): static
 	{
-		return $this->state(fn (array $attributes) => [
+		return $this->state(fn(array $attributes) => [
 			'email_verified_at' => null,
 		]);
 	}

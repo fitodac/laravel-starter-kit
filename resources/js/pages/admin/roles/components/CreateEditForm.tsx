@@ -75,6 +75,7 @@ export const CreateEditForm = () => {
 							errorMessage={errors.name}
 							onKeyUp={() => clearErrors('name')}
 							isDisabled={isProtected.current || processing}
+							isReadOnly={isProtected.current}
 							onValueChange={(e) => setData('name', e)}
 						/>
 					</fieldset>

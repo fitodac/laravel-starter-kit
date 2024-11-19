@@ -50,9 +50,9 @@ class AdminNavbarProvider extends ServiceProvider
 
 		// Users and Administrators
 		if (
+			isset($role) && 'Super Admin' == $role ||
 			isset($permissions) &&
-			(in_array('Super Admin Access', $permissions) ||
-				in_array('Admin Access', $permissions))
+			in_array('Can see users', $permissions)
 		) {
 			$item = [
 				'key' => 'users',
@@ -66,7 +66,10 @@ class AdminNavbarProvider extends ServiceProvider
 				]
 			];
 
-			if (in_array('Super Admin Access', $permissions)) {
+			if (
+				isset($role) && 'Super Admin' == $role ||
+				in_array('Can see admins', $permissions)
+			) {
 				$item['menu'][] = [
 					'label' => 'Administrators',
 					'route' => 'dashboard.admins.list',

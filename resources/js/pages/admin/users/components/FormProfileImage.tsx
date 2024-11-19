@@ -17,7 +17,7 @@ import userBlank from '@/assets/img/blank-462x265.webp'
 import type { PageProps, InertiaResponse } from '@/types'
 
 export const FormProfileImage = () => {
-	const user = usePage<PageProps>().props.auth.user
+	const user = usePage<PageProps>().props.user
 
 	if (!user) return null
 

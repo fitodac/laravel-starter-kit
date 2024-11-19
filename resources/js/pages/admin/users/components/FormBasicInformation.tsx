@@ -1,21 +1,14 @@
 import { FormEvent } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
-import {
-	Input,
-	Button,
-	ButtonGroup,
-	Divider,
-	Switch,
-	Chip,
-} from '@nextui-org/react'
+import { Input, Button, Divider, Chip } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 import { FormProfileImage } from './FormProfileImage'
 
 import type { PageProps, InertiaResponse } from '@/types'
 
 export const FormBasicInformation = () => {
-	const { user, permission } = usePage<PageProps>().props
+	const { user } = usePage<PageProps>().props
 
 	const { data, setData, patch, processing, errors, clearErrors, isDirty } =
 		useForm({
@@ -24,8 +17,6 @@ export const FormBasicInformation = () => {
 			lastname: user.lastname,
 			username: user.username,
 			email: user.email,
-			role: user.roles ? user.roles[0].id : null,
-			status: user.status ?? 'disabled',
 			basic_information: true,
 		})
 
@@ -55,7 +46,7 @@ export const FormBasicInformation = () => {
 
 					<FormProfileImage />
 
-					<div className="flex gap-4 pt-5">
+					<div className="flex gap-4 pt-3">
 						<div className="flex items-center gap-3">
 							<span className="text-foreground-500 text-xs">{t('Role')}</span>
 							<Chip
@@ -84,7 +75,7 @@ export const FormBasicInformation = () => {
 						</div>
 					</div>
 
-					<div className="grid grid-cols-2 gap-x-6 gap-y-5">
+					<div className="grid gap-x-6 gap-y-5 lg:grid-cols-2">
 						<fieldset>
 							<label htmlFor="" className="text-sm">
 								{t('Name')}{' '}
@@ -156,65 +147,6 @@ export const FormBasicInformation = () => {
 								onValueChange={(e) => setData('email', e)}
 							/>
 						</fieldset>
-
-						{'Super Admin Access' === permission && (
-							<fieldset className="space-y-1">
-								<label className="text-small text-foreground select-none">
-									{t('Role')}
-								</label>
-								<ButtonGroup fullWidth size="sm" isDisabled={processing}>
-									<Button
-										color="primary"
-										className="text-xs"
-										onPress={() => setData('role', 3)}
-										variant={data.role === 3 ? 'solid' : 'flat'}
-									>
-										User
-									</Button>
-									<Button
-										color="primary"
-										className="text-xs"
-										onPress={() => setData('role', 2)}
-										variant={data.role === 2 ? 'solid' : 'flat'}
-									>
-										Admin
-									</Button>
-									<Button
-										color="primary"
-										className="text-xs"
-										onPress={() => setData('role', 1)}
-										variant={data.role === 1 ? 'solid' : 'flat'}
-									>
-										Super Admin
-									</Button>
-								</ButtonGroup>
-							</fieldset>
-						)}
-
-						<div className="flex flex-col gap-y-1">
-							<label className="text-small text-foreground select-none">
-								{t('User status')}
-							</label>
-
-							<Switch
-								size="sm"
-								aria-label="Remember me"
-								value={'1'}
-								isDisabled={processing}
-								isSelected={data.status === 'enabled'}
-								onValueChange={(val) => {
-									setData('status', val ? 'enabled' : 'disabled')
-									clearErrors('status')
-								}}
-								className="mx-2"
-							>
-								{t('Is the user enabled?')}
-							</Switch>
-
-							{errors.status && (
-								<span className="text-tiny text-danger">{errors.status}</span>
-							)}
-						</div>
 					</div>
 
 					<div className="pt-5 flex justify-end">

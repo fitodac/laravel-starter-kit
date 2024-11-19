@@ -108,11 +108,11 @@ export const ProfileDropdown = ({
 						)}
 
 						<DropdownItem
-							textValue={String(t('My account'))}
+							textValue={String(t('My profile'))}
 							onClick={() => router.visit(route('profile.edit'))}
 							startContent={<i className="ri-profile-line ri-lg" />}
 						>
-							{t('My account')}
+							{t('My profile')}
 						</DropdownItem>
 
 						<DropdownItem

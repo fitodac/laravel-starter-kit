@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
-use Illuminate\Support\Facades\Auth;
 use App\Providers\AdminNavbarProvider;
+use App\Data\UserData;
+use App\Data\NotificationData;
 
 
 class HandleInertiaRequests extends Middleware
@@ -35,17 +36,30 @@ class HandleInertiaRequests extends Middleware
 	{
 
 		$user = $request->user();
+
 		$role = $user ? $user->roles->first()->name : null;
 		$permissions = $user ? $user->permissions->toArray() : null;
-		$user ? $user->preferences : null;
+		$notifications = $user ? NotificationData::collect($user->unreadNotifications->toArray()) : null;
+
+		if ($user) {
+
+			$user = UserData::from(array_merge(
+				$user->toArray(),
+				[
+					'roles' => $user->getRoles(),
+					'account' => $user->getAccount()
+				]
+			));
+		}
+
 
 		return [
 			...parent::share($request),
 			'auth' => [
-				'user' => $user,
+				'user' => $user ? $user : [],
 				'permissions' => $permissions,
 				'role' => $role,
-				'preferences' => $user ? $user->preferences : null
+				'notifications' => $notifications
 			],
 			'adminNavbar' => app(AdminNavbarProvider::class)->getMenu($user, $role, $permissions),
 			'adminLayout' => config('settings.general.admin_layout'),

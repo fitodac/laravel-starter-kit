@@ -6,21 +6,23 @@ use Inertia\Inertia;
 use App\Models\User;
 use App\Models\Session;
 use Illuminate\Http\Request;
-use App\Mail\SendUserDetails;
-use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Http\Requests\Admin\CreateUserRequest;
-use Intervention\Image\Laravel\Facades\Image;
+use App\Services\UserService;
+use Inertia\Response;
 
 
 class UserController extends Controller
 {
+
+	private UserService $userService;
+
+	public function __construct(UserService $userService)
+	{
+		$this->userService = $userService;
+	}
 
 	/**
 	 * LIST
@@ -28,13 +30,12 @@ class UserController extends Controller
 	 * 
 	 * 
 	 */
-	public function index(Request $request)
+	public function index(): Response
 	{
-		$per_page = config('settings.general.per_page');
-
-		$users = User::role('User')->with('sessions')->paginate($per_page);
-		$total = User::count();
-		return Inertia::render('admin/users/UsersList', compact('users', 'total'));
+		return Inertia::render(
+			'admin/users/UsersList',
+			$this->userService->userList()
+		);
 	}
 
 	/**
@@ -43,7 +44,7 @@ class UserController extends Controller
 	 * 
 	 * 
 	 */
-	public function create()
+	public function create(): Response
 	{
 		return Inertia::render('admin/users/Create');
 	}
@@ -54,20 +55,10 @@ class UserController extends Controller
 	 * 
 	 * 
 	 */
-	public function store(CreateUserRequest $request)
+	public function store(CreateUserRequest $request): RedirectResponse
 	{
-		$user = User::create($request->validated());
+		$user = $this->userService->storeUser($request);
 
-		// Assign a role for the user
-		$role = Role::findById($request->role);
-		$user->assignRole($role);
-
-		// Send email with user details if send_details is true
-		if ($request->has('send_details') && $request->send_details) {
-			Mail::to($user->email)->send(new SendUserDetails($user, $request->password));
-		}
-
-		// Redirect to the user's profile page
 		return redirect()->route('dashboard.user.show', $user);
 	}
 
@@ -77,7 +68,7 @@ class UserController extends Controller
 	 * 
 	 * 
 	 */
-	public function show(User $user)
+	public function show(User $user): RedirectResponse
 	{
 		return redirect()->route('dashboard.user.edit', ['user' => $user]);
 	}
@@ -88,17 +79,12 @@ class UserController extends Controller
 	 * 
 	 * 
 	 */
-	public function edit(User $user)
+	public function edit(User $user): Response
 	{
-
-		$auth = Auth::user();
-		$permission = $auth->getPermissionsViaRoles()->pluck('name')->first();
-
-		$user['role'] = $user->roles->pluck('name')->first();
-
-		$sessions = $user->sessions;
-
-		return Inertia::render('admin/users/Edit', compact('user', 'sessions', 'permission'));
+		return Inertia::render(
+			'admin/users/Edit',
+			$this->userService->editUser($user)
+		);
 	}
 
 	/**
@@ -109,20 +95,9 @@ class UserController extends Controller
 	 */
 	public function update(UpdateUserRequest $request, User $user): RedirectResponse
 	{
-		$data = $request->validated();
+		$user = $this->userService->updateUser($request, $user);
 
-		// Encrypt password if it's provided
-		if (!empty($data['password'])) {
-			$data['password'] = bcrypt($data['password']);
-		}
-
-		$user->update($data);
-
-		// Assign a role for the user
-		if (!empty($data['role'])) {
-			$role = Role::findById($data['role']);
-			$user->syncRoles([$role]);
-		}
+		if (!$user) return back()->with('error', 'User not updated.');
 
 		return back()->with('success', 'User updated successfully.');
 	}
@@ -133,27 +108,9 @@ class UserController extends Controller
 	 * 
 	 * 
 	 */
-	public function update_image_profile(User $user, Request $request)
+	public function update_image_profile(User $user, Request $request): void
 	{
-		if ($request->hasFile('profile_picture')) {
-			$currentImagePath = '/public/img/users/avatars/' . $user->profile_picture;
-			if (Storage::exists($currentImagePath)) {
-				Storage::delete($currentImagePath);
-			}
-
-
-			$file = $request->file('profile_picture');
-			$filename = time() . '.webp';
-			$image = Image::read($file);
-			$image
-				->resize(256, 256)
-				->toWebp(100)
-				->save("storage/img/users/avatars/$filename");
-
-			if ($filename) {
-				$user->update(['profile_picture' => $filename]);
-			}
-		}
+		$this->userService->updateImageProfile($user, $request);
 	}
 
 	/**
@@ -162,16 +119,9 @@ class UserController extends Controller
 	 * 
 	 * 
 	 */
-	public function remove_image_profile(User $user)
+	public function remove_image_profile(User $user): RedirectResponse
 	{
-
-		$imagePath = '/public/img/users/avatars/' . $user->profile_picture;
-
-		if (Storage::exists($imagePath)) {
-			Storage::delete($imagePath);
-		}
-
-		$user->update(['profile_picture' => null]);
+		$this->userService->removeImageProfile($user);
 		return back()->with('success', 'Image removed successfully.');
 	}
 
@@ -181,7 +131,7 @@ class UserController extends Controller
 	 * 
 	 * 
 	 */
-	public function invalidate_session($id)
+	public function invalidate_session($id): RedirectResponse
 	{
 		Session::findOrFail($id)->delete();
 		return back()->with('success', 'The session was closed.');
@@ -193,9 +143,9 @@ class UserController extends Controller
 	 * 
 	 * 
 	 */
-	public function destroy(User $user)
+	public function destroy(User $user): RedirectResponse
 	{
-		$this->remove_image_profile($user);
+		$this->userService->removeImageProfile($user);
 		$user->delete();
 		return redirect()
 			->route('dashboard.users.list')

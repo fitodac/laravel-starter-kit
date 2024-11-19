@@ -26,6 +26,21 @@ return [
 	'protected_permissions' => [
 		'Super Admin Access',
 		'Admin Access',
-		'Private Access'
+		'Private Access',
+
+		'Can see users',
+		'Can create new user',
+		'Can edit user',
+		'Can see admins',
+		'Can create new admin',
+		'Can edit admin',
+		'Can impersonate',
+		'Can see roles and permissions',
+		'Can create new role',
+		'Can edit role',
+		'Can create new permission',
+		'Can edit permission',
+		'Can edit notifications',
+		'Can edit email templates',
 	],
 ];

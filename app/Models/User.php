@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Lab404\Impersonate\Models\Impersonate;
+use App\Data\AccountData;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -41,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
 		'company',
 		'bio',
 
-		// Prefferences and settings
+		// Prefferences
 		'profile_picture',
 		'status',
 	];
@@ -105,21 +106,34 @@ class User extends Authenticatable implements MustVerifyEmail
 		}
 	}
 
+	/**
+	 * Get the account associated with the user.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function account()
+	{
+		return $this->hasOne(Account::class);
+	}
 
 
 	/**
-	 * Get the user's preferences.
+	 * Get the user's roles.
 	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return array An array of the user's roles.
 	 */
-	public function preferences()
+	public function getRoles(): array
 	{
-		return $this->hasMany(UserPreference::class);
+		return $this->roles->map(fn($role) => ['id' => $role->id, 'name' => $role->name])->toArray();
 	}
 
-	public function getPreferencesAttribute()
+	/**
+	 * Get the user's account data.
+	 *
+	 * @return \App\Data\AccountData
+	 */
+	public function getAccount(): AccountData
 	{
-		$modelPreferences = $this->load('preferences')->getRelation('preferences')->pluck('value', 'key')->toArray();
-		return $modelPreferences;
+		return AccountData::from($this->account->toArray());
 	}
 }

@@ -55,9 +55,11 @@ export const UsersList = () => {
 					</>
 				),
 				name: (
-					<span className="font-medium">{`${user.name} ${user.lastname}`}</span>
+					<div className="truncate text-ellipsis max-w-28">{`${user.name} ${user.lastname}`}</div>
 				),
-				company: user.company,
+				company: (
+					<div className="truncate text-ellipsis max-w-28">{user.company}</div>
+				),
 				status: (
 					<>
 						<Chip

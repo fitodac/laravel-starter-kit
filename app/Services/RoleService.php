@@ -15,6 +15,13 @@ class RoleService
 {
 
 
+	/**
+	 * Retrieve a list of roles.
+	 * 
+	 * @param Request $request
+	 * 
+	 * @return array
+	 */
 	public function roleList(Request $request): array
 	{
 		$per_page = config('settings.general.per_page');
@@ -45,6 +52,12 @@ class RoleService
 
 
 
+	/**
+	 * Create a new role and give it the specified permissions
+	 *
+	 * @param Request $request
+	 * @return Role
+	 */
 	public function storeRole(Request $request): Role
 	{
 		$request->validate([
@@ -66,6 +79,14 @@ class RoleService
 	}
 
 
+
+	/**
+	 * Update the specified role in storage.
+	 *
+	 * @param Request $request
+	 * @param Role $role
+	 * @return Role
+	 */
 	public function updateRole(Request $request, Role $role): Role
 	{
 		$request->validate([
@@ -89,6 +110,13 @@ class RoleService
 	}
 
 
+
+	/**
+	 * Remove the specified role from storage.
+	 *
+	 * @param Role $role
+	 * @return bool
+	 */
 	public function destroyRole(Role $role): bool
 	{
 		$deletedRole = $role->delete();
@@ -100,6 +128,17 @@ class RoleService
 
 
 
+	/**
+	 * Send a notification to the users with the 'Super Admin' role for the following cases:
+	 * 
+	 *  - create: when a new role is created
+	 *  - update: when a role is updated
+	 *  - delete: when a role is deleted
+	 * 
+	 * @param string $case One of the above cases
+	 * @param Role $role The role that was created, updated or deleted
+	 * @return void
+	 */
 	protected function notifyByMail($case, Role $role)
 	{
 		$superadmin = Role::findByName('Super Admin');

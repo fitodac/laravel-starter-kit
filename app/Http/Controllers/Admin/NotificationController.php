@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\User;
 use App\Models\InAppNotification;
 use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
 
 class NotificationController extends Controller
 {
@@ -34,7 +34,7 @@ class NotificationController extends Controller
 	 * 
 	 * 
 	 */
-	public function store(Request $request)
+	public function store(Request $request): RedirectResponse
 	{
 
 		$request->validate([
@@ -68,7 +68,7 @@ class NotificationController extends Controller
 	 * 
 	 * 
 	 */
-	public function update(Request $request, InAppNotification $notification)
+	public function update(Request $request, InAppNotification $notification): RedirectResponse
 	{
 		$request->validate([
 			'body' => 'required',
@@ -87,9 +87,25 @@ class NotificationController extends Controller
 	 * 
 	 * 
 	 */
-	public function destroy(InAppNotification $notification)
+	public function destroy(InAppNotification $notification): RedirectResponse
 	{
 		$notification->delete();
 		return back()->with('success', 'Notification deleted successfully.');
+	}
+
+
+
+	// public function markAsRead(InAppNotification $notification)
+	// {
+	// 	$notification->markAsRead();
+	// 	return back()->with('success', 'Notification marked as read successfully.');
+	// }
+
+	public function markAllAsRead(): RedirectResponse
+	{
+		$user = auth()->user();
+
+		$user->unreadNotifications()->update(['read_at' => now()]);
+		return back()->with('success', 'All notifications marked as read successfully.');
 	}
 }

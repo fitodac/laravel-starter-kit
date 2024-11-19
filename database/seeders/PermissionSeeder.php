@@ -15,14 +15,13 @@ class PermissionSeeder extends Seeder
 	 */
 	public function run(): void
 	{
-		// $roleSuperAdmin = Role::get('Super Admin');
 		$roleAdmin = Role::findByName('Admin');
-		// $roleUser = Role::get('User');
 
 		$can_see_users = Permission::create(['name' => 'Can see users']);
 		$can_create_new_user = Permission::create(['name' => 'Can create new user']);
 		$can_edit_user = Permission::create(['name' => 'Can edit user']);
 
+		$can_see_admins = Permission::create(['name' => 'Can see admins']);
 		$can_create_new_admin = Permission::create(['name' => 'Can create new admin']);
 		$can_edit_admin = Permission::create(['name' => 'Can edit admin']);
 

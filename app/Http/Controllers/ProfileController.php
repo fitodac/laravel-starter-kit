@@ -54,7 +54,7 @@ class ProfileController extends Controller
 	 * 
 	 * 
 	 */
-	public function update_image(Request $request)
+	public function update_image(Request $request): void
 	{
 		$user = $request->user();
 
@@ -85,7 +85,7 @@ class ProfileController extends Controller
 	 * 
 	 * 
 	 */
-	public function remove_image(Request $request)
+	public function remove_image(Request $request): RedirectResponse
 	{
 		$user = $request->user();
 

@@ -4,12 +4,24 @@ import { PageHeader, PageContent } from '@/components'
 
 const pageTitle = String(t('Dashboard'))
 
-const Page = () => {
+type Props = {
+	total_accounts: number
+	total_users: number
+	total_admins: number
+}
+
+const Page = ({ total_accounts, total_users, total_admins }: Props) => {
 	return (
 		<>
 			<PageHeader title={pageTitle} />
 
 			<PageContent>
+				<div className="space-y-4">
+					<p>Total de cuentas creadas {total_accounts}</p>
+					<p>Total usuarios {total_users}</p>
+					<p>Total administradores {total_admins}</p>
+				</div>
+
 				{/* <div className="bg-gray-100 w-screen min-h-svh dark:bg-gray-900">
 					<div className="max-w-5xl py-20 mx-auto">
 						<div className="grid grid-cols-2 gap-x-20">

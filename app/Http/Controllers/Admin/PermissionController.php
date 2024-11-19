@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Permission;
 use App\Services\PermissionService;
@@ -25,7 +26,7 @@ class PermissionController extends Controller
 	 * 
 	 * 
 	 */
-	public function index(Request $request)
+	public function index(Request $request): Response
 	{
 		return Inertia::render(
 			'admin/permissions/Permissions',

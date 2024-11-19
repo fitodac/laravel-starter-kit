@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MediaManager;
-
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 
 class MediaManagerController extends Controller
 {
@@ -17,7 +18,7 @@ class MediaManagerController extends Controller
 	 * 
 	 * 
 	 */
-	public function index()
+	public function index(): JsonResponse
 	{
 		$manager = MediaManager::first();
 		$images = $manager->getMedia('images')->toArray();
@@ -39,7 +40,7 @@ class MediaManagerController extends Controller
 	 * 
 	 * 
 	 */
-	public function store(Request $request)
+	public function store(Request $request): void
 	{
 		$files = $request->file('files');
 		$manager = MediaManager::first();
@@ -56,7 +57,7 @@ class MediaManagerController extends Controller
 	}
 
 	// Create an "update" function to update media files in the 'images' collection.
-	public function update(Request $request, $id)
+	public function update(Request $request, $id): JsonResponse
 	{
 		$manager = MediaManager::first();
 		$media = $manager->getMedia('images')->find($id);
@@ -81,7 +82,7 @@ class MediaManagerController extends Controller
 	 * 
 	 * 
 	 */
-	public function destroy($id)
+	public function destroy($id): JsonResponse
 	{
 		$manager = MediaManager::first();
 		$media = $manager->getMedia('images')->find($id);

@@ -8,9 +8,11 @@ export const useColorMode = () => {
 
 	if (!auth) return { colorMode }
 
-	const { user, preferences } = auth
+	const { user } = auth ?? []
 
-	const mode = user ? preferences.colorMode ?? 'light' : colorMode
+	const mode = Array.isArray(user)
+		? (user.account && user.account.colorMode) ?? 'light'
+		: colorMode
 
 	useEffect(() => {
 		document.querySelector('html')?.classList.add(mode)

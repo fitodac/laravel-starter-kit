@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Demo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 use App\Models\demo\Product;
 
 class TablesController extends Controller
@@ -16,7 +17,7 @@ class TablesController extends Controller
 	 * 
 	 * 
 	 */
-	public function index(Request $request)
+	public function index(Request $request): Response
 	{
 		$per_page = config('settings.general.per_page');
 

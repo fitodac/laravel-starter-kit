@@ -13,7 +13,7 @@ export const PageHeader = ({ title, children, classNames }: Props) => {
 	return (
 		<div
 			className={cn(
-				'bg-white w-full py-7',
+				'bg-white w-full px-6 py-7',
 				'flex justify-center',
 				'md:px-10 md:py-12 xl:gap-20',
 				'dark:bg-black',

@@ -37,6 +37,9 @@ class UpdateUserRequest extends FormRequest
 			$rules['lastname'] = 'required|string|max:255';
 			$rules['username'] = 'required|string|max:255|unique:users,username,' . $this->user->id;
 			$rules['email'] = 'required|email|lowercase|unique:users,email,' . $this->user->id;
+		}
+
+		if ($this->has('role_status')) {
 			$rules['status'] = 'required|in:enabled,disabled';
 			$rules['role'] = 'required|integer|exists:roles,id';
 		}
