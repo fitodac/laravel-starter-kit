@@ -39,7 +39,13 @@ class HandleInertiaRequests extends Middleware
 
 		$role = $user ? $user->roles->first()->name : null;
 		$permissions = $user ? $user->permissions->toArray() : null;
-		$notifications = $user ? NotificationData::collect($user->unreadNotifications->toArray()) : null;
+
+		$new_notifications_count = config('settings.general.new_notifications_count');
+		$notifications = $user ? NotificationData::collect(
+			$user->unreadNotifications()
+				->take($new_notifications_count)
+				->get()->toArray()
+		) : null;
 
 		if ($user) {
 

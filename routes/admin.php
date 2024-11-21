@@ -5,8 +5,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\NotificationTemplateController;
+use App\Http\Controllers\Admin\EmailTemplateController;
 
 
 Route::get('dashboard', [DashboardController::class, 'index'])
@@ -132,18 +133,22 @@ Route::middleware(['auth', 'verified'])
 
 
 		/**
-		 * Notifications
+		 * Notification templates
 		 * 
 		 * 
 		 * 
 		 */
-		Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.list');
-		Route::post('/notifications', [NotificationController::class, 'store'])->name('notification.store');
-		Route::match(['put', 'patch'], 'notifications/{notification}', [NotificationController::class, 'update'])->name('notification.update');
-		Route::delete('notifications/{notification}', [NotificationController::class, 'destroy'])->name('notification.destroy');
-
-		Route::post('/notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notification.markAsRead');
-		Route::post('/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notification.markAllAsRead');
+		Route::get('/notification-templates', [NotificationTemplateController::class, 'index'])->name('notificationTemplates.index');
+		Route::match(['put', 'patch'], 'notification-templates/{template}', [NotificationTemplateController::class, 'update'])->name('notificationTemplates.update');
+		Route::delete('notification-templates/{template}', [NotificationTemplateController::class, 'destroy'])->name('notificationTemplates.destroy');
+		
+		/**
+		 * Email templates
+		 * 
+		 * 
+		 * 
+		 */
+		Route::get('/email-templates', [EmailTemplateController::class, 'index'])->name('emailTemplates.index');
 	});
 
 

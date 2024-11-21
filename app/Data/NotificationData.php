@@ -11,5 +11,6 @@ class NotificationData extends Data
 		public string $id,
 		public ?string $read_at,
 		public array $data,
+		public string $created_at,
 	) {}
 }

@@ -283,15 +283,20 @@ class AdminNavbarProvider extends ServiceProvider
 
 			$menu[] = $item;
 
-			// Notifications
+			// Templates
 			$item = [
-				'key' => 'notifications',
-				'title' => 'Notifications',
+				'key' => 'templates',
+				'title' => 'Templates',
 				'menu' => [
 					[
-						'label' => 'In App Notifications',
-						'route' => 'dashboard.notification.list',
+						'label' => 'Notifications',
+						'route' => 'dashboard.notificationTemplates.index',
 						'icon' => 'ri-notification-badge-fill'
+					],
+					[
+						'label' => 'Emails',
+						'route' => 'dashboard.emailTemplates.index',
+						'icon' => 'ri-mail-open-fill'
 					]
 				],
 			];

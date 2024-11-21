@@ -1,3 +1,2 @@
-export * from './NotificationsList'
-export * from './CreateEditForm'
-export * from './DeleteNotification'
+export * from './TemplatesList'
+export * from './EditForm'

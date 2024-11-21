@@ -3,15 +3,14 @@ import type { Dispatch } from 'react'
 export type NotificationContextProps = {
 	state: State
 	dispatch: Dispatch<any>
-	isOpen: boolean
-	onOpen: () => void
-	onOpenChange: () => void
 }
 
 export type Notification = {
 	id: number
-	title: string
-	body: string
+	data: {
+		title: string
+		content: string
+	}
 	used_dates: any[]
 	created_at: string
 	updated_at: string
@@ -35,4 +34,12 @@ export type NotificationsTable = {
 		label: string
 		active: boolean
 	}[]
+}
+
+export type NotificationTemplateContextProps = {
+	state: State
+	dispatch: Dispatch<any>
+	isOpen: boolean
+	onOpen: () => void
+	onOpenChange: () => void
 }

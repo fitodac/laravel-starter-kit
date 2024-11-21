@@ -11,19 +11,17 @@ export const useActions = () => {
 		NotificationContext
 	) as NotificationContextProps
 
-	const { data, post, patch, errors, setData, processing, clearErrors, reset } =
+	const { data, patch, errors, setData, processing, clearErrors, reset } =
 		useForm({
 			title: '',
-			body: '',
-			used_dates: [],
+			content: '',
 		})
 
 	useEffect(() => {
-		if (state.selectedNotification)
-			setData({
-				...state.selectedNotification,
-				used_dates: state.selectedNotification.used_dates as never[],
-			})
+		if (state.selectedNotification) {
+			const { title, content } = state.selectedNotification
+			setData({ title, content })
+		}
 	}, [state.selectedNotification])
 
 	/**
@@ -40,24 +38,11 @@ export const useActions = () => {
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
 
-		if (state.selectedNotification) {
-			patch(
-				route('dashboard.notification.update', {
-					notification: state.selectedNotification,
-				}),
-				{
-					preserveScroll: true,
-					onSuccess: () => {
-						dispatch({ type: 'closeDrawer' })
-						reset()
-						dispatch({ type: 'setSelectedNotification', payload: null })
-						router.reload({ only: ['notifications'] })
-					},
-					onError: (errors) => console.log('error', errors),
-				}
-			)
-		} else {
-			post(route('dashboard.notification.store'), {
+		patch(
+			route('dashboard.notificationTemplates.update', {
+				template: state.selectedNotification,
+			}),
+			{
 				preserveScroll: true,
 				// @ts-ignore
 				onSuccess: (resp: InertiaResponse) => {
@@ -65,19 +50,14 @@ export const useActions = () => {
 						toast.success(t(resp.props.flash.success))
 					}
 
-					dispatch({
-						type: 'setSelectedNotification',
-						payload: resp.props.notifications.data.at(0),
-					})
-
 					dispatch({ type: 'closeDrawer' })
 					reset()
-
-					router.reload({ only: ['notifications'] })
+					dispatch({ type: 'setSelectedNotification', payload: null })
+					router.reload({ only: ['templates'] })
 				},
 				onError: (errors) => console.log('error', errors),
-			})
-		}
+			}
+		)
 	}
 
 	const inputName = useRef<HTMLInputElement>(null)
@@ -90,7 +70,6 @@ export const useActions = () => {
 
 	return {
 		data,
-		post,
 		patch,
 		errors,
 		setData,

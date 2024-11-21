@@ -6,6 +6,7 @@ use App\Http\Controllers\MediaManagerController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', function () {
 	return Inertia::render('Welcome', [
@@ -44,6 +45,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('media', [MediaManagerController::class, 'index'])->name('media.list');
 	Route::patch('media/{id}', [MediaManagerController::class, 'update'])->name('media.update');
 	Route::delete('media/{id}', [MediaManagerController::class, 'destroy'])->name('media.delete');
+
+
+	/**
+	 * Notifications
+	 * 
+	 * 
+	 * 
+	 */
+	Route::get('notifications', [NotificationController::class, 'index'])->name('notification.index');
+	Route::post('notification-templates/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notification.markAsRead');
+	Route::post('notification-templates/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notification.markAllAsRead');
 });
 
 

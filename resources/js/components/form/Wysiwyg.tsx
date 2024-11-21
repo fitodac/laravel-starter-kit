@@ -1,4 +1,4 @@
-import { EditorContent, useEditor } from '@tiptap/react'
+import { EditorContent, useEditor, type JSONContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import CharacterCount from '@tiptap/extension-character-count'
 import DragHandle from '@tiptap-pro/extension-drag-handle-react'
@@ -18,7 +18,8 @@ interface Props {
 	colorSelector?: boolean
 	minHeight?: number
 	placeholder?: string
-	initialContent?: string
+	initialContent?: string | JSONContent | JSONContent[] | null
+	onUpdate: (val: any) => void
 }
 
 export const Wysiwyg = ({
@@ -32,6 +33,7 @@ export const Wysiwyg = ({
 	minHeight = 170,
 	placeholder = '',
 	initialContent = '',
+	onUpdate,
 }: Props) => {
 	const editor = useEditor({
 		extensions: [
@@ -46,6 +48,7 @@ export const Wysiwyg = ({
 			Placeholder.configure({ placeholder }),
 		],
 		content: initialContent,
+		onUpdate: ({ editor }) => onUpdate(editor.getHTML()),
 	})
 
 	if (!editor) return null
@@ -64,6 +67,8 @@ export const Wysiwyg = ({
 					<div className="flex h-10">
 						<Button
 							isIconOnly
+							size="sm"
+							radius="lg"
 							variant="light"
 							onClick={() => editor.chain().focus().toggleBold().run()}
 							color={editor.isActive('bold') ? 'primary' : 'default'}
@@ -73,6 +78,8 @@ export const Wysiwyg = ({
 
 						<Button
 							isIconOnly
+							size="sm"
+							radius="lg"
 							variant="light"
 							onClick={() => editor.chain().focus().toggleItalic().run()}
 							color={editor.isActive('italic') ? 'primary' : 'default'}
@@ -82,6 +89,8 @@ export const Wysiwyg = ({
 
 						<Button
 							isIconOnly
+							size="sm"
+							radius="lg"
 							variant="light"
 							onClick={() => editor.chain().focus().toggleStrike().run()}
 							color={editor.isActive('strike') ? 'primary' : 'default'}
@@ -93,6 +102,8 @@ export const Wysiwyg = ({
 							<>
 								<Button
 									isIconOnly
+									size="sm"
+									radius="lg"
 									variant="light"
 									onClick={() =>
 										editor.chain().focus().toggleHeading({ level: 2 }).run()
@@ -108,6 +119,8 @@ export const Wysiwyg = ({
 
 								<Button
 									isIconOnly
+									size="sm"
+									radius="lg"
 									variant="light"
 									onClick={() =>
 										editor.chain().focus().toggleHeading({ level: 3 }).run()
@@ -123,6 +136,8 @@ export const Wysiwyg = ({
 
 								<Button
 									isIconOnly
+									size="sm"
+									radius="lg"
 									variant="light"
 									onClick={() =>
 										editor.chain().focus().toggleHeading({ level: 4 }).run()
@@ -153,6 +168,8 @@ export const Wysiwyg = ({
 						{blockquote && (
 							<Button
 								isIconOnly
+								size="sm"
+								radius="lg"
 								variant="light"
 								onClick={() => editor.chain().focus().toggleBlockquote().run()}
 								color={editor.isActive('blockquote') ? 'primary' : 'default'}
@@ -167,6 +184,8 @@ export const Wysiwyg = ({
 
 								<Button
 									isIconOnly
+									size="sm"
+									radius="lg"
 									variant="light"
 									onClick={() => editor.chain().focus().toggleCode().run()}
 									color={editor.isActive('code') ? 'primary' : 'default'}
@@ -176,6 +195,8 @@ export const Wysiwyg = ({
 
 								<Button
 									isIconOnly
+									size="sm"
+									radius="lg"
 									variant="light"
 									onClick={() => editor.chain().focus().toggleCodeBlock().run()}
 									color={editor.isActive('codeBlock') ? 'primary' : 'default'}
@@ -191,6 +212,8 @@ export const Wysiwyg = ({
 
 								<Button
 									isIconOnly
+									size="sm"
+									radius="lg"
 									variant="light"
 									onClick={() =>
 										editor.chain().focus().setHorizontalRule().run()
@@ -210,6 +233,8 @@ export const Wysiwyg = ({
 
 								<Button
 									isIconOnly
+									size="sm"
+									radius="lg"
 									variant="light"
 									onClick={() =>
 										editor.chain().focus().toggleBulletList().run()
@@ -221,6 +246,8 @@ export const Wysiwyg = ({
 
 								<Button
 									isIconOnly
+									size="sm"
+									radius="lg"
 									variant="light"
 									onClick={() =>
 										editor.chain().focus().toggleOrderedList().run()
@@ -238,6 +265,8 @@ export const Wysiwyg = ({
 
 								<Button
 									isIconOnly
+									size="sm"
+									radius="lg"
 									variant="light"
 									onClick={() =>
 										editor.chain().focus().setColor('#958DF1').run()
@@ -275,7 +304,7 @@ export const Wysiwyg = ({
 
 				<EditorContent
 					editor={editor}
-					className="pt-0 pb-6 flex flex-col"
+					className="text-sm pt-0 pb-6 flex flex-col"
 					style={{ minHeight: minHeight + 'px' }}
 				/>
 			</div>

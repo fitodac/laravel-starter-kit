@@ -11,6 +11,8 @@ use Database\Seeders\RoleSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\MediaManagerSeeder;
+use Database\Seeders\NotificationTemplateSeeder;
+use Database\Seeders\EmailTemplateSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +29,8 @@ class DatabaseSeeder extends Seeder
 			UsersSeeder::class,
 			ProductsSeeder::class,
 			MediaManagerSeeder::class,
+			NotificationTemplateSeeder::class,
+			EmailTemplateSeeder::class
 		]);
 	}
 }

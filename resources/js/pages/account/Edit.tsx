@@ -1,7 +1,7 @@
 import { Layout } from '@/layouts/admin/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { FormPreferences, FormNotifications } from './components'
+import { FormPreferences } from './components'
 import { MustVerifyEmail } from '../profile/components'
 import { Tabs, Tab } from '@nextui-org/react'
 
@@ -40,10 +40,6 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: Props) => {
 					>
 						<Tab key="preferences" title="Preferences">
 							<FormPreferences />
-						</Tab>
-
-						<Tab key="notifications" title="Notifications">
-							<FormNotifications />
 						</Tab>
 					</Tabs>
 				</div>

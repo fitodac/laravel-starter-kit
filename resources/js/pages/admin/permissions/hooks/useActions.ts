@@ -54,10 +54,7 @@ export const useActions = () => {
 						toast.success(t(resp.props.flash.success))
 					}
 
-					dispatch({
-						type: 'setSelectedPermission',
-						payload: resp.props.permissions.data.at(0),
-					})
+					dispatch({ type: 'setSelectedPermission', payload: null })
 
 					dispatch({ type: 'closeDrawer' })
 					reset()

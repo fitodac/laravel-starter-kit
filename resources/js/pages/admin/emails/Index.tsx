@@ -3,7 +3,7 @@ import { Layout } from '@/layouts/admin/Layout'
 import { PageHeader, PageContent } from '@/components'
 import { Button } from '@nextui-org/react'
 import { t } from '@/i18n'
-import { NotificationsList, CreateEditForm } from './components'
+import { TemplatesList, CreateEditForm } from './components'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import {
@@ -13,7 +13,7 @@ import {
 
 import { NotificationContextProps } from '@/types/notifications'
 
-const pageTitle = String(t('Notifications'))
+const pageTitle = String(t('Email templates'))
 
 const Page = () => {
 	const { state, dispatch } = useContext(
@@ -22,25 +22,10 @@ const Page = () => {
 
 	return (
 		<>
-			<PageHeader title={pageTitle}>
-				<div className="flex justify-end">
-					<Button
-						size="sm"
-						color="primary"
-						className="px-6"
-						variant="flat"
-						onPress={() => {
-							dispatch({ type: 'setSelectedNotification', payload: null })
-							dispatch({ type: 'openDrawer' })
-						}}
-					>
-						{t('New notification')}
-					</Button>
-				</div>
-			</PageHeader>
+			<PageHeader title={pageTitle} />
 
 			<PageContent>
-				<NotificationsList />
+				<TemplatesList />
 			</PageContent>
 
 			<div className="h-20" />

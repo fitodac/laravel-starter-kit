@@ -1,5 +1,4 @@
 import { usePage } from '@inertiajs/react'
-import { PageProps } from '@/types'
 import { useEffect } from 'react'
 import {
 	Dropdown,
@@ -9,6 +8,10 @@ import {
 	Button,
 } from '@nextui-org/react'
 import ReactSafelySetInnerHTML from 'react-safely-set-inner-html'
+import { t } from '@/i18n'
+import { router } from '@inertiajs/react'
+
+import type { PageProps } from '@/types'
 
 export const TopbarNotifications = () => {
 	const { props } = usePage<PageProps>()
@@ -16,7 +19,17 @@ export const TopbarNotifications = () => {
 		auth: { user, notifications },
 	} = props
 
-	if (!user) return null
+	if (!user || !notifications) return null
+
+	useEffect(() => {
+		const index = notifications.findIndex((n) => n.id === 'mark-all-as-read')
+
+		if (notifications && notifications.length && index === -1) {
+			notifications.push({ id: 'mark-all-as-read' })
+		}
+	}, [notifications])
+
+	if (!notifications.length) return <TriggerButton />
 
 	useEffect(() => {
 		// window.Echo.private(`App.Models.User.${user.id}`).notification(
@@ -28,12 +41,6 @@ export const TopbarNotifications = () => {
 		// 	window.Echo.leaveChannel(`App.Models.User.${user.id}`)
 		// }
 	}, [])
-
-	useEffect(() => {
-		// console.log('Notifications: ', notifications)
-	}, [notifications])
-
-	if (!notifications.length) return <TriggerButton />
 
 	return (
 		<>
@@ -57,21 +64,27 @@ export const TopbarNotifications = () => {
 					variant="light"
 					className="min-w-72"
 				>
-					{notifications.length > 0 ? (
-						notifications.map((notification) => (
+					{notifications.map((notification, idx) =>
+						idx === notifications.length - 1 ? (
+							<DropdownItem
+								key={notification.id}
+								as={Button}
+								color="primary"
+								variant="flat"
+								className="mt-3"
+							>
+								{t('Mark all as read')}
+							</DropdownItem>
+						) : (
 							<DropdownItem
 								key={notification.id}
 								textValue={String(notification.data.title)}
-								// onClick={() =>
-								// 	router.post(
-								// 		route('dashboard.notification.markAsRead', { notification })
-								// 	)
-								// }
 								description={
 									<ReactSafelySetInnerHTML>
 										{notification.data.content}
 									</ReactSafelySetInnerHTML>
 								}
+								onPress={() => router.visit(route('notification.index'))}
 							>
 								<div className="text-xs font-medium">
 									<ReactSafelySetInnerHTML>
@@ -79,9 +92,7 @@ export const TopbarNotifications = () => {
 									</ReactSafelySetInnerHTML>
 								</div>
 							</DropdownItem>
-						))
-					) : (
-						<></>
+						)
 					)}
 				</DropdownMenu>
 			</Dropdown>

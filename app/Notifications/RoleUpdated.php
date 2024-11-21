@@ -55,6 +55,7 @@ class RoleUpdated extends Notification
 		return [
 			'title' => 'Role updated',
 			'content' => 'The role <strong>' . $this->role->name . '</strong> has been updated.'
+			// 'content' => str_replace('[role.name]', $this->role->name, 'The role <strong>[role.name]</strong> has been updated.')
 		];
 	}
 }

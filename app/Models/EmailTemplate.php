@@ -5,13 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InAppNotification extends Model
+class EmailTemplate extends Model
 {
 	use HasFactory;
 
 	protected $fillable = [
-		'title',
+		'name',
+		'subject',
 		'body',
-		'used_dates'
+		'view',
+		'type'
+	];
+
+	public $casts = [
+		'body' => 'json'
 	];
 }

@@ -91,7 +91,7 @@ class UserService
 	 * @param User $user
 	 * @return User
 	 */
-	public function updateUser(UpdateUserRequest $request): User
+	public function updateUser(UpdateUserRequest $request, User $user): User
 	{
 		$data = $request->validated();
 
@@ -99,8 +99,6 @@ class UserService
 		if (!empty($data['password'])) {
 			$data['password'] = bcrypt($data['password']);
 		}
-
-		$user = $request->user();
 
 		$user->update($data);
 

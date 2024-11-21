@@ -29,7 +29,14 @@ export const NotificationsList = () => {
 
 	const { links, current_page, data } = notifications as NotificationsTable
 
-	const { state, onOpen, dispatch } = useContext(
+	if (!data.length)
+		return (
+			<div className="text-foreground-400 text-center py-10 flex-1">
+				{t('There are no notifications')}
+			</div>
+		)
+
+	const { state, dispatch } = useContext(
 		NotificationContext
 	) as NotificationContextProps
 
@@ -55,6 +62,7 @@ export const NotificationsList = () => {
 					dispatch({ type: 'setListLoading', payload: true })
 				}}
 				sortDescriptor={state.sortDescriptor}
+				hideHeader
 			>
 				<TableHeader columns={columns}>
 					{(column) => (
@@ -82,7 +90,7 @@ export const NotificationsList = () => {
 							{(key) => (
 								<TableCell>
 									{NotificationsListCell({
-										...{ item, key: String(key), dispatch, onOpen },
+										...{ item, key: String(key), dispatch },
 									})}
 								</TableCell>
 							)}
@@ -96,13 +104,7 @@ export const NotificationsList = () => {
 	)
 }
 
-const columns = [
-	{ key: 'id', label: '#', allowsSorting: true },
-	{ key: 'title', label: t('title'), allowsSorting: true },
-	{ key: 'body', label: t('Body'), width: 500 },
-	{ key: 'created_at', label: t('Date'), allowsSorting: true },
-	{ key: 'actions', label: t('Actions') },
-] as {
+const columns = [{ key: 'notification', label: '', allowsSorting: true }] as {
 	key: string
 	label: string
 	allowsSorting?: boolean

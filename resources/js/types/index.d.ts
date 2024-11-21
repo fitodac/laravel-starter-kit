@@ -103,6 +103,6 @@ export type Sessions = {
 
 export type Notification = {
 	id: string
-	read_at: string
-	data: any
+	read_at?: string
+	data?: any
 }

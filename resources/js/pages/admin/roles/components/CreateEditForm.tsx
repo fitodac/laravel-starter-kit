@@ -14,7 +14,7 @@ import { useActions } from '../hooks/useActions'
 import { usePage } from '@inertiajs/react'
 
 import type { PageProps } from '@/types'
-import type { RoleContextProps, WebPermissions } from '@/types/roles'
+import type { RoleContextProps } from '@/types/roles'
 import { Permission } from '@/types/permissions'
 
 export const CreateEditForm = () => {

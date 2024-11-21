@@ -5,6 +5,7 @@ import {
 	DropdownTrigger,
 	DropdownMenu,
 	DropdownItem,
+	cn,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
 
@@ -29,7 +30,21 @@ export const PermissionsListCell = ({
 
 	switch (key) {
 		case 'name':
-			return <span className="font-medium">{item.name}</span>
+			return (
+				<>
+					<span
+						className={cn(
+							'font-medium',
+							protected_permissions.includes(item.name) && 'opacity-50'
+						)}
+					>
+						{item.name}
+					</span>
+					{protected_permissions.includes(item.name) && (
+						<small className="text-xs text-danger pl-1">{t('Protected')}</small>
+					)}
+				</>
+			)
 		case 'actions':
 			return !protected_permissions.includes(item.name) ? (
 				<div className="flex justify-end">

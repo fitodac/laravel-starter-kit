@@ -10,6 +10,8 @@ return [
 
 	// Determine if the super admin should be notified when a new user registers.
 	'new_user_superadmin_notification' => env('VITE_NEW_USER_SUPERADMIN_NOTIFICATION', true),
+	// Determine how many notifications to show in the dropdown menu.
+	'new_notifications_count' => env('VITE_NEW_NOTIFICATIONS_COUNT', 5),
 
 	// Determine if the site is in light or dark mode.
 	'color_mode' => env('VITE_COLOR_MODE', 'light'),
