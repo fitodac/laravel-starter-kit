@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Data\EmailTemplateData;
+use App\Http\Requests\Admin\UpdateEmailTemplateRequest;
 
 class EmailTemplateController extends Controller
 {
@@ -30,50 +31,25 @@ class EmailTemplateController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * EDIT
+	 * 
+	 * 
+	 * 
 	 */
-	public function create()
+	public function edit(EmailTemplate $template)
 	{
-		//
+		return Inertia::render('admin/emails/Edit', compact('template'));
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * UPDATE
+	 * 
+	 * 
+	 * 
 	 */
-	public function store(Request $request)
+	public function update(UpdateEmailTemplateRequest $request, EmailTemplate $template)
 	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 */
-	public function show(EmailTemplate $emailTemplate)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 */
-	public function edit(EmailTemplate $emailTemplate)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 */
-	public function update(Request $request, EmailTemplate $emailTemplate)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 */
-	public function destroy(EmailTemplate $emailTemplate)
-	{
-		//
+		$template->update($request->all());
+		return redirect()->route('admin.emailTemplates.index')->with('success', 'Email template updated successfully');
 	}
 }

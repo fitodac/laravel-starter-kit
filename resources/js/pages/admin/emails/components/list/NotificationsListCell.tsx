@@ -1,28 +1,15 @@
-import { type Dispatch } from 'react'
-import {
-	Button,
-	Dropdown,
-	DropdownTrigger,
-	DropdownMenu,
-	DropdownItem,
-} from '@nextui-org/react'
+import { Button } from '@nextui-org/react'
 import { t } from '@/i18n'
+import { Link } from '@inertiajs/react'
 
 import type { EmailTemplate } from '@/types/notification-templates.d'
 
 interface Props {
 	item: EmailTemplate
 	key: string
-	dispatch: Dispatch<any>
-	onOpen: () => void
 }
 
-export const NotificationsListCell = ({
-	item,
-	key,
-	dispatch,
-	onOpen,
-}: Props) => {
+export const NotificationsListCell = ({ item, key }: Props) => {
 	switch (key) {
 		case 'id':
 			return item.id
@@ -34,11 +21,9 @@ export const NotificationsListCell = ({
 					<Button
 						color="primary"
 						size="sm"
+						as={Link}
 						variant="flat"
-						onPress={() => {
-							dispatch({ type: 'setSelectedNotification', payload: item })
-							dispatch({ type: 'openDrawer' })
-						}}
+						href={route('admin.emailTemplates.edit', { template: item })}
 					>
 						{t('Edit')}
 					</Button>

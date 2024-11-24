@@ -76,7 +76,7 @@ class PermissionController extends Controller
 	 * 
 	 * 
 	 */
-	public function destroy(Permission $permission): RedirectResponse
+	public function destroy(Request $request, Permission $permission): RedirectResponse
 	{
 		$permission = $this->permissionService->destroyPermission($permission);
 

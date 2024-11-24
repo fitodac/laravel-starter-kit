@@ -37,7 +37,7 @@ export type EmailTemplate = {
 	id: number
 	name: string
 	subject: string
-	body: string[]
+	body: string
 	type: string
 }
 

@@ -1,30 +1,20 @@
-import { FormEvent, useEffect, useRef, useContext } from 'react'
-import { useForm, router } from '@inertiajs/react'
-import { NotificationContext } from '../providers/NotificationProvider'
+import { FormEvent, useRef } from 'react'
+import { useForm, router, usePage } from '@inertiajs/react'
 import { toast } from 'react-toastify'
 import { t } from '@/i18n'
 
-import type { NotificationContextProps } from '@/types/notifications'
+import type { EmailTemplate } from '@/types/notification-templates'
 
 export const useActions = () => {
-	const { state, dispatch } = useContext(
-		NotificationContext
-	) as NotificationContextProps
+	const props = usePage().props
+	const template = props.template as EmailTemplate
+	const { body, subject } = template
 
-	const { data, post, patch, errors, setData, processing, clearErrors, reset } =
+	const { data, post, patch, errors, setData, processing, clearErrors } =
 		useForm({
-			title: '',
-			body: '',
-			used_dates: [],
+			subject: subject ?? '',
+			body: body ?? '',
 		})
-
-	useEffect(() => {
-		if (state.selectedNotification)
-			setData({
-				...state.selectedNotification,
-				used_dates: state.selectedNotification.used_dates as never[],
-			})
-	}, [state.selectedNotification])
 
 	/**
 	 * Submits the form data to the server.
@@ -40,53 +30,19 @@ export const useActions = () => {
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
 
-		if (state.selectedNotification) {
-			patch(
-				route('dashboard.notification.update', {
-					notification: state.selectedNotification,
-				}),
-				{
-					preserveScroll: true,
-					onSuccess: () => {
-						dispatch({ type: 'closeDrawer' })
-						reset()
-						dispatch({ type: 'setSelectedNotification', payload: null })
-						router.reload({ only: ['notifications'] })
-					},
-					onError: (errors) => console.log('error', errors),
+		patch(route('admin.emailTemplates.update', { template }), {
+			preserveScroll: true,
+			// @ts-ignore
+			onSuccess: (resp: InertiaResponse) => {
+				if (resp.props.flash && resp.props.flash.success) {
+					toast.success(t(resp.props.flash.success))
 				}
-			)
-		} else {
-			post(route('dashboard.notification.store'), {
-				preserveScroll: true,
-				// @ts-ignore
-				onSuccess: (resp: InertiaResponse) => {
-					if (resp.props.flash && resp.props.flash.success) {
-						toast.success(t(resp.props.flash.success))
-					}
-
-					dispatch({
-						type: 'setSelectedNotification',
-						payload: resp.props.notifications.data.at(0),
-					})
-
-					dispatch({ type: 'closeDrawer' })
-					reset()
-
-					router.reload({ only: ['notifications'] })
-				},
-				onError: (errors) => console.log('error', errors),
-			})
-		}
+			},
+			onError: (errors) => console.log('error', errors),
+		})
 	}
 
 	const inputName = useRef<HTMLInputElement>(null)
-
-	useEffect(() => {
-		setTimeout(() => {
-			inputName.current?.focus()
-		}, 300)
-	}, [state.drawerOpen])
 
 	return {
 		data,
@@ -96,7 +52,6 @@ export const useActions = () => {
 		setData,
 		processing,
 		clearErrors,
-		reset,
 		inputName,
 		submit,
 	}

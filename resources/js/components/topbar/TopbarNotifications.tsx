@@ -10,6 +10,7 @@ import {
 import ReactSafelySetInnerHTML from 'react-safely-set-inner-html'
 import { t } from '@/i18n'
 import { router } from '@inertiajs/react'
+import { alowedTags } from '@/helpers/safelySetInnerHtmlAllowedTags'
 
 import type { PageProps } from '@/types'
 
@@ -18,6 +19,21 @@ export const TopbarNotifications = () => {
 	const {
 		auth: { user, notifications },
 	} = props
+
+	// Laravel  Echo
+	useEffect(() => {
+		user &&
+			window.Echo.private(`App.Models.User.${user.id}`).notification(
+				(notification: any) => {
+					console.log('Notification test')
+					console.log('Notification: ', notification)
+				}
+			)
+
+		// return () => {
+		// 	window.Echo.leaveChannel(`App.Models.User.${user.id}`)
+		// }
+	}, [user])
 
 	if (!user || !notifications) return null
 
@@ -31,27 +47,9 @@ export const TopbarNotifications = () => {
 
 	if (!notifications.length) return <TriggerButton />
 
-	useEffect(() => {
-		// window.Echo.private(`App.Models.User.${user.id}`).notification(
-		// 	(notification: any) => {
-		// 		console.log('Notification: ', notification)
-		// 	}
-		// )
-		// return () => {
-		// 	window.Echo.leaveChannel(`App.Models.User.${user.id}`)
-		// }
-	}, [])
-
 	return (
 		<>
-			<Dropdown
-				radius="none"
-				placement="bottom-end"
-				// onOpenChange={() => {
-				// notifications.length &&
-				// 	router.post(route('dashboard.notification.markAllAsRead'))
-				// }}
-			>
+			<Dropdown radius="none" placement="bottom-end">
 				<DropdownTrigger className="cursor-pointer select-none">
 					<div>
 						<TriggerButton {...{ notifications }} />
@@ -60,9 +58,8 @@ export const TopbarNotifications = () => {
 
 				<DropdownMenu
 					aria-label="Profile dropdown"
-					// color="primary"
 					variant="light"
-					className="min-w-72"
+					classNames={{ base: 'w-96' }}
 				>
 					{notifications.map((notification, idx) =>
 						idx === notifications.length - 1 ? (
@@ -70,8 +67,10 @@ export const TopbarNotifications = () => {
 								key={notification.id}
 								as={Button}
 								color="primary"
-								variant="flat"
 								className="mt-3"
+								onPress={() => {
+									router.post(route('notification.markAllAsRead'))
+								}}
 							>
 								{t('Mark all as read')}
 							</DropdownItem>
@@ -80,8 +79,8 @@ export const TopbarNotifications = () => {
 								key={notification.id}
 								textValue={String(notification.data.title)}
 								description={
-									<ReactSafelySetInnerHTML>
-										{notification.data.content}
+									<ReactSafelySetInnerHTML allowedTags={alowedTags}>
+										{`<div class="[&>*]:truncate [&>*:not(:first-child)]:hidden">${notification.data.content}</div>`}
 									</ReactSafelySetInnerHTML>
 								}
 								onPress={() => router.visit(route('notification.index'))}

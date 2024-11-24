@@ -295,7 +295,7 @@ class AdminNavbarProvider extends ServiceProvider
 					],
 					[
 						'label' => 'Emails',
-						'route' => 'dashboard.emailTemplates.index',
+						'route' => 'admin.emailTemplates.index',
 						'icon' => 'ri-mail-open-fill'
 					]
 				],

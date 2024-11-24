@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Input, Button, Divider, Spinner, cn } from '@nextui-org/react'
+import { Input, Button, Divider, Spinner, Snippet, cn } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { NotificationContext } from '../providers/NotificationProvider'
 import { useActions } from '../hooks/useActions'
@@ -12,6 +12,8 @@ export const EditForm = () => {
 		NotificationContext
 	) as NotificationTemplateContextProps
 
+	// if (!state.selectedNotification) return null
+
 	const {
 		data,
 		errors,
@@ -22,6 +24,8 @@ export const EditForm = () => {
 		inputName,
 		submit,
 	} = useActions()
+
+	const { shortcodes } = state.selectedNotification ?? {}
 
 	return (
 		<div
@@ -66,16 +70,6 @@ export const EditForm = () => {
 									<i className="ri-circle-fill text-danger text-[6px] relative -top-2" />
 								</label>
 
-								{/* <Textarea
-							isRequired
-							variant="faded"
-							value={data.content}
-							errorMessage={errors.content}
-							isInvalid={errors.content ? true : false}
-							onValueChange={(val) => setData('content', val)}
-							isDisabled={processing}
-						/> */}
-
 								<div className="flex-1 max-w-xl space-y-14">
 									<Wysiwyg
 										{...{
@@ -113,6 +107,37 @@ export const EditForm = () => {
 								{t('Save')}
 							</Button>
 						</div>
+
+						{shortcodes && (
+							<div>
+								<h4 className="text-sm font-semibold">{t('Shortcodes')}</h4>
+
+								<div className="mt-3">
+									{Object.keys(shortcodes).map((key: string, idx: number) => (
+										<div key={key}>
+											{idx > 0 && <Divider className="mt-4 mb-2" />}
+
+											<Snippet
+												// size="sm"
+												hideSymbol
+												radius="none"
+												classNames={{
+													base: 'bg-transparent w-full p-0',
+												}}
+											>
+												<strong>{key}</strong>
+											</Snippet>
+
+											{shortcodes[key] && (
+												<div className="text-xs text-foreground-500 font-medium">
+													{shortcodes[key]}
+												</div>
+											)}
+										</div>
+									))}
+								</div>
+							</div>
+						)}
 					</form>
 				</div>
 			</div>

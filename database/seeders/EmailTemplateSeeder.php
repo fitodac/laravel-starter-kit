@@ -17,7 +17,7 @@ class EmailTemplateSeeder extends Seeder
 		EmailTemplate::create([
 			'name' => 'User created',
 			'subject' => 'User created',
-			'body' => json_encode(['hello', 'world']),
+			'body' => '<p>Foo bar</p>',
 			'view' => 'mail.user',
 			'type' => 'App\Notifications\UserCreated'
 		]);
@@ -26,7 +26,7 @@ class EmailTemplateSeeder extends Seeder
 		EmailTemplate::create([
 			'name' => 'User updated',
 			'subject' => 'User updated',
-			'body' => json_encode(['hello', 'world']),
+			'body' => '<p>Foo bar</p>',
 			'view' => 'mail.user',
 			'type' => 'App\Notifications\UserUpdated'
 		]);
@@ -35,7 +35,7 @@ class EmailTemplateSeeder extends Seeder
 		EmailTemplate::create([
 			'name' => 'User deleted',
 			'subject' => 'User deleted',
-			'body' => json_encode(['hello', 'world']),
+			'body' => '<p>Foo bar</p>',
 			'view' => 'mail.user',
 			'type' => 'App\Notifications\UserDeleted'
 		]);
@@ -44,7 +44,7 @@ class EmailTemplateSeeder extends Seeder
 		EmailTemplate::create([
 			'name' => 'Role created',
 			'subject' => 'Role created',
-			'body' => json_encode(['hello', 'world']),
+			'body' => '<p>Foo bar</p>',
 			'view' => 'mail.role',
 			'type' => 'App\Notifications\RoleCreated'
 		]);
@@ -53,7 +53,7 @@ class EmailTemplateSeeder extends Seeder
 		EmailTemplate::create([
 			'name' => 'Role updated',
 			'subject' => 'Role updated',
-			'body' => json_encode(['hello', 'world']),
+			'body' => '<p>Foo bar</p>',
 			'view' => 'mail.role',
 			'type' => 'App\Notifications\RoleUpdated'
 		]);
@@ -62,7 +62,7 @@ class EmailTemplateSeeder extends Seeder
 		EmailTemplate::create([
 			'name' => 'Role deleted',
 			'subject' => 'Role deleted',
-			'body' => json_encode(['hello', 'world']),
+			'body' => '<p>Foo bar</p>',
 			'view' => 'mail.role',
 			'type' => 'App\Notifications\RoleDelted'
 		]);
@@ -71,7 +71,7 @@ class EmailTemplateSeeder extends Seeder
 		EmailTemplate::create([
 			'name' => 'Permission created',
 			'subject' => 'Permission created',
-			'body' => json_encode(['hello', 'world']),
+			'body' => '<p>Foo bar</p>',
 			'view' => 'mail.permission',
 			'type' => 'App\Notifications\PermissionCreated'
 		]);
@@ -80,7 +80,7 @@ class EmailTemplateSeeder extends Seeder
 		EmailTemplate::create([
 			'name' => 'Permission updated',
 			'subject' => 'Permission updated',
-			'body' => json_encode(['hello', 'world']),
+			'body' => '<p>Foo bar</p>',
 			'view' => 'mail.permission',
 			'type' => 'App\Notifications\PermissionUpdated'
 		]);
@@ -89,7 +89,7 @@ class EmailTemplateSeeder extends Seeder
 		EmailTemplate::create([
 			'name' => 'Permission deleted',
 			'subject' => 'Permission deleted',
-			'body' => json_encode(['hello', 'world']),
+			'body' => '<p>Foo bar</p>',
 			'view' => 'mail.permission',
 			'type' => 'App\Notifications\PermissionDeleted'
 		]);

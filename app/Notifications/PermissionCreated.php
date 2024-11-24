@@ -7,10 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Spatie\Permission\Models\Permission;
+use App\Models\NotificationTemplate;
+use App\Models\EmailTemplate;
+use App\Traits\NotificationTrait;
 
-class PermissionCreated extends Notification
+class PermissionCreated extends Notification implements ShouldQueue
 {
-	use Queueable;
+	use Queueable, NotificationTrait;
 
 	/**
 	 * Create a new notification instance.
@@ -40,9 +43,13 @@ class PermissionCreated extends Notification
 	 */
 	public function toMail(object $notifiable): MailMessage
 	{
+		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
+
 		return (new MailMessage)
-			->subject('Permission created')
-			->view('mail.permission');
+			->subject($template->subject ?? 'Permission created')
+			->view($template->view ?? 'mail.permission', [
+				'content' => $template->body ?? ''
+			]);
 	}
 
 	/**
@@ -52,9 +59,11 @@ class PermissionCreated extends Notification
 	 */
 	public function toArray(object $notifiable): array
 	{
+		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->first();
+
 		return [
-			'title' => 'Permission created',
-			'content' => 'A new permission has been created.'
+			'title' => $this->replaceShortcodes($template->title, 'permission.') ?? 'Permission created',
+			'content' => $this->replaceShortcodes($template->content, 'permission.') ?? 'A new permission has been created.'
 		];
 	}
 }

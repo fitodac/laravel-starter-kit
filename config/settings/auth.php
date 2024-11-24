@@ -36,7 +36,7 @@ return [
 		'Can edit role',
 		'Can create new permission',
 		'Can edit permission',
-		'Can edit notifications',
+		'Can edit notification templates',
 		'Can edit email templates',
 	],
 ];

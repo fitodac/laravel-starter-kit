@@ -1,4 +1,5 @@
 import { EditorContent, useEditor, type JSONContent } from '@tiptap/react'
+import { Underline } from '@tiptap/extension-underline'
 import StarterKit from '@tiptap/starter-kit'
 import CharacterCount from '@tiptap/extension-character-count'
 import DragHandle from '@tiptap-pro/extension-drag-handle-react'
@@ -45,6 +46,7 @@ export const Wysiwyg = ({
 			}),
 			Color,
 			TextStyle,
+			Underline,
 			Placeholder.configure({ placeholder }),
 		],
 		content: initialContent,
@@ -74,6 +76,17 @@ export const Wysiwyg = ({
 							color={editor.isActive('bold') ? 'primary' : 'default'}
 						>
 							<i className="ri-bold ri-lg" />
+						</Button>
+
+						<Button
+							isIconOnly
+							size="sm"
+							radius="lg"
+							variant="light"
+							onClick={() => editor.chain().focus().toggleUnderline().run()}
+							color={editor.isActive('underline') ? 'primary' : 'default'}
+						>
+							<i className="ri-underline ri-lg" />
 						</Button>
 
 						<Button
@@ -320,21 +333,21 @@ export const Wysiwyg = ({
 						)}
 					>
 						<svg height="20" width="20" viewBox="0 0 20 20">
-							<circle r="10" cx="10" cy="10" fill="#e9ecef" />
+							<circle r="10" cx="10" cy="10" className="fill-foreground-50" />
 							<circle
 								r="5"
 								cx="10"
 								cy="10"
 								fill="transparent"
-								stroke="currentColor"
 								strokeWidth="10"
 								strokeDasharray={`calc(${percentage} * 31.4 / 100) 31.4`}
 								transform="rotate(-90) translate(-20)"
+								className="stroke-primary"
 							/>
-							<circle r="6" cx="10" cy="10" fill="white" />
+							<circle r="6" cx="10" cy="10" className="fill-background" />
 						</svg>
 
-						<span className="text-xs font-medium">
+						<span className="text-[.7rem] text-foreground-600 font-medium tracking-wide">
 							{editor.storage.characterCount.characters()} / {charactersLimit}{' '}
 							{t('characters')} /{editor.storage.characterCount.words()}{' '}
 							{t('words')}

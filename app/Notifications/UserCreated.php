@@ -7,18 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\User;
+use App\Models\NotificationTemplate;
+use App\Models\EmailTemplate;
+use App\Traits\NotificationTrait;
 
-class UserCreated extends Notification
+class UserCreated extends Notification implements ShouldQueue
 {
-	use Queueable;
+	use Queueable, NotificationTrait;
 
 	/**
 	 * Create a new notification instance.
 	 */
 	public function __construct(
 		private readonly User $user
-	)
-	{
+	) {
 		//
 	}
 
@@ -41,9 +43,13 @@ class UserCreated extends Notification
 	 */
 	public function toMail(object $notifiable): MailMessage
 	{
+		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
+
 		return (new MailMessage)
-			->subject('User created')
-			->view('mail.user');
+			->subject($template->subject ?? 'User created')
+			->view($template->view ?? 'mail.user', [
+				'content' => $template->body ?? ''
+			]);
 	}
 
 	/**
@@ -53,9 +59,11 @@ class UserCreated extends Notification
 	 */
 	public function toArray(object $notifiable): array
 	{
+		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->firstOrFail();
+
 		return [
-			'title' => 'User created',
-			'content' => 'A new user has been created.'
+			'title' => $this->replaceShortcodes($template->title, 'user.') ?? 'User created',
+			'content' => $this->replaceShortcodes($template->content, 'user.') ?? 'A new user has been created.'
 		];
 	}
 }

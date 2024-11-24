@@ -13,11 +13,11 @@ return new class extends Migration
 	{
 		Schema::create('email_templates', function (Blueprint $table) {
 			$table->id();
-			$table->string('name');
-			$table->string('subject');
-			$table->json('body');
-			$table->string('view');
-			$table->string('type');
+			$table->string('name')->default('');
+			$table->string('subject')->default('');
+			$table->text('body')->nullable();
+			$table->string('view')->default('');
+			$table->string('type')->default('');
 			$table->timestamps();
 		});
 	}

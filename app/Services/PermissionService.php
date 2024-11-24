@@ -87,11 +87,15 @@ class PermissionService
 
 	public function destroyPermission(Permission $permission): bool
 	{
+		$user = auth()->user();
+		$user->notify(new PermissionDeleted($permission));
+
 		$deletedPermission = $permission->delete();
 		if ($deletedPermission) $this->notifyByMail('delete', $permission);
 
 		return $deletedPermission;
 	}
+
 
 	/**
 	 * Send email notifications to all users with the Super Admin role.

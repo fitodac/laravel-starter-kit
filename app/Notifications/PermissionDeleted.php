@@ -7,10 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Spatie\Permission\Models\Permission;
+use App\Models\NotificationTemplate;
+use App\Models\EmailTemplate;
+use App\Traits\NotificationTrait;
 
-class PermissionDeleted extends Notification
+class PermissionDeleted extends Notification implements ShouldQueue
 {
-	use Queueable;
+	use Queueable, NotificationTrait;
 
 	/**
 	 * Create a new notification instance.
@@ -40,9 +43,13 @@ class PermissionDeleted extends Notification
 	 */
 	public function toMail(object $notifiable): MailMessage
 	{
+		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
+
 		return (new MailMessage)
-			->subject('Permission deleted')
-			->view('mail.permission');
+			->subject($template->subject ?? 'Permission deleted')
+			->view($template->view ?? 'mail.permission', [
+				'content' => $template->body ?? ''
+			]);
 	}
 
 	/**
@@ -52,9 +59,12 @@ class PermissionDeleted extends Notification
 	 */
 	public function toArray(object $notifiable): array
 	{
+		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->first();
+
 		return [
-			'title' => 'Permission updated',
-			'content' => 'The permission <strong>' . $this->permission->name . '</strong> has been deleted.'
+			'title' => $this->replaceShortcodes($template->title, 'permission.') ?? 'Permission deleted',
+			// 'content' => $this->replaceShortcodes($template->content, 'permission.') ?? 'The permission <strong>' . $this->permission->name . '</strong> has been deleted.'
+			'content' => $this->replaceShortcodes($template->content, 'permission.') ?? 'Permission deleted...'
 		];
 	}
 }

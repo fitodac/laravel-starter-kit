@@ -7,10 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\User;
+use App\Models\NotificationTemplate;
+use App\Models\EmailTemplate;
+use App\Traits\NotificationTrait;
 
-class UserUpdated extends Notification
+class UserUpdated extends Notification implements ShouldQueue
 {
-	use Queueable;
+	use Queueable, NotificationTrait;
 
 	/**
 	 * Create a new notification instance.
@@ -40,9 +43,13 @@ class UserUpdated extends Notification
 	 */
 	public function toMail(object $notifiable): MailMessage
 	{
+		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
+
 		return (new MailMessage)
-			->subject('User updated')
-			->view('mail.user');
+			->subject($template->subject ?? 'User updated')
+			->view($template->view ?? 'mail.user', [
+				'content' => $template->body ?? ''
+			]);
 	}
 
 	/**
@@ -52,9 +59,11 @@ class UserUpdated extends Notification
 	 */
 	public function toArray(object $notifiable): array
 	{
+		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->firstOrFail();
+
 		return [
-			'title' => 'User updated',
-			'content' => 'User updated successfully',
+			'title' => $this->replaceShortcodes($template->title, 'user.') ?? 'User updated',
+			'content' => $this->replaceShortcodes($template->content, 'user.') ?? 'User updated successfully'
 		];
 	}
 }

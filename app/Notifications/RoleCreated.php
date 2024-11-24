@@ -7,10 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Spatie\Permission\Models\Role;
+use App\Models\NotificationTemplate;
+use App\Models\EmailTemplate;
+use App\Traits\NotificationTrait;
 
-class RoleCreated extends Notification
+class RoleCreated extends Notification implements ShouldQueue
 {
-	use Queueable;
+	use Queueable, NotificationTrait;
 
 	/**
 	 * Create a new notification instance.
@@ -40,9 +43,13 @@ class RoleCreated extends Notification
 	 */
 	public function toMail(object $notifiable): MailMessage
 	{
+		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
+
 		return (new MailMessage)
-			->subject('Role created')
-			->view('mail.role');
+			->subject($template->subject ?? 'Role created')
+			->view($template->view ?? 'mail.role', [
+				'content' => $template->body ?? ''
+			]);
 	}
 
 	/**
@@ -52,9 +59,11 @@ class RoleCreated extends Notification
 	 */
 	public function toArray(object $notifiable): array
 	{
+		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->firstOrFail();
+
 		return [
-			'title' => 'Role created',
-			'content' => 'A new role has been created.'
+			'title' => $this->replaceShortcodes($template->title, 'role.') ?? 'Role created',
+			'content' => $this->replaceShortcodes($template->content, 'role.') ?? 'A new role has been created.'
 		];
 	}
 }

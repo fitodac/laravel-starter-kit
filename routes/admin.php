@@ -138,18 +138,33 @@ Route::middleware(['auth', 'verified'])
 		 * 
 		 * 
 		 */
-		Route::get('/notification-templates', [NotificationTemplateController::class, 'index'])->name('notificationTemplates.index');
-		Route::match(['put', 'patch'], 'notification-templates/{template}', [NotificationTemplateController::class, 'update'])->name('notificationTemplates.update');
-		Route::delete('notification-templates/{template}', [NotificationTemplateController::class, 'destroy'])->name('notificationTemplates.destroy');
-		
+		Route::middleware(['role_or_permission:Super Admin|Can edit notification templates'])
+			->group(function () {
+				Route::get('/notification-templates', [NotificationTemplateController::class, 'index'])->name('notificationTemplates.index');
+				Route::match(['put', 'patch'], 'notification-templates/{template}', [NotificationTemplateController::class, 'update'])->name('notificationTemplates.update');
+				Route::delete('notification-templates/{template}', [NotificationTemplateController::class, 'destroy'])->name('notificationTemplates.destroy');
+			});
+	});
+
+
+Route::impersonate();
+
+
+Route::middleware(['auth', 'verified'])
+	->name('admin.')
+	->prefix('admin')
+	->group(function () {
+
 		/**
 		 * Email templates
 		 * 
 		 * 
 		 * 
 		 */
-		Route::get('/email-templates', [EmailTemplateController::class, 'index'])->name('emailTemplates.index');
+		Route::middleware(['role_or_permission:Super Admin|Can edit email templates'])
+			->group(function () {
+				Route::get('/email-templates', [EmailTemplateController::class, 'index'])->name('emailTemplates.index');
+				Route::get('email-templates/{template}/edit', [EmailTemplateController::class, 'edit'])->name('emailTemplates.edit');
+				Route::match(['put', 'patch'], 'email-templates/{template}', [EmailTemplateController::class, 'update'])->name('emailTemplates.update');
+			});
 	});
-
-
-Route::impersonate();

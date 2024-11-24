@@ -10,7 +10,7 @@ class EmailTemplateData extends Data
 		public int $id,
 		public string $name,
 		public string $subject,
-		public array $body,
+		public string $body,
 		public string $view,
 		public string $type,
 	) {}

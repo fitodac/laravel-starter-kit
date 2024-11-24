@@ -26,6 +26,11 @@ class NotificationTemplateController extends Controller
 		$templates = NotificationTemplate::orderBy($request->order ?? 'id', $request->dir === 'ascending' ? 'asc' : 'desc')
 			->paginate($per_page);
 
+		$templates->getCollection()->transform(function ($template) {
+			$template->shortcodes = json_decode($template->shortcodes, true);
+			return $template;
+		});
+
 		$templates = NotificationTemplateData::collect($templates);
 
 		return Inertia::render('admin/notifications/Index', compact('templates'));

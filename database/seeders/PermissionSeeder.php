@@ -33,7 +33,7 @@ class PermissionSeeder extends Seeder
 		$can_create_new_permission = Permission::create(['name' => 'Can create new permission']);
 		$can_edit_permission = Permission::create(['name' => 'Can edit permission']);
 
-		$can_edit_notifications = Permission::create(['name' => 'Can edit notifications']);
+		$can_edit_notifications = Permission::create(['name' => 'Can edit notification templates']);
 		$can_edit_email_templates = Permission::create(['name' => 'Can edit email templates']);
 
 

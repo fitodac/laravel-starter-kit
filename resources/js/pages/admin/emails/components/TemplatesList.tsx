@@ -1,4 +1,3 @@
-import { useContext, useEffect } from 'react'
 import {
 	Table,
 	TableHeader,
@@ -12,13 +11,11 @@ import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
 import { usePage } from '@inertiajs/react'
 import { NotificationsListCell, NotificationsListPager } from './list'
-import { NotificationContext } from '../providers/NotificationProvider'
 
 import type { PageProps } from '@/types'
 import type {
 	EmailTemplate,
 	EmailTemplateTable,
-	EmailTemplateContextProps,
 } from '@/types/notification-templates.d'
 
 export const TemplatesList = () => {
@@ -30,15 +27,7 @@ export const TemplatesList = () => {
 
 	const { links, current_page, data } = templates as EmailTemplateTable
 
-	const { state, onOpen, dispatch } = useContext(
-		NotificationContext
-	) as EmailTemplateContextProps
-
 	const sort = useTableSorting()
-
-	useEffect(() => {
-		if (data) dispatch({ type: 'setListLoading', payload: false })
-	}, [data])
 
 	return (
 		<>
@@ -50,12 +39,6 @@ export const TemplatesList = () => {
 					td: 'border-t border-content3',
 				}}
 				bottomContent={<NotificationsListPager {...{ links, current_page }} />}
-				onSortChange={(sortDescriptor) => {
-					const sd = sort({ sortDescriptor, only: ['notifications'] })
-					dispatch({ type: 'setSortDescriptor', payload: sd })
-					dispatch({ type: 'setListLoading', payload: true })
-				}}
-				sortDescriptor={state.sortDescriptor}
 			>
 				<TableHeader columns={columns}>
 					{(column) => (
@@ -76,14 +59,13 @@ export const TemplatesList = () => {
 							<Spinner label={t('loading').toString()} />
 						</div>
 					}
-					isLoading={state.listLoading}
 				>
 					{(item: EmailTemplate) => (
 						<TableRow key={item.id}>
 							{(key) => (
 								<TableCell>
 									{NotificationsListCell({
-										...{ item, key: String(key), dispatch, onOpen },
+										...{ item, key: String(key) },
 									})}
 								</TableCell>
 							)}

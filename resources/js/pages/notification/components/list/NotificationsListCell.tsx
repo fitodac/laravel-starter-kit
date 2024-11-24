@@ -1,11 +1,13 @@
 import { type Dispatch } from 'react'
 import { Button } from '@nextui-org/react'
+import { router } from '@inertiajs/react'
 import dayjs from 'dayjs'
 import { t } from '@/i18n'
 import { toast } from 'react-toastify'
+import ReactSafelySetInnerHTML from 'react-safely-set-inner-html'
+import { alowedTags } from '@/helpers/safelySetInnerHtmlAllowedTags'
 
 import type { Notification } from '@/types/notifications'
-import { router } from '@inertiajs/react'
 
 interface Props {
 	item: Notification
@@ -18,10 +20,14 @@ export const NotificationsListCell = ({ item, key, dispatch }: Props) => {
 		case 'notification':
 			return (
 				<div className="flex gap-10">
-					<div className="flex-1 space-y-1">
-						<h4 className="font-semibold">{item.data.title}</h4>
-						<div className="text-xs">{item.data.content}</div>
-						<div className="text-foreground-500 text-xs flex gap-10">
+					<div className="flex-1">
+						<h4 className="text-base font-semibold">{item.data.title}</h4>
+
+						<ReactSafelySetInnerHTML allowedTags={alowedTags}>
+							{`<div class="text-[.8rem] text-foreground-800 leading-tight font-medium mt-1 space-y-1">${item.data.content}</div>`}
+						</ReactSafelySetInnerHTML>
+
+						<div className="text-foreground-500 text-xs flex gap-10 mt-2">
 							<span>#{item.id}</span>
 							<span>
 								<i className="ri-calendar-line ri-sm"></i>{' '}

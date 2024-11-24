@@ -3,6 +3,7 @@
 namespace App\Data;
 
 use Spatie\LaravelData\Data;
+use App\Models\NotificationTemplate;
 
 class NotificationTemplateData extends Data
 {
@@ -11,5 +12,6 @@ class NotificationTemplateData extends Data
 		public string $title,
 		public string $content,
 		public string $type,
+		public array $shortcodes,
 	) {}
 }
