@@ -44,6 +44,7 @@ export const TipTapPage = ({ template }: Props) => {
 							separator: true,
 							lists: true,
 							colorSelector: true,
+							onUpdate: (val) => null,
 						}}
 					/>
 				</div>

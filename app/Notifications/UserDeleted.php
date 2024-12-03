@@ -62,8 +62,8 @@ class UserDeleted extends Notification implements ShouldQueue
 		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->firstOrFail();
 
 		return [
-			'title' => $this->replaceShortcodes($template->title, 'user.') ?? 'User deleted',
-			'content' => $this->replaceShortcodes($template->content, 'user.') ?? 'User deleted successfully'
+			'title' => $this->replaceShortcodes($template->title, 'user.', $this->user) ?? 'User deleted',
+			'content' => $this->replaceShortcodes($template->content, 'user.', $this->user) ?? 'User deleted successfully'
 		];
 	}
 }

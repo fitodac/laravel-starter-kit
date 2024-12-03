@@ -1,22 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NotificationTemplateController;
 use App\Http\Controllers\Admin\EmailTemplateController;
 
 
-Route::get('dashboard', [DashboardController::class, 'index'])
-	->middleware(['auth', 'verified'])
-	->name('dashboard');
+Route::impersonate();
 
-Route::middleware(['auth', 'verified'])
-	->prefix('dashboard/corporate')
-	->name('dashboard.')
+
+Route::get('admin', [AdminController::class, 'index'])->name('admin');
+
+
+Route::middleware(['auth', 'verified', 'role:Super Admin|Admin'])
+	->name('admin.')
+	->prefix('admin')
 	->group(function () {
 
 		/**
@@ -27,7 +29,7 @@ Route::middleware(['auth', 'verified'])
 		 */
 		Route::get('users', [UserController::class, 'index'])
 			->middleware(['role_or_permission:Super Admin|Can see users'])
-			->name('users.list');
+			->name('user.index');
 
 		Route::get('users/create', [UserController::class, 'create'])
 			->middleware(['role_or_permission:Super Admin|Can create new user'])
@@ -67,7 +69,7 @@ Route::middleware(['auth', 'verified'])
 		 */
 		Route::get('administrators', [UserAdminController::class, 'index'])
 			->middleware(['role_or_permission:Super Admin|Can see admins'])
-			->name('admins.list');
+			->name('admin.index');
 
 		// Route::get('administrator/create', [UserAdminController::class, 'create'])->name('admin.create');
 		// Route::post('administrator', [UserAdminController::class, 'store'])->name('admin.store');
@@ -75,17 +77,6 @@ Route::middleware(['auth', 'verified'])
 		// Route::get('administrator/{user}/edit', [UserAdminController::class, 'edit'])->name('admin.edit');
 		// Route::match(['put', 'patch'], 'administrator/{user}', [UserAdminController::class, 'update'])->name('admin.update');
 		// Route::delete('administrator/{user}', [UserAdminController::class, 'destroy'])->name('admin.destroy');
-
-		/**
-		 * Sessions
-		 * 
-		 * 
-		 * 
-		 */
-		Route::delete('session/{id}/invalidate', [UserController::class, 'invalidate_session'])
-			->middleware(['role_or_permission:Super Admin'])
-			->name('session.invalidate');
-
 
 		/**
 		 * Roles
@@ -131,7 +122,6 @@ Route::middleware(['auth', 'verified'])
 			->middleware(['role_or_permission:Super Admin|Can edit permission'])
 			->name('permission.destroy');
 
-
 		/**
 		 * Notification templates
 		 * 
@@ -144,16 +134,6 @@ Route::middleware(['auth', 'verified'])
 				Route::match(['put', 'patch'], 'notification-templates/{template}', [NotificationTemplateController::class, 'update'])->name('notificationTemplates.update');
 				Route::delete('notification-templates/{template}', [NotificationTemplateController::class, 'destroy'])->name('notificationTemplates.destroy');
 			});
-	});
-
-
-Route::impersonate();
-
-
-Route::middleware(['auth', 'verified'])
-	->name('admin.')
-	->prefix('admin')
-	->group(function () {
 
 		/**
 		 * Email templates
@@ -167,4 +147,15 @@ Route::middleware(['auth', 'verified'])
 				Route::get('email-templates/{template}/edit', [EmailTemplateController::class, 'edit'])->name('emailTemplates.edit');
 				Route::match(['put', 'patch'], 'email-templates/{template}', [EmailTemplateController::class, 'update'])->name('emailTemplates.update');
 			});
+
+
+		/**
+		 * Sessions
+		 * 
+		 * 
+		 * 
+		 */
+		Route::delete('session/{id}/invalidate', [UserController::class, 'invalidate_session'])
+			->middleware(['role_or_permission:Super Admin'])
+			->name('session.invalidate');
 	});

@@ -59,7 +59,7 @@ class UserController extends Controller
 	{
 		$user = $this->userService->storeUser($request);
 
-		return redirect()->route('dashboard.user.show', $user);
+		return redirect()->route('admin.user.show', $user);
 	}
 
 	/**
@@ -70,7 +70,7 @@ class UserController extends Controller
 	 */
 	public function show(User $user): RedirectResponse
 	{
-		return redirect()->route('dashboard.user.edit', ['user' => $user]);
+		return redirect()->route('admin.user.edit', ['user' => $user]);
 	}
 
 	/**
@@ -147,7 +147,7 @@ class UserController extends Controller
 	{
 
 		return redirect()
-			->route('dashboard.users.list')
+			->route('admin.user.index')
 			->with('success', 'The account was deleted.');
 	}
 }

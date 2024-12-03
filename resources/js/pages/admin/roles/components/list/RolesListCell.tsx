@@ -28,9 +28,6 @@ export const RolesListCell = ({
 	protected_roles,
 }: Props) => {
 	switch (key) {
-		case 'id':
-			return item.id
-
 		case 'name':
 			return (
 				<>

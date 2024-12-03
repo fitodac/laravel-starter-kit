@@ -23,7 +23,7 @@ class CheckProtectedRole
 
 		if (in_array($role->name, $protectedRoles)) {
 			return redirect()
-				->route('dashboard.role.list')
+				->route('admin.role.list')
 				->with('error', 'This role is protected and can not be edited or deleted.');
 		}
 

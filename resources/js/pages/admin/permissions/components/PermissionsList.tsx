@@ -44,10 +44,20 @@ export const PermissionsList = () => {
 	useEffect(() => {
 		if (!columns.find((e) => e.key === 'actions')) {
 			roles.forEach((role: Role) => {
-				columns.push({ key: role.name, label: role.name, allowsSorting: false })
+				columns.push({
+					key: role.name,
+					label: role.name,
+					allowsSorting: false,
+					width: 50,
+				})
 			})
 
-			columns.push({ key: 'actions', label: '', allowsSorting: false })
+			columns.push({
+				key: 'actions',
+				label: '',
+				allowsSorting: false,
+				width: 50,
+			})
 		}
 	}, [])
 
@@ -113,9 +123,7 @@ export const PermissionsList = () => {
 	)
 }
 
-const columns = [
-	{ key: 'name', label: t('Name'), allowsSorting: true, width: 500 },
-] as {
+const columns = [{ key: 'name', label: t('Name'), allowsSorting: true }] as {
 	key: string
 	label: string
 	allowsSorting?: boolean

@@ -28,17 +28,22 @@ trait NotificationTrait
 		return $this->getNamespace() . '\\' . $this->getFilename();
 	}
 
-	public function replaceShortcodes(string $content, string $shorcodeKey): string
+	public function replaceShortcodes(string $content, string $shorcodeKey, $collection = []): string
 	{
 		$template = new NotificationTemplate;
-		$shortcodes = $template->permissionShortcodes;
+		$shortcodes = match ($shorcodeKey) {
+			'role.' => $template->roleShortcodes,
+			'permission.' => $template->permissionShortcodes,
+			'user.' => $template->userShortcodes,
+			default => $template->userShortcodes,
+		};
 
-		return preg_replace_callback('/\[(.*?)\]/', function ($matches) use ($shortcodes, $shorcodeKey) {
+		return preg_replace_callback('/\[(.*?)\]/', function ($matches) use ($shortcodes, $shorcodeKey, $collection) {
 			$key = $matches[1];
 
-			if (str_starts_with($key, $shorcodeKey) && isset($this->permission)) {
+			if (str_starts_with($key, $shorcodeKey)) {
 				$field = explode('.', $key)[1] ?? null;
-				return htmlspecialchars($this->permission->{$field} ?? $matches[0]);
+				return htmlspecialchars($collection->{$field} ?? $matches[0]);
 			}
 
 			return $shortcodes[$key] ?? $matches[0];

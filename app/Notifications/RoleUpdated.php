@@ -62,8 +62,8 @@ class RoleUpdated extends Notification implements ShouldQueue
 		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->firstOrFail();
 
 		return [
-			'title' => $this->replaceShortcodes($template->title, 'role.') ?? 'Role updated',
-			'content' => $this->replaceShortcodes($template->content, 'role.') ?? 'The role <strong>' . $this->role->name . '</strong> has been updated.'
+			'title' => $this->replaceShortcodes($template->title, 'role.', $this->role) ?? 'Role updated',
+			'content' => $this->replaceShortcodes($template->content, 'role.', $this->role) ?? 'The role <strong>' . $this->role->name . '</strong> has been updated.'
 		];
 	}
 }

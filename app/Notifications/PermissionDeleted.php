@@ -62,9 +62,8 @@ class PermissionDeleted extends Notification implements ShouldQueue
 		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->first();
 
 		return [
-			'title' => $this->replaceShortcodes($template->title, 'permission.') ?? 'Permission deleted',
-			// 'content' => $this->replaceShortcodes($template->content, 'permission.') ?? 'The permission <strong>' . $this->permission->name . '</strong> has been deleted.'
-			'content' => $this->replaceShortcodes($template->content, 'permission.') ?? 'Permission deleted...'
+			'title' => $this->replaceShortcodes($template->title, 'permission.', $this->permission) ?? 'Permission deleted',
+			'content' => $this->replaceShortcodes($template->content, 'permission.', $this->permission) ?? 'The permission <strong>' . $this->permission->name . '</strong> has been deleted.'
 		];
 	}
 }

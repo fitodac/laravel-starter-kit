@@ -3,6 +3,9 @@ import type { Dispatch } from 'react'
 export type NotificationContextProps = {
 	state: State
 	dispatch: Dispatch<any>
+	isOpen?: boolean
+	onOpen?: () => void
+	onOpenChange?: () => void
 }
 
 export type Notification = {

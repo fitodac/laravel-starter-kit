@@ -63,7 +63,7 @@ export const DeleteAccount = () => {
 									fullWidth
 									color="danger"
 									onPress={() =>
-										destroy(route('dashboard.user.destroy', { user }), {
+										destroy(route('admin.user.destroy', { user }), {
 											preserveScroll: true,
 											// @ts-ignore
 											onSuccess: (resp: InertiaResponse) => {

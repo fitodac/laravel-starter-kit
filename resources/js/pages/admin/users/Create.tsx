@@ -44,7 +44,7 @@ export const Page = ({ user }: Props) => {
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
 
-		post(route('dashboard.user.store', { user }), {
+		post(route('admin.user.store', { user }), {
 			preserveScroll: true,
 			// @ts-ignore
 			onSuccess: (resp: InertiaResponse) => {

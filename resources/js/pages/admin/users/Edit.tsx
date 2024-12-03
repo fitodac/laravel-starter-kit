@@ -31,7 +31,7 @@ export const Page = ({ user }: Props) => {
 						variant="flat"
 						startContent={<i className="ri-arrow-left-line" />}
 						as={Link}
-						href={route('dashboard.users.list')}
+						href={route('admin.user.index')}
 					>
 						{t('Back to users list')}
 					</Button>

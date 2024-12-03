@@ -62,8 +62,8 @@ class PermissionUpdated extends Notification implements ShouldQueue
 		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->firstOrFail();
 
 		return [
-			'title' => $this->replaceShortcodes($template->title, 'permission.') ?? 'Permission updated',
-			'content' => $this->replaceShortcodes($template->content, 'permission.') ?? 'The permission <strong>' . $this->permission->name . '</strong> has been updated.'
+			'title' => $this->replaceShortcodes($template->title, 'permission.', $this->permission) ?? 'Permission updated',
+			'content' => $this->replaceShortcodes($template->content, 'permission.', $this->permission) ?? 'The permission <strong>' . $this->permission->name . '</strong> has been updated.'
 		];
 	}
 }

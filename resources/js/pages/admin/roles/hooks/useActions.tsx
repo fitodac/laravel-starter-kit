@@ -43,7 +43,7 @@ export const useActions = () => {
 
 		if (state.selectedRole) {
 			patch(
-				route('dashboard.role.update', {
+				route('admin.role.update', {
 					role: state.selectedRole,
 				}),
 				{
@@ -63,7 +63,7 @@ export const useActions = () => {
 				}
 			)
 		} else {
-			post(route('dashboard.role.store'), {
+			post(route('admin.role.store'), {
 				preserveScroll: true,
 				// @ts-ignore
 				onSuccess: (resp: InertiaResponse) => {

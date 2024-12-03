@@ -62,8 +62,8 @@ class RoleCreated extends Notification implements ShouldQueue
 		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->firstOrFail();
 
 		return [
-			'title' => $this->replaceShortcodes($template->title, 'role.') ?? 'Role created',
-			'content' => $this->replaceShortcodes($template->content, 'role.') ?? 'A new role has been created.'
+			'title' => $this->replaceShortcodes($template->title, 'role.', $this->role) ?? 'Role created',
+			'content' => $this->replaceShortcodes($template->content, 'role.', $this->role) ?? 'A new role has been created.'
 		];
 	}
 }

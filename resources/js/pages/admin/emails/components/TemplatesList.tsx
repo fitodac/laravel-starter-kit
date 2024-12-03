@@ -78,7 +78,7 @@ export const TemplatesList = () => {
 }
 
 const columns = [
-	{ key: 'id', label: '#', allowsSorting: true },
+	{ key: 'id', label: '#', allowsSorting: true, width: 70 },
 	{ key: 'name', label: t('Name'), allowsSorting: true },
 	{ key: 'actions', label: t('Actions') },
 ] as {

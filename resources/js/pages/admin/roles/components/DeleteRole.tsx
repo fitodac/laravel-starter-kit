@@ -50,7 +50,7 @@ export const DeleteRole = () => {
 									color="danger"
 									onPress={() => {
 										destroy(
-											route('dashboard.role.destroy', {
+											route('admin.role.destroy', {
 												role: state.selectedRole,
 											}),
 											{

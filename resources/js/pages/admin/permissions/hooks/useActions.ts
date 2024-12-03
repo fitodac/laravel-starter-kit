@@ -26,7 +26,7 @@ export const useActions = () => {
 
 		if (state.selectedPermission) {
 			patch(
-				route('dashboard.permission.update', {
+				route('admin.permission.update', {
 					permission: state.selectedPermission,
 				}),
 				{
@@ -46,7 +46,7 @@ export const useActions = () => {
 				}
 			)
 		} else {
-			post(route('dashboard.permission.store'), {
+			post(route('admin.permission.store'), {
 				preserveScroll: true,
 				// @ts-ignore
 				onSuccess: (resp: InertiaResponse) => {

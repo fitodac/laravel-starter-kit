@@ -62,8 +62,8 @@ class UserCreated extends Notification implements ShouldQueue
 		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->firstOrFail();
 
 		return [
-			'title' => $this->replaceShortcodes($template->title, 'user.') ?? 'User created',
-			'content' => $this->replaceShortcodes($template->content, 'user.') ?? 'A new user has been created.'
+			'title' => $this->replaceShortcodes($template->title, 'user.', $this->user) ?? 'User created',
+			'content' => $this->replaceShortcodes($template->content, 'user.', $this->user) ?? 'A new user has been created.'
 		];
 	}
 }

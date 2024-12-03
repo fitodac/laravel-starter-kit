@@ -7,6 +7,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Admin\DashboardController;
+
 
 Route::get('/', function () {
 	return Inertia::render('Welcome', [
@@ -57,6 +59,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::post('notification-templates/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notification.markAsRead');
 	Route::post('notification-templates/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notification.markAllAsRead');
 });
+
+
+Route::get('dashboard', [DashboardController::class, 'index'])
+	->middleware(['auth', 'verified'])
+	->name('dashboard');
 
 
 

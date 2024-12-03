@@ -16,7 +16,7 @@
 		"@vitejs/plugin-react": "^4.2.0",
 		"autoprefixer": "^10.4.12",
 		"axios": "^1.6.4",
-		"laravel-echo": "^1.17.0",
+		"laravel-echo": "^1.17.1",
 		"laravel-vite-plugin": "^1.0",
 		"postcss": "^8.4.31",
 		"pusher-js": "^8.4.0-rc2",
@@ -53,6 +53,7 @@
 		"react-safely-set-inner-html": "^2.2.2",
 		"react-toastify": "^10.0.5",
 		"remixicon": "^4.3.0",
+		"uuid": "^11.0.3",
 		"zustand": "^4.5.4"
 	}
 }

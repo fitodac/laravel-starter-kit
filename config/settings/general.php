@@ -4,6 +4,8 @@
  * All environment variables must being with VITE_
  */
 return [
+	'admin_path' => env('VITE_ADMIN_PATH', 'admin'),
+	'admin_domain' => env('VITE_ADMIN_DOMAIN', null),
 	'admin_layout' => env('VITE_ADMIN_LAYOUT', 'corporate'), // corporate, executive
 	'auth_layout' => env('VITE_AUTH_LAYOUT', 'layout1'), // 'layout1', 'layout2', or 'layout3'
 	'colormode' => env('VITE_COLORMODE', 'dark'),

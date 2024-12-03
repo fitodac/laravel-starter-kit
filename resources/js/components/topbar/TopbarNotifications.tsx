@@ -22,17 +22,25 @@ export const TopbarNotifications = () => {
 
 	// Laravel  Echo
 	useEffect(() => {
-		user &&
-			window.Echo.private(`App.Models.User.${user.id}`).notification(
-				(notification: any) => {
-					console.log('Notification test')
-					console.log('Notification: ', notification)
-				}
-			)
+		if (user) {
+			window.Echo.private(`App.Models.User.${user.id}`)
+				.notification((notification: any) => {
+					console.log('notification', notification)
 
-		// return () => {
-		// 	window.Echo.leaveChannel(`App.Models.User.${user.id}`)
-		// }
+					const { id, title, content } = notification
+					notifications.unshift({
+						id,
+						data: { title, content },
+					})
+				})
+				.error((error: any) => {
+					console.error('Error al conectarse al canal:', error)
+				})
+		}
+
+		return () => {
+			if (user) window.Echo.leaveChannel(`App.Models.User.${user.id}`)
+		}
 	}, [user])
 
 	if (!user || !notifications) return null

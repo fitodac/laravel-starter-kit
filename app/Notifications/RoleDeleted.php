@@ -62,8 +62,8 @@ class RoleDeleted extends Notification implements ShouldQueue
 		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->firstOrFail();
 
 		return [
-			'title' => $this->replaceShortcodes($template->title, 'role.') ?? 'Role deleted',
-			'content' => $this->replaceShortcodes($template->content, 'role.') ?? 'The role <strong>' . $this->role->name . '</strong> has been deleted.'
+			'title' => $this->replaceShortcodes($template->title, 'role.', $this->role) ?? 'Role deleted',
+			'content' => $this->replaceShortcodes($template->content, 'role.', $this->role) ?? 'The role <strong>' . $this->role->name . '</strong> has been deleted.'
 		];
 	}
 }

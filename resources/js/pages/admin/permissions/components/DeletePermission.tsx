@@ -49,7 +49,7 @@ export const DeletePermission = () => {
 								color="danger"
 								onPress={() => {
 									destroy(
-										route('dashboard.permission.destroy', {
+										route('admin.permission.destroy', {
 											permission: state.selectedPermission,
 										}),
 										{

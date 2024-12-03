@@ -51,7 +51,7 @@ class RoleController extends Controller
 		if (!$role) return back()->with('error', 'Role creation failed.');
 
 		return redirect()
-			->route('dashboard.role.list')
+			->route('admin.role.list')
 			->with('success', 'Role created successfully.');
 	}
 
@@ -68,7 +68,7 @@ class RoleController extends Controller
 		if (!$role) return back()->with('error', 'Role update failed.');
 
 		return redirect()
-			->route('dashboard.role.list')
+			->route('admin.role.list')
 			->with('success', 'Role updated successfully.');
 	}
 
@@ -85,7 +85,7 @@ class RoleController extends Controller
 		if (!$role) return back()->with('error', 'Role delete failed.');
 
 		return redirect()
-			->route('dashboard.role.list')
+			->route('admin.role.list')
 			->with('success', 'Role deleted successfully.');
 	}
 }

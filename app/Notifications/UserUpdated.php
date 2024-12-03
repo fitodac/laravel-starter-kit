@@ -62,8 +62,8 @@ class UserUpdated extends Notification implements ShouldQueue
 		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->firstOrFail();
 
 		return [
-			'title' => $this->replaceShortcodes($template->title, 'user.') ?? 'User updated',
-			'content' => $this->replaceShortcodes($template->content, 'user.') ?? 'User updated successfully'
+			'title' => $this->replaceShortcodes($template->title, 'user.', $this->user) ?? 'User updated',
+			'content' => $this->replaceShortcodes($template->content, 'user.', $this->user) ?? 'User updated successfully'
 		];
 	}
 }

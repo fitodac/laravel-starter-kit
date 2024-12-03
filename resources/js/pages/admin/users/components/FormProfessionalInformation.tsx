@@ -20,7 +20,7 @@ export const FormProfessionalInformation = () => {
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
 
-		patch(route('dashboard.user.update', { user }), {
+		patch(route('admin.user.update', { user }), {
 			preserveScroll: true,
 			// @ts-ignore
 			onSuccess: (resp: InertiaResponse) => {

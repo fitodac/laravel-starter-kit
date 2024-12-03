@@ -48,7 +48,7 @@ class PermissionController extends Controller
 		if (!$permission) return back()->with('error', 'Permission creation failed.');
 
 		return redirect()
-			->route('dashboard.permission.list')
+			->route('admin.permission.list')
 			->with('success', 'Permission created successfully.');
 	}
 
@@ -66,7 +66,7 @@ class PermissionController extends Controller
 		if (!$permission) return back()->with('error', 'Permission update failed.');
 
 		return redirect()
-			->route('dashboard.permission.list')
+			->route('admin.permission.list')
 			->with('success', 'Permission updated successfully.');
 	}
 
@@ -83,7 +83,7 @@ class PermissionController extends Controller
 		if (!$permission) return back()->with('error', 'Permission delete failed.');
 
 		return redirect()
-			->route('dashboard.permission.list')
+			->route('admin.permission.list')
 			->with('success', 'Permission deleted successfully.');
 	}
 }

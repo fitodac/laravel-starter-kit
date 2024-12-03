@@ -39,7 +39,7 @@ export const useActions = () => {
 		e.preventDefault()
 
 		patch(
-			route('dashboard.notificationTemplates.update', {
+			route('admin.notificationTemplates.update', {
 				template: state.selectedNotification,
 			}),
 			{

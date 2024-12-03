@@ -66,6 +66,7 @@ export const Sidebar = () => {
 															className={cn(icon, template.sidebar.cn.menuIcon)}
 														/>
 													}
+													className="[&>a>.ps-submenu-expand-icon>span]:relative [&>a>.ps-submenu-expand-icon>span]:top-[-2px]"
 												>
 													{submenu.map(({ label, route: path }) => (
 														<Fragment key={path}>

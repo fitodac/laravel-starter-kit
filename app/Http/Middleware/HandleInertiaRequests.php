@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 use App\Providers\AdminNavbarProvider;
+use App\Providers\DashboardNavbarProvider;
 use App\Data\UserData;
 use App\Data\NotificationData;
-
 
 class HandleInertiaRequests extends Middleware
 {
@@ -58,6 +58,8 @@ class HandleInertiaRequests extends Middleware
 			));
 		}
 
+		$isAdmin = $request->is(config('settings.general.admin_path') . '*');
+
 
 		return [
 			...parent::share($request),
@@ -67,11 +69,14 @@ class HandleInertiaRequests extends Middleware
 				'role' => $role,
 				'notifications' => $notifications
 			],
-			'adminNavbar' => app(AdminNavbarProvider::class)->getMenu($user, $role, $permissions),
+			'adminNavbar' => $isAdmin ?
+				app(AdminNavbarProvider::class)->getMenu($user, $role, $permissions) :
+				app(DashboardNavbarProvider::class)->getMenu($user, $role, $permissions),
 			'adminLayout' => config('settings.general.admin_layout'),
 			'authLayout' => config('settings.general.auth_layout'),
 			'colorMode' => config('settings.general.colormode'),
 			'adminCanImpersonate' => config('settings.general.admin_can_impersonate'),
+			'isAdmin' => $isAdmin,
 			'ziggy' => fn() => [
 				...(new Ziggy)->toArray(),
 				'location' => $request->url(),

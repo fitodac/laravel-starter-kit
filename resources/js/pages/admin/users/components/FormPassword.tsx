@@ -28,7 +28,7 @@ export const FormPassword = () => {
 	const submit = (e: FormEvent) => {
 		e.preventDefault()
 
-		put(route('dashboard.user.update', { user }), {
+		put(route('admin.user.update', { user }), {
 			preserveScroll: true,
 			// @ts-ignore
 			onSuccess: (resp: InertiaResponse) => {

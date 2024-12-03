@@ -91,7 +91,7 @@ export const UsersList = () => {
 								color="primary"
 								variant="flat"
 								as={Link}
-								href={route('dashboard.user.edit', { user })}
+								href={route('admin.user.edit', { user })}
 							>
 								{t('Edit')}
 							</Button>
@@ -176,11 +176,11 @@ export const UsersList = () => {
 }
 
 const columns = [
-	{ key: 'id', label: '#' },
-	{ key: 'username', label: t('Username') },
-	{ key: 'name', label: t('Name') },
+	{ key: 'id', label: '#', width: 70 },
+	{ key: 'username', label: t('Username'), width: 150 },
+	{ key: 'name', label: t('Name'), width: 150 },
 	{ key: 'company', label: t('Company') },
 	{ key: 'status', label: t('Status') },
 	{ key: 'sessions', label: t('Sessions') },
-	{ key: 'actions', label: '' },
+	{ key: 'actions', label: '', width: 70 },
 ] as { key: string; label: string; allowsSorting?: boolean }[]

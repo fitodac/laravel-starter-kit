@@ -99,10 +99,18 @@ export const RolesList = () => {
 }
 
 const columns = [
-	{ key: 'id', label: '#', allowsSorting: true },
 	{ key: 'name', label: t('Name'), allowsSorting: true },
-	{ key: 'guard_name', label: t('Guard'), allowsSorting: true },
-	{ key: 'permissions', label: t('Permissions'), allowsSorting: true },
-	{ key: 'users_count', label: t('Associated users'), allowsSorting: true },
-	{ key: 'actions', label: '' },
+	{
+		key: 'permissions',
+		label: t('Permissions'),
+		allowsSorting: true,
+		width: 100,
+	},
+	{
+		key: 'users_count',
+		label: t('Associated users'),
+		allowsSorting: true,
+		width: 100,
+	},
+	{ key: 'actions', label: '', width: 50 },
 ] as { key: string; label: string; allowsSorting?: boolean }[]

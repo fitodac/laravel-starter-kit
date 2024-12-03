@@ -18,7 +18,7 @@ export const Page = () => {
 						className="px-6"
 						variant="flat"
 						as={Link}
-						href={route('dashboard.user.create')}
+						href={route('admin.user.create')}
 					>
 						{t('New user')}
 					</Button>

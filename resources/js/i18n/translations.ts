@@ -1,6 +1,6 @@
 type Translations = {
 	en: { [index: string]: string }
-	es: { [index: string]: string }
+	sp: { [index: string]: string }
 	[key: string]: { [index: string]: string }
 }
 
