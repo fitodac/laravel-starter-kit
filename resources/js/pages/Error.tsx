@@ -20,22 +20,21 @@ const Page = ({ status }: Props) => {
 	const { colorMode } = useColorMode()
 
 	const messages: Messages = {
-		503: {
-			pageTitle: '503: Service Unavailable',
-			description:
-				'Sorry, we are doing some maintenance. Please check back soon.',
-		},
-		500: {
-			pageTitle: '500: Server Error',
-			description: 'Sorry, something went wrong on our servers.',
+		403: {
+			pageTitle: t('403 page title'),
+			description: t('403 page description'),
 		},
 		404: {
-			pageTitle: '404: Page Not Found',
-			description: 'Sorry, the page you are looking for could not be found.',
+			pageTitle: t('404 page title'),
+			description: t('404 page description'),
 		},
-		403: {
-			pageTitle: '403: Forbidden',
-			description: 'Sorry, you are forbidden from accessing this page.',
+		500: {
+			pageTitle: t('500 page title'),
+			description: t('500 page description'),
+		},
+		503: {
+			pageTitle: t('503 page title'),
+			description: t('503 page description'),
 		},
 	}[status]
 
@@ -45,7 +44,7 @@ const Page = ({ status }: Props) => {
 
 			<div className="bg-gray-100 w-screen h-screen dark:bg-gray-900">
 				<div className="grid place-content-center w-full h-full p-10">
-					<div className="flex flex-col gap-3 text-center max-w-2xl">
+					<div className="flex flex-col gap-3 text-center max-w-2xl select-none">
 						<div className="text-6xl">{status}</div>
 
 						<div className="text-2xl tracking-tight">

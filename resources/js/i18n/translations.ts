@@ -100,6 +100,15 @@ const translations: Translations = {
 		'Job title': 'Job title',
 		Company: 'Company',
 		Biography: 'Biography',
+		'503 page title': '503: Service Unavailable',
+		'503 page description':
+			'Sorry, we are doing some maintenance. Please check back soon.',
+		'500 page title': '500: Server Error',
+		'500 page description': 'Sorry, something went wrong on our servers.',
+		'403 page title': '403: Forbidden',
+		'403 page description': 'Sorry, you are forbidden from accessing this page.',
+		'404 page title': '404: Page Not Found',
+		'404 page description': 'Sorry, the page you are looking for could not be found.',
 	},
 	sp: {
 		Welcome: 'Bienvenido',
@@ -195,6 +204,15 @@ const translations: Translations = {
 		'Job title': 'Título',
 		Company: 'Compañia',
 		Biography: 'Biografía',
+		'503 page title': '503: Servicio no disponible',
+		'503 page description':
+			'Lo sentimos, estamos realizando mantenimiento. Por favor, vuelve a intentarlo más tarde.',
+		'500 page title': '500: Error del servidor',
+		'500 page description': 'Lo sentimos, algo salió mal en nuestros servidores.',
+		'403 page title': '403: Prohibido',
+		'403 page description': 'Lo sentimos, no tienes permiso para acceder a esta página.',
+		'404 page title': '404: Página no encontrada',
+		'404 page description': 'Lo sentimos, no se pudo encontrar la página que buscas.',
 	},
 }
 

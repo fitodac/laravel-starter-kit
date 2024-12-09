@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Database\Factories\AccountFactory;
 
 class RegisteredUserController extends Controller
 {
@@ -45,6 +46,8 @@ class RegisteredUserController extends Controller
 		]);
 
 		$user->assignRole('User');
+
+		AccountFactory::new()->create(['user_id' => $user->id]);
 
 		event(new Registered($user));
 

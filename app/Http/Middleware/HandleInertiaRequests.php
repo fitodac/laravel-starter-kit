@@ -47,10 +47,8 @@ class HandleInertiaRequests extends Middleware
 				->get()->toArray()
 		) : null;
 
-		// dd($user);
 
 		if ($user) {
-
 			$user = UserData::from(array_merge(
 				$user->toArray(),
 				[

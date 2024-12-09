@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Database\Factories\AccountFactory;
+use App\Models\Account;
 
 class UsersSeeder extends Seeder
 {
@@ -73,10 +75,7 @@ class UsersSeeder extends Seeder
 		User::factory(30)->create()->each(function ($user) {
 			$user->assignRole('User');
 
-			$user->account()->create([
-				'colorMode' => 'dark',
-				'language' => 'en'
-			]);
+			$user->account()->create(AccountFactory::new()->definition());
 		});
 	}
 }
