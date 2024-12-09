@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\User;
 use Database\Factories\AccountFactory;
+use Illuminate\Support\Facades\Notification;
 
 class PermissionTest extends TestCase
 {
@@ -60,6 +61,8 @@ class PermissionTest extends TestCase
 	 */
 	public function test_permission_can_be_created()
 	{
+		Notification::fake();
+
 		$response = $this
 			->actingAs($this->user)
 			->post(route('admin.permission.store'), [
