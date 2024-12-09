@@ -1,13 +1,5 @@
 import { useRef } from 'react'
-import {
-	Image,
-	Button,
-	CardHeader,
-	CardBody,
-	Chip,
-	cn,
-} from '@nextui-org/react'
-import { useUser } from '@/hooks'
+import { Image, Button } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { router, usePage } from '@inertiajs/react'
 import { toast } from 'react-toastify'
@@ -72,6 +64,7 @@ export const FormProfileImage = () => {
 						? `/storage/img/users/avatars/${user.profile_picture}`
 						: userBlank
 				}
+				classNames={{ img: 'object-cover aspect-square' }}
 			/>
 
 			<input

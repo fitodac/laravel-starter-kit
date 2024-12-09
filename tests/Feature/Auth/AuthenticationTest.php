@@ -6,8 +6,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
+use Database\Factories\AccountFactory;
 
 class AuthenticationTest extends TestCase
 {
@@ -24,10 +24,11 @@ class AuthenticationTest extends TestCase
 	{
 		parent::setUp();
 
-		// Create a user with roles and permissions
-		$this->user = User::factory()->create();
-		$userRole = Role::create(['name' => 'User']);
+		// Create a user
+		$this->user = User::factory()->unverified()->create();
+		Role::create(['name' => 'User']);
 		$this->user->assignRole('User');
+		AccountFactory::new()->create(['user_id' => $this->user->id]);
 	}
 
 	/**
@@ -140,6 +141,13 @@ class AuthenticationTest extends TestCase
 		$response->assertRedirect('/dashboard');
 	}
 
+	/**
+	 * Test that a user can logout.
+	 *
+	 * This test sends a POST request to the logout route, and asserts that
+	 * the user is no longer authenticated and that the response redirects
+	 * to the homepage.
+	 */
 	public function test_users_can_logout(): void
 	{
 		$response = $this->actingAs($this->user)->post('/logout');
