@@ -134,6 +134,6 @@ class User extends Authenticatable implements MustVerifyEmail
 	 */
 	public function getAccount(): AccountData
 	{
-		return AccountData::from($this->account->toArray());
+		return $this->account ? AccountData::from($this->account->toArray()) : null;
 	}
 }

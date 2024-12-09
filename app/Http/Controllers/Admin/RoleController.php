@@ -78,14 +78,16 @@ class RoleController extends Controller
 	 * 
 	 * 
 	 */
-	public function destroy(Role $role): RedirectResponse
+	public function destroy(Request $request, Role $role): RedirectResponse
 	{
+		$page = $request->query('page', 1);
+
 		$role = $this->roleService->destroyRole($role);
 
 		if (!$role) return back()->with('error', 'Role delete failed.');
 
 		return redirect()
-			->route('admin.role.list')
+			->route('admin.role.list', compact('page'))
 			->with('success', 'Role deleted successfully.');
 	}
 }

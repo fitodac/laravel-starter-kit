@@ -19,7 +19,7 @@ class NotificationTemplateSeeder extends Seeder
 			'title' => 'User created',
 			'content' => '<p>A new user has been created.</p>',
 			'type' => 'App\Notifications\UserCreated',
-			'shortcodes' => json_encode($template->userShorcodes(), true)
+			'shortcodes' => json_encode($template->userShortcodes(), true)
 		]);
 
 		// User updated
@@ -27,15 +27,7 @@ class NotificationTemplateSeeder extends Seeder
 			'title' => 'User updated',
 			'content' => '<p>User updated successfully</p>',
 			'type' => 'App\Notifications\UserUpdated',
-			'shortcodes' => json_encode($template->userShorcodes(), true)
-		]);
-
-		// User deleted
-		NotificationTemplate::create([
-			'title' => 'User deleted',
-			'content' => '<p>User deleted successfully</p>',
-			'type' => 'App\Notifications\UserDeleted',
-			'shortcodes' => json_encode($template->userShorcodes(), true)
+			'shortcodes' => json_encode($template->userShortcodes(), true)
 		]);
 
 		// Role created
@@ -43,7 +35,7 @@ class NotificationTemplateSeeder extends Seeder
 			'title' => 'Role created',
 			'content' => '<p>A new role has been created.</p>',
 			'type' => 'App\Notifications\RoleCreated',
-			'shortcodes' => json_encode($template->roleShorcodes(), true)
+			'shortcodes' => json_encode($template->roleShortcodes(), true)
 		]);
 
 		// Role updated
@@ -51,15 +43,7 @@ class NotificationTemplateSeeder extends Seeder
 			'title' => 'Role updated',
 			'content' => '<p>The role <strong>[role.name]</strong> has been updated.</p>',
 			'type' => 'App\Notifications\RoleUpdated',
-			'shortcodes' => json_encode($template->roleShorcodes(), true)
-		]);
-
-		// Role deleted
-		NotificationTemplate::create([
-			'title' => 'Role deleted',
-			'content' => '<p>The role <strong>[role.deleted]</strong> has been deleted.</p>',
-			'type' => 'App\Notifications\RoleDelted',
-			'shortcodes' => json_encode($template->roleShorcodes(), true)
+			'shortcodes' => json_encode($template->roleShortcodes(), true)
 		]);
 
 		// Permission created
@@ -67,7 +51,7 @@ class NotificationTemplateSeeder extends Seeder
 			'title' => 'Permission created',
 			'content' => '<p>A new permission has been created.</p>',
 			'type' => 'App\Notifications\PermissionCreated',
-			'shortcodes' => json_encode($template->permissionShorcodes(), true)
+			'shortcodes' => json_encode($template->permissionShortcodes(), true)
 		]);
 
 		// Permission updated
@@ -75,15 +59,7 @@ class NotificationTemplateSeeder extends Seeder
 			'title' => 'Permission updated',
 			'content' => '<p>The permission <strong>[permission.name]</strong> has been updated.</p>',
 			'type' => 'App\Notifications\PermissionUpdated',
-			'shortcodes' => json_encode($template->permissionShorcodes(), true)
-		]);
-
-		// Permission deleted
-		NotificationTemplate::create([
-			'title' => 'Permission deleted',
-			'content' => '<p>The permission <strong>[permission.name]</strong> has been deleted.</p>',
-			'type' => 'App\Notifications\PermissionDeleted',
-			'shortcodes' => json_encode($template->permissionShorcodes(), true)
+			'shortcodes' => json_encode($template->permissionShortcodes(), true)
 		]);
 	}
 }

@@ -47,6 +47,7 @@ export const TemplatesList = () => {
 					th: '[&]:first:rounded-none [&]:last:rounded-none [&]:last:text-right',
 					td: 'border-t border-content3',
 				}}
+				selectionMode="single"
 				bottomContent={<NotificationsListPager {...{ links, current_page }} />}
 				onSortChange={(sortDescriptor) => {
 					const sd = sort({ sortDescriptor, only: ['notifications'] })

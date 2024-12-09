@@ -16,10 +16,20 @@ const Page = ({ total_accounts, total_users, total_admins }: Props) => {
 			<PageHeader title={pageTitle} />
 
 			<PageContent>
-				<div className="space-y-4">
-					<p>Total de cuentas creadas {total_accounts}</p>
-					<p>Total usuarios {total_users}</p>
-					<p>Total administradores {total_admins}</p>
+				<div className="flex-1 space-y-6">
+					<div className="gap-6 lg:grid lg:grid-cols-4">
+						<div className="">
+							<p>Total de cuentas creadas {total_accounts}</p>
+						</div>
+
+						<div className="">
+							<p>Total usuarios {total_users}</p>
+						</div>
+
+						<div className="">
+							<p>Total administradores {total_admins}</p>
+						</div>
+					</div>
 				</div>
 
 				{/* <div className="bg-gray-100 w-screen min-h-svh dark:bg-gray-900">

@@ -22,7 +22,7 @@ class NotificationTemplate extends Model
 
 
 
-	public function userShorcodes(): array
+	public function userShortcodes(): array
 	{
 		return [
 			'[user.id]' => "The unique identifier for the user",
@@ -45,18 +45,16 @@ class NotificationTemplate extends Model
 		];
 	}
 
-	public function roleShorcodes(): array
+	public function roleShortcodes(): array
 	{
 		return [
-			'[role.id]' => "The unique identifier for the role",
 			'[role.name]' => "The name of the role",
 		];
 	}
 
-	public function permissionShorcodes(): array
+	public function permissionShortcodes(): array
 	{
 		return [
-			'[permission.id]' => "The unique identifier for the permission",
 			'[permission.name]' => "The name of the permission",
 		];
 	}

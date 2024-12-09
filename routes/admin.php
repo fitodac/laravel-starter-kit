@@ -13,7 +13,9 @@ use App\Http\Controllers\Admin\EmailTemplateController;
 Route::impersonate();
 
 
-Route::get('admin', [AdminController::class, 'index'])->name('admin');
+Route::middleware(['auth', 'verified', 'role:Super Admin|Admin'])
+	->get('admin', [AdminController::class, 'index'])
+	->name('admin');
 
 
 Route::middleware(['auth', 'verified', 'role:Super Admin|Admin'])

@@ -70,6 +70,7 @@ export const PermissionsList = () => {
 					th: '[&]:first:rounded-none [&]:last:rounded-none',
 					td: 'border-t border-content3',
 				}}
+				selectionMode="single"
 				bottomContent={<PermissionsListPager {...{ links, current_page }} />}
 				onSortChange={(sortDescriptor) => {
 					const sd = sort({ sortDescriptor, only: ['permissions'] })

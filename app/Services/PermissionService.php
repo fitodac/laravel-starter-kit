@@ -9,7 +9,7 @@ use App\Data\PermissionData;
 use App\Data\RoleData;
 use App\Notifications\PermissionCreated;
 use App\Notifications\PermissionUpdated;
-use App\Notifications\PermissionDeleted;
+use Illuminate\Support\Facades\Auth;
 
 class PermissionService
 {
@@ -87,8 +87,7 @@ class PermissionService
 
 	public function destroyPermission(Permission $permission): bool
 	{
-		$user = auth()->user();
-		$user->notify(new PermissionDeleted($permission));
+		$user = Auth::user();
 
 		$deletedPermission = $permission->delete();
 		if ($deletedPermission) $this->notifyByMail('delete', $permission);
@@ -110,19 +109,9 @@ class PermissionService
 
 		switch ($case) {
 			case 'create':
-				foreach ($superadmin->users as $user) {
-					$user->notify(new PermissionCreated($permission));
-				}
-				break;
+				$superadmin->users->each->notify(new PermissionCreated($permission));
 			case 'update':
-				foreach ($superadmin->users as $user) {
-					$user->notify(new PermissionUpdated($permission));
-				}
-				break;
-			case 'delete':
-				foreach ($superadmin->users as $user) {
-					$user->notify(new PermissionDeleted($permission));
-				}
+				$superadmin->users->each->notify(new PermissionUpdated($permission));
 				break;
 		}
 	}

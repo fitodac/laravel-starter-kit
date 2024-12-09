@@ -9,14 +9,14 @@ export type NotificationContextProps = {
 }
 
 export type Notification = {
-	id: number
-	data: {
+	id: string
+	data?: {
 		title: string
 		content: string
 	}
-	used_dates: any[]
-	created_at: string
-	updated_at: string
+	used_dates?: string[]
+	created_at?: string
+	updated_at?: string
 }
 
 export type NotificationsTable = {

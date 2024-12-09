@@ -9,7 +9,6 @@ use App\Data\RoleData;
 use App\Data\PermissionData;
 use App\Notifications\RoleCreated;
 use App\Notifications\RoleUpdated;
-use App\Notifications\RoleDeleted;
 
 class RoleService
 {
@@ -120,7 +119,6 @@ class RoleService
 	public function destroyRole(Role $role): bool
 	{
 		$deletedRole = $role->delete();
-		if ($deletedRole) $this->notificationsForSuperAdmins('delete', $role);
 
 		return $deletedRole;
 	}
@@ -145,19 +143,10 @@ class RoleService
 
 		switch ($case) {
 			case 'create':
-				foreach ($superadmin->users as $user) {
-					$user->notify(new RoleCreated($role));
-				}
+				$superadmin->users->each->notify(new RoleCreated($role));
 				break;
 			case 'update':
-				foreach ($superadmin->users as $user) {
-					$user->notify(new RoleUpdated($role));
-				}
-				break;
-			case 'delete':
-				foreach ($superadmin->users as $user) {
-					$user->notify(new RoleDeleted($role));
-				}
+				$superadmin->users->each->notify(new RoleUpdated($role));
 				break;
 		}
 	}

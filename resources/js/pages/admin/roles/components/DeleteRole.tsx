@@ -52,6 +52,7 @@ export const DeleteRole = () => {
 										destroy(
 											route('admin.role.destroy', {
 												role: state.selectedRole,
+												page: route().params.page,
 											}),
 											{
 												preserveScroll: true,

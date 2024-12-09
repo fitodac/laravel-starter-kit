@@ -23,8 +23,6 @@ export const TemplatesList = () => {
 		props: { templates },
 	} = usePage<PageProps>()
 
-	console.log('templates', templates)
-
 	const { links, current_page, data } = templates as EmailTemplateTable
 
 	const sort = useTableSorting()
@@ -38,6 +36,7 @@ export const TemplatesList = () => {
 					th: '[&]:first:rounded-none [&]:last:rounded-none [&]:last:text-right',
 					td: 'border-t border-content3',
 				}}
+				selectionMode="single"
 				bottomContent={<NotificationsListPager {...{ links, current_page }} />}
 			>
 				<TableHeader columns={columns}>

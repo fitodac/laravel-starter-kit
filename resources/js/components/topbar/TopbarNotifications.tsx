@@ -1,5 +1,5 @@
+import { useEffect, useState } from 'react'
 import { usePage } from '@inertiajs/react'
-import { useEffect } from 'react'
 import {
 	Dropdown,
 	DropdownItem,
@@ -13,25 +13,35 @@ import { router } from '@inertiajs/react'
 import { alowedTags } from '@/helpers/safelySetInnerHtmlAllowedTags'
 
 import type { PageProps } from '@/types'
+import type { Notification } from '@/types/notifications'
+
+const addMarkAllAsReadButton = (notifications: Notification[]) => {
+	notifications.push({ id: 'mark-all-as-read' })
+	return notifications
+}
 
 export const TopbarNotifications = () => {
-	const { props } = usePage<PageProps>()
 	const {
 		auth: { user, notifications },
-	} = props
+	} = usePage<PageProps>().props
+
+	const [notificationsList, setNotificationsList] = useState(
+		notifications.filter((e) => e.read_at === null)
+	)
+
+	console.log('notifications inicial', notifications)
 
 	// Laravel  Echo
 	useEffect(() => {
 		if (user) {
 			window.Echo.private(`App.Models.User.${user.id}`)
 				.notification((notification: any) => {
-					console.log('notification', notification)
+					const _notifications = notifications
+					_notifications.unshift(notification)
 
-					const { id, title, content } = notification
-					notifications.unshift({
-						id,
-						data: { title, content },
-					})
+					console.log('_notifications', _notifications)
+
+					setNotificationsList(addMarkAllAsReadButton(_notifications))
 				})
 				.error((error: any) => {
 					console.error('Error al conectarse al canal:', error)
@@ -43,24 +53,20 @@ export const TopbarNotifications = () => {
 		}
 	}, [user])
 
-	if (!user || !notifications) return null
-
 	useEffect(() => {
-		const index = notifications.findIndex((n) => n.id === 'mark-all-as-read')
-
-		if (notifications && notifications.length && index === -1) {
-			notifications.push({ id: 'mark-all-as-read' })
+		if (notifications && notifications.length) {
+			setNotificationsList(addMarkAllAsReadButton([...notifications]))
 		}
-	}, [notifications])
+	}, [])
 
-	if (!notifications.length) return <TriggerButton />
+	if (!notificationsList.length) return <TriggerButton />
 
 	return (
 		<>
 			<Dropdown radius="none" placement="bottom-end">
 				<DropdownTrigger className="cursor-pointer select-none">
 					<div>
-						<TriggerButton {...{ notifications }} />
+						<TriggerButton {...{ notifications: notificationsList }} />
 					</div>
 				</DropdownTrigger>
 
@@ -69,8 +75,8 @@ export const TopbarNotifications = () => {
 					variant="light"
 					classNames={{ base: 'w-96' }}
 				>
-					{notifications.map((notification, idx) =>
-						idx === notifications.length - 1 ? (
+					{notificationsList.map((notification: NotificationItem) =>
+						notification.id === 'mark-all-as-read' ? (
 							<DropdownItem
 								key={notification.id}
 								as={Button}
@@ -78,6 +84,7 @@ export const TopbarNotifications = () => {
 								className="mt-3"
 								onPress={() => {
 									router.post(route('notification.markAllAsRead'))
+									setNotificationsList([])
 								}}
 							>
 								{t('Mark all as read')}
@@ -85,17 +92,17 @@ export const TopbarNotifications = () => {
 						) : (
 							<DropdownItem
 								key={notification.id}
-								textValue={String(notification.data.title)}
+								textValue={String(notification.title)}
 								description={
 									<ReactSafelySetInnerHTML allowedTags={alowedTags}>
-										{`<div class="[&>*]:truncate [&>*:not(:first-child)]:hidden">${notification.data.content}</div>`}
+										{`<div class="[&>*]:truncate [&>*:not(:first-child)]:hidden">${notification.content}</div>`}
 									</ReactSafelySetInnerHTML>
 								}
 								onPress={() => router.visit(route('notification.index'))}
 							>
 								<div className="text-xs font-medium">
 									<ReactSafelySetInnerHTML>
-										{notification.data.title}
+										{notification.title ?? ''}
 									</ReactSafelySetInnerHTML>
 								</div>
 							</DropdownItem>
@@ -133,4 +140,11 @@ const TriggerButton = ({ notifications = [] }: { notifications?: any[] }) => {
 				)}
 		</Button>
 	)
+}
+
+type NotificationItem = {
+	id: string
+	title?: string
+	content?: string
+	type?: string
 }

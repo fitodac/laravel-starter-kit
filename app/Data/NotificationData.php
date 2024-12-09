@@ -11,6 +11,11 @@ class NotificationData extends Data
 		public string $id,
 		public ?string $read_at,
 		public array $data,
+		public ?string $title,
+		public ?string $content,
 		public string $created_at,
-	) {}
+	) {
+		$this->title = $data['title'];
+		$this->content = $data['content'];
+	}
 }

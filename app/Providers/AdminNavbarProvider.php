@@ -119,11 +119,26 @@ class AdminNavbarProvider extends ServiceProvider
 			];
 
 			$menu[] = $item;
+
+			// User dashboard
+			$menu[] = [
+				'key' => 'user_dashboard',
+				'title' => 'User dashboard',
+				'menu' => [
+					[
+						'label' => 'User dashboard',
+						'route' => 'dashboard',
+						'icon' => 'ri-home-5-line'
+					]
+				]
+			];
 		}
 
 
-		return Cache::remember($cacheKey, 60, function () use ($menu) {
-			return $menu;
-		});
+		return $menu;
+
+		// return Cache::remember($cacheKey, 60, function () use ($menu) {
+		// 	return $menu;
+		// });
 	}
 }

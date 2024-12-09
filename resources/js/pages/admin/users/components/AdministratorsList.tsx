@@ -113,6 +113,7 @@ export const AdministratorsList = () => {
 						th: '[&]:first:rounded-none [&]:last:rounded-none',
 						td: 'border-t border-content3',
 					}}
+					selectionMode="single"
 					bottomContent={
 						<div className="flex justify-between items-center">
 							<div className="text-sm flex-1">

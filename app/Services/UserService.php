@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 use App\Notifications\UserCreated;
 use App\Notifications\UserUpdated;
-use App\Notifications\UserDeleted;
 
 
 class UserService
@@ -124,7 +123,6 @@ class UserService
 	{
 		$this->removeImageProfile($user);
 		$deletedUser = $user->delete();
-		if ($deletedUser) $this->notificationsForSuperAdmins('delete', $user);
 
 		return $deletedUser;
 	}
@@ -217,19 +215,10 @@ class UserService
 
 		switch ($case) {
 			case 'create':
-				foreach ($superadmin->users as $user) {
-					$user->notify(new UserCreated($user));
-				}
+				$superadmin->users->each->notify(new UserCreated($user));
 				break;
 			case 'update':
-				foreach ($superadmin->users as $user) {
-					$user->notify(new UserUpdated($user));
-				}
-				break;
-			case 'delete':
-				foreach ($superadmin->users as $user) {
-					$user->notify(new UserDeleted($user));
-				}
+				$superadmin->users->each->notify(new UserUpdated($user));
 				break;
 		}
 	}

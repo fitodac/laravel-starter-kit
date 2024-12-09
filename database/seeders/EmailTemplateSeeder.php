@@ -31,14 +31,7 @@ class EmailTemplateSeeder extends Seeder
 			'type' => 'App\Notifications\UserUpdated'
 		]);
 
-		// User deleted
-		EmailTemplate::create([
-			'name' => 'User deleted',
-			'subject' => 'User deleted',
-			'body' => '<p>Foo bar</p>',
-			'view' => 'mail.user',
-			'type' => 'App\Notifications\UserDeleted'
-		]);
+
 
 		// Role created
 		EmailTemplate::create([
@@ -58,14 +51,7 @@ class EmailTemplateSeeder extends Seeder
 			'type' => 'App\Notifications\RoleUpdated'
 		]);
 
-		// Role deleted
-		EmailTemplate::create([
-			'name' => 'Role deleted',
-			'subject' => 'Role deleted',
-			'body' => '<p>Foo bar</p>',
-			'view' => 'mail.role',
-			'type' => 'App\Notifications\RoleDelted'
-		]);
+
 
 		// Permission created
 		EmailTemplate::create([
@@ -84,14 +70,14 @@ class EmailTemplateSeeder extends Seeder
 			'view' => 'mail.permission',
 			'type' => 'App\Notifications\PermissionUpdated'
 		]);
-
-		// Permission deleted
+		
+		// New user registered
 		EmailTemplate::create([
-			'name' => 'Permission deleted',
-			'subject' => 'Permission deleted',
-			'body' => '<p>Foo bar</p>',
-			'view' => 'mail.permission',
-			'type' => 'App\Notifications\PermissionDeleted'
+			'name' => 'New user registered',
+			'subject' => 'New User Registration',
+			'body' => '<p>A new user has registered:</p>',
+			'view' => 'mail.newUserRegistered',
+			'type' => 'App\Notifications\NewUserRegisteredNotification'
 		]);
 	}
 }
