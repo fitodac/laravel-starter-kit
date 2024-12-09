@@ -62,8 +62,8 @@ class PermissionCreated extends Notification implements ShouldQueue
 		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->first();
 
 		return [
-			'title' => $this->replaceShortcodes($template->title, 'permission.', $this->permission) ?? 'Permission created',
-			'content' => $this->replaceShortcodes($template->content, 'permission.', $this->permission) ?? 'A new permission has been created.'
+			'title' => $this->replaceShortcodes($template->title ?? '', 'permission.', $this->permission) ?? 'Permission created',
+			'content' => $this->replaceShortcodes($template->content ?? '', 'permission.', $this->permission) ?? 'A new permission has been created.'
 		];
 	}
 }

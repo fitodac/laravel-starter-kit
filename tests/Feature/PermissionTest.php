@@ -8,6 +8,7 @@ use Tests\TestCase;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\User;
+use Database\Factories\AccountFactory;
 
 class PermissionTest extends TestCase
 {
@@ -26,24 +27,34 @@ class PermissionTest extends TestCase
 
 		// Create a user with roles and permissions
 		$this->user = User::factory()->create();
-		$userRole = Role::create(['name' => 'Super Admin']);
-
+		Role::create(['name' => 'Super Admin']);
 		$this->user->assignRole('Super Admin');
+		AccountFactory::new()->create(['user_id' => $this->user->id]);
 	}
+
 
 	/**
 	 * Test that the permissions list can be rendered
+	 *
+	 * This test sends a GET request to the permissions list route and asserts
+	 * that the response status is 200, indicating that the permissions list
+	 * view is successfully accessible.
 	 *
 	 * @return void
 	 */
 	public function test_permissions_list_can_be_rendered()
 	{
-		$response = $this->actingAs($this->user)->get(route('dashboard.permission.list'));
+		$response = $this->actingAs($this->user)->get(route('admin.permission.list'));
 		$response->assertStatus(200);
 	}
 
+
 	/**
 	 * Test that a permission can be created
+	 *
+	 * This test sends a POST request to the permission store route with a valid
+	 * permission name. After the request is sent, it asserts that the response
+	 * redirects to the permissions list view.
 	 *
 	 * @return void
 	 */
@@ -51,15 +62,20 @@ class PermissionTest extends TestCase
 	{
 		$response = $this
 			->actingAs($this->user)
-			->post(route('dashboard.permission.store'), [
+			->post(route('admin.permission.store'), [
 				'name' => 'Test Permission',
 			]);
 
 		$response->assertStatus(302);
 	}
 
+
 	/**
 	 * Test that a permission can be edited
+	 *
+	 * This test creates a permission, sends a PUT request to the permission
+	 * update route with a valid permission name, and then asserts that the
+	 * response redirects to the permissions list view.
 	 *
 	 * @return void
 	 */
@@ -69,13 +85,18 @@ class PermissionTest extends TestCase
 
 		$response = $this
 			->actingAs($this->user)
-			->put(route('dashboard.permission.update', $permission));
+			->put(route('admin.permission.update', $permission));
 
 		$response->assertStatus(302);
 	}
 
+
 	/**
 	 * Test that a permission can be deleted
+	 *
+	 * This test creates a permission, sends a DELETE request to the permission
+	 * destroy route, and asserts that the response status is 302, indicating
+	 * a successful redirect after deletion.
 	 *
 	 * @return void
 	 */
@@ -85,7 +106,7 @@ class PermissionTest extends TestCase
 
 		$response = $this
 			->actingAs($this->user)
-			->delete(route('dashboard.permission.destroy', $permission));
+			->delete(route('admin.permission.destroy', $permission));
 
 		$response->assertStatus(302);
 	}
