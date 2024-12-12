@@ -20,6 +20,12 @@ class ProfileUpdateRequest extends FormRequest
 			'job_title' => 'nullable|string|max:255',
 			'company' => 'nullable|string|max:255',
 			'bio' => 'nullable|string|max:1000',
+			'phone' => 'nullable|string|max:20',
+			'birth_date' => 'nullable|date',
+			'address' => 'nullable|string|max:255',
+			'city' => 'nullable|string|max:255',
+			'country' => 'nullable|string|max:255',
+			'zip' => 'nullable|string|max:10',
 
 			// Preferences and settings
 			'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -32,16 +38,6 @@ class ProfileUpdateRequest extends FormRequest
 			$rules['username'] = 'required|string|max:255|unique:users,username,' . $this->id;
 			$rules['email'] = 'required|email|lowercase|unique:users,email,' . $this->id;
 		}
-
-		if ($this->has('personal_information')) {
-			$rules['phone'] = 'nullable|string|max:20';
-			$rules['birth_date'] = 'nullable|date';
-			$rules['address'] = 'nullable|string|max:255';
-			$rules['city'] = 'nullable|string|max:255';
-			$rules['country'] = 'nullable|string|max:255';
-			$rules['zip'] = 'nullable|string|max:10';
-		}
-
 
 		return $rules;
 	}

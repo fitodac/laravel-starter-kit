@@ -2,7 +2,7 @@ import { type PropsWithChildren, useEffect } from 'react'
 import { Head } from '@inertiajs/react'
 import { useMainStore } from '@/store'
 import { useWindowWidth } from '@/hooks'
-import { Sidebar, Header } from './components'
+import { Sidebar, Header, Footer } from './components'
 
 interface Props extends PropsWithChildren {
 	pageTitle: string
@@ -29,7 +29,9 @@ export const LayoutCorporate = ({ children, pageTitle }: Props) => {
 			<div className="flex min-h-svh">
 				<Sidebar />
 
-				<div className="flex-1">{children}</div>
+				<div className="flex-1">
+					{children} <Footer />
+				</div>
 			</div>
 		</>
 	)

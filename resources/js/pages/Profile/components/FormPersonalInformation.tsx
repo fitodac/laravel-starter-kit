@@ -20,7 +20,6 @@ export const FormPersonalInformation = () => {
 			city: user.city,
 			country: user.country,
 			zip: user.zip,
-			personal_information: true,
 		})
 
 	const submit = (e: FormEvent) => {
