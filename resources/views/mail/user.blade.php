@@ -1,3 +1,7 @@
+@include('mail.partials.header')
+
 <div>
-    <!-- Simplicity is the essence of happiness. - Cedric Bledsoe -->
+	{!! $content !!}
 </div>
+
+@include('mail.partials.footer')

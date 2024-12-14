@@ -45,13 +45,14 @@ class RoleController extends Controller
 	 */
 	public function store(Request $request): RedirectResponse
 	{
+		$page = $request->query('page', 1);
 
 		$role = $this->roleService->storeRole($request);
 
 		if (!$role) return back()->with('error', 'Role creation failed.');
 
 		return redirect()
-			->route('admin.role.list')
+			->route('admin.role.list', compact('page'))
 			->with('success', 'Role created successfully.');
 	}
 
@@ -63,12 +64,14 @@ class RoleController extends Controller
 	 */
 	public function update(Request $request, Role $role): RedirectResponse
 	{
+		$page = $request->query('page', 1);
+
 		$role = $this->roleService->updateRole($request, $role);
 
 		if (!$role) return back()->with('error', 'Role update failed.');
 
 		return redirect()
-			->route('admin.role.list')
+			->route('admin.role.list', compact('page'))
 			->with('success', 'Role updated successfully.');
 	}
 

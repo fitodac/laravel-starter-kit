@@ -29,8 +29,6 @@ export const TopbarNotifications = () => {
 		notifications.filter((e) => e.read_at === null)
 	)
 
-	console.log('notifications inicial', notifications)
-
 	// Laravel  Echo
 	useEffect(() => {
 		if (user) {
@@ -38,8 +36,6 @@ export const TopbarNotifications = () => {
 				.notification((notification: any) => {
 					const _notifications = notifications
 					_notifications.unshift(notification)
-
-					console.log('_notifications', _notifications)
 
 					setNotificationsList(addMarkAllAsReadButton(_notifications))
 				})

@@ -39,7 +39,9 @@ export const TipTapPage = ({ template }: Props) => {
 						{...{
 							charactersLimit: 500,
 							code: true,
+							codeBlock: true,
 							blockquote: true,
+							alignment: true,
 							headings: true,
 							separator: true,
 							lists: true,

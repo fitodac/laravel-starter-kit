@@ -16,15 +16,8 @@ interface Props {
 }
 
 const Page = ({ template }: Props) => {
-	const {
-		data,
-		errors,
-		setData,
-		processing,
-		clearErrors,
-		inputName,
-		submit,
-	} = useActions()
+	const { data, errors, setData, processing, clearErrors, inputName, submit } =
+		useActions()
 
 	return (
 		<>
@@ -59,6 +52,8 @@ const Page = ({ template }: Props) => {
 									<Wysiwyg
 										{...{
 											headings: true,
+											alignment: true,
+											codeBlock: true,
 											initialContent: String(data.body),
 											onUpdate: (val) => setData('body', val),
 										}}

@@ -1,9 +1,10 @@
 import { cn, Divider } from '@nextui-org/react'
+import { t } from '@/i18n'
 
 export const Footer = () => {
 	return (
 		<div className="px-5 py-7 md:px-6 md:py-8">
-			<div className="flex justify-between">
+			<div className="flex justify-between select-none">
 				<div className="">
 					<nav
 						className={cn(
@@ -31,7 +32,7 @@ export const Footer = () => {
 				</div>
 
 				<div className="text-foreground-600 text-xs tracking-wide">
-					Made with Laravel, React and Inertia
+					{t('Made with Laravel, React and Inertia')}
 				</div>
 			</div>
 		</div>

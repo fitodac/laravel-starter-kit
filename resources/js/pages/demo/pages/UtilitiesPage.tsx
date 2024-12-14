@@ -1,4 +1,4 @@
-import { Layout } from '@/layouts/admin/Layout'
+import { Layout } from '@/layouts/user/Layout'
 import {
 	ImageUploaderPage,
 	IconsPage,

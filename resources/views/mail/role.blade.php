@@ -1,4 +1,7 @@
+@include('mail.partials.header')
+
 <div>
-	<p>Esto es un email...</p>
-	<!-- It is never too late to be what you might have been. - George Eliot -->
+	{!! $content !!}
 </div>
+
+@include('mail.partials.footer')

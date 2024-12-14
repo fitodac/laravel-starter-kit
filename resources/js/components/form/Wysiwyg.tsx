@@ -6,17 +6,28 @@ import DragHandle from '@tiptap-pro/extension-drag-handle-react'
 import { Color } from '@tiptap/extension-color'
 import TextStyle from '@tiptap/extension-text-style'
 import Placeholder from '@tiptap/extension-placeholder'
-import { cn, Button, Divider } from '@nextui-org/react'
+import TextAlign from '@tiptap/extension-text-align'
+import {
+	cn,
+	Button,
+	Divider,
+	Dropdown,
+	DropdownTrigger,
+	DropdownMenu,
+	DropdownItem,
+} from '@nextui-org/react'
 import { t } from '@/i18n'
 
 interface Props {
 	charactersLimit?: number
 	code?: boolean
+	codeBlock?: boolean
 	blockquote?: boolean
 	headings?: boolean
 	separator?: boolean
 	lists?: boolean
 	colorSelector?: boolean
+	alignment?: boolean
 	minHeight?: number
 	placeholder?: string
 	initialContent?: string | JSONContent | JSONContent[] | null
@@ -29,8 +40,10 @@ export const Wysiwyg = ({
 	separator,
 	blockquote,
 	code,
+	codeBlock,
 	lists,
 	colorSelector,
+	alignment,
 	minHeight = 170,
 	placeholder = '',
 	initialContent = '',
@@ -48,6 +61,9 @@ export const Wysiwyg = ({
 			TextStyle,
 			Underline,
 			Placeholder.configure({ placeholder }),
+			TextAlign.configure({
+				types: ['heading', 'paragraph'],
+			}),
 		],
 		content: initialContent,
 		onUpdate: ({ editor }) => onUpdate(editor.getHTML()),
@@ -66,7 +82,7 @@ export const Wysiwyg = ({
 		<div>
 			<div className="bg-default-100 rounded-medium">
 				<div className="px-3 py-2">
-					<div className="flex h-10">
+					<div className="flex gap-1 h-10">
 						<Button
 							isIconOnly
 							size="sm"
@@ -74,6 +90,7 @@ export const Wysiwyg = ({
 							variant="light"
 							onClick={() => editor.chain().focus().toggleBold().run()}
 							color={editor.isActive('bold') ? 'primary' : 'default'}
+							title={String(t('Bold'))}
 						>
 							<i className="ri-bold ri-lg" />
 						</Button>
@@ -85,6 +102,7 @@ export const Wysiwyg = ({
 							variant="light"
 							onClick={() => editor.chain().focus().toggleUnderline().run()}
 							color={editor.isActive('underline') ? 'primary' : 'default'}
+							title={String(t('Underline'))}
 						>
 							<i className="ri-underline ri-lg" />
 						</Button>
@@ -96,6 +114,7 @@ export const Wysiwyg = ({
 							variant="light"
 							onClick={() => editor.chain().focus().toggleItalic().run()}
 							color={editor.isActive('italic') ? 'primary' : 'default'}
+							title={String(t('Italic'))}
 						>
 							<i className="ri-italic ri-lg" />
 						</Button>
@@ -107,6 +126,7 @@ export const Wysiwyg = ({
 							variant="light"
 							onClick={() => editor.chain().focus().toggleStrike().run()}
 							color={editor.isActive('strike') ? 'primary' : 'default'}
+							title={String(t('Strikethrough'))}
 						>
 							<i className="ri-strikethrough ri-lg" />
 						</Button>
@@ -126,6 +146,7 @@ export const Wysiwyg = ({
 											? 'primary'
 											: 'default'
 									}
+									title={String(t('Heading 2'))}
 								>
 									<i className="ri-h-2 ri-lg" />
 								</Button>
@@ -143,6 +164,7 @@ export const Wysiwyg = ({
 											? 'primary'
 											: 'default'
 									}
+									title={String(t('Heading 3'))}
 								>
 									<i className="ri-h-3 ri-lg" />
 								</Button>
@@ -160,22 +182,123 @@ export const Wysiwyg = ({
 											? 'primary'
 											: 'default'
 									}
+									title={String(t('Heading 4'))}
 								>
 									<i className="ri-h-4 ri-lg" />
 								</Button>
-								{/* <Dropdown>
-									<DropdownTrigger>
-										<Button isIconOnly variant="light">
-											<i className="ri-heading" />
-										</Button>
-									</DropdownTrigger>
-									<DropdownMenu aria-label="Headings">
-										<DropdownItem key="new">
-											<i className="ri-h-2" />
-										</DropdownItem>
-									</DropdownMenu>
-								</Dropdown> */}
 							</>
+						)}
+
+						{alignment && (
+							<Dropdown
+								placement="bottom-start"
+								classNames={{
+									content: 'min-w-1 p-0',
+								}}
+							>
+								<DropdownTrigger>
+									<Button
+										isIconOnly
+										size="sm"
+										radius="lg"
+										variant="light"
+										title={String(t('Alignment'))}
+									>
+										{editor.isActive({ textAlign: 'center' }) ? (
+											<i className="ri-align-center ri-lg" />
+										) : editor.isActive({ textAlign: 'right' }) ? (
+											<i className="ri-align-right ri-lg" />
+										) : editor.isActive({ textAlign: 'justify' }) ? (
+											<i className="ri-align-justify ri-lg" />
+										) : (
+											<i className="ri-align-left ri-lg" />
+										)}
+									</Button>
+								</DropdownTrigger>
+
+								<DropdownMenu
+									aria-label="Alignment"
+									classNames={{
+										list: 'flex-row gap-1.5',
+									}}
+									itemClasses={{
+										base: 'p-0 hover:bg-transparent',
+									}}
+								>
+									<DropdownItem>
+										<Button
+											isIconOnly
+											size="sm"
+											radius="lg"
+											variant="light"
+											onClick={() =>
+												editor.chain().focus().setTextAlign('left').run()
+											}
+											color={
+												editor.isActive({ textAlign: 'left' })
+													? 'primary'
+													: 'default'
+											}
+										>
+											<i className="ri-align-left ri-lg" />
+										</Button>
+									</DropdownItem>
+									<DropdownItem>
+										<Button
+											isIconOnly
+											size="sm"
+											radius="lg"
+											variant="light"
+											onClick={() =>
+												editor.chain().focus().setTextAlign('center').run()
+											}
+											color={
+												editor.isActive({ textAlign: 'center' })
+													? 'primary'
+													: 'default'
+											}
+										>
+											<i className="ri-align-center ri-lg" />
+										</Button>
+									</DropdownItem>
+									<DropdownItem>
+										<Button
+											isIconOnly
+											size="sm"
+											radius="lg"
+											variant="light"
+											onClick={() =>
+												editor.chain().focus().setTextAlign('right').run()
+											}
+											color={
+												editor.isActive({ textAlign: 'right' })
+													? 'primary'
+													: 'default'
+											}
+										>
+											<i className="ri-align-right ri-lg" />
+										</Button>
+									</DropdownItem>
+									<DropdownItem>
+										<Button
+											isIconOnly
+											size="sm"
+											radius="lg"
+											variant="light"
+											onClick={() =>
+												editor.chain().focus().setTextAlign('justify').run()
+											}
+											color={
+												editor.isActive({ textAlign: 'justify' })
+													? 'primary'
+													: 'default'
+											}
+										>
+											<i className="ri-align-justify ri-lg" />
+										</Button>
+									</DropdownItem>
+								</DropdownMenu>
+							</Dropdown>
 						)}
 
 						{blockquote && (
@@ -186,37 +309,40 @@ export const Wysiwyg = ({
 								variant="light"
 								onClick={() => editor.chain().focus().toggleBlockquote().run()}
 								color={editor.isActive('blockquote') ? 'primary' : 'default'}
+								title={String(t('Blockquote'))}
 							>
 								<i className="ri-double-quotes-l ri-lg" />
 							</Button>
 						)}
 
+						{code || codeBlock ? <Divider orientation="vertical" /> : <></>}
+
 						{code && (
-							<>
-								<Divider orientation="vertical" />
+							<Button
+								isIconOnly
+								size="sm"
+								radius="lg"
+								variant="light"
+								onClick={() => editor.chain().focus().toggleCode().run()}
+								color={editor.isActive('code') ? 'primary' : 'default'}
+								title={String(t('Code'))}
+							>
+								<i className="ri-code-s-slash-line ri-lg" />
+							</Button>
+						)}
 
-								<Button
-									isIconOnly
-									size="sm"
-									radius="lg"
-									variant="light"
-									onClick={() => editor.chain().focus().toggleCode().run()}
-									color={editor.isActive('code') ? 'primary' : 'default'}
-								>
-									<i className="ri-code-s-slash-line ri-lg" />
-								</Button>
-
-								<Button
-									isIconOnly
-									size="sm"
-									radius="lg"
-									variant="light"
-									onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-									color={editor.isActive('codeBlock') ? 'primary' : 'default'}
-								>
-									<i className="ri-code-box-line ri-lg" />
-								</Button>
-							</>
+						{codeBlock && (
+							<Button
+								isIconOnly
+								size="sm"
+								radius="lg"
+								variant="light"
+								onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+								color={editor.isActive('codeBlock') ? 'primary' : 'default'}
+								title={String(t('Code block'))}
+							>
+								<i className="ri-code-box-line ri-lg" />
+							</Button>
 						)}
 
 						{separator && (
@@ -234,6 +360,7 @@ export const Wysiwyg = ({
 									color={
 										editor.isActive('horizontalRule') ? 'primary' : 'default'
 									}
+									title={String(t('Horizontal rule'))}
 								>
 									<i className="ri-separator ri-lg" />
 								</Button>
@@ -253,6 +380,7 @@ export const Wysiwyg = ({
 										editor.chain().focus().toggleBulletList().run()
 									}
 									color={editor.isActive('bulletList') ? 'primary' : 'default'}
+									title={String(t('Unordered list'))}
 								>
 									<i className="ri-list-unordered ri-lg" />
 								</Button>
@@ -266,6 +394,7 @@ export const Wysiwyg = ({
 										editor.chain().focus().toggleOrderedList().run()
 									}
 									color={editor.isActive('orderedList') ? 'primary' : 'default'}
+									title={String(t('Ordered list'))}
 								>
 									<i className="ri-list-ordered ri-lg" />
 								</Button>
@@ -290,6 +419,7 @@ export const Wysiwyg = ({
 											: 'default'
 									}
 									data-testid="setPrimary"
+									title={String(t('Text color'))}
 								>
 									<i className="bg-primary w-6 h-6 rounded-full block" />
 								</Button>

@@ -21,11 +21,15 @@ export const NotificationsListCell = ({ item, key, dispatch }: Props) => {
 			return (
 				<div className="flex gap-10">
 					<div className="flex-1">
-						<h4 className="text-base font-semibold">{item.data.title}</h4>
+						{item.data?.title && (
+							<h4 className="text-base font-semibold">{item.data.title}</h4>
+						)}
 
-						<ReactSafelySetInnerHTML allowedTags={alowedTags}>
-							{`<div class="text-[.8rem] text-foreground-800 leading-tight font-medium mt-1 space-y-1">${item.data.content}</div>`}
-						</ReactSafelySetInnerHTML>
+						{item.data?.content && (
+							<ReactSafelySetInnerHTML allowedTags={alowedTags}>
+								{`<div class="text-[.8rem] text-foreground-800 leading-tight font-medium mt-1 space-y-1">${item.data.content}</div>`}
+							</ReactSafelySetInnerHTML>
+						)}
 
 						<div className="text-foreground-500 text-xs flex gap-10 mt-2">
 							<span>#{item.id}</span>
