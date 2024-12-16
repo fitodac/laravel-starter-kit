@@ -13,10 +13,12 @@ interface Props {
 
 const pageTitle = t('Log in').toString()
 
+const params = new URLSearchParams(window.location.search) ?? null
+
 const Page = ({ status, canResetPassword }: Props) => {
 	const { data, setData, post, processing, errors, reset } = useForm({
-		login: '',
-		password: '',
+		login: 'maxmasterson',
+		password: 'password',
 		remember: false,
 	})
 
@@ -34,7 +36,7 @@ const Page = ({ status, canResetPassword }: Props) => {
 	const submit: FormEventHandler = (e) => {
 		e.preventDefault()
 
-		post(route('login'), {
+		post(route('login', { redirect: params ? params.get('redirect') : null }), {
 			onError: (error) => console.log(error),
 		})
 	}

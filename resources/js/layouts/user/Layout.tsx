@@ -1,6 +1,6 @@
 import { type PropsWithChildren } from 'react'
 import { usePage } from '@inertiajs/react'
-import { useColorMode } from '@/hooks'
+import { useColorMode, useKeepSessionAlive } from '@/hooks'
 import { LayoutCorporate } from './corporate/Layout'
 import { LayoutExecutive } from './executive/Layout'
 import { Toastify } from '@/components'
@@ -14,6 +14,7 @@ interface Props extends PropsWithChildren {
 export const Layout = ({ children, pageTitle }: Props) => {
 	const { adminLayout } = usePage<PageProps>().props
 	const { colorMode } = useColorMode()
+	useKeepSessionAlive()
 
 	switch (adminLayout) {
 		case 'executive':

@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useIdleTimer } from 'react-idle-timer'
 import { t } from '@/i18n'
 import {
@@ -8,19 +8,46 @@ import {
 	ModalContent,
 	useDisclosure,
 } from '@nextui-org/react'
-import { router } from '@inertiajs/react'
+import { router, usePage } from '@inertiajs/react'
+import axios from 'axios'
 
-const promptBeforeIdle = 60 * 1000
-const timeout = 120 * 60 * 1000
+import type { User, PageProps } from '@/types'
 
-interface Props extends PropsWithChildren {
-	user: any
-}
+const promptBeforeIdle =
+	parseInt(import.meta.env.VITE_PROMPT_BERFORE_IDLE ?? '60') * 1000
+const timeout = parseInt(import.meta.env.VITE_IDLE_TIMEOUT ?? '120') * 60 * 1000
 
-export const SessionAware = ({ children, user }: Props) => {
+// window.addEventListener('beforeunload', (event) => {
+// 	event.preventDefault()
+// 	event.returnValue = ''
+// })
+
+export const SessionAware = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const [state, setState] = useState<string>('Active')
 	const [remaining, setRemaining] = useState<number>(0)
+
+	useEffect(() => {
+		console.log('SessionAware')
+
+		return () => {
+			console.log('SessionAware unmount')
+		}
+		// const interval = setInterval(() => {
+		// 	axios.get(route('userid')).then((resp) => console.log('resp', resp.data))
+		// }, 500)
+
+		// return () => {
+		// 	clearInterval(interval)
+		// }
+	}, [])
+
+	return null
+
+	const { props } = usePage<PageProps>()
+	const {
+		auth: { user },
+	} = props
 
 	/**
 	 * Called when the user is considered idle.
@@ -29,6 +56,7 @@ export const SessionAware = ({ children, user }: Props) => {
 	 * authenticated.
 	 */
 	const onIdle = () => {
+		console.log('onIdle')
 		setState('Idle')
 		if (user) {
 			router.post(route('logout'))
@@ -41,6 +69,7 @@ export const SessionAware = ({ children, user }: Props) => {
 	 * Sets the application state back to 'Active' and closes the modal.
 	 */
 	const onActive = () => {
+		console.log('onActive')
 		setState('Active')
 		onClose()
 	}
@@ -52,17 +81,26 @@ export const SessionAware = ({ children, user }: Props) => {
 	 * is authenticated.
 	 */
 	const onPrompt = () => {
+		console.log('onPrompt')
 		setState('Prompted')
 		if (user) {
 			onOpen()
 		}
 	}
 
+	const onAction = async (event?: Event) => {
+		axios.get(route('userid')).then((resp) => console.log('resp', resp.data))
+
+		// setEvent(event?.type ?? 'Event')
+		// setCount(count + 1)
+	}
+
 	const { getRemainingTime, activate } = useIdleTimer({
 		onIdle, // The user is considered idle
 		onActive, // The user is considered active
 		onPrompt, // The user is prompted to stay
-		promptBeforeIdle, // The time in milliseconds before the user is considered idle
+		onAction,
+		promptBeforeIdle, // The time in milliseconds before the user is prompted to stay
 		timeout, // The time in milliseconds before the user is considered idle
 		throttle: 500, // The time in milliseconds before the user is considered active
 	})
@@ -88,8 +126,6 @@ export const SessionAware = ({ children, user }: Props) => {
 
 	return (
 		<>
-			{children}
-
 			<Modal
 				isOpen={isOpen}
 				backdrop="blur"

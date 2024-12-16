@@ -9,6 +9,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Admin\DashboardController;
 
+use Illuminate\Http\Request;
+
 
 Route::get('/', function () {
 	return Inertia::render('Welcome', [
@@ -58,7 +60,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('notifications', [NotificationController::class, 'index'])->name('notification.index');
 	Route::post('notification-templates/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notification.markAsRead');
 	Route::post('notification-templates/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notification.markAllAsRead');
+
+
+	/**
+	 * Keep alive
+	 */
+	Route::get('keep-alive', function () {
+		return response()->json(['status' => 'alive']);
+	})->name('keepAlive');
 });
+
 
 
 Route::get('dashboard', [DashboardController::class, 'index'])
