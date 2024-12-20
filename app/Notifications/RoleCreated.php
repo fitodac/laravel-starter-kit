@@ -46,9 +46,9 @@ class RoleCreated extends Notification implements ShouldQueue
 		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
 
 		return (new MailMessage)
-			->subject($template->subject ?? 'Role created')
+			->subject($this->replaceShortcodes($template->subject, 'role.', $this->role) ?? 'Role created')
 			->view($template->view ?? 'mail.role', [
-				'content' => $template->body ?? ''
+				'content' => $this->replaceShortcodes($template->body, 'role.', $this->role) ?? ''
 			]);
 	}
 

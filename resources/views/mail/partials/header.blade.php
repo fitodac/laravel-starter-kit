@@ -9,7 +9,7 @@
 
 <body
 	style="
-		background-color: #f4f4f4; 
+		background-color: #FFF; 
 		color: #333; 
 		font-size:15px;
 		font-family: sans-serif; 

@@ -46,9 +46,9 @@ class PermissionCreated extends Notification implements ShouldQueue
 		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
 
 		return (new MailMessage)
-			->subject($template->subject ?? 'Permission created')
+			->subject($this->replaceShortcodes($template->subject, 'permission.', $this->permission) ?? 'Permission created')
 			->view($template->view ?? 'mail.permission', [
-				'content' => $template->body ?? ''
+				'content' => $this->replaceShortcodes($template->body, 'permission.', $this->permission) ?? ''
 			]);
 	}
 

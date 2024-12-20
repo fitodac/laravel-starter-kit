@@ -6,12 +6,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Spatie\Permission\Models\Role;
-use App\Models\NotificationTemplate;
 use App\Models\EmailTemplate;
 use App\Traits\NotificationTrait;
 
-class RoleUpdated extends Notification implements ShouldQueue
+class ResetPasswordNotification extends Notification implements ShouldQueue
 {
 	use Queueable, NotificationTrait;
 
@@ -19,7 +17,7 @@ class RoleUpdated extends Notification implements ShouldQueue
 	 * Create a new notification instance.
 	 */
 	public function __construct(
-		private readonly Role $role
+		private readonly string $resetUrl
 	) {
 		//
 	}
@@ -31,11 +29,7 @@ class RoleUpdated extends Notification implements ShouldQueue
 	 */
 	public function via(object $notifiable): array
 	{
-		return [
-			'mail',
-			'database',
-			'broadcast'
-		];
+		return ['mail'];
 	}
 
 	/**
@@ -46,10 +40,15 @@ class RoleUpdated extends Notification implements ShouldQueue
 		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
 
 		return (new MailMessage)
-			->subject($this->replaceShortcodes($template->subject, 'role.', $this->role) ?? 'Role updated')
-			->view($template->view ?? 'mail.role', [
-				'content' => $this->replaceShortcodes($template->body, 'role.', $this->role) ?? ''
+			->subject($template->subject ?? 'Reset password notification')
+			->view($template->view ?? 'mail.reset-password', [
+				'content' => $template->body ?? ''
 			]);
+
+		// return (new MailMessage)
+		// 	->line('The introduction to the notification.')
+		// 	->action('Notification Action', url('/'))
+		// 	->line('Thank you for using our application!');
 	}
 
 	/**
@@ -59,11 +58,8 @@ class RoleUpdated extends Notification implements ShouldQueue
 	 */
 	public function toArray(object $notifiable): array
 	{
-		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->firstOrFail();
-
 		return [
-			'title' => $this->replaceShortcodes($template->title, 'role.', $this->role) ?? 'Role updated',
-			'content' => $this->replaceShortcodes($template->content, 'role.', $this->role) ?? 'The role <strong>' . $this->role->name . '</strong> has been updated.'
+			//
 		];
 	}
 }

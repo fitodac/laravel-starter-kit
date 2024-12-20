@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Auth;
 class PermissionService
 {
 
+	/**
+	 * Retrieve a list of permissions.
+	 *
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
 	public function permissionList(Request $request): array
 	{
 		$per_page = config('settings.general.per_page');
@@ -45,6 +52,12 @@ class PermissionService
 	}
 
 
+	/**
+	 * Store a newly created permission in storage.
+	 *
+	 * @param Request $request
+	 * @return Permission
+	 */
 	public function storePermission(Request $request): Permission
 	{
 		$request->validate([
@@ -59,11 +72,19 @@ class PermissionService
 
 		$permission = Permission::create(['name' => $name]);
 
-		$this->notifyByMail('create', $permission);
+		$this->notificationsForSuperAdmins('create', $permission);
 
 		return $permission;
 	}
 
+
+	/**
+	 * Update the specified permission in storage.
+	 *
+	 * @param Request $request
+	 * @param Permission $permission
+	 * @return Permission
+	 */
 
 	public function updatePermission(Request $request, Permission $permission): Permission
 	{
@@ -77,20 +98,23 @@ class PermissionService
 		$name = preg_replace('/\s+/', ' ', $request->name);
 		$name = preg_replace('/[^A-Za-z0-9\s]/', '', $name);
 
-		$permission->update(['name' => $name]);
+		$permission->update(['name' => trim($name)]);
 
-		$this->notifyByMail('update', $permission);
+		$this->notificationsForSuperAdmins('update', $permission);
 
 		return $permission;
 	}
 
 
+	/**
+	 * Delete the specified permission.
+	 *
+	 * @param Permission $permission
+	 * @return bool
+	 */
 	public function destroyPermission(Permission $permission): bool
 	{
-		$user = Auth::user();
-
 		$deletedPermission = $permission->delete();
-		if ($deletedPermission) $this->notifyByMail('delete', $permission);
 
 		return $deletedPermission;
 	}
@@ -103,13 +127,14 @@ class PermissionService
 	 * @param Permission $permission
 	 * @return void
 	 */
-	protected function notifyByMail($case, Permission $permission)
+	protected function notificationsForSuperAdmins($case, Permission $permission)
 	{
 		$superadmin = Role::findByName('Super Admin');
 
 		switch ($case) {
 			case 'create':
 				$superadmin->users->each->notify(new PermissionCreated($permission));
+				break;
 			case 'update':
 				$superadmin->users->each->notify(new PermissionUpdated($permission));
 				break;

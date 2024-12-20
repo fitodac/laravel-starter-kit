@@ -46,9 +46,9 @@ class UserUpdated extends Notification implements ShouldQueue
 		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
 
 		return (new MailMessage)
-			->subject($template->subject ?? 'User updated')
+			->subject($this->replaceShortcodes($template->subject, 'user.', $this->user) ?? 'User updated')
 			->view($template->view ?? 'mail.user', [
-				'content' => $template->body ?? ''
+				'content' => $this->replaceShortcodes($template->body, 'user.', $this->user) ?? ''
 			]);
 	}
 

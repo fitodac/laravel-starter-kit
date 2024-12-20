@@ -98,9 +98,7 @@ class RoleService
 		$name = preg_replace('/\s+/', ' ', $request->name);
 		$name = preg_replace('/[^A-Za-z0-9\s]/', '', $name);
 
-		$role->update([
-			'name' => trim($name)
-		]);
+		$role->update(['name' => trim($name)]);
 		$role->syncPermissions($request->permissions);
 
 		$this->notificationsForSuperAdmins('update', $role);

@@ -25,6 +25,11 @@ class EmailTemplateController extends Controller
 		$templates = EmailTemplate::orderBy($request->order ?? 'id', $request->dir === 'ascending' ? 'asc' : 'desc')
 			->paginate($per_page);
 
+		$templates->getCollection()->transform(function ($template) {
+			$template->shortcodes = json_decode($template->shortcodes, true);
+			return $template;
+		});
+
 		$templates = EmailTemplateData::collect($templates);
 
 		return Inertia::render('admin/emails/Index', compact('templates'));
@@ -38,6 +43,9 @@ class EmailTemplateController extends Controller
 	 */
 	public function edit(EmailTemplate $template)
 	{
+		$template->shortcodes = json_decode($template->shortcodes, true) ?? [];
+		$template = EmailTemplateData::from($template);
+
 		return Inertia::render('admin/emails/Edit', compact('template'));
 	}
 
@@ -50,6 +58,6 @@ class EmailTemplateController extends Controller
 	public function update(UpdateEmailTemplateRequest $request, EmailTemplate $template)
 	{
 		$template->update($request->all());
-		return redirect()->route('admin.emailTemplates.index')->with('success', 'Email template updated successfully');
+		return back()->with('success', 'Template updated successfully');
 	}
 }

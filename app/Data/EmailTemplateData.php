@@ -13,5 +13,6 @@ class EmailTemplateData extends Data
 		public string $body,
 		public string $view,
 		public string $type,
+		public array $shortcodes,
 	) {}
 }

@@ -39,6 +39,7 @@ export type EmailTemplate = {
 	subject: string
 	body: string
 	type: string
+	shortcodes: { [key: string]: string }[]
 }
 
 export type EmailTemplateTable = {

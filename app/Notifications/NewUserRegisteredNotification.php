@@ -6,11 +6,13 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\EmailTemplate;
+use App\Traits\NotificationTrait;
 use App\Models\User;
 
 class NewUserRegisteredNotification extends Notification
 {
-	use Queueable;
+	use Queueable, NotificationTrait;
 
 
 	/**
@@ -39,13 +41,19 @@ class NewUserRegisteredNotification extends Notification
 	 */
 	public function toMail(object $notifiable): MailMessage
 	{
+		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
+
 		return (new MailMessage)
-			->subject('New User Registration')
-			->greeting('Hello Admin!')
-			->line('A new user has registered:')
-			->line('Name: ' . $this->newUser->name)
-			->line('Email: ' . $this->newUser->email)
-			->line('Username: ' . $this->newUser->username);
+			->subject($template->subject ?? 'New User Registration')
+			->view($template->view ?? 'mail.new-user-registered', [
+				'content' => $template->body ?? ''
+			]);
+
+		// ->greeting('Hello Admin!')
+		// ->line('A new user has registered:')
+		// ->line('Name: ' . $this->newUser->name)
+		// ->line('Email: ' . $this->newUser->email)
+		// ->line('Username: ' . $this->newUser->username);
 	}
 
 	/**

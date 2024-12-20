@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Lab404\Impersonate\Models\Impersonate;
+use App\Notifications\ResetPasswordNotification;
 use App\Data\AccountData;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -135,5 +134,18 @@ class User extends Authenticatable implements MustVerifyEmail
 	public function getAccount(): AccountData
 	{
 		return AccountData::from($this->account->toArray());
+	}
+
+
+	/**
+	 * Send a password reset notification to the user.
+	 *
+	 * @param  string  $token
+	 */
+	public function sendPasswordResetNotification($token): void
+	{
+		$url = 'https://example.com/reset-password?token=' . $token;
+
+		$this->notify(new ResetPasswordNotification($url));
 	}
 }

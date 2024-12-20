@@ -18,6 +18,7 @@ return new class extends Migration
 			$table->text('body')->nullable();
 			$table->string('view')->default('');
 			$table->string('type')->default('');
+			$table->json('shortcodes');
 			$table->timestamps();
 		});
 	}

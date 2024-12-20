@@ -14,10 +14,12 @@ class EmailTemplate extends Model
 		'subject',
 		'body',
 		'view',
-		'type'
+		'type',
+		'shortcodes'
 	];
 
 	public $casts = [
-		'body' => 'json'
+		'body' => 'json',
+		'shortcodes' => 'json',
 	];
 }
