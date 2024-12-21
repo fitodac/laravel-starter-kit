@@ -19,7 +19,7 @@ const Page = ({ template }: Props) => {
 	const { data, errors, setData, processing, clearErrors, inputName, submit } =
 		useActions()
 
-	const { shortcodes } = template
+	const { shortcodes } = template ?? {}
 
 	return (
 		<>
@@ -70,7 +70,6 @@ const Page = ({ template }: Props) => {
 												{...{
 													headings: true,
 													alignment: true,
-													codeBlock: true,
 													initialContent: String(data.body),
 													onUpdate: (val) => setData('body', val),
 												}}
@@ -109,24 +108,23 @@ const Page = ({ template }: Props) => {
 									<h4 className="text-sm font-semibold">{t('Shortcodes')}</h4>
 
 									<div className="mt-3">
-										{Object.keys(shortcodes).map((key: string, idx: number) => (
-											<div key={key}>
+										{Object.entries(shortcodes).map((e, idx) => (
+											<div key={idx}>
 												{idx > 0 && <Divider className="mt-4 mb-2" />}
 
 												<Snippet
-													// size="sm"
 													hideSymbol
 													radius="none"
 													classNames={{
 														base: 'bg-transparent w-full p-0',
 													}}
 												>
-													<strong>{key}</strong>
+													<strong>{e[0]}</strong>
 												</Snippet>
 
-												{shortcodes[key] && (
+												{e[1].length && (
 													<div className="text-xs text-foreground-500 font-medium">
-														{shortcodes[key]}
+														{e[1]}
 													</div>
 												)}
 											</div>

@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { EditorContent, useEditor, type JSONContent } from '@tiptap/react'
 import { Underline } from '@tiptap/extension-underline'
 import StarterKit from '@tiptap/starter-kit'
@@ -17,6 +18,7 @@ import {
 	DropdownItem,
 } from '@nextui-org/react'
 import { t } from '@/i18n'
+import { extensionLink } from './wysiwyg/Link'
 
 interface Props {
 	charactersLimit?: number
@@ -24,6 +26,7 @@ interface Props {
 	codeBlock?: boolean
 	blockquote?: boolean
 	headings?: boolean
+	link?: boolean
 	separator?: boolean
 	lists?: boolean
 	colorSelector?: boolean
@@ -37,6 +40,7 @@ interface Props {
 export const Wysiwyg = ({
 	charactersLimit,
 	headings = true,
+	link = true,
 	separator,
 	blockquote,
 	code,
@@ -64,6 +68,7 @@ export const Wysiwyg = ({
 			TextAlign.configure({
 				types: ['heading', 'paragraph'],
 			}),
+			extensionLink,
 		],
 		content: initialContent,
 		onUpdate: ({ editor }) => onUpdate(editor.getHTML()),
@@ -78,6 +83,35 @@ export const Wysiwyg = ({
 			  )
 			: 0
 
+	const setLink = useCallback(() => {
+		const previousUrl = editor.getAttributes('link').href
+		const url = window.prompt('URL', previousUrl)
+
+		// cancelled
+		if (url === null) {
+			return
+		}
+
+		// empty
+		if (url === '') {
+			editor.chain().focus().extendMarkRange('link').unsetLink().run()
+
+			return
+		}
+
+		// update link
+		try {
+			editor
+				.chain()
+				.focus()
+				.extendMarkRange('link')
+				.setLink({ href: url })
+				.run()
+		} catch (e) {
+			alert(e.message)
+		}
+	}, [editor])
+
 	return (
 		<div>
 			<div className="bg-default-100 rounded-medium">
@@ -88,7 +122,7 @@ export const Wysiwyg = ({
 							size="sm"
 							radius="lg"
 							variant="light"
-							onClick={() => editor.chain().focus().toggleBold().run()}
+							onPress={() => editor.chain().focus().toggleBold().run()}
 							color={editor.isActive('bold') ? 'primary' : 'default'}
 							title={String(t('Bold'))}
 						>
@@ -100,7 +134,7 @@ export const Wysiwyg = ({
 							size="sm"
 							radius="lg"
 							variant="light"
-							onClick={() => editor.chain().focus().toggleUnderline().run()}
+							onPress={() => editor.chain().focus().toggleUnderline().run()}
 							color={editor.isActive('underline') ? 'primary' : 'default'}
 							title={String(t('Underline'))}
 						>
@@ -112,7 +146,7 @@ export const Wysiwyg = ({
 							size="sm"
 							radius="lg"
 							variant="light"
-							onClick={() => editor.chain().focus().toggleItalic().run()}
+							onPress={() => editor.chain().focus().toggleItalic().run()}
 							color={editor.isActive('italic') ? 'primary' : 'default'}
 							title={String(t('Italic'))}
 						>
@@ -124,7 +158,7 @@ export const Wysiwyg = ({
 							size="sm"
 							radius="lg"
 							variant="light"
-							onClick={() => editor.chain().focus().toggleStrike().run()}
+							onPress={() => editor.chain().focus().toggleStrike().run()}
 							color={editor.isActive('strike') ? 'primary' : 'default'}
 							title={String(t('Strikethrough'))}
 						>
@@ -138,7 +172,7 @@ export const Wysiwyg = ({
 									size="sm"
 									radius="lg"
 									variant="light"
-									onClick={() =>
+									onPress={() =>
 										editor.chain().focus().toggleHeading({ level: 2 }).run()
 									}
 									color={
@@ -156,7 +190,7 @@ export const Wysiwyg = ({
 									size="sm"
 									radius="lg"
 									variant="light"
-									onClick={() =>
+									onPress={() =>
 										editor.chain().focus().toggleHeading({ level: 3 }).run()
 									}
 									color={
@@ -174,7 +208,7 @@ export const Wysiwyg = ({
 									size="sm"
 									radius="lg"
 									variant="light"
-									onClick={() =>
+									onPress={() =>
 										editor.chain().focus().toggleHeading({ level: 4 }).run()
 									}
 									color={
@@ -185,6 +219,37 @@ export const Wysiwyg = ({
 									title={String(t('Heading 4'))}
 								>
 									<i className="ri-h-4 ri-lg" />
+								</Button>
+							</>
+						)}
+
+						{link && (
+							<>
+								<Button
+									isIconOnly
+									size="sm"
+									radius="lg"
+									variant="light"
+									onPress={setLink}
+									className={editor.isActive('link') ? '' : ''}
+									color={editor.isActive('link') ? 'primary' : 'default'}
+									title={String(t('Link'))}
+								>
+									<i className="ri-link"></i>
+								</Button>
+
+								<Button
+									isIconOnly
+									size="sm"
+									radius="lg"
+									variant="light"
+									color="default"
+									onPress={() => editor.chain().focus().unsetLink().run()}
+									disabled={!editor.isActive('link')}
+									className={editor.isActive('link') ? '' : 'opacity-30'}
+									title={String(t('Unlink'))}
+								>
+									<i className="ri-link-unlink"></i>
 								</Button>
 							</>
 						)}
@@ -231,7 +296,7 @@ export const Wysiwyg = ({
 											size="sm"
 											radius="lg"
 											variant="light"
-											onClick={() =>
+											onPress={() =>
 												editor.chain().focus().setTextAlign('left').run()
 											}
 											color={
@@ -249,7 +314,7 @@ export const Wysiwyg = ({
 											size="sm"
 											radius="lg"
 											variant="light"
-											onClick={() =>
+											onPress={() =>
 												editor.chain().focus().setTextAlign('center').run()
 											}
 											color={
@@ -267,7 +332,7 @@ export const Wysiwyg = ({
 											size="sm"
 											radius="lg"
 											variant="light"
-											onClick={() =>
+											onPress={() =>
 												editor.chain().focus().setTextAlign('right').run()
 											}
 											color={
@@ -285,7 +350,7 @@ export const Wysiwyg = ({
 											size="sm"
 											radius="lg"
 											variant="light"
-											onClick={() =>
+											onPress={() =>
 												editor.chain().focus().setTextAlign('justify').run()
 											}
 											color={
@@ -307,7 +372,7 @@ export const Wysiwyg = ({
 								size="sm"
 								radius="lg"
 								variant="light"
-								onClick={() => editor.chain().focus().toggleBlockquote().run()}
+								onPress={() => editor.chain().focus().toggleBlockquote().run()}
 								color={editor.isActive('blockquote') ? 'primary' : 'default'}
 								title={String(t('Blockquote'))}
 							>
@@ -323,7 +388,7 @@ export const Wysiwyg = ({
 								size="sm"
 								radius="lg"
 								variant="light"
-								onClick={() => editor.chain().focus().toggleCode().run()}
+								onPress={() => editor.chain().focus().toggleCode().run()}
 								color={editor.isActive('code') ? 'primary' : 'default'}
 								title={String(t('Code'))}
 							>
@@ -337,7 +402,7 @@ export const Wysiwyg = ({
 								size="sm"
 								radius="lg"
 								variant="light"
-								onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+								onPress={() => editor.chain().focus().toggleCodeBlock().run()}
 								color={editor.isActive('codeBlock') ? 'primary' : 'default'}
 								title={String(t('Code block'))}
 							>
@@ -354,7 +419,7 @@ export const Wysiwyg = ({
 									size="sm"
 									radius="lg"
 									variant="light"
-									onClick={() =>
+									onPress={() =>
 										editor.chain().focus().setHorizontalRule().run()
 									}
 									color={
@@ -376,7 +441,7 @@ export const Wysiwyg = ({
 									size="sm"
 									radius="lg"
 									variant="light"
-									onClick={() =>
+									onPress={() =>
 										editor.chain().focus().toggleBulletList().run()
 									}
 									color={editor.isActive('bulletList') ? 'primary' : 'default'}
@@ -390,7 +455,7 @@ export const Wysiwyg = ({
 									size="sm"
 									radius="lg"
 									variant="light"
-									onClick={() =>
+									onPress={() =>
 										editor.chain().focus().toggleOrderedList().run()
 									}
 									color={editor.isActive('orderedList') ? 'primary' : 'default'}
@@ -410,7 +475,7 @@ export const Wysiwyg = ({
 									size="sm"
 									radius="lg"
 									variant="light"
-									onClick={() =>
+									onPress={() =>
 										editor.chain().focus().setColor('#958DF1').run()
 									}
 									color={

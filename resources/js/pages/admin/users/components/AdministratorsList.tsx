@@ -19,6 +19,8 @@ import { t } from '@/i18n'
 import { Link, router, usePage } from '@inertiajs/react'
 import type { PageProps, User, Users } from '@/types'
 
+import userBlank from '@/assets/img/blank-462x265.webp'
+
 export const AdministratorsList = () => {
 	const { users, total } = usePage<PageProps>().props as unknown as {
 		users: Users
@@ -45,8 +47,16 @@ export const AdministratorsList = () => {
 					<>
 						<div className="flex gap-x-3 items-center">
 							<Avatar
-								src={`/storage/img/users/avatars/${user.profile_picture}`}
-								name={user.name[0] + user.lastname[0]}
+								src={
+									user.profile_picture
+										? `/storage/img/users/avatars/${user.profile_picture}`
+										: userBlank
+								}
+								name={
+									user.name && user.lastname
+										? user.name[0] + ' ' + user.lastname[0]
+										: t('Name not provided').toString()
+								}
 								radius="full"
 								isBordered={user.sessions?.length ? true : false}
 								color={user.sessions?.length ? 'success' : 'default'}
@@ -55,11 +65,20 @@ export const AdministratorsList = () => {
 						</div>
 					</>
 				),
-				name: (
-					<div className="truncate text-ellipsis max-w-28">{`${user.name} ${user.lastname}`}</div>
-				),
-				company: (
+				name:
+					user.name && user.lastname ? (
+						<div className="truncate text-ellipsis max-w-28">{`${user.name} ${user.lastname}`}</div>
+					) : (
+						<div className="text-xs text-foreground-500 font-medium">
+							{t('Not provided')}
+						</div>
+					),
+				company: user.company ? (
 					<div className="truncate text-ellipsis max-w-28">{user.company}</div>
+				) : (
+					<div className="text-xs text-foreground-500 font-medium">
+						{t('Not provided')}
+					</div>
 				),
 				status: (
 					<>

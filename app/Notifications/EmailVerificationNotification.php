@@ -6,12 +6,12 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Spatie\Permission\Models\Permission;
+use App\Models\User;
 use App\Models\NotificationTemplate;
 use App\Models\EmailTemplate;
 use App\Traits\NotificationTrait;
 
-class PermissionCreated extends Notification implements ShouldQueue
+class EmailVerificationNotification extends Notification implements ShouldQueue
 {
 	use Queueable, NotificationTrait;
 
@@ -19,7 +19,7 @@ class PermissionCreated extends Notification implements ShouldQueue
 	 * Create a new notification instance.
 	 */
 	public function __construct(
-		private readonly Permission $permission
+		private readonly string $url
 	) {
 		//
 	}
@@ -31,11 +31,7 @@ class PermissionCreated extends Notification implements ShouldQueue
 	 */
 	public function via(object $notifiable): array
 	{
-		return [
-			'mail',
-			'database',
-			'broadcast'
-		];
+		return ['mail', 'broadcast'];
 	}
 
 	/**
@@ -45,10 +41,14 @@ class PermissionCreated extends Notification implements ShouldQueue
 	{
 		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
 
+		if (str_contains($template->body, '[url]')) {
+			$template->body = str_replace('[url]', $this->url, $template->body);
+		}
+
 		return (new MailMessage)
-			->subject($this->replaceShortcodes($template->subject, 'permission.', $this->permission) ?? 'Permission created')
+			->subject($template->subject ?? 'Verify your email address')
 			->markdown('mail::message', [
-				'content' => $this->replaceShortcodes($template->body, 'permission.', $this->permission) ?? '',
+				'content' => $template->body ?? '',
 				'slot' => ''
 			]);
 	}
@@ -60,11 +60,8 @@ class PermissionCreated extends Notification implements ShouldQueue
 	 */
 	public function toArray(object $notifiable): array
 	{
-		$template = NotificationTemplate::where('type', $this->getNameSpaceAndFileName())->first();
-
 		return [
-			'title' => $this->replaceShortcodes($template->title ?? '', 'permission.', $this->permission) ?? 'Permission created',
-			'content' => $this->replaceShortcodes($template->content ?? '', 'permission.', $this->permission) ?? 'A new permission has been created.'
+			//
 		];
 	}
 }

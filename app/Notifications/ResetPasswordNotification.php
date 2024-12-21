@@ -39,16 +39,16 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
 	{
 		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
 
+		if (str_contains($template->body, '[url]')) {
+			$template->body = str_replace('[url]', $this->resetUrl, $template->body);
+		}
+
 		return (new MailMessage)
 			->subject($template->subject ?? 'Reset password notification')
-			->view($template->view ?? 'mail.reset-password', [
-				'content' => $template->body ?? ''
+			->markdown('mail::message', [
+				'content' => $template->body ?? '',
+				'slot' => ''
 			]);
-
-		// return (new MailMessage)
-		// 	->line('The introduction to the notification.')
-		// 	->action('Notification Action', url('/'))
-		// 	->line('Thank you for using our application!');
 	}
 
 	/**

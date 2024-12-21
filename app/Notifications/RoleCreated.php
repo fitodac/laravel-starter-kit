@@ -47,8 +47,9 @@ class RoleCreated extends Notification implements ShouldQueue
 
 		return (new MailMessage)
 			->subject($this->replaceShortcodes($template->subject, 'role.', $this->role) ?? 'Role created')
-			->view($template->view ?? 'mail.role', [
-				'content' => $this->replaceShortcodes($template->body, 'role.', $this->role) ?? ''
+			->markdown('mail::message', [
+				'content' => $this->replaceShortcodes($template->body, 'role.', $this->role) ?? '',
+				'slot' => ''
 			]);
 	}
 

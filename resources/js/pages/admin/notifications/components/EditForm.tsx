@@ -27,6 +27,8 @@ export const EditForm = () => {
 
 	const { shortcodes } = state.selectedNotification ?? {}
 
+	console.log('shortcodes', shortcodes)
+
 	return (
 		<div
 			className={cn(
@@ -118,7 +120,6 @@ export const EditForm = () => {
 											{idx > 0 && <Divider className="mt-4 mb-2" />}
 
 											<Snippet
-												// size="sm"
 												hideSymbol
 												radius="none"
 												classNames={{

@@ -51,4 +51,8 @@
 		font-size: 1rem;
 		font-weight: 700;
 	}
+
+	a {
+		@apply text-primary underline;
+	}
 }

@@ -15,7 +15,7 @@ class NotificationData extends Data
 		public ?string $content,
 		public string $created_at,
 	) {
-		$this->title = $data['title'];
-		$this->content = $data['content'];
+		$this->title = $data['title'] ?? null;
+		$this->content = $data['content'] ?? null;
 	}
 }

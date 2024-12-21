@@ -33,6 +33,7 @@
 		"@tiptap-pro/extension-drag-handle-react": "^2.11.2",
 		"@tiptap/extension-character-count": "^2.6.6",
 		"@tiptap/extension-color": "^2.6.6",
+		"@tiptap/extension-link": "^2.10.4",
 		"@tiptap/extension-placeholder": "^2.6.6",
 		"@tiptap/extension-text-align": "^2.10.3",
 		"@tiptap/extension-text-style": "^2.6.6",

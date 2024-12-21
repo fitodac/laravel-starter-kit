@@ -55,7 +55,6 @@ trait NotificationTrait
 			$content = str_replace('[app.name]', config('app.name'), $content);
 		}
 
-
 		return preg_replace_callback('/\[(.*?)\]/', function ($matches) use ($shortcodes, $shorcodeKey, $collection) {
 			$key = $matches[1];
 

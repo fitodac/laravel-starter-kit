@@ -1,12 +1,5 @@
 import { useRef } from 'react'
-import {
-	Image,
-	Button,
-	CardHeader,
-	CardBody,
-	Chip,
-	cn,
-} from '@nextui-org/react'
+import { Image, Button } from '@nextui-org/react'
 import { useUser } from '@/hooks'
 import { t } from '@/i18n'
 import { router, usePage } from '@inertiajs/react'
@@ -72,6 +65,9 @@ export const FormProfileImage = () => {
 						? `/storage/img/users/avatars/${user.profile_picture}`
 						: userBlank
 				}
+				classNames={{
+					img: 'object-cover',
+				}}
 			/>
 
 			<input
@@ -111,43 +107,6 @@ export const FormProfileImage = () => {
 						{t('Remove picture')}
 					</Button>
 				)}
-
-				{/* 
-				<Chip
-					size="sm"
-					color="primary"
-					avatar={
-						<>
-							<i className="ri-image-line ri-lg ml-1 -top-px relative" />
-						</>
-					}
-					className={cn(
-						'cursor-pointer select-none md:order-2',
-						'hover:opacity-90 focus:opacity-50 active:opacity-disabled'
-					)}
-					onClick={uploadNewProfilePicture}
-				>
-					{user.profile_picture ? t('Change picture') : t('Add profile image')}
-				</Chip>
-
-				<div>
-					{user.profile_picture && (
-						<Chip
-							size="sm"
-							color="danger"
-							avatar={
-								<>
-									<i className="ri-delete-bin-2-line ri-lg ml-1 -top-px relative" />
-								</>
-							}
-							className="cursor-pointer select-none hover:opacity-90 focus:opacity-50 active:opacity-disabled"
-							onClick={removeImage}
-						>
-							{t('Remove picture')}
-						</Chip>
-					)}
-				</div> 
-				*/}
 			</div>
 		</div>
 	)

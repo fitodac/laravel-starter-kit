@@ -30,82 +30,37 @@ class EmailTemplateSeeder extends Seeder
 			'[app.name]' => "Application name"
 		], $this->permissionShortcodes());
 
-		// User created
-		EmailTemplate::create([
-			'name' => 'User created',
-			'subject' => '🎉 New User Created in [app.name]',
-			'body' => "
-				<p>Hi,</p>
-				<p></p>
-				<p>Hope you're doing well!</p>
-				<p></p>
-				<p>I wanted to let you know that a new <strong>User</strong> has been created.</p>
-				<p>• Full Name: <strong>[user.name] [user.lastname]</strong></p>
-				<p>• Username: <strong>[user.username]</strong></p>
-				<p>• Email: <strong>[user.email]</strong></p>
-				<p></p>
-				<p>Thanks a bunch for your attention!</p>
-			",
-			'view' => 'mail.user',
-			'type' => 'App\Notifications\UserCreated',
-			'shortcodes' => json_encode($userShortcodes, true)
-		]);
-
-		// User updated
-		EmailTemplate::create([
-			'name' => 'User updated',
-			'subject' => '🔄 User Data Updated in [app.name]',
-			'body' => "
-				<p>Hi,</p>
-				<p></p>
-				<p>Hope you're doing well!</p>
-				<p></p>
-				<p>I wanted to let you know that a new <strong>User</strong> has been updated.</p>
-				<p>• Full Name: <strong>[user.name] [user.lastname]</strong></p>
-				<p>• Username: <strong>[user.username]</strong></p>
-				<p>• Email: <strong>[user.email]</strong></p>
-				<p></p>
-				<p>Thanks a bunch for your attention!</p>
-			",
-			'view' => 'mail.user',
-			'type' => 'App\Notifications\UserUpdated',
-			'shortcodes' => json_encode($userShortcodes, true)
-		]);
-
 
 
 		// Role created
 		EmailTemplate::create([
-			'name' => 'Role created',
-			'subject' => '🎉 New Role Created in [app.name]',
+			'name' => 'Notify admins when a ROLE is created',
+			'subject' => '[app.name] - New role created',
 			'body' => "
-				<p>Hi,</p>
-				<p></p>
-				<p>Hope you're doing well!</p>
+				<p><strong>Hello!</strong></p>
 				<p></p>
 				<p>I wanted to let you know that a new <strong>Role</strong> has been created.</p>
 				<p>• Role Name: <strong>[role.name]</strong></p>
 				<p></p>
-				<p>Thanks a bunch for your attention!</p>
+				<p>Best regards</p>
 			",
 			'view' => 'mail.role',
 			'type' => 'App\Notifications\RoleCreated',
 			'shortcodes' => json_encode($roleShortcodes, true)
 		]);
 
+
 		// Role updated
 		EmailTemplate::create([
-			'name' => 'Role updated',
-			'subject' => '🔄 Role Updated in [app.name]',
+			'name' => 'Notify admins when a ROLE is updated',
+			'subject' => '[app.name] - Role updated',
 			'body' => "
-				<p>Hi,</p>
-				<p></p>
-				<p>Hope you're doing well!</p>
+				<p><strong>Hello!</strong></p>
 				<p></p>
 				<p>I wanted to give you a heads-up that a <strong>Role</strong> has been updated.</p>
 				<p>• Role Name: <strong>[role.name]</strong></p>
 				<p></p>
-				<p>Thanks a bunch for your attention!</p>
+				<p>Best regards</p>
 			",
 			'view' => 'mail.role',
 			'type' => 'App\Notifications\RoleUpdated',
@@ -113,39 +68,35 @@ class EmailTemplateSeeder extends Seeder
 		]);
 
 
-
 		// Permission created
 		EmailTemplate::create([
-			'name' => 'Permission created',
-			'subject' => '🎉 New Permission Created in [app.name]',
+			'name' => 'Notify admins when a PERMISSION is created',
+			'subject' => '[app.name] - New permission created',
 			'body' => "
-				<p>Hi,</p>
-				<p></p>
-				<p>Hope you're doing well!</p>
+				<p><strong>Hello!</strong></p>
 				<p></p>
 				<p>I wanted to let you know that a new <strong>Permission</strong> has been created.</p>
 				<p>• Permission Name: <strong>[permission.name]</strong></p>
 				<p></p>
-				<p>Thanks a bunch for your attention!</p>
+				<p>Best regards</p>
 			",
 			'view' => 'mail.permission',
 			'type' => 'App\Notifications\PermissionCreated',
 			'shortcodes' => json_encode($permissionShortcodes, true)
 		]);
 
+
 		// Permission updated
 		EmailTemplate::create([
-			'name' => 'Permission updated',
-			'subject' => '🔄 Permission Updated in [app.name]',
+			'name' => 'Notify admins when a PERMISSION is updated',
+			'subject' => '[app.name] - Permission updated',
 			'body' => "
-				<p>Hi,</p>
-				<p></p>
-				<p>Hope you're doing well!</p>
+				<p><strong>Hello!</strong></p>
 				<p></p>
 				<p>I wanted to give you a heads-up that a <strong>Permission</strong> has been updated.</p>
 				<p>• Permission Name: <strong>[permission.name]</strong></p>
 				<p></p>
-				<p>Thanks a bunch for your attention!</p>
+				<p>Best regards</p>
 			",
 			'view' => 'mail.permission',
 			'type' => 'App\Notifications\PermissionUpdated',
@@ -153,71 +104,165 @@ class EmailTemplateSeeder extends Seeder
 		]);
 
 
-
-		// New user registered
+		// User created
 		EmailTemplate::create([
-			'name' => 'New user registered',
-			'subject' => '🎉 New User Registration in [App Name]',
+			'name' => 'Notify admins when a USER is created',
+			'subject' => '[app.name] - New user created',
 			'body' => "
-				
-				<p><strong>Hi [Admin's Name],</strong></p>
+				<p><strong>Hello!</strong></p>
 				<p></p>
-				<p>Hope you're having a fantastic day!</p>
+				<p>I wanted to let you know that a new <strong>User</strong> has been created.</p>
+				<p>• Full Name: <strong>[user.name] [user.lastname]</strong></p>
+				<p>• Username: <strong>[user.username]</strong></p>
+				<p>• Email: <strong>[user.email]</strong></p>
 				<p></p>
-				<p>I wanted to let you know that a new <strong>User</strong> has <strong>registered</strong> in <strong>[App Name]</strong>. Here are the details:</p>
-				<p>• <strong>Username:</strong> [Username]</p>
-				<p>• <strong>Full Name:</strong> [Full Name]</p>
-				<p>• <strong>Registration Date:</strong> [Date]</p>
-				<p>• <strong>Email:</strong> [User's Email Address]</p>
-				<p>• <strong>Role Assigned:</strong> [Role Name] (if applicable)</p>
-				<p>• <strong>Department:</strong> [Department Name] (if applicable)</p>
+				<p>Best regards</p>
+			",
+			'view' => 'mail.user',
+			'type' => 'App\Notifications\UserCreated',
+			'shortcodes' => json_encode($userShortcodes, true)
+		]);
+
+
+		// User updated
+		EmailTemplate::create([
+			'name' => 'Notify admins when a USER is updated',
+			'subject' => '[app.name] - User updated',
+			'body' => "
+				<p><strong>Hello!</strong></p>
 				<p></p>
-				<p><strong>What to Do Next:</strong></p>
-				<p>1. <strong>Verify Information:</strong> Ensure that all the user details are accurate and complete.</p>
-				<p>2. <strong>Assign Resources:</strong> Provide the new user with access to necessary tools and resources based on their role.</p>
-				<p>3. <strong>Welcome the User:</strong> Consider sending a welcome message or setting up an onboarding session to help them get started.</p>
+				<p>I wanted to let you know that a new <strong>User</strong> has been updated.</p>
+				<p>• Full Name: <strong>[user.name] [user.lastname]</strong></p>
+				<p>• Username: <strong>[user.username]</strong></p>
+				<p>• Email: <strong>[user.email]</strong></p>
 				<p></p>
-				<p>If you have any questions or need assistance with anything, feel free to reach out to the support team at [support email] or give us a call at [support phone number].</p>
+				<p>Best regards</p>
+			",
+			'view' => 'mail.user',
+			'type' => 'App\Notifications\UserUpdated',
+			'shortcodes' => json_encode($userShortcodes, true)
+		]);
+
+
+		// A new user registers
+		EmailTemplate::create([
+			'name' => 'Notify admins when a new USER registers',
+			'subject' => '[app.name] - New user registered',
+			'body' => "
+				<p><strong>Hello!</strong></p>
 				<p></p>
-				<p><strong>Thanks a bunch for your attention!</strong></p>
+				<p>A new <strong>User</strong> has registered on <strong>[app.name]</strong>. Here are the details:</p>
+				<p></p>
+				<p>• Username: <strong>[user.username]</strong></p>
+				<p>• Email: <strong>[user.email]</strong></p>
+				<p></p>
+				<p>Best regards</p>
 			",
 			'view' => 'mail.new-user-registered',
 			'type' => 'App\Notifications\NewUserRegisteredNotification',
-			'shortcodes' => json_encode([], true)
+			'shortcodes' => json_encode($userShortcodes, true)
 		]);
+
+
+		// Send account details to USER when a new USER is created
+		EmailTemplate::create([
+			'name' => 'Send account details to USER when a new USER is created',
+			'subject' => '[app.name] - Your account details',
+			'body' => "
+				<p>Welcome, [user.name]</p>
+				<p></p>
+				<p>
+					Your account has been created.
+					<br/>Here are your login details:
+				</p>
+				<p></p>
+				<p>Username: <strong>[user.username]</strong></p>
+				<p>Email: <strong>[user.email]</strong></p>
+				<p>Password: <strong>[user.password]</strong></p>
+				<p></p>
+				<p>Please keep this information secure.</p>
+				<p>For your own security, please change your password immediately after logging in.</p>
+				<p></p>
+				<p>Best regards</p>
+			",
+			'view' => '',
+			'type' => 'App\Notifications\SendUserDetailsOnCreateUserNotification',
+			'shortcodes' => json_encode($userShortcodes, true)
+		]);
+
+
+		// Send account details to USER when a USER is updated
+		EmailTemplate::create([
+			'name' => 'User details on update',
+			'subject' => '[app.name] - Your Account has been updated',
+			'body' => "
+				<p>Hello, [user.name]</p>
+				<p></p>
+				<p>
+					Your account has been updated.
+					<br/>Here are the details:
+				</p>
+				<p></p>
+				<p>Username: <strong>[user.username]</strong></p>
+				<p>Full name: <strong>[user.name] [user.lastname]</strong></p>
+				<p>Email: <strong>[user.email]</strong></p>
+				<p></p>
+				<p>Birth date: <strong>[user.birth_date]</strong></p>
+				<p></p>
+				<p>Phone: <strong>[user.phone]</strong></p>
+				<p>Address: <strong>[user.address]</strong></p>
+				<p></p>
+				<p>Company: <strong>[user.company]</strong></p>
+				<p>Job title: <strong>[user.address], [user.city], [user.country]</strong></p>
+				<p></p>
+				<p>Company: <strong>[user.company]</strong></p>
+				<p>Job title: <strong>[user.job_title]</strong></p>
+				<p></p>
+				<p>Please keep this information secure.</p>
+			",
+			'view' => '',
+			'type' => 'App\Notifications\SendUserDetailsOnUpdateUserNotification',
+			'shortcodes' => json_encode($userShortcodes, true)
+		]);
+
 
 		// Email address verification
 		EmailTemplate::create([
-			'name' => 'Email address verification',
-			'subject' => '🔒 Verify Your Email Address',
+			'name' => 'Verification email for a registered USER',
+			'subject' => '[app.name] - Verify your email address',
 			'body' => "
 				<p><strong>Hello!</strong></p>
 				<p></p>
         <p>Please use the link below to verify your email address.</p>
 				<p></p>
-				<p>[url]</p>
+				<p>
+					<a target='_blank' rel='noopener noreferrer nofollow' href='[url]'>[url]</a>
+				</p>
 				<p></p>
         <p>If you did not create an account, no further action is required.</p>
 				<p></p>
         <p>Best regards</p>
 			",
 			'view' => 'mail.verify-email',
-			'type' => 'App\Providers\AppServiceProvider',
+			'type' => 'App\Notifications\EmailVerificationNotification',
 			'shortcodes' => json_encode([
 				'[url]' => "The url for email verification"
 			], true)
 		]);
 
+
 		// Reset password notification
 		EmailTemplate::create([
-			'name' => 'Reset password notification',
-			'subject' => '🔒 Verify Your Email Address',
+			'name' => 'Request for password reset by USER',
+			'subject' => 'Reset Your Password',
 			'body' => "
 				<p><strong>Hello!</strong></p>
 				<p></p>
         <p>You are receiving this email because we received a password reset request for your account.</p>
 				<p></p>
-				<p>[url]</p>
+				<p>
+					<a target='_blank' rel='noopener noreferrer nofollow' href='[url]'>[url]</a>
+				</p>
 				<p></p>
         <p>This password reset link will expire in 60 minutes.</p>
         <p>If you did not request a password reset, no further action is required.</p>

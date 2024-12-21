@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\User;
 use App\Data\RoleData;
 use Illuminate\Http\Request;
-use App\Mail\SendUserDetails;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +14,8 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 use App\Notifications\UserCreated;
 use App\Notifications\UserUpdated;
+use App\Notifications\SendUserDetailsOnCreateUserNotification;
+use App\Notifications\SendUserDetailsOnUpdateUserNotification;
 
 
 class UserService
@@ -29,7 +30,10 @@ class UserService
 	{
 		$per_page = config('settings.general.per_page');
 
-		$users = User::role('User')->with('sessions')->paginate($per_page);
+		$users = User::role('User')
+			->with('sessions')
+			->orderBy('created_at', 'desc')
+			->paginate($per_page);
 		$total = User::count();
 
 		return compact('users', 'total');
@@ -44,7 +48,12 @@ class UserService
 	 */
 	public function storeUser(CreateUserRequest $request): User
 	{
-		$user = User::create($request->validated());
+
+		$password = $request->password;
+		$user = User::create(array_merge(
+			$request->validated(),
+			['password' => bcrypt($password)]
+		));
 
 		// Assign a role for the user
 		$role = Role::findById($request->role);
@@ -52,7 +61,7 @@ class UserService
 
 		// Send email with user details if send_details is true
 		if ($request->has('send_details') && $request->send_details) {
-			Mail::to($user->email)->send(new SendUserDetails($user, $request->password));
+			$this->notificationsForUsers('create', $user, $password);
 		}
 
 		$this->notificationsForSuperAdmins('create', $user);
@@ -108,6 +117,7 @@ class UserService
 		}
 
 		$this->notificationsForSuperAdmins('update', $user);
+		$this->notificationsForUsers('update', $user);
 
 		return $user;
 	}
@@ -219,6 +229,19 @@ class UserService
 				break;
 			case 'update':
 				$superadmin->users->each->notify(new UserUpdated($user));
+				break;
+		}
+	}
+
+
+	protected function notificationsForUsers($case, User $user, $password = null): void
+	{
+		switch ($case) {
+			case 'create':
+				$user->notify(new SendUserDetailsOnCreateUserNotification($user, $password));
+				break;
+			case 'update':
+				$user->notify(new SendUserDetailsOnUpdateUserNotification($user));
 				break;
 		}
 	}

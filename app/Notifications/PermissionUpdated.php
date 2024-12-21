@@ -47,8 +47,9 @@ class PermissionUpdated extends Notification implements ShouldQueue
 
 		return (new MailMessage)
 			->subject($this->replaceShortcodes($template->subject, 'permission.', $this->permission) ?? 'Permission updated')
-			->view($template->view ?? 'mail.permission', [
-				'content' => $this->replaceShortcodes($template->body, 'permission.', $this->permission) ?? ''
+			->markdown('mail::message', [
+				'content' => $this->replaceShortcodes($template->body, 'permission.', $this->permission) ?? '',
+				'slot' => ''
 			]);
 	}
 

@@ -31,8 +31,7 @@ class NewUserRegisteredNotification extends Notification
 	{
 		return [
 			'mail',
-			'database',
-			'broadcast'
+			'database'
 		];
 	}
 
@@ -44,16 +43,11 @@ class NewUserRegisteredNotification extends Notification
 		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
 
 		return (new MailMessage)
-			->subject($template->subject ?? 'New User Registration')
-			->view($template->view ?? 'mail.new-user-registered', [
-				'content' => $template->body ?? ''
+			->subject($this->replaceShortcodes($template->subject, 'user.', $this->newUser) ?? 'New user registered')
+			->markdown('mail::message', [
+				'content' => $this->replaceShortcodes($template->body, 'user.', $this->newUser) ?? '',
+				'slot' => ''
 			]);
-
-		// ->greeting('Hello Admin!')
-		// ->line('A new user has registered:')
-		// ->line('Name: ' . $this->newUser->name)
-		// ->line('Email: ' . $this->newUser->email)
-		// ->line('Username: ' . $this->newUser->username);
 	}
 
 	/**
@@ -64,8 +58,7 @@ class NewUserRegisteredNotification extends Notification
 	public function toArray(object $notifiable): array
 	{
 		return [
-			'title' => 'New User Registered',
-			'content' => 'A new user has registered.'
+			//
 		];
 	}
 }

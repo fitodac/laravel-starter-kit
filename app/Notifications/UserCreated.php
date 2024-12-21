@@ -47,8 +47,9 @@ class UserCreated extends Notification implements ShouldQueue
 
 		return (new MailMessage)
 			->subject($this->replaceShortcodes($template->subject, 'user.', $this->user) ?? 'User created')
-			->view($template->view ?? 'mail.user', [
-				'content' => $this->replaceShortcodes($template->body, 'user.', $this->user) ?? ''
+			->markdown('mail::message', [
+				'content' => $this->replaceShortcodes($template->body, 'user.', $this->user) ?? '',
+				'slot' => ''
 			]);
 	}
 
