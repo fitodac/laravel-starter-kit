@@ -11,7 +11,7 @@ use App\Models\NotificationTemplate;
 use App\Models\EmailTemplate;
 use App\Traits\NotificationTrait;
 
-class SendUserDetailsOnUpdateUserNotification extends Notification
+class SendUserDetailsOnUpdateUserNotification extends Notification implements ShouldQueue
 {
 	use Queueable, NotificationTrait;
 

@@ -10,7 +10,7 @@ use App\Models\EmailTemplate;
 use App\Traits\NotificationTrait;
 use App\Models\User;
 
-class NewUserRegisteredNotification extends Notification
+class NewUserRegisteredNotification extends Notification implements ShouldQueue
 {
 	use Queueable, NotificationTrait;
 
