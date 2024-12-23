@@ -43,8 +43,8 @@ export const DeleteAccount = (): JSX.Element => {
 
 	return (
 		<>
-			<div className="space-y-5">
-				<div className="text-sm font-medium flex gap-5 items-center">
+			<div className="space-y-7 mt-5 md:mt-0">
+				<div className="text-sm font-medium flex gap-5 items-center select-none">
 					{t('Delete account')}
 					<Divider className="flex-1" />
 				</div>
@@ -55,9 +55,11 @@ export const DeleteAccount = (): JSX.Element => {
 					</CardBody>
 				</Card>
 
-				<Button color="danger" onPress={onOpen}>
-					{t('Delete account')}
-				</Button>
+				<div className="flex justify-end">
+					<Button color="danger" size="sm" onPress={onOpen}>
+						{t('Delete account')}
+					</Button>
+				</div>
 			</div>
 
 			<Modal

@@ -94,32 +94,34 @@ export const ColorsPage = ({ template }: Props) => {
 			/>
 
 			<PageContent className={contentClassName}>
-				<div className="space-y-2">
-					<h3 className="font-bold">Semantic colors</h3>
+				<div className="">
+					<div className="space-y-2">
+						<h3 className="font-bold">Semantic colors</h3>
 
-					<div className="max-w-xs pt-3 space-y-16 sm:max-w-lg md:max-w-xl">
-						{data.map(({ title, items }, idx) => (
-							<Fragment key={`row${idx}`}>
-								<Row {...{ title, items }} />
-							</Fragment>
-						))}
+						<div className="max-w-xs pt-3 space-y-16 sm:max-w-lg md:max-w-xl">
+							{data.map(({ title, items }, idx) => (
+								<Fragment key={`row${idx}`}>
+									<Row {...{ title, items }} />
+								</Fragment>
+							))}
+						</div>
 					</div>
+
+					<div className="text-sm space-y-2 mt-20">
+						<h3 className="font-bold">JavaScript colors</h3>
+						<p className="font-light">
+							You can import semantic and common colors into your JavaScript
+							files as follows:
+						</p>
+
+						<Snippet size="sm" className="hidden md:inline-flex">
+							{`import {commonColors, semanticColors} from "@nextui-org/theme";`}
+						</Snippet>
+						<p>Inspect this page to see the available colors.</p>
+					</div>
+
+					<div className="h-20"></div>
 				</div>
-
-				<div className="space-y-2 mt-20">
-					<h3 className="font-bold">JavaScript colors</h3>
-					<p>
-						You can import semantic and common colors into your JavaScript files
-						as follows:
-					</p>
-
-					<Snippet size="sm" className="hidden md:inline-flex">
-						{`import {commonColors, semanticColors} from "@nextui-org/theme";`}
-					</Snippet>
-					<p>Inspect this page to see the available colors.</p>
-				</div>
-
-				<div className="h-20"></div>
 			</PageContent>
 		</>
 	)
@@ -134,6 +136,7 @@ const Row = ({
 }) => (
 	<div className="space-y-2">
 		<div className="font-bold">{title}</div>
+
 		<div className="w-auto grid grid-cols-3 gap-6 sm:grid-cols-5 xl:grid-cols-6">
 			{items.map((e) => (
 				<Fragment key={`row${e.cn}`}>

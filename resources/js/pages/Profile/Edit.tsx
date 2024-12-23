@@ -1,4 +1,4 @@
-import { Layout } from '@/layouts/admin/Layout'
+import { Layout } from '@/layouts/user/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { PageProps } from '@/types'
@@ -11,10 +11,13 @@ import {
 	MustVerifyEmail,
 } from './components'
 import { Tabs, Tab } from '@nextui-org/react'
+import { useWindowWidth } from '@/hooks'
 
 const pageTitle = String(t('My profile'))
 
 const Page = ({ auth: { user }, mustVerifyEmail, status }: PageProps) => {
+	const { windowWidth } = useWindowWidth()
+
 	if (!user) return null
 
 	return (
@@ -22,7 +25,7 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: PageProps) => {
 			<PageHeader title={pageTitle} />
 
 			<PageContent>
-				<div className="flex flex-col flex-1">
+				<div className="flex flex-col flex-1 max-w-full">
 					<div>
 						{mustVerifyEmail && user.email_verified_at === null && (
 							<MustVerifyEmail {...{ status }} />
@@ -33,10 +36,12 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: PageProps) => {
 						aria-label="Profile tabs"
 						color="primary"
 						variant="light"
-						placement="start"
+						isVertical={windowWidth > 768 ? true : false}
 						classNames={{
-							panel: 'w-full max-w-screen-md xl:pl-20',
-							tab: 'justify-start',
+							panel: 'w-full max-w-screen-md md:px-6 xl:pl-20',
+							tab: 'justify-start font-medium select-none',
+							base: 'w-full overflow-x-hidden md:w-72 lg:w-auto',
+							tabList: 'bg-red-500 w-full overflow-x-auto',
 						}}
 					>
 						<Tab key="basicInformation" title="Basic information">

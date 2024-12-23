@@ -12,6 +12,7 @@ export const PageContent = ({ children, className, aside }: Props) => {
 			<section className={cn('px-5 py-7 md:px-6 md:py-8', className)}>
 				<div className="flex gap-20">
 					{children}
+
 					{aside && (
 						<aside className="hidden sticky top-20 h-32 xl:flex">{aside}</aside>
 					)}

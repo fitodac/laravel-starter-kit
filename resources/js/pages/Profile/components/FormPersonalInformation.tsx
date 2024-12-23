@@ -40,13 +40,13 @@ export const FormPersonalInformation = () => {
 	return (
 		<>
 			<form onSubmit={submit}>
-				<section className="space-y-5">
-					<div className="text-sm font-medium flex gap-5 items-center">
+				<section className="space-y-5 mt-5 md:mt-0">
+					<div className="text-sm font-medium flex gap-5 items-center select-none">
 						{t('Personal information')}
 						<Divider className="flex-1" />
 					</div>
 
-					<div className="grid grid-cols-2 gap-x-6 gap-y-5">
+					<div className="grid gap-x-6 gap-y-5 lg:grid-cols-2">
 						<fieldset className="space-y-1">
 							<label htmlFor="" className="text-sm">
 								{t('Phone')}

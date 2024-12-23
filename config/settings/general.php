@@ -6,7 +6,7 @@
 return [
 	'admin_path' => env('VITE_ADMIN_PATH', 'admin'),
 	'admin_layout' => env('VITE_ADMIN_LAYOUT', 'corporate'), // corporate, executive
-	'user_layout' => env('VITE_USER_LAYOUT', 'corporate'), // corporate, executive
+	'user_layout' => env('VITE_USER_LAYOUT', 'executive'), // corporate, executive, mobile
 	'auth_layout' => env('VITE_AUTH_LAYOUT', 'layout1'), // 'layout1', 'layout2', or 'layout3'
 	'color_mode' => env('VITE_COLOR_MODE', 'dark'), // light or dark
 

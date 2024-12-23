@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Image, Button } from '@nextui-org/react'
+import { Image, Button, cn } from '@nextui-org/react'
 import { t } from '@/i18n'
 import { router, usePage } from '@inertiajs/react'
 import { toast } from 'react-toastify'
@@ -53,10 +53,15 @@ export const FormProfileImage = () => {
 	}
 
 	return (
-		<div className="flex items-center gap-7 relative">
+		<div
+			className={cn(
+				'flex flex-col gap-5 relative',
+				'lg:flex-row lg:items-center lg:gap-7'
+			)}
+		>
 			<Image
-				width={150}
-				height={150}
+				width={100}
+				height={100}
 				removeWrapper
 				radius="full"
 				src={
@@ -80,7 +85,7 @@ export const FormProfileImage = () => {
 				}}
 			/>
 
-			<div className="flex gap-x-3 justify-between">
+			<div className="flex gap-x-5 lg:justify-between">
 				<Button
 					size="sm"
 					color="primary"

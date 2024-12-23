@@ -3,6 +3,7 @@ import { usePage } from '@inertiajs/react'
 import { useColorMode, useKeepSessionAlive } from '@/hooks'
 import { LayoutCorporate } from './corporate/Layout'
 import { LayoutExecutive } from './executive/Layout'
+import { LayoutMobile } from './mobile/Layout'
 import { Toastify } from '@/components'
 
 import type { PageProps } from '@/types'
@@ -22,6 +23,16 @@ export const Layout = ({ children, pageTitle }: Props) => {
 				<>
 					<main className="bg-background min-h-screen">
 						<LayoutExecutive {...{ children, pageTitle }} />
+					</main>
+					<Toastify {...{ colorMode }} />
+				</>
+			)
+
+		case 'mobile':
+			return (
+				<>
+					<main className="bg-background min-h-screen">
+						<LayoutMobile {...{ children, pageTitle }} />
 					</main>
 					<Toastify {...{ colorMode }} />
 				</>
