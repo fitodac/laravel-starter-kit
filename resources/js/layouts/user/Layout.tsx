@@ -12,11 +12,11 @@ interface Props extends PropsWithChildren {
 }
 
 export const Layout = ({ children, pageTitle }: Props) => {
-	const { adminLayout } = usePage<PageProps>().props
+	const { userLayout } = usePage<PageProps>().props
 	const { colorMode } = useColorMode()
 	useKeepSessionAlive()
 
-	switch (adminLayout) {
+	switch (userLayout) {
 		case 'executive':
 			return (
 				<>

@@ -73,8 +73,9 @@ class HandleInertiaRequests extends Middleware
 				app(AdminNavbarProvider::class)->getMenu($user, $role, $permissions) :
 				app(DashboardNavbarProvider::class)->getMenu($user, $role, $permissions),
 			'adminLayout' => config('settings.general.admin_layout'),
+			'userLayout' => config('settings.general.user_layout'),
 			'authLayout' => config('settings.general.auth_layout'),
-			'colorMode' => config('settings.general.colormode'),
+			'colorMode' => config('settings.general.color_mode'),
 			'adminCanImpersonate' => config('settings.general.admin_can_impersonate'),
 			'isAdmin' => $isAdmin,
 			'ziggy' => fn() => [

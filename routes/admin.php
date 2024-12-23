@@ -14,13 +14,13 @@ Route::impersonate();
 
 
 Route::middleware(['auth', 'verified', 'role:Super Admin|Admin'])
-	->get('admin', [AdminController::class, 'index'])
+	->get(config('settings.general.admin_path'), [AdminController::class, 'index'])
 	->name('admin');
 
 
 Route::middleware(['auth', 'verified', 'role:Super Admin|Admin'])
 	->name('admin.')
-	->prefix('admin')
+	->prefix(config('settings.general.admin_path'))
 	->group(function () {
 
 		/**

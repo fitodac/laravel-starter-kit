@@ -5,23 +5,20 @@
  */
 return [
 	'admin_path' => env('VITE_ADMIN_PATH', 'admin'),
-	'admin_domain' => env('VITE_ADMIN_DOMAIN', null),
 	'admin_layout' => env('VITE_ADMIN_LAYOUT', 'corporate'), // corporate, executive
+	'user_layout' => env('VITE_USER_LAYOUT', 'corporate'), // corporate, executive
 	'auth_layout' => env('VITE_AUTH_LAYOUT', 'layout1'), // 'layout1', 'layout2', or 'layout3'
-	'colormode' => env('VITE_COLORMODE', 'dark'),
+	'color_mode' => env('VITE_COLOR_MODE', 'dark'), // light or dark
 
 	// Determine if the super admin should be notified when a new user registers.
 	'new_user_superadmin_notification' => env('VITE_NEW_USER_SUPERADMIN_NOTIFICATION', true),
 	// Determine how many notifications to show in the dropdown menu.
 	'new_notifications_count' => env('VITE_NEW_NOTIFICATIONS_COUNT', 5),
-
-	// Determine if the site is in light or dark mode.
-	'color_mode' => env('VITE_COLOR_MODE', 'light'),
-
+	// Determine how many items to show per page in the admin panel.
 	'per_page' => 15,
 
 	// Configure Open Graph settings for the site.
-	'og_description' => env('VITE_OG_DESCRIPTION', 'Laravel Vite Boilerplate'),
+	'og_description' => env('VITE_OG_DESCRIPTION', 'Laravel Dashboard'),
 	'og_image' => env('VITE_OG_IMAGE', 'og-image.jpg'),
 	'x_user' => env('VITE_X_USER', '@twitter_X_user'),
 	'msapplication_color' => env('VITE_MSAPPLICATION_COLOR', '#000000'),

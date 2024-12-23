@@ -108,7 +108,7 @@ export const Wysiwyg = ({
 				.setLink({ href: url })
 				.run()
 		} catch (e) {
-			alert(e.message)
+			console.log(e)
 		}
 	}, [editor])
 
