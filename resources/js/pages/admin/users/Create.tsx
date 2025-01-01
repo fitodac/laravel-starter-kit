@@ -192,7 +192,7 @@ export const Page = ({ user }: Props) => {
 
 						<section className="space-y-3">
 							<div className="font-medium flex gap-5 items-center">
-								{t(`Security & status`)}
+								{t('Security & status')}
 								<Divider className="flex-1" />
 							</div>
 

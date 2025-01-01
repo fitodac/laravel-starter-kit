@@ -11,7 +11,7 @@ interface Props {
 	layout: string
 }
 
-const pageTitle = t('Log in').toString()
+const pageTitle = 'Log in'
 
 const params = new URLSearchParams(window.location.search) ?? null
 
@@ -151,7 +151,7 @@ const Page = ({ status, canResetPassword }: Props) => {
 }
 
 Page.layout = (page: JSX.Element) => {
-	return <Layout {...{ children: page, pageTitle }} />
+	return <Layout {...{ children: page, pageTitle: t(pageTitle).toString() }} />
 }
 
 // Page.layout = (page: JSX.Element) => {

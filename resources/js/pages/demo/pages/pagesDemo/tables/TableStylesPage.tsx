@@ -18,7 +18,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('Tables styles'))
+const pageTitle = 'Tables styles'
 
 export const TableStylesPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -27,7 +27,7 @@ export const TableStylesPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

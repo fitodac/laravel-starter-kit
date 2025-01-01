@@ -10,7 +10,7 @@ import { Button } from '@nextui-org/react'
 import type { NotificationsTable } from '@/types/notifications'
 import { PageProps } from '@/types'
 
-const pageTitle = String(t('Notifications'))
+const pageTitle = 'Notifications'
 
 interface Props extends PageProps {
 	notifications: NotificationsTable
@@ -19,7 +19,7 @@ interface Props extends PageProps {
 const Page = ({ notifications }: Props) => {
 	return (
 		<>
-			<PageHeader title={pageTitle}>
+			<PageHeader title={t(pageTitle)}>
 				<div className="flex justify-end">
 					{notifications.data.length > 0 && (
 						<Button
@@ -48,7 +48,7 @@ const Page = ({ notifications }: Props) => {
 
 Page.layout = (page: JSX.Element) => (
 	<NotificationProvider>
-		<Layout {...{ children: page, pageTitle }} />
+		<Layout {...{ children: page, pageTitle: t(pageTitle).toString() }} />
 	</NotificationProvider>
 )
 

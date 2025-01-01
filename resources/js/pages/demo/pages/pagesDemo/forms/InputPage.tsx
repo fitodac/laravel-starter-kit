@@ -20,7 +20,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('Input'))
+const pageTitle = 'Input'
 
 export const InputPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -29,7 +29,7 @@ export const InputPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

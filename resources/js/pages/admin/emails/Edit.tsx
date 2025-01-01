@@ -9,7 +9,7 @@ import 'react-modern-drawer/dist/index.css'
 
 import type { EmailTemplate } from '@/types/notification-templates'
 
-const pageTitle = String(t('Edit email template'))
+const pageTitle = 'Edit email template'
 
 interface Props {
 	template: EmailTemplate
@@ -23,7 +23,7 @@ const Page = ({ template }: Props) => {
 
 	return (
 		<>
-			<PageHeader title={pageTitle}>
+			<PageHeader title={t(pageTitle)}>
 				<div className="flex justify-end">
 					<Button
 						size="sm"
@@ -141,7 +141,7 @@ const Page = ({ template }: Props) => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle }} />
+	<Layout {...{ children: page, pageTitle: t(pageTitle).toString() }} />
 )
 
 export default Page

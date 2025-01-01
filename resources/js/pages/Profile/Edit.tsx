@@ -13,7 +13,7 @@ import {
 import { Tabs, Tab } from '@nextui-org/react'
 import { useWindowWidth } from '@/hooks'
 
-const pageTitle = String(t('My profile'))
+const pageTitle = 'My profile'
 
 const Page = ({ auth: { user }, mustVerifyEmail, status }: PageProps) => {
 	const { windowWidth } = useWindowWidth()
@@ -22,7 +22,7 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: PageProps) => {
 
 	return (
 		<>
-			<PageHeader title={pageTitle} />
+			<PageHeader title={t(pageTitle)} />
 
 			<PageContent>
 				<div className="flex flex-col flex-1 max-w-full">
@@ -71,7 +71,7 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: PageProps) => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle }} />
+	<Layout {...{ children: page, pageTitle: t(pageTitle).toString() }} />
 )
 
 export default Page

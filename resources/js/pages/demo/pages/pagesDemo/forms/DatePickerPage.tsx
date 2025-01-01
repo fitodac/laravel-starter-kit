@@ -19,7 +19,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('Date Picker'))
+const pageTitle = 'Date Picker'
 
 export const DatePickerPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -28,7 +28,7 @@ export const DatePickerPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

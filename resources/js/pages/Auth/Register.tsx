@@ -4,7 +4,7 @@ import { Link, useForm } from '@inertiajs/react'
 import { Input, Button } from '@nextui-org/react'
 import { AuthLayout1, AuthLayout2, AuthLayout3 } from '@/layouts/auth'
 
-const pageTitle = t('Register').toString()
+const pageTitle = 'Register'
 
 interface Props {
 	layout: string
@@ -151,13 +151,29 @@ const Page = ({ layout }: Props) => {
 Page.layout = (page: JSX.Element) => {
 	switch (page.props.layout) {
 		case 'layout1':
-			return <AuthLayout1 {...{ children: page, pageTitle }} />
+			return (
+				<AuthLayout1
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		case 'layout2':
-			return <AuthLayout2 {...{ children: page, pageTitle }} />
+			return (
+				<AuthLayout2
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		case 'layout3':
-			return <AuthLayout3 {...{ children: page, pageTitle }} />
+			return (
+				<AuthLayout3
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		default:
-			return <AuthLayout1 {...{ children: page, pageTitle }} />
+			return (
+				<AuthLayout1
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 	}
 }
 

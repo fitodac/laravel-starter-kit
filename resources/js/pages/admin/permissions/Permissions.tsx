@@ -13,7 +13,7 @@ import {
 
 import type { PermissionContextProps } from '@/types/permissions'
 
-const pageTitle = String(t('Permissions'))
+const pageTitle = 'Permissions'
 
 const Page = () => {
 	const { state, dispatch } = useContext(
@@ -22,7 +22,7 @@ const Page = () => {
 
 	return (
 		<>
-			<PageHeader title={pageTitle}>
+			<PageHeader title={t(pageTitle)}>
 				<div className="flex justify-end">
 					<Button
 						size="sm"
@@ -61,7 +61,7 @@ const Page = () => {
 
 Page.layout = (page: JSX.Element) => (
 	<PermissionProvider>
-		<Layout {...{ children: page, pageTitle }} />
+		<Layout {...{ children: page, pageTitle: t(pageTitle).toString() }} />
 	</PermissionProvider>
 )
 

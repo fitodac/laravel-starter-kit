@@ -10,7 +10,7 @@ interface Props {
 	layout: string
 }
 
-const pageTitle = t('Reset password').toString()
+const pageTitle = 'Reset password'
 
 const Page = ({ token, email }: Props) => {
 	const { data, setData, post, processing, errors, reset } = useForm({
@@ -125,13 +125,29 @@ const Page = ({ token, email }: Props) => {
 Page.layout = (page: JSX.Element) => {
 	switch (page.props.layout) {
 		case 'layout1':
-			return <AuthLayout1 {...{ children: page, pageTitle }} />
+			return (
+				<AuthLayout1
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		case 'layout2':
-			return <AuthLayout2 {...{ children: page, pageTitle }} />
+			return (
+				<AuthLayout2
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		case 'layout3':
-			return <AuthLayout3 {...{ children: page, pageTitle }} />
+			return (
+				<AuthLayout3
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		default:
-			return <AuthLayout1 {...{ children: page, pageTitle }} />
+			return (
+				<AuthLayout1
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 	}
 }
 

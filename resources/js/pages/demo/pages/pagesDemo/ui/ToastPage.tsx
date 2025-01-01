@@ -8,7 +8,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('Toasts'))
+const pageTitle = 'Toasts'
 
 export const ToastPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -17,7 +17,7 @@ export const ToastPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

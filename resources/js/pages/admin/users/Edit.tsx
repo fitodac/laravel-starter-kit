@@ -14,7 +14,7 @@ import {
 
 import type { PageProps, User } from '@/types'
 
-const pageTitle = String(t('Edit user'))
+const pageTitle = 'Edit user'
 
 interface Props extends PageProps {
 	user: User
@@ -23,7 +23,7 @@ interface Props extends PageProps {
 export const Page = ({ user }: Props) => {
 	return (
 		<>
-			<PageHeader title={pageTitle}>
+			<PageHeader title={t(pageTitle)}>
 				<div className="flex justify-end">
 					<Button
 						size="sm"
@@ -91,7 +91,7 @@ Page.layout = (page: JSX.Element) => (
 	<Layout
 		{...{
 			children: page,
-			pageTitle,
+			pageTitle: t(pageTitle).toString(),
 		}}
 	/>
 )

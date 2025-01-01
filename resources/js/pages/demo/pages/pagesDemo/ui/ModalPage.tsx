@@ -19,7 +19,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('Modal'))
+const pageTitle = 'Modal'
 
 export const ModalPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -32,7 +32,7 @@ export const ModalPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

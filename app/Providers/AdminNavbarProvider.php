@@ -135,10 +135,10 @@ class AdminNavbarProvider extends ServiceProvider
 		}
 
 
-		return $menu;
+		// return $menu;
 
-		// return Cache::remember($cacheKey, 60, function () use ($menu) {
-		// 	return $menu;
-		// });
+		return Cache::remember($cacheKey, 60, function () use ($menu) {
+			return $menu;
+		});
 	}
 }

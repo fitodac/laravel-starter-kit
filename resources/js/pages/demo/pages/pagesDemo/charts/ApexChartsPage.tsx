@@ -14,7 +14,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('Apex Charts'))
+const pageTitle = 'Apex Charts'
 
 export const ApexChartsPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -23,7 +23,7 @@ export const ApexChartsPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

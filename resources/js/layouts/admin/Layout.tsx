@@ -12,8 +12,14 @@ interface Props extends PropsWithChildren {
 }
 
 export const Layout = ({ children, pageTitle }: Props) => {
-	const { adminLayout } = usePage<PageProps>().props
+	const {
+		adminLayout,
+		auth: { user },
+	} = usePage<PageProps>().props
+
 	const { colorMode } = useColorMode()
+	window.locale = user?.account?.language ?? 'en'
+
 	useKeepSessionAlive()
 
 	switch (adminLayout) {

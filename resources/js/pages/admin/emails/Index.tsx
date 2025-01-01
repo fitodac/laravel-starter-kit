@@ -4,12 +4,12 @@ import { t } from '@/i18n'
 import { TemplatesList } from './components'
 import 'react-modern-drawer/dist/index.css'
 
-const pageTitle = String(t('Email templates'))
+const pageTitle = 'Email templates'
 
 const Page = () => {
 	return (
 		<>
-			<PageHeader title={pageTitle} />
+			<PageHeader title={t(pageTitle)} />
 
 			<PageContent>
 				<TemplatesList />
@@ -19,7 +19,7 @@ const Page = () => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle }} />
+	<Layout {...{ children: page, pageTitle: t(pageTitle).toString() }} />
 )
 
 export default Page

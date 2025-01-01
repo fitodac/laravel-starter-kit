@@ -16,7 +16,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('Accordion'))
+const pageTitle = 'Accordion'
 
 export const AccordionPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -25,7 +25,7 @@ export const AccordionPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

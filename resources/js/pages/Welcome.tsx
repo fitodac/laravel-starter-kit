@@ -5,7 +5,7 @@ import { PageProps } from '@/types'
 import { Button } from '@nextui-org/react'
 import { useColorMode } from '@/hooks'
 
-const pageTitle = String(t('Welcome'))
+const pageTitle = 'Welcome'
 
 const Welcome = ({ auth }: PageProps) => {
 	useColorMode()
@@ -66,7 +66,7 @@ const Welcome = ({ auth }: PageProps) => {
 }
 
 Welcome.layout = (page: JSX.Element) => (
-	<GuestLayout {...{ children: page, pageTitle }} />
+	<GuestLayout {...{ children: page, pageTitle: t(pageTitle).toString() }} />
 )
 
 export default Welcome

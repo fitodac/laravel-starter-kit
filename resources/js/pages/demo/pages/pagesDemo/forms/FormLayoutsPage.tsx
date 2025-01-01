@@ -17,7 +17,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('Form Layouts'))
+const pageTitle = 'Form Layouts'
 
 export const FormLayoutsPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -26,7 +26,7 @@ export const FormLayoutsPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

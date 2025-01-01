@@ -2,7 +2,7 @@ import { Layout } from '@/layouts/admin/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 
-const pageTitle = String(t('Admin dashboard'))
+const pageTitle = 'Admin dashboard'
 
 type Props = {
 	total_accounts: number
@@ -13,7 +13,7 @@ type Props = {
 const Page = ({ total_accounts, total_users, total_admins }: Props) => {
 	return (
 		<>
-			<PageHeader title={pageTitle} />
+			<PageHeader title={t(pageTitle)} />
 
 			<PageContent>
 				<div className="flex-1 space-y-6">
@@ -89,7 +89,7 @@ const Page = ({ total_accounts, total_users, total_admins }: Props) => {
 }
 
 Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle }} />
+	<Layout {...{ children: page, pageTitle: t(pageTitle).toString() }} />
 )
 
 export default Page

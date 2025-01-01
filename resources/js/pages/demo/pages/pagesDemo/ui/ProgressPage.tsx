@@ -13,7 +13,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('Progress'))
+const pageTitle = 'Progress'
 
 export const ProgressPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -22,7 +22,7 @@ export const ProgressPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

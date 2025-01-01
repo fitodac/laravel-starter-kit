@@ -78,7 +78,7 @@ const data = [
 	},
 ]
 
-const pageTitle = String(t('Color'))
+const pageTitle = 'Color'
 
 export const ColorsPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -87,7 +87,7 @@ export const ColorsPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

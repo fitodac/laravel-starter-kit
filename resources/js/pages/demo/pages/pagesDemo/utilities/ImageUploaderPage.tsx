@@ -12,7 +12,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('Image uploader'))
+const pageTitle = 'Image uploader'
 
 export const ImageUploaderPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -21,7 +21,7 @@ export const ImageUploaderPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

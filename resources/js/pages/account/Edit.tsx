@@ -7,7 +7,7 @@ import { Tabs, Tab } from '@nextui-org/react'
 
 import type { PageProps } from '@/types'
 
-const pageTitle = String(t('My account'))
+const pageTitle = 'My account'
 
 interface Props extends PageProps {
 	account: any
@@ -18,7 +18,7 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: Props) => {
 
 	return (
 		<>
-			<PageHeader title={pageTitle} />
+			<PageHeader title={t(pageTitle)} />
 
 			<PageContent>
 				<div className="flex flex-col flex-1">
@@ -48,8 +48,9 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: Props) => {
 	)
 }
 
-Page.layout = (page: JSX.Element) => (
-	<Layout {...{ children: page, pageTitle }} />
-)
+Page.layout = (page: JSX.Element) => {
+	console.log('page', page)
+	return <Layout {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+}
 
 export default Page

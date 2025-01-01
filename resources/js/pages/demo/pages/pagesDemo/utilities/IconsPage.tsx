@@ -20,7 +20,7 @@ const copyIcon = (cn: string) => {
 	}
 }
 
-const pageTitle = String(t('Icons'))
+const pageTitle = 'Icons'
 
 export const IconsPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -29,7 +29,7 @@ export const IconsPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

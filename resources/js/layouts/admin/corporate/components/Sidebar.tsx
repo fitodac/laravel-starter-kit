@@ -11,6 +11,7 @@ import { Link, usePage } from '@inertiajs/react'
 import { templates } from '@/config'
 import { cn } from '@nextui-org/react'
 import { Fragment } from 'react/jsx-runtime'
+import { t } from '@/i18n'
 
 import { PageProps } from '@/types'
 
@@ -60,7 +61,7 @@ export const Sidebar = () => {
 											return (
 												<SubMenu
 													key={label + path}
-													label={label}
+													label={t(label)}
 													icon={
 														<i
 															className={cn(icon, template.sidebar.cn.menuIcon)}
@@ -75,7 +76,7 @@ export const Sidebar = () => {
 																active={location.href === route(path || '')}
 																className={template.sidebar.cn.subMenu}
 															>
-																{label}
+																{t(label)}
 															</MenuItem>
 														</Fragment>
 													))}
@@ -94,7 +95,7 @@ export const Sidebar = () => {
 													}
 													active={location.href === route(path || '')}
 												>
-													{label}
+													{t(label)}
 												</MenuItem>
 											</Fragment>
 										)

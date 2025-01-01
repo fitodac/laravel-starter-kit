@@ -14,7 +14,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('Loading indicators'))
+const pageTitle = 'Loading indicators'
 
 export const LoadingIndicatorsPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -23,7 +23,7 @@ export const LoadingIndicatorsPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

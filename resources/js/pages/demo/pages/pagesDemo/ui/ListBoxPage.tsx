@@ -15,7 +15,7 @@ interface Props {
 	template?: Template
 }
 
-const pageTitle = String(t('ListBox'))
+const pageTitle = 'ListBox'
 
 export const ListBoxPage = ({ template }: Props) => {
 	const { headerClassName, contentClassName } =
@@ -24,7 +24,7 @@ export const ListBoxPage = ({ template }: Props) => {
 	return (
 		<>
 			<PageHeader
-				title={pageTitle}
+				title={t(pageTitle)}
 				classNames={{
 					wrapper: headerClassName,
 				}}

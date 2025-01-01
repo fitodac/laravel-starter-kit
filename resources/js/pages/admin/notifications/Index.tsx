@@ -12,7 +12,7 @@ import {
 
 import { NotificationContextProps } from '@/types/notifications'
 
-const pageTitle = String(t('Notification templates'))
+const pageTitle = 'Notification templates'
 
 const Page = () => {
 	const { state, dispatch } = useContext(
@@ -21,7 +21,7 @@ const Page = () => {
 
 	return (
 		<>
-			<PageHeader title={pageTitle} />
+			<PageHeader title={t(pageTitle)} />
 
 			<PageContent>
 				<TemplatesList />
@@ -45,7 +45,7 @@ const Page = () => {
 
 Page.layout = (page: JSX.Element) => (
 	<NotificationProvider>
-		<Layout {...{ children: page, pageTitle }} />
+		<Layout {...{ children: page, pageTitle: t(pageTitle).toString() }} />
 	</NotificationProvider>
 )
 
