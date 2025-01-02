@@ -1,7 +1,7 @@
 import { createContext, type PropsWithChildren, useState } from 'react'
 import { tabsMapper } from '../helpers/mappers/tabs.mapper'
 
-import type { Image, MediaManagerContextType, ComponentProps } from '../types.d'
+import type { MediaManagerContextType, ComponentProps } from '../types.d'
 
 const initialState = {
 	files: null,
@@ -11,6 +11,7 @@ const initialState = {
 	selectedTab: tabsMapper('TAB_LIBRARY'),
 	collection: null,
 	order: null,
+	fileToEdit: null,
 }
 
 export const MediaManagerContext = createContext<MediaManagerContextType>({
@@ -26,7 +27,7 @@ export const MediaManagerProvider = ({
 }: Props) => {
 	const [files, setFiles] = useState(initialState.files)
 	const [filesTotal, setFilesTotal] = useState(initialState.filesTotal)
-	// const [filesSelected, setFilesSelected] = useState<Image[] | never[] | any[]>(
+
 	const [filesSelected, setFilesSelected] = useState<any>(
 		collection ?? initialState.filesSelected
 	)
@@ -35,6 +36,8 @@ export const MediaManagerProvider = ({
 	)
 	const [selectedTab, setSelectedTab] = useState(initialState.selectedTab)
 	const [order, setOrder] = useState<number[] | null>(initialState.order)
+
+	const [fileToEdit, setFileToEdit] = useState(initialState.fileToEdit)
 
 	const enableTabs = () => setTabsDisabled([])
 
@@ -59,6 +62,8 @@ export const MediaManagerProvider = ({
 				selectMultiple,
 				order,
 				setOrder,
+				fileToEdit,
+				setFileToEdit,
 			}}
 		>
 			{children}

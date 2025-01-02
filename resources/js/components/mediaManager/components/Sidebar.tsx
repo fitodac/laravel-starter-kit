@@ -7,6 +7,8 @@ import { useMediaManager } from '../hooks/useMediaManager'
 import dayjs from 'dayjs'
 import { useForm } from '@inertiajs/react'
 
+import type { Image as ImageProps } from '../types.d'
+
 const handleCopy = (url: string) => {
 	if (navigator.clipboard) {
 		navigator.clipboard
@@ -29,29 +31,21 @@ const inputStyle = {
 }
 
 export const Sidebar = () => {
-	const { filesSelected } = useContext(MediaManagerContext)
+	const { fileToEdit } = useContext(MediaManagerContext)
 	const { updateFile, deleteFile, formatSize } = useMediaManager()
 	const [editable, setEditable] = useState(false)
-	const { data, setData } = useForm({ ...filesSelected[0] })
+	const { data, setData } = useForm({ ...fileToEdit })
 
 	useEffect(() => {
 		setEditable(false)
-		setData({ ...filesSelected[0] })
-	}, [filesSelected])
+		setData({ ...fileToEdit })
+	}, [fileToEdit])
 
 	const content = () => {
-		if (!filesSelected.length) return null
+		if (!fileToEdit) return <FileNotFound />
 
-		const {
-			name,
-			file_name,
-			original_url,
-			size,
-			created_at,
-			id,
-			uuid,
-			custom_properties,
-		} = filesSelected[0]
+		const { name, file_name, original_url, size, created_at, id, uuid } =
+			fileToEdit
 
 		return (
 			<div className="h-full overflow-auto">
@@ -66,16 +60,16 @@ export const Sidebar = () => {
 
 							<div className="flex justify-between gap-4 pt-3">
 								<span className="w-24">{t('File name')}:</span>
-								<span className="truncate flex-1">
-									{file_name} {file_name} {file_name} {file_name}
-								</span>
+								<span className="truncate flex-1">{file_name}</span>
 							</div>
+
 							<Divider />
 
 							<div className="flex justify-between gap-4">
 								<span className="w-24">{t('Size')}:</span>
 								<span className="truncate flex-1">{formatSize(size)}</span>
 							</div>
+
 							<Divider />
 
 							<div className="flex justify-between gap-4">
@@ -84,12 +78,14 @@ export const Sidebar = () => {
 									{dayjs(created_at).format('MMM DD, YYYY')}
 								</span>
 							</div>
+
 							<Divider />
 
 							<div className="flex justify-between gap-4">
 								<span className="w-24">{t('uuid')}:</span>
 								<span className="truncate flex-1">{uuid}</span>
 							</div>
+
 							<Divider />
 						</div>
 
@@ -187,6 +183,9 @@ export const Sidebar = () => {
 													name: data.name,
 													custom_properties: data.custom_properties,
 												})
+
+												updateFile(data as ImageProps)
+
 												setEditable(false)
 											}}
 										>
@@ -220,9 +219,9 @@ export const Sidebar = () => {
 						<div className="flex justify-end">
 							<a href={original_url} target="_blank">
 								<Button
+									size="sm"
 									color="primary"
 									variant="light"
-									size="sm"
 									startContent={<i className="ri-image-circle-line ri-2x" />}
 								>
 									{t('Open image in new tab')}
@@ -233,6 +232,7 @@ export const Sidebar = () => {
 
 					<div className="mt-8 flex justify-end">
 						<Button
+							size="sm"
 							color="danger"
 							variant="light"
 							startContent={<i className="ri-close-line ri-xl" />}
@@ -258,3 +258,19 @@ export const Sidebar = () => {
 		</aside>
 	)
 }
+
+const FileNotFound = () => (
+	<div className="text-foreground-600 fill-foreground-200 text-sm font-medium py-14">
+		<div className="flex flex-col items-center">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				className="w-16"
+			>
+				<path d="M20 3C20.5523 3 21 3.44772 21 4V5.757L19 7.757V5H5V13.1L9 9.1005L13.328 13.429L11.9132 14.8422L9 11.9289L5 15.928V19H15.533L16.2414 19.0012L17.57 17.671L18.8995 19H19V16.242L21 14.242V20C21 20.5523 20.5523 21 20 21H4C3.45 21 3 20.55 3 20V4C3 3.44772 3.44772 3 4 3H20ZM21.7782 7.80761L23.1924 9.22183L15.4142 17L13.9979 16.9979L14 15.5858L21.7782 7.80761ZM15.5 7C16.3284 7 17 7.67157 17 8.5C17 9.32843 16.3284 10 15.5 10C14.6716 10 14 9.32843 14 8.5C14 7.67157 14.6716 7 15.5 7Z"></path>
+			</svg>
+
+			<p className="">{t('Select an image to start editing')}</p>
+		</div>
+	</div>
+)

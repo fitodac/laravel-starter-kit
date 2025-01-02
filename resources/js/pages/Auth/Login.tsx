@@ -17,8 +17,8 @@ const params = new URLSearchParams(window.location.search) ?? null
 
 const Page = ({ status, canResetPassword }: Props) => {
 	const { data, setData, post, processing, errors, reset } = useForm({
-		login: 'maxmasterson',
-		password: 'password',
+		login: '',
+		password: '',
 		remember: false,
 	})
 

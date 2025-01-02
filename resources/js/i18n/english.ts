@@ -219,4 +219,11 @@ export default {
 	'Makr all as read': 'Makr all as read',
 	'There are no notifications': 'There are no notifications',
 	'Mark as read': 'Mark as read',
+	////
+	'Image gallery': 'Image gallery',
+	Media: 'Media',
+	'There are no media files yet': 'There are no media files yet',
+	'Upload files': 'Upload files',
+	'Allowed image types:': 'Allowed image types: %types%',
+	'Select an image to start editing': 'Select an image to start editing',
 }

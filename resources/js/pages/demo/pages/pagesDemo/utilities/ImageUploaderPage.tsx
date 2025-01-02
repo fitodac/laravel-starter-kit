@@ -44,8 +44,6 @@ export const ImageUploaderPage = ({ template }: Props) => {
 					<MediaManagerImageUpload />
 					<GalleryMediaManager />
 				</div>
-
-				<div className="h-20"></div>
 			</PageContent>
 		</>
 	)

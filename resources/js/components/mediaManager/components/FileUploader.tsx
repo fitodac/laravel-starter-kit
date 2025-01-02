@@ -15,6 +15,8 @@ const defaultAcceptedFormats = {
 	'image/avif': ['.avif'],
 }
 
+const allowedTypes = Object.values(defaultAcceptedFormats).flat().join(', ')
+
 export const FileUploader = () => {
 	const { enableTabs, disableTabs, setSelectedTab } =
 		useContext(MediaManagerContext)
@@ -70,17 +72,20 @@ export const FileUploader = () => {
 
 			<div className="space-y-2 text-center">
 				<p className="font-semibold">{t('Drop files to upload')}</p>
-				<p className="text-foreground-500 text-xs">{t('or')}</p>
+				<p className="text-foreground-600 text-xs">{t('or')}</p>
 				<Button
 					color="primary"
 					variant="faded"
 					className="px-10"
 					onPress={open}
 				>
-					{t('Select files')}
+					{t('Upload files')}
 				</Button>
-				<p className="text-foreground-500 text-xs font-medium pt-5">
+				<p className="text-foreground-600 text-xs font-medium pt-5">
 					{t('Maximum upload file size')} 300 MB
+				</p>
+				<p className="text-foreground-600 text-xs font-medium pt-5">
+					{t('Allowed image types:', { types: allowedTypes })}
 				</p>
 			</div>
 		</div>

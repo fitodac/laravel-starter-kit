@@ -1,12 +1,16 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Tab, Tabs } from '@nextui-org/react'
 import { MediaManagerContext } from '../providers/MediaManagerProvider'
 import { tabsMapper } from '../helpers/mappers/tabs.mapper'
-import { MediaLibrary, FileUploader } from './'
+import { MediaLibrary, FileUploader, MediaEditor } from './'
 
 export const TabContent = () => {
-	const { tabsDisabled, selectedTab, setSelectedTab } =
+	const { tabsDisabled, selectedTab, setSelectedTab, selectMultiple } =
 		useContext(MediaManagerContext)
+
+	useEffect(() => {
+		return setSelectedTab && setSelectedTab(tabsMapper('TAB_LIBRARY'))
+	}, [])
 
 	return (
 		<div className="h-full">
@@ -24,7 +28,7 @@ export const TabContent = () => {
 					classNames={{
 						base: 'bg-content2 w-full dark:bg-black/20',
 						tabList: 'p-0 gap-0 rounded-none',
-						tab: 'px-6 py-5 rounded-none',
+						tab: 'px-6 py-5 rounded-none select-none [&>div]:text-foreground-700 [&>div]:font-medium',
 						cursor: 'rounded-none',
 						panel: 'p-0 flex flex-1',
 					}}
@@ -38,6 +42,13 @@ export const TabContent = () => {
 					<Tab key={tabsMapper('TAB_LIBRARY')} title="Media library">
 						<MediaLibrary />
 					</Tab>
+
+					{/* Media editor */}
+					{selectMultiple && (
+						<Tab key={tabsMapper('TAB_EDITOR')} title="Edit images">
+							<MediaEditor />
+						</Tab>
+					)}
 				</Tabs>
 			</div>
 		</div>

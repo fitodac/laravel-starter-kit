@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\MediaManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Laravel\Facades\Image;
 
 class MediaManagerController extends Controller
 {
@@ -20,11 +21,10 @@ class MediaManagerController extends Controller
 	 */
 	public function index(): JsonResponse
 	{
-		$manager = MediaManager::first();
-		$images = $manager->getMedia('images')->toArray();
-		$images = array_reverse($images);
-
-		$imagesTotal = $manager->getMedia('images')->count();
+		$user = Auth::user();
+		$images = $user->getMedia('images');
+		$imagesTotal = $images->count();
+		$images = array_reverse($images->toArray());
 
 		return response()->json(compact('images', 'imagesTotal'));
 	}
@@ -42,25 +42,44 @@ class MediaManagerController extends Controller
 	 */
 	public function store(Request $request): void
 	{
+		$user = $request->user();
 		$files = $request->file('files');
-		$manager = MediaManager::first();
+
+		$storagePath = storage_path('app/public');
+
+		if (!file_exists("$storagePath/temp")) {
+			mkdir("$storagePath/temp", 0755, true);
+		}
 
 		foreach ($files as $file) {
-			$manager->addMedia($file)
+			$image = Image::read($file);
+			$filename = time();
+			$tempPath = "$storagePath/temp/$filename.webp";
+			$image->toWebp(90)->save($tempPath);
+
+			$user->addMedia($tempPath)
 				->withCustomProperties([
 					'altText' => '',
 					'caption' => '',
-					'description' => ''
+					'description' => '',
 				])
 				->toMediaCollection('images');
 		}
 	}
 
-	// Create an "update" function to update media files in the 'images' collection.
+
+	/**
+	 * Update the specified media item in the 'images' collection.
+	 *
+	 * @param \Illuminate\Http\Request $request The request object containing update details.
+	 * @param mixed $id The identifier of the media item to be updated.
+	 * @return \Illuminate\Http\JsonResponse A JSON response indicating success or failure.
+	 */
+
 	public function update(Request $request, $id): JsonResponse
 	{
-		$manager = MediaManager::first();
-		$media = $manager->getMedia('images')->find($id);
+		$user = $request->user();
+		$media = $user->getMedia('images')->find($id);
 
 		if ($media) {
 			if (!empty($request->name)) $media->name = $request->name;
@@ -84,8 +103,8 @@ class MediaManagerController extends Controller
 	 */
 	public function destroy($id): JsonResponse
 	{
-		$manager = MediaManager::first();
-		$media = $manager->getMedia('images')->find($id);
+		$user = Auth::user();
+		$media = $user->getMedia('images')->find($id);
 
 		if ($media) {
 			$media->delete();

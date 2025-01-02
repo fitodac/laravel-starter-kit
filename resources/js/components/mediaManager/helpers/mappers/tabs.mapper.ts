@@ -11,6 +11,8 @@ export const tabsMapper = (key: string): string => {
 			return 'uploadFiles'
 		case 'TAB_LIBRARY':
 			return 'mediaLibrary'
+		case 'TAB_EDITOR':
+			return 'mediaEditor'
 	}
 
 	return key

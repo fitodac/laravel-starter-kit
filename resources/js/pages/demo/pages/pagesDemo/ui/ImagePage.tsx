@@ -32,14 +32,16 @@ export const ImagePage = ({ template }: Props) => {
 					wrapper: headerClassName,
 				}}
 			>
-				{/* <p className="text-lg font-medium leading-tight">
-					Beautifully designed buttons that enhance visual appeal and usability.
+				<p className="text-lg font-medium leading-tight">
+					Revolutionize Visual Interactions
 				</p>
 				<p className="font-light leading-tight mt-2">
-					Each button is intuitive and responsive, providing efficient access to
-					key functions. These buttons offer a perfect blend of aesthetics and
-					practicality, ensuring a seamless user experience.
-				</p> */}
+					Transform the way you showcase visuals with our advanced image
+					components. Featuring responsive designs, intuitive interactions, and
+					fully customizable options like shadows, zoom effects, and carousels,
+					these tools bring your images to life. Deliver a seamless blend of
+					style and functionality, ensuring every visual makes a lasting impact.
+				</p>
 			</PageHeader>
 
 			<PageContent
@@ -123,9 +125,10 @@ export const ImagePage = ({ template }: Props) => {
 							/>
 
 							<div className="flex justify-center gap-5">
-								{[img01, img02, img03, img04].map((src) => {
+								{[img01, img02, img03, img04].map((src, idx) => {
 									return (
 										<Image
+											key={idx}
 											width={40}
 											src={src}
 											alt={`pic ${src}`}
@@ -167,13 +170,13 @@ export const ImagePage = ({ template }: Props) => {
 						<h3 className="font-semibold">Shadow</h3>
 
 						<div className="grid grid-cols-3 gap-5 sm:flex lg:gap-10">
-							{['sm', 'md', 'lg'].map((radius, idx) => (
+							{['sm', 'md', 'lg'].map((shadow, idx) => (
 								<div key={`rounded-${idx}`}>
 									<Image
 										width={120}
 										alt="Image demo"
 										// @ts-ignore
-										shadow={radius}
+										shadow={shadow}
 										src={img03}
 										classNames={{ img: 'object-cover aspect-square' }}
 									/>

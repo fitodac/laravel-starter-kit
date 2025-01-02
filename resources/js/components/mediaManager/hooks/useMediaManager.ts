@@ -49,24 +49,6 @@ export const useMediaManager = () => {
 
 		setFiles && setFiles(Object.entries(data.images).map((e) => e[1]))
 		setFilesTotal && setFilesTotal(data.imagesTotal)
-
-		/**
-		if (selectMultiple && filesSelected) {
-			const compare = [] as number[]
-			filesSelected.forEach((file) => {
-				const key = Object.keys(data.images).find(
-					(k) => data.images[k].id === file.id
-				)
-
-				if (key) compare.push(parseInt(key))
-			})
-
-			setFilesSelected &&
-				setFilesSelected([
-					...data.images.filter((e: Image) => compare.includes(e.id)),
-				])
-		}
-		 */
 	}
 
 	/**
@@ -143,7 +125,7 @@ export const useMediaManager = () => {
 			index++
 		}
 
-		return numeral(value).format('0,0') + units[index]
+		return `${numeral(value).format('0,0')} ${units[index]}`
 	}
 
 	return {

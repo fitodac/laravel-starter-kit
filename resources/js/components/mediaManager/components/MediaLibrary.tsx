@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react'
-import { Sidebar, GallerySelection } from '.'
+import { Sidebar, GallerySelection, EmptyLibrary } from '.'
 import { t } from '@/i18n'
 import { useMediaManager } from '../hooks'
 import { MediaManagerContext } from '../providers/MediaManagerProvider'
@@ -15,8 +15,13 @@ import type { Image as ImageProps } from '../types.d'
 
 export const MediaLibrary = () => {
 	const { getFiles, formatSize } = useMediaManager()
-	const { files, setFilesSelected, filesSelected, selectMultiple, setOrder } =
-		useContext(MediaManagerContext)
+	const {
+		files,
+		setFilesSelected,
+		filesSelected,
+		selectMultiple,
+		setFileToEdit,
+	} = useContext(MediaManagerContext)
 
 	useEffect(() => {
 		getFiles()
@@ -24,6 +29,8 @@ export const MediaLibrary = () => {
 
 	const selectFile = (file: ImageProps) => {
 		if (!selectMultiple) {
+			setFileToEdit && setFileToEdit(file)
+
 			if (
 				filesSelected &&
 				filesSelected[0] &&
@@ -48,20 +55,26 @@ export const MediaLibrary = () => {
 	return (
 		<section className="w-full relative">
 			<div className="inset-y-0 left-0 absolute lg:right-96">
-				{!files ? (
+				{!files && (
 					<div className="w-full h-full grid place-content-center">
 						<CircularProgress label={t('Loading files')} />
 					</div>
-				) : (
+				)}
+
+				{files && !files.length && <EmptyLibrary />}
+
+				{files && (
 					<div className="scrollbar-thin h-full overflow-y-scroll">
 						<div
 							className={cn(
-								'grid grid-cols-2 gap-7 px-6 pt-4 pb-24',
-								'sm:grid-cols-3 xl:grid-cols-5'
+								'grid grid-cols-3 gap-4 px-6 pt-4 pb-24',
+								'sm:grid-cols-4 xl:grid-cols-5'
 							)}
 						>
 							{files.map((file: ImageProps) => (
 								<Card
+									isPressable
+									isFooterBlurred
 									key={file.id}
 									radius="md"
 									classNames={{
@@ -74,8 +87,6 @@ export const MediaLibrary = () => {
 										footer:
 											'bg-black/30 whitespace-nowrap flex-col items-end p-2 absolute bottom-0 inset-x-0 rounded-none z-10',
 									}}
-									isFooterBlurred
-									isPressable
 									onPress={() => selectFile(file)}
 								>
 									{filesSelected &&
@@ -89,8 +100,10 @@ export const MediaLibrary = () => {
 										radius="md"
 										removeWrapper
 									/>
-									<CardFooter>
-										<div className="text-sm truncate">{file.name}</div>
+									<CardFooter className="text-white">
+										<div className="text-xs font-light text-right truncate w-full">
+											{file.name}
+										</div>
 										<div className="text-xs truncate">
 											{formatSize(file.size)}
 										</div>

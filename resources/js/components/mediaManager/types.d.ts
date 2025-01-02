@@ -43,6 +43,8 @@ interface MediaManagerContextType {
 	selectMultiple?: boolean
 	order?: number[] | null
 	setOrder?: (order: number[] | null) => void
+	fileToEdit: Image | null
+	setFileToEdit: (fileToEdit: Image | null) => void
 }
 
 interface ComponentProps {

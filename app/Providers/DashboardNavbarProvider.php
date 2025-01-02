@@ -48,6 +48,20 @@ class DashboardNavbarProvider extends ServiceProvider
 		];
 
 
+		// User gallery
+		$menu[] = [
+			'key' => 'gallery',
+			'title' => 'Media',
+			'menu' => [
+				[
+					'label' => 'Gallery',
+					'route' => 'gallery.index',
+					'icon' => 'ri-gallery-line'
+				]
+			]
+		];
+
+
 		// UI components
 		$menu[] = [
 			'key' => 'ui-components',

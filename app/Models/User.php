@@ -12,10 +12,19 @@ use App\Notifications\ResetPasswordNotification;
 use App\Notifications\EmailVerificationNotification;
 use App\Data\AccountData;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
-	use HasFactory, Notifiable, HasRoles, Impersonate;
+	use HasFactory;
+	use Notifiable;
+	use HasRoles;
+	use Impersonate;
+	use InteractsWithMedia;
 
 	/**
 	 * The attributes that are mass assignable.
@@ -128,10 +137,11 @@ class User extends Authenticatable implements MustVerifyEmail
 		return $this->roles->map(fn($role) => ['id' => $role->id, 'name' => $role->name])->toArray();
 	}
 
+
 	/**
 	 * Get the user's account data.
 	 *
-	 * @return \App\Data\AccountData
+	 * @return \App\Data\AccountData The user's account data.
 	 */
 	public function getAccount(): AccountData
 	{
@@ -153,15 +163,16 @@ class User extends Authenticatable implements MustVerifyEmail
 	}
 
 
-/**
- * Generate a temporary signed URL for email verification.
- *
- * This URL is used to verify the user's email address and is valid for
- * a specified duration defined in the authentication configuration.
- *
- * @return string The generated verification URL.
- */
 
+	/**
+	 * Generate a signed URL for the user to verify their email address.
+	 *
+	 * The generated URL is a temporary signed route that is only valid for the
+	 * specified duration defined in the authentication configuration. The URL
+	 * contains the user's ID and a hash of their email address.
+	 *
+	 * @return string The signed URL used to verify the user's email address.
+	 */
 	private function generateVerificationUrl(): string
 	{
 		return URL::temporarySignedRoute(
@@ -184,5 +195,47 @@ class User extends Authenticatable implements MustVerifyEmail
 	{
 		$url = $this->generateVerificationUrl();
 		$this->notify(new EmailVerificationNotification($url));
+	}
+
+
+	/**
+	 * Register media collections for the user.
+	 *
+	 * This method defines two media collections: 'images' and 'files'.
+	 * These collections can be used to organize and store media files
+	 * associated with the user.
+	 */
+
+	public function registerMediaCollections(): void
+	{
+		$this->addMediaCollection('images');
+		$this->addMediaCollection('files');
+	}
+
+
+	/**
+	 * Register media conversions for the user.
+	 *
+	 * This method adds a 'preview' media conversion that fits the media
+	 * within a 300x300 dimension while maintaining the aspect ratio.
+	 * The conversion is set to be non-queued.
+	 *
+	 * @param \Spatie\MediaLibrary\MediaCollections\Models\Media|null $media
+	 */
+
+	public function registerMediaConversions(?Media $media = null): void
+	{
+		$this
+			->addMediaConversion('webp')
+			->format('webp')
+			->performOnCollections('images')
+			->nonQueued();
+
+		$this
+			->addMediaConversion('preview')
+			->format('webp')
+			->performOnCollections('images')
+			->fit(Fit::Contain, 300, 300)
+			->nonQueued();
 	}
 }

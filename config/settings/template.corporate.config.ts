@@ -11,7 +11,7 @@ export const template = {
 		width: '230px',
 		collapsedWidth: '0px',
 
-		breakpoint: 820,
+		breakpoint: 767,
 
 		item: {
 			hover: {
