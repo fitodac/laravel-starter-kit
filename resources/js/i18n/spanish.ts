@@ -220,4 +220,10 @@ export default {
 	'Makr all as read': 'Marcar todo como leído',
 	'There are no notifications': 'No hay notificaciones',
 	'Mark as read': 'Marcar como leído',
+	'Image gallery': 'Galería de imágenes',
+	Media: 'Medios',
+	'There are no media files yet': 'Todavía no hay archivos multimedia',
+	'Upload files': 'Subir archivos',
+	'Allowed image types:': 'Tipos de imagen permitidos: %types%',
+	'Select an image to start editing': 'Selecciona una imagen para comenzar a editar',
 }

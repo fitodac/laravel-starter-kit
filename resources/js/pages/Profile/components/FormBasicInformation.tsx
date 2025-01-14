@@ -5,7 +5,7 @@ import { Input, Button, Divider } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 import { FormProfileImage } from './FormProfileImage'
 
-import type { PageProps, InertiaResponse } from '@/types'
+import type { PageProps, FlashMessage } from '@/types'
 
 export const FormBasicInformation = () => {
 	const user = usePage<PageProps>().props.auth.user
@@ -27,11 +27,10 @@ export const FormBasicInformation = () => {
 
 		patch(route('profile.update'), {
 			preserveScroll: true,
-			// @ts-ignore
-			onSuccess: (resp: InertiaResponse) => {
-				if (resp.props.flash && resp.props.flash.success) {
-					toast.success(t(resp.props.flash.success))
-				}
+			onSuccess: (resp) => {
+				const flash = resp.props.flash as FlashMessage
+				if (flash.success) toast.success(t(flash.success))
+				if (flash.error) toast.error(t(flash.error))
 			},
 			onError: (errors) => console.log(errors),
 		})

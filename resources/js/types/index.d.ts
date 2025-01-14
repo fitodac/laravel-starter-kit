@@ -106,3 +106,28 @@ export type Notification = {
 	read_at?: string
 	data?: any
 }
+
+export interface PaginatedData {
+	current_page: number
+	data: any[]
+	first_page_url: string
+	from: number
+	last_page: number
+	last_page_url: string
+	next_page_url: string | null
+	path: string
+	per_page: number
+	prev_page_url: string | null
+	to: number
+	total: number
+	links: {
+		url: string
+		label: string
+		active: boolean
+	}[]
+}
+
+export interface FlashMessage {
+	success?: string
+	error?: string
+}

@@ -49,6 +49,7 @@ const Page = ({ layout }: Props) => {
 								errorMessage={errors.password}
 								isInvalid={errors.password ? true : false}
 								onValueChange={(e) => setData('password', e)}
+								autoComplete="off"
 								endContent={
 									<button
 										type="button"

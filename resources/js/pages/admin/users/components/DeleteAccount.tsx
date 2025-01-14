@@ -13,7 +13,7 @@ import {
 import { t } from '@/i18n'
 import { toast } from 'react-toastify'
 
-import type { PageProps, InertiaResponse } from '@/types'
+import type { PageProps, FlashMessage } from '@/types'
 
 export const DeleteAccount = () => {
 	const { user } = usePage<PageProps>().props
@@ -65,11 +65,10 @@ export const DeleteAccount = () => {
 									onPress={() =>
 										destroy(route('admin.user.destroy', { user }), {
 											preserveScroll: true,
-											// @ts-ignore
-											onSuccess: (resp: InertiaResponse) => {
-												if (resp.props.flash && resp.props.flash.success) {
-													toast.success(t(resp.props.flash.success))
-												}
+											onSuccess: (resp) => {
+												const flash = resp.props.flash as FlashMessage
+												if (flash.success) toast.success(t(flash.success))
+												if (flash.error) toast.error(t(flash.error))
 											},
 										})
 									}

@@ -54,6 +54,7 @@ const Page = ({ status, layout }: Props) => {
 								isInvalid={errors.email ? true : false}
 								errorMessage={errors.email}
 								onValueChange={(e) => setData('email', e)}
+								autoComplete="off"
 							/>
 						</fieldset>
 
@@ -104,13 +105,29 @@ const Page = ({ status, layout }: Props) => {
 Page.layout = (page: JSX.Element) => {
 	switch (page.props.layout) {
 		case 'layout1':
-			return <AuthLayout1 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout1
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		case 'layout2':
-			return <AuthLayout2 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout2
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		case 'layout3':
-			return <AuthLayout3 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout3
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		default:
-			return <AuthLayout1 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout1
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 	}
 }
 

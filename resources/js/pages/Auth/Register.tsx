@@ -48,6 +48,7 @@ const Page = ({ layout }: Props) => {
 								isInvalid={errors.username ? true : false}
 								errorMessage={errors.username}
 								onValueChange={(e) => setData('username', e)}
+								autoComplete="off"
 							/>
 						</fieldset>
 
@@ -62,6 +63,7 @@ const Page = ({ layout }: Props) => {
 								isInvalid={errors.email ? true : false}
 								errorMessage={errors.email}
 								onValueChange={(e) => setData('email', e)}
+								autoComplete="off"
 							/>
 						</fieldset>
 
@@ -76,6 +78,7 @@ const Page = ({ layout }: Props) => {
 								isInvalid={errors.password ? true : false}
 								errorMessage={errors.password}
 								onValueChange={(e) => setData('password', e)}
+								autoComplete="off"
 								endContent={
 									<button
 										type="button"
@@ -103,6 +106,7 @@ const Page = ({ layout }: Props) => {
 								errorMessage={errors.password_confirmation}
 								isInvalid={errors.password_confirmation ? true : false}
 								onValueChange={(e) => setData('password_confirmation', e)}
+								autoComplete="off"
 								endContent={
 									<button
 										type="button"

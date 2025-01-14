@@ -1,9 +1,10 @@
 import { FormEvent, useRef } from 'react'
-import { useForm, router, usePage } from '@inertiajs/react'
+import { useForm, usePage } from '@inertiajs/react'
 import { toast } from 'react-toastify'
 import { t } from '@/i18n'
 
 import type { EmailTemplate } from '@/types/notification-templates'
+import type { FlashMessage } from '@/types'
 
 export const useActions = () => {
 	const props = usePage().props
@@ -32,11 +33,10 @@ export const useActions = () => {
 
 		patch(route('admin.emailTemplates.update', { template }), {
 			preserveScroll: true,
-			// @ts-ignore
-			onSuccess: (resp: InertiaResponse) => {
-				if (resp.props.flash && resp.props.flash.success) {
-					toast.success(t(resp.props.flash.success))
-				}
+			onSuccess: (resp) => {
+				const flash = resp.props.flash as FlashMessage
+				if (flash.success) toast.success(t(flash.success))
+				if (flash.error) toast.error(t(flash.error))
 			},
 			onError: (errors) => console.log('error', errors),
 		})

@@ -41,7 +41,7 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: PageProps) => {
 							panel: 'w-full max-w-screen-md md:px-6 xl:pl-20',
 							tab: 'justify-start font-medium select-none',
 							base: 'w-full overflow-x-hidden md:w-72 lg:w-auto',
-							tabList: 'bg-red-500 w-full overflow-x-auto',
+							tabList: 'w-full overflow-x-auto',
 						}}
 					>
 						<Tab key="basicInformation" title="Basic information">

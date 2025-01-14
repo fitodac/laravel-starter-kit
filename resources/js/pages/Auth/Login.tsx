@@ -60,6 +60,7 @@ const Page = ({ status, canResetPassword }: Props) => {
 								isInvalid={errors.login ? true : false}
 								errorMessage={errors.login}
 								onValueChange={(e) => setData('login', e)}
+								autoComplete="off"
 							/>
 						</fieldset>
 
@@ -74,6 +75,7 @@ const Page = ({ status, canResetPassword }: Props) => {
 								isInvalid={errors.password ? true : false}
 								onValueChange={(e) => setData('password', e)}
 								errorMessage={errors.password}
+								autoComplete="off"
 								endContent={
 									<button
 										type="button"

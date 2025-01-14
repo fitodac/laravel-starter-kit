@@ -10,7 +10,7 @@ export const MenuMobile = () => {
 		<div
 			className={cn(
 				'bg-content1 border-t border-content3',
-				'inset-x-0 bottom-0 absolute shadow-xl z-20'
+				'inset-x-0 bottom-0 fixed shadow-xl z-20'
 			)}
 		>
 			<nav className="flex justify-between">

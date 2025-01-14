@@ -13,6 +13,7 @@ import type {
 	Sessions as SessionsProps,
 	PageProps,
 	InertiaResponse,
+	FlashMessage,
 } from '@/types'
 
 import { toast } from 'react-toastify'
@@ -26,11 +27,10 @@ export const SessionsManager = () => {
 		destroy(route('dashboard.session.invalidate', { id }), {
 			only: ['sessions'],
 			preserveScroll: true,
-			// @ts-ignore
-			onSuccess: (resp: InertiaResponse) => {
-				if (resp.props.flash && resp.props.flash.success) {
-					toast.success(t(resp.props.flash.success))
-				}
+			onSuccess: (resp) => {
+				const flash = resp.props.flash as FlashMessage
+				if (flash.success) toast.success(t(flash.success))
+				if (flash.error) toast.error(t(flash.error))
 			},
 			onError: (error) => console.log('error', error),
 		})

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 import userBlank from '@/assets/img/blank-462x265.webp'
 
-import type { PageProps, InertiaResponse } from '@/types'
+import type { PageProps, FlashMessage } from '@/types'
 
 export const FormProfileImage = () => {
 	const user = usePage<PageProps>().props.auth.user
@@ -17,11 +17,10 @@ export const FormProfileImage = () => {
 
 	const removeImage = () => {
 		router.delete(route('profile.remove_image'), {
-			// @ts-ignore
-			onSuccess: (resp: InertiaResponse) => {
-				if (resp.props.flash && resp.props.flash.success) {
-					toast.success(t(resp.props.flash.success))
-				}
+			onSuccess: (resp) => {
+				const flash = resp.props.flash as FlashMessage
+				if (flash.success) toast.success(t(flash.success))
+				if (flash.error) toast.error(t(flash.error))
 			},
 			onError: (errors) => console.log(errors),
 		})
@@ -38,11 +37,10 @@ export const FormProfileImage = () => {
 				{ profile_picture: file },
 				{
 					forceFormData: true,
-					// @ts-ignore
-					onSuccess: (resp: InertiaResponse) => {
-						if (resp.props.flash && resp.props.flash.success) {
-							toast.success(t(resp.props.flash.success))
-						}
+					onSuccess: (resp) => {
+						const flash = resp.props.flash as FlashMessage
+						if (flash.success) toast.success(t(flash.success))
+						if (flash.error) toast.error(t(flash.error))
 					},
 					onError: (errors) => console.log(errors),
 				}
@@ -109,43 +107,6 @@ export const FormProfileImage = () => {
 						{t('Remove picture')}
 					</Button>
 				)}
-
-				{/* 
-				<Chip
-					size="sm"
-					color="primary"
-					avatar={
-						<>
-							<i className="ri-image-line ri-lg ml-1 -top-px relative" />
-						</>
-					}
-					className={cn(
-						'cursor-pointer select-none md:order-2',
-						'hover:opacity-90 focus:opacity-50 active:opacity-disabled'
-					)}
-					onClick={uploadNewProfilePicture}
-				>
-					{user.profile_picture ? t('Change picture') : t('Add profile image')}
-				</Chip>
-
-				<div>
-					{user.profile_picture && (
-						<Chip
-							size="sm"
-							color="danger"
-							avatar={
-								<>
-									<i className="ri-delete-bin-2-line ri-lg ml-1 -top-px relative" />
-								</>
-							}
-							className="cursor-pointer select-none hover:opacity-90 focus:opacity-50 active:opacity-disabled"
-							onClick={removeImage}
-						>
-							{t('Remove picture')}
-						</Chip>
-					)}
-				</div> 
-				*/}
 			</div>
 		</div>
 	)

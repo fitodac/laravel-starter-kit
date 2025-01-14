@@ -65,6 +65,7 @@ const Page = ({ token, email }: Props) => {
 								errorMessage={errors.password}
 								isInvalid={errors.password ? true : false}
 								onValueChange={(e) => setData('password', e)}
+								autoComplete="off"
 								endContent={
 									<button
 										type="button"
@@ -91,6 +92,7 @@ const Page = ({ token, email }: Props) => {
 								errorMessage={errors.password_confirmation}
 								isInvalid={errors.password ? true : false}
 								onValueChange={(e) => setData('password_confirmation', e)}
+								autoComplete="off"
 								endContent={
 									<button
 										type="button"

@@ -24,6 +24,12 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
+	/**
+	 * Profile
+	 * 
+	 * 
+	 * 
+	 */
 	Route::get('profile', [ProfileController::class, 'edit'])
 		->name('profile.edit');
 

@@ -4,7 +4,7 @@ import { useForm } from '@inertiajs/react'
 import { Input, Button, Divider } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 
-import type { InertiaResponse } from '@/types'
+import type { FlashMessage } from '@/types'
 
 export const FormPassword = () => {
 	const [currentPasswordVisibility, setCurrentPasswordVisibility] =
@@ -33,12 +33,11 @@ export const FormPassword = () => {
 
 		put(route('password.update'), {
 			preserveScroll: true,
-			// @ts-ignore
-			onSuccess: (resp: InertiaResponse) => {
+			onSuccess: (resp) => {
 				reset()
-				if (resp.props.flash && resp.props.flash.success) {
-					toast.success(t(resp.props.flash.success))
-				}
+				const flash = resp.props.flash as FlashMessage
+				if (flash.success) toast.success(t(flash.success))
+				if (flash.error) toast.error(t(flash.error))
 			},
 			onError: (errors) => {
 				console.log(errors)

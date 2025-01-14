@@ -14,7 +14,7 @@ import {
 import { toast } from 'react-toastify'
 import { useGeneratePassword } from '@/hooks'
 
-import type { PageProps, User, InertiaResponse } from '@/types'
+import type { PageProps, User, FlashMessage } from '@/types'
 
 interface Props extends PageProps {
 	user: User
@@ -46,11 +46,10 @@ export const Page = ({ user }: Props) => {
 
 		post(route('admin.user.store', { user }), {
 			preserveScroll: true,
-			// @ts-ignore
-			onSuccess: (resp: InertiaResponse) => {
-				if (resp.props.flash && resp.props.flash.success) {
-					toast.success(t(resp.props.flash.success))
-				}
+			onSuccess: (resp) => {
+				const flash = resp.props.flash as FlashMessage
+				if (flash.success) toast.success(t(flash.success))
+				if (flash.error) toast.error(t(flash.error))
 			},
 			onError: (errors) => console.log(errors),
 		})

@@ -13,6 +13,7 @@ import { toast } from 'react-toastify'
 import { NotificationContext } from '../providers/NotificationProvider'
 
 import type { NotificationContextProps } from '@/types/notifications'
+import type { FlashMessage } from '@/types'
 
 export const DeleteNotification = () => {
 	const { delete: destroy } = useForm()
@@ -63,9 +64,9 @@ export const DeleteNotification = () => {
 											preserveScroll: true,
 											// @ts-ignore
 											onSuccess: (resp: InertiaResponse) => {
-												if (resp.props.flash && resp.props.flash.success) {
-													toast.success(t(resp.props.flash.success))
-												}
+												const flash = resp.props.flash as FlashMessage
+												if (flash.success) toast.success(t(flash.success))
+												if (flash.error) toast.error(t(flash.error))
 												onClose()
 											},
 										}

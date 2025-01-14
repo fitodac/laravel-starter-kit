@@ -8,6 +8,7 @@ import ReactSafelySetInnerHTML from 'react-safely-set-inner-html'
 import { alowedTags } from '@/helpers/safelySetInnerHtmlAllowedTags'
 
 import type { Notification } from '@/types/notifications'
+import type { FlashMessage } from '@/types'
 
 interface Props {
 	item: Notification
@@ -47,10 +48,10 @@ export const NotificationsListCell = ({ item, key, dispatch }: Props) => {
 							onPress={() => {
 								router.post(route('notification.markAsRead', { id: item.id }), {
 									// @ts-ignore
-									onSuccess: (resp: InertiaResponse) => {
-										if (resp.props.flash && resp.props.flash.success) {
-											toast.success(t(resp.props.flash.success))
-										}
+									onSuccess: (resp) => {
+										const flash = resp.props.flash as FlashMessage
+										if (flash.success) toast.success(t(flash.success))
+										if (flash.error) toast.error(t(flash.error))
 									},
 								})
 							}}

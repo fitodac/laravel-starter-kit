@@ -13,6 +13,7 @@ import { toast } from 'react-toastify'
 import { PermissionContext } from '../providers/PermissionProvider'
 
 import type { PermissionContextProps } from '@/types/permissions'
+import type { FlashMessage } from '@/types'
 
 export const DeletePermission = () => {
 	const { delete: destroy } = useForm()
@@ -54,11 +55,10 @@ export const DeletePermission = () => {
 										}),
 										{
 											preserveScroll: true,
-											// @ts-ignore
-											onSuccess: (resp: InertiaResponse) => {
-												if (resp.props.flash && resp.props.flash.success) {
-													toast.success(t(resp.props.flash.success))
-												}
+											onSuccess: (resp) => {
+												const flash = resp.props.flash as FlashMessage
+												if (flash.success) toast.success(t(flash.success))
+												if (flash.error) toast.error(t(flash.error))
 												onClose()
 											},
 										}

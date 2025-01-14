@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { t } from '@/i18n'
 
 import type { NotificationContextProps } from '@/types/notifications'
+import type { FlashMessage } from '@/types'
 
 export const useActions = () => {
 	const { state, dispatch } = useContext(
@@ -59,15 +60,14 @@ export const useActions = () => {
 		} else {
 			post(route('dashboard.notification.store'), {
 				preserveScroll: true,
-				// @ts-ignore
-				onSuccess: (resp: InertiaResponse) => {
-					if (resp.props.flash && resp.props.flash.success) {
-						toast.success(t(resp.props.flash.success))
-					}
+				onSuccess: (resp) => {
+					const flash = resp.props.flash as FlashMessage
+					if (flash.success) toast.success(t(flash.success))
+					if (flash.error) toast.error(t(flash.error))
 
 					dispatch({
 						type: 'setSelectedNotification',
-						payload: resp.props.notifications.data.at(0),
+						payload: (resp.props as any).notifications.data.at(0),
 					})
 
 					dispatch({ type: 'closeDrawer' })

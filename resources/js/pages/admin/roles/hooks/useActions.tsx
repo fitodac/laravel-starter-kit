@@ -6,6 +6,7 @@ import { t } from '@/i18n'
 
 import type { RoleContextProps } from '@/types/roles'
 import { Permission } from '@/types/permissions'
+import type { FlashMessage } from '@/types'
 
 export const useActions = () => {
 	const { state, dispatch } = useContext(RoleContext) as RoleContextProps
@@ -48,11 +49,10 @@ export const useActions = () => {
 				}),
 				{
 					preserveScroll: true,
-					// @ts-ignore
-					onSuccess: (resp: InertiaResponse) => {
-						if (resp.props.flash && resp.props.flash.success) {
-							toast.success(t(resp.props.flash.success))
-						}
+					onSuccess: (resp) => {
+						const flash = resp.props.flash as FlashMessage
+						if (flash.success) toast.success(t(flash.success))
+						if (flash.error) toast.error(t(flash.error))
 
 						dispatch({ type: 'closeDrawer' })
 						reset()
@@ -65,11 +65,10 @@ export const useActions = () => {
 		} else {
 			post(route('admin.role.store'), {
 				preserveScroll: true,
-				// @ts-ignore
-				onSuccess: (resp: InertiaResponse) => {
-					if (resp.props.flash && resp.props.flash.success) {
-						toast.success(t(resp.props.flash.success))
-					}
+				onSuccess: (resp) => {
+					const flash = resp.props.flash as FlashMessage
+					if (flash.success) toast.success(t(flash.success))
+					if (flash.error) toast.error(t(flash.error))
 
 					dispatch({ type: 'setSelectedRole', payload: null })
 

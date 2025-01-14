@@ -15,6 +15,7 @@ export const PageHeader = ({ title, children, classNames }: Props) => {
 			className={cn(
 				'bg-white w-full px-6 py-7',
 				'flex justify-center',
+				'sm:py-7',
 				'md:px-10 md:py-12 xl:gap-20',
 				'dark:bg-black',
 				classNames && classNames.base
@@ -28,7 +29,7 @@ export const PageHeader = ({ title, children, classNames }: Props) => {
 				)}
 			>
 				{title && (
-					<h2 className="text-xl font-semibold select-none md:text-2xl">
+					<h2 className="text-lg font-semibold select-none sm:text-xl md:text-2xl">
 						{title}
 					</h2>
 				)}

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 import userBlank from '@/assets/img/blank-462x265.webp'
 
-import type { PageProps, InertiaResponse } from '@/types'
+import type { PageProps, FlashMessage } from '@/types'
 
 export const FormProfileImage = () => {
 	const user = usePage<PageProps>().props.user
@@ -18,11 +18,10 @@ export const FormProfileImage = () => {
 
 	const removeImage = () => {
 		router.delete(route('profile.remove_image'), {
-			// @ts-ignore
-			onSuccess: (resp: InertiaResponse) => {
-				if (resp.props.flash && resp.props.flash.success) {
-					toast.success(t(resp.props.flash.success))
-				}
+			onSuccess: (resp) => {
+				const flash = resp.props.flash as FlashMessage
+				if (flash.success) toast.success(t(flash.success))
+				if (flash.error) toast.error(t(flash.error))
 			},
 			onError: (errors) => console.log(errors),
 		})
@@ -39,11 +38,10 @@ export const FormProfileImage = () => {
 				{ profile_picture: file },
 				{
 					forceFormData: true,
-					// @ts-ignore
-					onSuccess: (resp: InertiaResponse) => {
-						if (resp.props.flash && resp.props.flash.success) {
-							toast.success(t(resp.props.flash.success))
-						}
+					onSuccess: (resp) => {
+						const flash = resp.props.flash as FlashMessage
+						if (flash.success) toast.success(t(flash.success))
+						if (flash.error) toast.error(t(flash.error))
 					},
 					onError: (errors) => console.log(errors),
 				}
