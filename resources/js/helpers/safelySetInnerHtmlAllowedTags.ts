@@ -8,5 +8,6 @@ export const alowedTags = [
 	'li',
 	'i',
 	'b',
+	'br',
 	'strong',
 ]
