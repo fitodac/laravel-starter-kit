@@ -1,10 +1,12 @@
 import en from './english'
 import sp from './spanish'
 
+type LocaleTranslations = { [key: string]: string }
+
 type Translations = {
-	en: { [index: string]: string }
-	sp: { [index: string]: string }
-	[key: string]: { [index: string]: string }
+	en: LocaleTranslations
+	sp: LocaleTranslations
+	[key: string]: LocaleTranslations
 }
 
 const translations: Translations = {
@@ -23,9 +25,21 @@ type Params = {
 }
 
 export const t = (str: string, params: Params = {}): string | JSX.Element => {
-	if (!str) return ''
+	if (!str) {
+		console.warn('Translation key is empty.')
+		return ''
+	}
 
-	const translation = translations[window.locale ?? 'en'][str]
+	const currentLocale = window.locale ?? 'en'
+
+	const translation = translations[currentLocale]?.[str]
+
+	if (!translation) {
+		console.warn(
+			`Missing translation for key: "${str}" in locale: "${currentLocale}"`
+		)
+		return str
+	}
 
 	if (typeof translation === 'string' && params) {
 		// @ts-ignore
