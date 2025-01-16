@@ -87,20 +87,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 		return $this->hasMany(Session::class);
 	}
 
-	/**
-	 * Get the user's permissions.
-	 *
-	 * @return \Illuminate\Support\Collection<int, string>
-	 */
-	public function getPermissionsAttribute()
-	{
-		if ($this->id) {
-			return $this->getPermissionsViaRoles()->pluck('name');
-		}
-
-		return [];
-	}
-
 
 	/**
 	 * Determine if the user can impersonate other users.

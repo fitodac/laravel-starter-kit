@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Cache;
+use App\Data\UserData;
 
 class AdminNavbarProvider extends ServiceProvider
 {
@@ -26,11 +27,12 @@ class AdminNavbarProvider extends ServiceProvider
 	/**
 	 * Get the menu data.
 	 */
-	public function getMenu($user, $role, $permissions = []): array
+	public function getMenu($user, $role): array
 	{
 		$menu = [];
 		$userId = $user->id ?? 0;
 		$cacheKey = "menu_{$userId}_{$role}";
+		$permissions = $user->permissions ?? [];
 
 		// Dashboard
 		$menu[] = [

@@ -10,6 +10,7 @@ import { NextUIProvider } from '@nextui-org/react'
 import { semanticColors } from '@nextui-org/theme'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
+window.locale = import.meta.env.VITE_APP_LOCALE || 'en'
 
 createInertiaApp({
 	title: (title) => `${title} - ${appName}`,

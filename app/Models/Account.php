@@ -9,7 +9,7 @@ class Account extends Model
 {
 	use HasFactory;
 
-	protected $fillable = ['user_id', 'key', 'value'];
+	protected $fillable = ['user_id', 'language', 'colorMode'];
 
 
 	public function user()

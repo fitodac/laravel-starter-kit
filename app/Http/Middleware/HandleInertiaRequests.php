@@ -37,26 +37,18 @@ class HandleInertiaRequests extends Middleware
 
 		$user = $request->user();
 
-		$role = $user ? $user->roles->first()->name : null;
-		$permissions = $user ? $user->permissions->toArray() : null;
+		if ($user) {
+			$user = UserData::fromUser($user);
+		}
+
+		$role = $user->roles[0] ?? null;
 
 		$new_notifications_count = config('settings.general.new_notifications_count');
 		$notifications = $user ? NotificationData::collect(
-			$user->unreadNotifications()
+			$request->user()->unreadNotifications()
 				->take($new_notifications_count)
 				->get()->toArray()
 		) : null;
-
-
-		if ($user) {
-			$user = UserData::from(array_merge(
-				$user->toArray(),
-				[
-					'roles' => $user->getRoles(),
-					'account' => $user->getAccount()
-				]
-			));
-		}
 
 		$isAdmin = $request->is(config('settings.general.admin_path') . '*');
 
@@ -65,13 +57,13 @@ class HandleInertiaRequests extends Middleware
 			...parent::share($request),
 			'auth' => [
 				'user' => $user ? $user : null,
-				'permissions' => $permissions,
-				'role' => $role,
+				'permissions' => $user->permissions ?? [],
+				'role' => $user->roles[0] ?? null,
 				'notifications' => $notifications
 			],
 			'adminNavbar' => $isAdmin ?
-				app(AdminNavbarProvider::class)->getMenu($user, $role, $permissions) :
-				app(DashboardNavbarProvider::class)->getMenu($user, $role, $permissions),
+				app(AdminNavbarProvider::class)->getMenu($user, $role) :
+				app(DashboardNavbarProvider::class)->getMenu($user, $role),
 			'adminLayout' => config('settings.general.admin_layout'),
 			'userLayout' => config('settings.general.user_layout'),
 			'authLayout' => config('settings.general.auth_layout'),
