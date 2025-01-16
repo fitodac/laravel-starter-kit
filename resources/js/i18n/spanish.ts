@@ -225,5 +225,12 @@ export default {
 	'There are no media files yet': 'Todavía no hay archivos multimedia',
 	'Upload files': 'Subir archivos',
 	'Allowed image types:': 'Tipos de imagen permitidos: %types%',
-	'Select an image to start editing': 'Selecciona una imagen para comenzar a editar',
+	'Select an image to start editing':
+		'Selecciona una imagen para comenzar a editar',
+	'The username has already been taken.':
+		'El nombre de usuario ya ha sido tomado.',
+	'The email field is required.':
+		'El campo de correo electrónico es obligatorio.',
+	'The password field confirmation does not match.':
+		'La confirmación de la contraseña no coincide.',
 }

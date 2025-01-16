@@ -48,7 +48,7 @@ const Page = ({ token, email }: Props) => {
 								value={data.email}
 								isDisabled={processing}
 								autoComplete="username"
-								errorMessage={errors.email}
+								errorMessage={errors.email && String(t(errors.email))}
 								isInvalid={errors.email ? true : false}
 								onValueChange={(e) => setData('email', e)}
 							/>
@@ -62,7 +62,7 @@ const Page = ({ token, email }: Props) => {
 								label={t('Password')}
 								value={data.password}
 								isDisabled={processing}
-								errorMessage={errors.password}
+								errorMessage={errors.password && String(t(errors.password))}
 								isInvalid={errors.password ? true : false}
 								onValueChange={(e) => setData('password', e)}
 								autoComplete="off"
@@ -89,7 +89,7 @@ const Page = ({ token, email }: Props) => {
 								label={t('Confirm password')}
 								value={data.password_confirmation}
 								isDisabled={processing}
-								errorMessage={errors.password_confirmation}
+								errorMessage={errors.password_confirmation && String(t(errors.password_confirmation))}
 								isInvalid={errors.password ? true : false}
 								onValueChange={(e) => setData('password_confirmation', e)}
 								autoComplete="off"

@@ -58,7 +58,7 @@ const Page = ({ status, canResetPassword }: Props) => {
 								isDisabled={processing}
 								ref={inputLogin}
 								isInvalid={errors.login ? true : false}
-								errorMessage={errors.login}
+								errorMessage={errors.login && String(t(errors.login))}
 								onValueChange={(e) => setData('login', e)}
 								autoComplete="off"
 							/>
@@ -74,7 +74,7 @@ const Page = ({ status, canResetPassword }: Props) => {
 								isDisabled={processing}
 								isInvalid={errors.password ? true : false}
 								onValueChange={(e) => setData('password', e)}
-								errorMessage={errors.password}
+								errorMessage={errors.password && String(t(errors.password))}
 								autoComplete="off"
 								endContent={
 									<button

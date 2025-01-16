@@ -52,7 +52,7 @@ const Page = ({ status, layout }: Props) => {
 								isDisabled={processing}
 								ref={inputEmail}
 								isInvalid={errors.email ? true : false}
-								errorMessage={errors.email}
+								errorMessage={errors.email && String(t(errors.email))}
 								onValueChange={(e) => setData('email', e)}
 								autoComplete="off"
 							/>

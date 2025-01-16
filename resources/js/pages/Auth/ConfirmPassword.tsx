@@ -46,7 +46,7 @@ const Page = ({ layout }: Props) => {
 								label={t('Password')}
 								value={data.password}
 								isDisabled={processing}
-								errorMessage={errors.password}
+								errorMessage={errors.password && String(t(errors.password))}
 								isInvalid={errors.password ? true : false}
 								onValueChange={(e) => setData('password', e)}
 								autoComplete="off"
@@ -84,13 +84,29 @@ const Page = ({ layout }: Props) => {
 Page.layout = (page: JSX.Element) => {
 	switch (page.props.layout) {
 		case 'layout1':
-			return <AuthLayout1 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout1
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		case 'layout2':
-			return <AuthLayout2 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout2
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		case 'layout3':
-			return <AuthLayout3 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout3
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		default:
-			return <AuthLayout1 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout1
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 	}
 }
 

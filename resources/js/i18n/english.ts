@@ -225,4 +225,9 @@ export default {
 	'Upload files': 'Upload files',
 	'Allowed image types:': 'Allowed image types: %types%',
 	'Select an image to start editing': 'Select an image to start editing',
+	'The username has already been taken.':
+		'The username has already been taken.',
+	'The email field is required.': 'The email field is required.',
+	'The password field confirmation does not match.':
+		'The password field confirmation does not match.',
 }

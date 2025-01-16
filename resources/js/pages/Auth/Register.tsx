@@ -46,7 +46,7 @@ const Page = ({ layout }: Props) => {
 								value={data.username}
 								isDisabled={processing}
 								isInvalid={errors.username ? true : false}
-								errorMessage={errors.username}
+								errorMessage={errors.username && String(t(errors.username))}
 								onValueChange={(e) => setData('username', e)}
 								autoComplete="off"
 							/>
@@ -61,7 +61,7 @@ const Page = ({ layout }: Props) => {
 								value={data.email}
 								isDisabled={processing}
 								isInvalid={errors.email ? true : false}
-								errorMessage={errors.email}
+								errorMessage={errors.email && String(t(errors.email))}
 								onValueChange={(e) => setData('email', e)}
 								autoComplete="off"
 							/>
@@ -76,7 +76,7 @@ const Page = ({ layout }: Props) => {
 								value={data.password}
 								isDisabled={processing}
 								isInvalid={errors.password ? true : false}
-								errorMessage={errors.password}
+								errorMessage={errors.password && String(t(errors.password))}
 								onValueChange={(e) => setData('password', e)}
 								autoComplete="off"
 								endContent={
@@ -103,7 +103,7 @@ const Page = ({ layout }: Props) => {
 								label={t('Confirm password')}
 								value={data.password_confirmation}
 								isDisabled={processing}
-								errorMessage={errors.password_confirmation}
+								errorMessage={errors.password_confirmation && String(t(errors.password_confirmation))}
 								isInvalid={errors.password_confirmation ? true : false}
 								onValueChange={(e) => setData('password_confirmation', e)}
 								autoComplete="off"
