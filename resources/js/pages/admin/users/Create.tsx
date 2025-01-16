@@ -92,7 +92,7 @@ export const Page = ({ user }: Props) => {
 										variant="faded"
 										value={data.username}
 										isInvalid={errors.username ? true : false}
-										errorMessage={errors.username}
+										errorMessage={errors.username && String(t(errors.username))}
 										onKeyUp={() => clearErrors('username')}
 										isDisabled={processing}
 										onValueChange={(e) => setData('username', e)}
@@ -112,7 +112,7 @@ export const Page = ({ user }: Props) => {
 										variant="faded"
 										value={data.name}
 										isInvalid={errors.name ? true : false}
-										errorMessage={errors.name}
+										errorMessage={errors.name && String(t(errors.name))}
 										onKeyUp={() => clearErrors('name')}
 										isDisabled={processing}
 										onValueChange={(e) => setData('name', e)}
@@ -130,7 +130,7 @@ export const Page = ({ user }: Props) => {
 										variant="faded"
 										value={data.lastname}
 										isInvalid={errors.lastname ? true : false}
-										errorMessage={errors.lastname}
+										errorMessage={errors.lastname && String(t(errors.lastname))}
 										onKeyUp={() => clearErrors('lastname')}
 										isDisabled={processing}
 										onValueChange={(e) => setData('lastname', e)}
@@ -148,7 +148,7 @@ export const Page = ({ user }: Props) => {
 										variant="faded"
 										value={data.email}
 										isInvalid={errors.email ? true : false}
-										errorMessage={errors.email}
+										errorMessage={errors.email && String(t(errors.email))}
 										onKeyUp={() => clearErrors('email')}
 										isDisabled={processing}
 										onValueChange={(e) => setData('email', e)}
@@ -206,7 +206,7 @@ export const Page = ({ user }: Props) => {
 										isRequired
 										variant="faded"
 										value={data.password}
-										errorMessage={errors.password}
+										errorMessage={errors.password && String(t(errors.password))}
 										type={pwdVisibility ? 'text' : 'password'}
 										isInvalid={errors.password ? true : false}
 										onKeyUp={() => clearErrors('password')}

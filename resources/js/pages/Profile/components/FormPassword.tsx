@@ -76,7 +76,9 @@ export const FormPassword = () => {
 								ref={currentPasswordInput}
 								variant="faded"
 								value={data.current_password}
-								errorMessage={errors.current_password}
+								errorMessage={
+									errors.current_password && String(t(errors.current_password))
+								}
 								type={currentPasswordVisibility ? 'text' : 'password'}
 								isInvalid={errors.current_password ? true : false}
 								onKeyUp={() => clearErrors('current_password')}
@@ -116,7 +118,7 @@ export const FormPassword = () => {
 								ref={passwordInput}
 								variant="faded"
 								value={data.password}
-								errorMessage={errors.password}
+								errorMessage={errors.password && String(t(errors.password))}
 								type={newPasswordVisibility ? 'text' : 'password'}
 								isInvalid={errors.password ? true : false}
 								onKeyUp={() => clearErrors('password')}
@@ -153,7 +155,10 @@ export const FormPassword = () => {
 								isRequired
 								variant="faded"
 								value={data.password_confirmation}
-								errorMessage={errors.password_confirmation}
+								errorMessage={
+									errors.password_confirmation &&
+									String(t(errors.password_confirmation))
+								}
 								type={newPasswordVisibility ? 'text' : 'password'}
 								isInvalid={errors.password_confirmation ? true : false}
 								onKeyUp={() => clearErrors('password_confirmation')}

@@ -55,7 +55,7 @@ export const FormPersonalInformation = () => {
 								variant="faded"
 								value={data.phone}
 								isInvalid={errors.phone ? true : false}
-								errorMessage={errors.phone}
+								errorMessage={errors.phone && String(t(errors.phone))}
 								onKeyUp={() => clearErrors('phone')}
 								isDisabled={processing}
 								onValueChange={(e) => setData('phone', e)}
@@ -71,7 +71,7 @@ export const FormPersonalInformation = () => {
 								variant="faded"
 								value={data.birth_date}
 								isInvalid={errors.birth_date ? true : false}
-								errorMessage={errors.birth_date}
+								errorMessage={errors.birth_date && String(t(errors.birth_date))}
 								onKeyUp={() => clearErrors('birth_date')}
 								isDisabled={processing}
 								onValueChange={(e) => setData('birth_date', e)}
@@ -87,7 +87,7 @@ export const FormPersonalInformation = () => {
 								variant="faded"
 								value={data.address}
 								isInvalid={errors.address ? true : false}
-								errorMessage={errors.address}
+								errorMessage={errors.address && String(t(errors.address))}
 								onKeyUp={() => clearErrors('address')}
 								isDisabled={processing}
 								onValueChange={(e) => setData('address', e)}
@@ -103,7 +103,7 @@ export const FormPersonalInformation = () => {
 								variant="faded"
 								value={data.city}
 								isInvalid={errors.city ? true : false}
-								errorMessage={errors.city}
+								errorMessage={errors.city && String(t(errors.city))}
 								onKeyUp={() => clearErrors('city')}
 								isDisabled={processing}
 								onValueChange={(e) => setData('city', e)}
@@ -119,7 +119,7 @@ export const FormPersonalInformation = () => {
 								variant="faded"
 								value={data.country}
 								isInvalid={errors.country ? true : false}
-								errorMessage={errors.country}
+								errorMessage={errors.country && String(t(errors.country))}
 								onKeyUp={() => clearErrors('country')}
 								isDisabled={processing}
 								onValueChange={(e) => setData('country', e)}
@@ -135,7 +135,7 @@ export const FormPersonalInformation = () => {
 								variant="faded"
 								value={data.zip}
 								isInvalid={errors.zip ? true : false}
-								errorMessage={errors.zip}
+								errorMessage={errors.zip && String(t(errors.zip))}
 								onKeyUp={() => clearErrors('zip')}
 								isDisabled={processing}
 								onValueChange={(e) => setData('zip', e)}

@@ -51,7 +51,7 @@ export const FormProfessionalInformation = () => {
 								variant="faded"
 								value={data.job_title}
 								isInvalid={errors.job_title ? true : false}
-								errorMessage={errors.job_title}
+								errorMessage={errors.job_title && String(t(errors.job_title))}
 								onKeyUp={() => clearErrors('job_title')}
 								isDisabled={processing}
 								onValueChange={(e) => setData('job_title', e)}

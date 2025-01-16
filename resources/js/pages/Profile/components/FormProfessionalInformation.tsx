@@ -52,7 +52,7 @@ export const FormProfessionalInformation = () => {
 								variant="faded"
 								value={data.job_title}
 								isInvalid={errors.job_title ? true : false}
-								errorMessage={errors.job_title}
+								errorMessage={errors.job_title && String(t(errors.job_title))}
 								onKeyUp={() => clearErrors('job_title')}
 								isDisabled={processing}
 								onValueChange={(e) => setData('job_title', e)}
@@ -68,7 +68,7 @@ export const FormProfessionalInformation = () => {
 								variant="faded"
 								value={data.company}
 								isInvalid={errors.company ? true : false}
-								errorMessage={errors.company}
+								errorMessage={errors.company && String(t(errors.company))}
 								onKeyUp={() => clearErrors('company')}
 								isDisabled={processing}
 								onValueChange={(e) => setData('company', e)}
@@ -84,7 +84,7 @@ export const FormProfessionalInformation = () => {
 								variant="faded"
 								value={data.bio}
 								isInvalid={errors.bio ? true : false}
-								errorMessage={errors.bio}
+								errorMessage={errors.bio && String(t(errors.bio))}
 								onKeyUp={() => clearErrors('bio')}
 								isDisabled={processing}
 								classNames={{ input: 'min-h-32' }}

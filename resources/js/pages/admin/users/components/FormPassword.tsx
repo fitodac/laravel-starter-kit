@@ -59,7 +59,7 @@ export const FormPassword = () => {
 								isRequired
 								variant="faded"
 								value={data.password}
-								errorMessage={errors.password}
+								errorMessage={errors.password && String(t(errors.password))}
 								type={pwdVisibility ? 'text' : 'password'}
 								isInvalid={errors.password ? true : false}
 								onKeyUp={() => clearErrors('password')}

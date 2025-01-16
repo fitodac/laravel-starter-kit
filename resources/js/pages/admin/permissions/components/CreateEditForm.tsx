@@ -50,7 +50,7 @@ export const CreateEditForm = () => {
 							ref={inputName}
 							value={data.name}
 							isInvalid={errors.name ? true : false}
-							errorMessage={errors.name}
+							errorMessage={errors.name && String(t(errors.name))}
 							onKeyUp={() => clearErrors('name')}
 							isDisabled={processing}
 							onValueChange={(e) => setData('name', e)}

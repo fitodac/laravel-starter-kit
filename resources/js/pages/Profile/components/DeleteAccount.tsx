@@ -92,7 +92,7 @@ export const DeleteAccount = (): JSX.Element => {
 											name="password"
 											label={t('Password')}
 											value={data.password}
-											errorMessage={errors.password}
+											errorMessage={errors.password && String(t(errors.password))}
 											isInvalid={errors.password ? true : false}
 											onValueChange={(e) => setData('password', e)}
 										/>

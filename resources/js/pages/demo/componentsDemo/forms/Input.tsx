@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Input, Divider, Chip, Button, Tabs, Tab } from '@nextui-org/react'
+import { t } from '@/i18n'
 
 /**
  * BasicInput
@@ -309,7 +310,7 @@ export const InputValidationStyles = () => {
 					label="Modern invalid"
 					className="max-w-sm"
 					isInvalid={true}
-					errorMessage="You must fill this to continue"
+					errorMessage={String(t('You must fill this to continue'))}
 					// @ts-ignore
 					variant={variant}
 				/>
@@ -324,7 +325,7 @@ export const InputValidationStyles = () => {
 						isRequired
 						className="max-w-sm"
 						isInvalid={true}
-						errorMessage="You must fill this to continue"
+						errorMessage={String(t('You must fill this to continue'))}
 						// @ts-ignore
 						variant={variant}
 					/>
