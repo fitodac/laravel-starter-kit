@@ -67,7 +67,7 @@ class HandleInertiaRequests extends Middleware
 			'adminLayout' => config('settings.general.admin_layout'),
 			'userLayout' => config('settings.general.user_layout'),
 			'authLayout' => config('settings.general.auth_layout'),
-			'colorMode' => config('settings.general.color_mode'),
+			'colorMode' => config('settings.general.color_mode', 'dark'),
 			'adminCanImpersonate' => config('settings.general.admin_can_impersonate'),
 			'isAdmin' => $isAdmin,
 			'ziggy' => fn() => [
