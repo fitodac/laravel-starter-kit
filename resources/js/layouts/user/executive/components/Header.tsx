@@ -24,10 +24,7 @@ const { executive: template } = templates
 export const Header = () => {
 	const { sidebarOpen, setSidebarOpen } = useMainStore()
 	const { colorMode } = useColorMode()
-
-	const {
-		props: { adminNavbar },
-	} = usePage<PageProps>()
+	const { userNavbar } = usePage<PageProps>().props
 
 	return (
 		<Navbar
@@ -85,8 +82,8 @@ export const Header = () => {
 			>
 				<div className="scrollbar-thin overflow-x-scroll">
 					<NavbarContent>
-						{adminNavbar &&
-							adminNavbar.map((nav) => (
+						{userNavbar &&
+							userNavbar.map((nav) => (
 								<Fragment key={nav.key}>
 									{nav.menu.length > 0 &&
 										nav.menu.map(({ label, route: path, submenu }) =>

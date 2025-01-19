@@ -17,8 +17,8 @@ class AccountFactory extends Factory
 	public function definition(): array
 	{
 		return [
-			'language' => 'en',
-			'colorMode' => 'dark',
+			'language' => config('app.locale', 'en'),
+			'colorMode' => config('settings.general.color_mode', 'dark'),
 		];
 	}
 }

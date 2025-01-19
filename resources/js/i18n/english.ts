@@ -230,4 +230,7 @@ export default {
 	'The email field is required.': 'The email field is required.',
 	'The password field confirmation does not match.':
 		'The password field confirmation does not match.',
+	'These credentials do not match our records.':
+		'These credentials do not match our records.',
+	'Admin dashboard': 'Admin dashboard',
 }

@@ -21,16 +21,11 @@ const { executive: template } = templates
 export const Sidebar = () => {
 	const { sidebarOpen, setSidebarOpen } = useMainStore()
 	const { windowWidth } = useWindowWidth()
-
-	const {
-		props: { demoExecutiveAdminNavbar },
-	} = usePage<PageProps>()
-
-	const adminNavbar = demoExecutiveAdminNavbar as NavbarProps
+	const { adminNavbar } = usePage<PageProps>().props
 
 	useEffect(() => {
 		setSidebarOpen(false)
-	}, [demoExecutiveAdminNavbar])
+	}, [adminNavbar])
 
 	if (windowWidth >= template.sidebar.breakpoint) {
 		return <></>

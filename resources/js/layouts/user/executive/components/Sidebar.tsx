@@ -13,7 +13,6 @@ import { cn } from '@nextui-org/react'
 import { Fragment } from 'react/jsx-runtime'
 
 import { PageProps } from '@/types'
-import type { NavbarProps } from '@/types/navbar'
 import { useEffect } from 'react'
 
 const { executive: template } = templates
@@ -22,15 +21,11 @@ export const Sidebar = () => {
 	const { sidebarOpen, setSidebarOpen } = useMainStore()
 	const { windowWidth } = useWindowWidth()
 
-	const {
-		props: { demoExecutiveAdminNavbar },
-	} = usePage<PageProps>()
-
-	const adminNavbar = demoExecutiveAdminNavbar as NavbarProps
+	const { userNavbar } = usePage<PageProps>().props
 
 	useEffect(() => {
 		setSidebarOpen(false)
-	}, [demoExecutiveAdminNavbar])
+	}, [userNavbar])
 
 	if (windowWidth >= template.sidebar.breakpoint) {
 		return <></>
@@ -55,8 +50,8 @@ export const Sidebar = () => {
 					{/* Top spacer */}
 					<div className={template.sidebar.cn.topSpacer}></div>
 
-					{adminNavbar &&
-						adminNavbar.map((nav) => (
+					{userNavbar &&
+						userNavbar.map((nav) => (
 							<Fragment key={nav.key}>
 								{nav.title && nav.menu.length > 0 && (
 									<div

@@ -30,10 +30,7 @@ const { executive: template } = templates
 export const Header = () => {
 	const { sidebarOpen, setSidebarOpen } = useMainStore()
 	const { colorMode } = useColorMode()
-
-	const {
-		props: { adminNavbar },
-	} = usePage<PageProps>()
+	const { adminNavbar } = usePage<PageProps>().props
 
 	return (
 		<Navbar

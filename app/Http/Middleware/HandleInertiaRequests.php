@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 use App\Providers\AdminNavbarProvider;
-use App\Providers\DashboardNavbarProvider;
+use App\Providers\UserNavbarProvider;
 use App\Data\UserData;
 use App\Data\NotificationData;
 
@@ -61,9 +61,8 @@ class HandleInertiaRequests extends Middleware
 				'role' => $user->roles[0] ?? null,
 				'notifications' => $notifications
 			],
-			'adminNavbar' => $isAdmin ?
-				app(AdminNavbarProvider::class)->getMenu($user, $role) :
-				app(DashboardNavbarProvider::class)->getMenu($user, $role),
+			'userNavbar' => app(UserNavbarProvider::class)->getMenu($user, $role),
+			'adminNavbar' => $isAdmin ? app(AdminNavbarProvider::class)->getMenu($user, $role) : null,
 			'adminLayout' => config('settings.general.admin_layout'),
 			'userLayout' => config('settings.general.user_layout'),
 			'authLayout' => config('settings.general.auth_layout'),

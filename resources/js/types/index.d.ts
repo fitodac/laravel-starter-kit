@@ -66,6 +66,7 @@ export interface PageProps {
 		permissions?: string[]
 		notifications: Notification[]
 	}
+	userNavbar: NavbarProps
 	adminNavbar: NavbarProps
 	settings: {
 		logo: string

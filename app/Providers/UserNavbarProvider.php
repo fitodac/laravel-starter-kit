@@ -4,17 +4,16 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Cache;
-use App\Data\UserData;
 
-class DashboardNavbarProvider extends ServiceProvider
+class UserNavbarProvider extends ServiceProvider
 {
 	/**
 	 * Register services.
 	 */
 	public function register(): void
 	{
-		$this->app->singleton(DashboardNavbarProvider::class, function ($app) {
-			return new DashboardNavbarProvider(null);
+		$this->app->singleton(UserNavbarProvider::class, function ($app) {
+			return new UserNavbarProvider(null);
 		});
 	}
 

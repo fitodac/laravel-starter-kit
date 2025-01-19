@@ -233,4 +233,7 @@ export default {
 		'El campo de correo electrónico es obligatorio.',
 	'The password field confirmation does not match.':
 		'La confirmación de la contraseña no coincide.',
+	'These credentials do not match our records.':
+		'Estas credenciales no coinciden con nuestros registros.',
+	'Admin dashboard': 'Panel de administración',
 }

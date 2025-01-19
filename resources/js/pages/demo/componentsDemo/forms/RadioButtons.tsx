@@ -216,8 +216,6 @@ export const CustomRadioGroup = () => {
 						statusColor="secondary"
 					/>
 				</RadioGroup>
-
-				{/* <pre>{JSON.stringify(groupSelected)}</pre> */}
 			</div>
 		</div>
 	)
