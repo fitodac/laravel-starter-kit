@@ -35,9 +35,12 @@ export const t = (str: string, params: Params = {}): string | JSX.Element => {
 	const translation = translations[currentLocale]?.[str]
 
 	if (!translation) {
-		console.warn(
-			`Missing translation for key: "${str}" in locale: "${currentLocale}"`
-		)
+		if ('production' === import.meta.env.VITE_APP_ENV) {
+			console.warn(
+				`Missing translation for key: "${str}" in locale: "${currentLocale}"`
+			)
+		}
+		
 		return str
 	}
 

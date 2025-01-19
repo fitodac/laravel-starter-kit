@@ -23,7 +23,9 @@ const data = [
 
 export const BasicTable = () => (
 	<>
-		<div className="space-y-6">
+		<div className="space-y-6" id="basicTable">
+			<h3 className="font-semibold">Basic table</h3>
+
 			<Table
 				shadow="none"
 				aria-label="Table"
@@ -47,23 +49,22 @@ export const BasicTable = () => (
 				</TableBody>
 			</Table>
 
-			<div className="space-y-2">
-				<div className="font-semibold">Basic table</div>
-				<p className="text-sm leading-tight">
-					The basic table is a simple, minimalist table design without visible
-					separations between rows or columns. This clean layout focuses solely
-					on the data presented, eliminating visual distractions. It's ideal for
-					interfaces where simplicity and clarity are key, seamlessly
-					integrating into any design without overwhelming the user.
-				</p>
-			</div>
+			<p className="text-xs leading-tight">
+				The basic table is a simple, minimalist table design without visible
+				separations between rows or columns. This clean layout focuses solely on
+				the data presented, eliminating visual distractions. It's ideal for
+				interfaces where simplicity and clarity are key, seamlessly integrating
+				into any design without overwhelming the user.
+			</p>
 		</div>
 	</>
 )
 
 export const StripedTable = () => (
 	<>
-		<div className="space-y-6">
+		<div className="space-y-6" id="stripedTable">
+			<h3 className="font-semibold">Striped table</h3>
+
 			<Table
 				isStriped
 				shadow="none"
@@ -89,23 +90,22 @@ export const StripedTable = () => (
 				</TableBody>
 			</Table>
 
-			<div className="space-y-2">
-				<div className="font-semibold">Striped table</div>
-				<p className="text-sm leading-tight">
-					The basic table is a simple, minimalist table design without visible
-					separations between rows or columns. This clean layout focuses solely
-					on the data presented, eliminating visual distractions. It's ideal for
-					interfaces where simplicity and clarity are key, seamlessly
-					integrating into any design without overwhelming the user.
-				</p>
-			</div>
+			<p className="text-xs leading-tight">
+				The basic table is a simple, minimalist table design without visible
+				separations between rows or columns. This clean layout focuses solely on
+				the data presented, eliminating visual distractions. It's ideal for
+				interfaces where simplicity and clarity are key, seamlessly integrating
+				into any design without overwhelming the user.
+			</p>
 		</div>
 	</>
 )
 
 export const ShadowedTable = () => (
 	<>
-		<div className="space-y-6">
+		<div className="space-y-6" id="shadowedTable">
+			<h3 className="font-semibold">Shadowed table</h3>
+
 			<Table
 				// removeWrapper
 				shadow="md"
@@ -131,23 +131,22 @@ export const ShadowedTable = () => (
 				</TableBody>
 			</Table>
 
-			<div className="space-y-2">
-				<div className="font-semibold">Shadowed table</div>
-				<p className="text-sm leading-tight">
-					The basic table is a simple, minimalist table design without visible
-					separations between rows or columns. This clean layout focuses solely
-					on the data presented, eliminating visual distractions. It's ideal for
-					interfaces where simplicity and clarity are key, seamlessly
-					integrating into any design without overwhelming the user.
-				</p>
-			</div>
+			<p className="text-xs leading-tight">
+				The basic table is a simple, minimalist table design without visible
+				separations between rows or columns. This clean layout focuses solely on
+				the data presented, eliminating visual distractions. It's ideal for
+				interfaces where simplicity and clarity are key, seamlessly integrating
+				into any design without overwhelming the user.
+			</p>
 		</div>
 	</>
 )
 
 export const SharpTable = () => (
 	<>
-		<div className="space-y-6">
+		<div className="space-y-6" id="sharpTable">
+			<h3 className="font-semibold">Sharp table</h3>
+
 			<Table
 				// removeWrapper
 				shadow="none"
@@ -173,23 +172,22 @@ export const SharpTable = () => (
 				</TableBody>
 			</Table>
 
-			<div className="space-y-2">
-				<div className="font-semibold">Sharp table</div>
-				<p className="text-sm leading-tight">
-					The basic table is a simple, minimalist table design without visible
-					separations between rows or columns. This clean layout focuses solely
-					on the data presented, eliminating visual distractions. It's ideal for
-					interfaces where simplicity and clarity are key, seamlessly
-					integrating into any design without overwhelming the user.
-				</p>
-			</div>
+			<p className="text-xs leading-tight">
+				The basic table is a simple, minimalist table design without visible
+				separations between rows or columns. This clean layout focuses solely on
+				the data presented, eliminating visual distractions. It's ideal for
+				interfaces where simplicity and clarity are key, seamlessly integrating
+				into any design without overwhelming the user.
+			</p>
 		</div>
 	</>
 )
 
 export const SharpStripedTable = () => (
 	<>
-		<div className="space-y-6">
+		<div className="space-y-6" id="sharpStripedTable">
+			<h3 className="font-semibold">Sharp striped table</h3>
+
 			<Table
 				isStriped
 				shadow="none"
@@ -215,23 +213,22 @@ export const SharpStripedTable = () => (
 				</TableBody>
 			</Table>
 
-			<div className="space-y-2">
-				<div className="font-semibold">Sharp striped table</div>
-				<p className="text-sm leading-tight">
-					The basic table is a simple, minimalist table design without visible
-					separations between rows or columns. This clean layout focuses solely
-					on the data presented, eliminating visual distractions. It's ideal for
-					interfaces where simplicity and clarity are key, seamlessly
-					integrating into any design without overwhelming the user.
-				</p>
-			</div>
+			<p className="text-xs leading-tight">
+				The basic table is a simple, minimalist table design without visible
+				separations between rows or columns. This clean layout focuses solely on
+				the data presented, eliminating visual distractions. It's ideal for
+				interfaces where simplicity and clarity are key, seamlessly integrating
+				into any design without overwhelming the user.
+			</p>
 		</div>
 	</>
 )
 
 export const BorderlessTable = () => (
 	<>
-		<div className="space-y-6">
+		<div className="space-y-6" id="borderlessTable">
+			<h3 className="font-semibold">Borderless table</h3>
+
 			<Table
 				removeWrapper
 				radius="none"
@@ -256,23 +253,22 @@ export const BorderlessTable = () => (
 				</TableBody>
 			</Table>
 
-			<div className="space-y-2">
-				<div className="font-semibold">Borderless table</div>
-				<p className="text-sm leading-tight">
-					The basic table is a simple, minimalist table design without visible
-					separations between rows or columns. This clean layout focuses solely
-					on the data presented, eliminating visual distractions. It's ideal for
-					interfaces where simplicity and clarity are key, seamlessly
-					integrating into any design without overwhelming the user.
-				</p>
-			</div>
+			<p className="text-xs leading-tight">
+				The basic table is a simple, minimalist table design without visible
+				separations between rows or columns. This clean layout focuses solely on
+				the data presented, eliminating visual distractions. It's ideal for
+				interfaces where simplicity and clarity are key, seamlessly integrating
+				into any design without overwhelming the user.
+			</p>
 		</div>
 	</>
 )
 
 export const ClassicTable = () => (
 	<>
-		<div className="space-y-6">
+		<div className="space-y-6" id="classicTable">
+			<h3 className="font-semibold">Classic table</h3>
+
 			<Table
 				removeWrapper
 				radius="none"
@@ -298,23 +294,22 @@ export const ClassicTable = () => (
 				</TableBody>
 			</Table>
 
-			<div className="space-y-2">
-				<div className="font-semibold">Classic table</div>
-				<p className="text-sm leading-tight">
-					The basic table is a simple, minimalist table design without visible
-					separations between rows or columns. This clean layout focuses solely
-					on the data presented, eliminating visual distractions. It's ideal for
-					interfaces where simplicity and clarity are key, seamlessly
-					integrating into any design without overwhelming the user.
-				</p>
-			</div>
+			<p className="text-xs leading-tight">
+				The basic table is a simple, minimalist table design without visible
+				separations between rows or columns. This clean layout focuses solely on
+				the data presented, eliminating visual distractions. It's ideal for
+				interfaces where simplicity and clarity are key, seamlessly integrating
+				into any design without overwhelming the user.
+			</p>
 		</div>
 	</>
 )
 
 export const DividersTable = () => (
 	<>
-		<div className="space-y-6">
+		<div className="space-y-6" id="dividersTable">
+			<h3 className="font-semibold">Dividers table</h3>
+
 			<Table
 				removeWrapper
 				aria-label="Table"
@@ -338,23 +333,22 @@ export const DividersTable = () => (
 				</TableBody>
 			</Table>
 
-			<div className="space-y-2">
-				<div className="font-semibold">Dividers table</div>
-				<p className="text-sm leading-tight">
-					The basic table is a simple, minimalist table design without visible
-					separations between rows or columns. This clean layout focuses solely
-					on the data presented, eliminating visual distractions. It's ideal for
-					interfaces where simplicity and clarity are key, seamlessly
-					integrating into any design without overwhelming the user.
-				</p>
-			</div>
+			<p className="text-xs leading-tight">
+				The basic table is a simple, minimalist table design without visible
+				separations between rows or columns. This clean layout focuses solely on
+				the data presented, eliminating visual distractions. It's ideal for
+				interfaces where simplicity and clarity are key, seamlessly integrating
+				into any design without overwhelming the user.
+			</p>
 		</div>
 	</>
 )
 
 export const CompactTable = () => (
 	<>
-		<div className="space-y-6">
+		<div className="space-y-6" id="compactTable">
+			<h3 className="font-semibold">Compact table</h3>
+
 			<Table shadow="none" aria-label="Table" isCompact>
 				<TableHeader columns={columns}>
 					{(column) => (
@@ -371,18 +365,13 @@ export const CompactTable = () => (
 				</TableBody>
 			</Table>
 
-			<div className="space-y-2">
-				<div className="font-semibold">Compact table</div>
-				<p className="text-sm leading-tight">
-					The basic table is a simple, minimalist table design without visible
-					separations between rows or columns. This clean layout focuses solely
-					on the data presented, eliminating visual distractions. It's ideal for
-					interfaces where simplicity and clarity are key, seamlessly
-					integrating into any design without overwhelming the user.
-				</p>
-			</div>
+			<p className="text-xs leading-tight">
+				The basic table is a simple, minimalist table design without visible
+				separations between rows or columns. This clean layout focuses solely on
+				the data presented, eliminating visual distractions. It's ideal for
+				interfaces where simplicity and clarity are key, seamlessly integrating
+				into any design without overwhelming the user.
+			</p>
 		</div>
 	</>
 )
-
-

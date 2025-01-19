@@ -11,6 +11,7 @@ import {
 	DividersTable,
 	CompactTable,
 } from '@/pages/demo/componentsDemo'
+import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 
@@ -49,8 +50,27 @@ export const TableStylesPage = ({ template }: Props) => {
 				</p>
 			</PageHeader>
 
-			<PageContent className={contentClassName}>
-				<div className="grid gap-6 lg:grid-cols-2 lg:gap-10">
+			<PageContent
+				className={contentClassName}
+				aside={
+					<InternalNavbar
+						{...{
+							menu: [
+								{ key: 'solidButton', label: 'Basic' },
+								{ key: 'stripedTable', label: 'Striped' },
+								{ key: 'shadowedTable', label: 'Shadowed' },
+								{ key: 'sharpTable', label: 'Sharp' },
+								{ key: 'sharpStripedTable', label: 'Sharp striped' },
+								{ key: 'borderlessTable', label: 'Borderless' },
+								{ key: 'classicTable', label: 'Classic' },
+								{ key: 'dividersTable', label: 'Dividers' },
+								{ key: 'compactTable', label: 'Compact' },
+							],
+						}}
+					/>
+				}
+			>
+				<div className="flex-1 max-w-xl space-y-28">
 					<BasicTable />
 					<StripedTable />
 					<SharpTable />
