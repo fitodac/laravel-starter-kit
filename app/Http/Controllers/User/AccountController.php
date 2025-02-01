@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Models\Account;
+use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Inertia\Response;
-use App\Services\AccountService;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\UpdateAccountRequest;
+
+use App\Models\Account;
+
+use App\Services\AccountService;
 
 class AccountController extends Controller
 {
@@ -38,13 +41,5 @@ class AccountController extends Controller
 		if (!$account) return back()->with('error', 'Account not updated.');
 
 		return back()->with('success', 'Account updated successfully.');
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 */
-	public function destroy(Account $account)
-	{
-		//
 	}
 }

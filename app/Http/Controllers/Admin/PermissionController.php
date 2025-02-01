@@ -20,11 +20,12 @@ class PermissionController extends Controller
 		$this->permissionService = $permissionService;
 	}
 
+	
 	/**
-	 * LIST
+	 * Display a listing of permissions
 	 * 
-	 * 
-	 * 
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function index(Request $request): Response
 	{
@@ -34,11 +35,12 @@ class PermissionController extends Controller
 		);
 	}
 
+	
 	/**
-	 * STORE
+	 * Store a newly created permission in storage
 	 * 
-	 * 
-	 * 
+	 * @param Request $request
+	 * @return RedirectResponse
 	 */
 	public function store(Request $request): RedirectResponse
 	{
@@ -52,11 +54,13 @@ class PermissionController extends Controller
 			->with('success', 'Permission created successfully.');
 	}
 
+	
 	/**
-	 * UPDATE
+	 * Update the specified permission in storage
 	 * 
-	 * 
-	 * 
+	 * @param Request $request
+	 * @param Permission $permission
+	 * @return RedirectResponse
 	 */
 	public function update(Request $request, Permission $permission): RedirectResponse
 	{
@@ -70,11 +74,13 @@ class PermissionController extends Controller
 			->with('success', 'Permission updated successfully.');
 	}
 
+	
 	/**
-	 * DELETE
+	 * Remove the specified permission from storage
 	 * 
-	 * 
-	 * 
+	 * @param Request $request
+	 * @param Permission $permission
+	 * @return RedirectResponse
 	 */
 	public function destroy(Request $request, Permission $permission): RedirectResponse
 	{

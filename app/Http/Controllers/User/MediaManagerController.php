@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
@@ -12,12 +13,9 @@ class MediaManagerController extends Controller
 {
 
 	/**
-	 * Get a list of media items from the 'images' collection.
-	 *
+	 * Get all media files from the 'images' collection.
+	 * 
 	 * @return \Illuminate\Http\JsonResponse
-	 * 
-	 * 
-	 * 
 	 */
 	public function index(): JsonResponse
 	{
@@ -36,9 +34,6 @@ class MediaManagerController extends Controller
 	 *
 	 * @param \Illuminate\Http\Request $request
 	 * @return void
-	 * 
-	 * 
-	 * 
 	 */
 	public function store(Request $request): void
 	{
@@ -75,7 +70,6 @@ class MediaManagerController extends Controller
 	 * @param mixed $id The identifier of the media item to be updated.
 	 * @return \Illuminate\Http\JsonResponse A JSON response indicating success or failure.
 	 */
-
 	public function update(Request $request, $id): JsonResponse
 	{
 		$user = $request->user();
@@ -97,9 +91,6 @@ class MediaManagerController extends Controller
 	 *
 	 * @param string $uuid The UUID of the media item to be deleted.
 	 * @return \Illuminate\Http\JsonResponse
-	 * 
-	 * 
-	 * 
 	 */
 	public function destroy($id): JsonResponse
 	{

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\Request;
@@ -17,10 +18,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 class ProfileController extends Controller
 {
 	/**
-	 * EDIT
-	 * 
-	 * 
-	 * 
+	 * Display the user's profile edit form.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Inertia\Response
 	 */
 	public function edit(Request $request): Response
 	{
@@ -30,11 +31,12 @@ class ProfileController extends Controller
 		]);
 	}
 
+
 	/**
-	 * UPDATE
+	 * Update the user's profile information
 	 * 
-	 * 
-	 * 
+	 * @param ProfileUpdateRequest $request
+	 * @return RedirectResponse
 	 */
 	public function update(ProfileUpdateRequest $request): RedirectResponse
 	{
@@ -48,11 +50,12 @@ class ProfileController extends Controller
 		return back()->with('success', 'Your profile was updated successfully.');
 	}
 
+
 	/**
-	 * UPDATE IMAGE PROFILE
+	 * Update user's profile picture
 	 * 
-	 * 
-	 * 
+	 * @param Request $request
+	 * @return void
 	 */
 	public function update_image(Request $request): void
 	{
@@ -79,11 +82,12 @@ class ProfileController extends Controller
 		}
 	}
 
+
 	/**
-	 * REMOVE IMAGE PROFILE
+	 * Remove the user's profile picture
 	 * 
-	 * 
-	 * 
+	 * @param Request $request
+	 * @return RedirectResponse
 	 */
 	public function remove_image(Request $request): RedirectResponse
 	{
@@ -99,11 +103,12 @@ class ProfileController extends Controller
 		return back()->with('success', 'Image removed successfully.');
 	}
 
+
 	/**
-	 * DELETE ACCOUNT
+	 * Delete the user's account
 	 * 
-	 * 
-	 * 
+	 * @param Request $request
+	 * @return RedirectResponse
 	 */
 	public function destroy(Request $request): RedirectResponse
 	{

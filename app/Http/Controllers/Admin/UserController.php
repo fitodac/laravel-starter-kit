@@ -24,11 +24,11 @@ class UserController extends Controller
 		$this->userService = $userService;
 	}
 
+
 	/**
-	 * LIST
+	 * Display a listing of users
 	 * 
-	 * 
-	 * 
+	 * @return \Inertia\Response
 	 */
 	public function index(): Response
 	{
@@ -38,22 +38,23 @@ class UserController extends Controller
 		);
 	}
 
+
 	/**
-	 * CREATE
+	 * Display the user creation form
 	 * 
-	 * 
-	 * 
+	 * @return \Inertia\Response
 	 */
 	public function create(): Response
 	{
 		return Inertia::render('admin/users/Create');
 	}
 
+
 	/**
-	 * STORE
+	 * Store a newly created user in storage
 	 * 
-	 * 
-	 * 
+	 * @param CreateUserRequest $request
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function store(CreateUserRequest $request): RedirectResponse
 	{
@@ -62,22 +63,24 @@ class UserController extends Controller
 		return redirect()->route('admin.user.show', $user);
 	}
 
+
 	/**
-	 * SHOW
+	 * Display the specified user
 	 * 
-	 * 
-	 * 
+	 * @param User $user
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function show(User $user): RedirectResponse
 	{
 		return redirect()->route('admin.user.edit', ['user' => $user]);
 	}
 
+
 	/**
-	 * EDIT
+	 * Display the user edit form
 	 * 
-	 * 
-	 * 
+	 * @param User $user
+	 * @return \Inertia\Response
 	 */
 	public function edit(User $user): Response
 	{
@@ -87,11 +90,13 @@ class UserController extends Controller
 		);
 	}
 
+
 	/**
-	 * UPDATE
+	 * Update the specified user in storage
 	 * 
-	 * 
-	 * 
+	 * @param UpdateUserRequest $request
+	 * @param User $user
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function update(UpdateUserRequest $request, User $user): RedirectResponse
 	{
@@ -102,34 +107,38 @@ class UserController extends Controller
 		return back()->with('success', 'User updated successfully.');
 	}
 
+
 	/**
-	 * UPDATE IMAGE PROFILE
+	 * Update user profile image
 	 * 
-	 * 
-	 * 
+	 * @param User $user
+	 * @param Request $request
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function update_image_profile(User $user, Request $request): void
+	public function updateImageProfile(User $user, Request $request): RedirectResponse
 	{
 		$this->userService->updateImageProfile($user, $request);
 	}
 
+
 	/**
-	 * REMOVE IMAGE PROFILE
+	 * Remove the user's profile image
 	 * 
-	 * 
-	 * 
+	 * @param User $user
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function remove_image_profile(User $user): RedirectResponse
+	public function removeImageProfile(User $user): RedirectResponse
 	{
 		$this->userService->removeImageProfile($user);
 		return back()->with('success', 'Image removed successfully.');
 	}
 
+
 	/**
-	 * TERMINATE SESSION
+	 * Invalidate a specific user session
 	 * 
-	 * 
-	 * 
+	 * @param int $id Session ID to invalidate
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function invalidate_session($id): RedirectResponse
 	{
@@ -137,11 +146,12 @@ class UserController extends Controller
 		return back()->with('success', 'The session was closed.');
 	}
 
+
 	/**
-	 * DELETE ACCOUNT
+	 * Remove the specified user from storage
 	 * 
-	 * 
-	 * 
+	 * @param User $user
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function destroy(User $user): RedirectResponse
 	{

@@ -23,12 +23,12 @@ class RoleController extends Controller
 	}
 
 
-	/**
-	 * LIST
-	 * 
-	 * 
-	 * 
-	 */
+/**
+ * Role Controller
+ * 
+ * This controller handles the CRUD operations for roles management
+ * including listing, creating, updating and deleting roles.
+ */
 	public function index(Request $request): Response
 	{
 		return Inertia::render(
@@ -37,11 +37,12 @@ class RoleController extends Controller
 		);
 	}
 
+	
 	/**
-	 * STORE
-	 * 
-	 * 
-	 * 
+	 * Store a newly created role in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function store(Request $request): RedirectResponse
 	{
@@ -56,11 +57,13 @@ class RoleController extends Controller
 			->with('success', 'Role created successfully.');
 	}
 
+	
 	/**
-	 * UPDATE
-	 * 
-	 * 
-	 * 
+	 * Update the specified role in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Spatie\Permission\Models\Role  $role
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function update(Request $request, Role $role): RedirectResponse
 	{
@@ -75,11 +78,13 @@ class RoleController extends Controller
 			->with('success', 'Role updated successfully.');
 	}
 
+	
 	/**
-	 * DELETE
-	 * 
-	 * 
-	 * 
+	 * Remove the specified role from storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Spatie\Permission\Models\Role  $role
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function destroy(Request $request, Role $role): RedirectResponse
 	{

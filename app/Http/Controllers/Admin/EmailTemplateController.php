@@ -9,6 +9,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use App\Data\EmailTemplateData;
 use App\Http\Requests\Admin\UpdateEmailTemplateRequest;
+use Illuminate\Http\RedirectResponse;
 
 class EmailTemplateController extends Controller
 {
@@ -41,7 +42,7 @@ class EmailTemplateController extends Controller
 	 * 
 	 * 
 	 */
-	public function edit(EmailTemplate $template)
+	public function edit(EmailTemplate $template): Response
 	{
 		$template->shortcodes = json_decode($template->shortcodes, true) ?? [];
 		$template = EmailTemplateData::from($template);
@@ -55,7 +56,7 @@ class EmailTemplateController extends Controller
 	 * 
 	 * 
 	 */
-	public function update(UpdateEmailTemplateRequest $request, EmailTemplate $template)
+	public function update(UpdateEmailTemplateRequest $request, EmailTemplate $template): RedirectResponse
 	{
 		$template->update($request->all());
 		return back()->with('success', 'Template updated successfully');

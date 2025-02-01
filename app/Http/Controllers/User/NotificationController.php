@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -12,8 +12,11 @@ use Illuminate\Http\RedirectResponse;
 
 class NotificationController extends Controller
 {
+	
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of notifications for the authenticated user
+	 * 
+	 * @return Response
 	 */
 	public function index(): Response
 	{
@@ -25,8 +28,13 @@ class NotificationController extends Controller
 		return Inertia::render('notification/NotificationsList', compact('notifications'));
 	}
 
+	
 	/**
-	 * Update the specified resource in storage.
+	 * Mark a single notification as read
+	 * 
+	 * @param Request $request
+	 * @param string $id
+	 * @return RedirectResponse
 	 */
 	public function markAsRead(Request $request, string $id): RedirectResponse
 	{
@@ -37,16 +45,15 @@ class NotificationController extends Controller
 	}
 
 
+	/**
+	 * Mark all notifications as read for the authenticated user
+	 * 
+	 * @param Request $request
+	 * @return RedirectResponse
+	 */
 	public function markAllAsRead(Request $request): RedirectResponse
 	{
-		// dd($request->user()->unreadNotifications);
-
 		$request->user()->unreadNotifications->markAsRead();
-
-		// foreach ($notifications as $notification) {
-		// 	$notification->markAsRead();
-		// }
-
 		return back()->with('success', 'All notifications marked as read successfully.');
 	}
 }

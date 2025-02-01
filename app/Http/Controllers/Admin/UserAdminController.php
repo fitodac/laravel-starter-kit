@@ -19,11 +19,11 @@ class UserAdminController extends Controller
 		$this->userService = $userService;
 	}
 
+
 	/**
-	 * LIST
+	 * Display a listing of administrators
 	 * 
-	 * 
-	 * 
+	 * @return \Inertia\Response
 	 */
 	public function index(): Response
 	{
@@ -34,11 +34,12 @@ class UserAdminController extends Controller
 		);
 	}
 
+
 	/**
-	 * SHOW
+	 * Display the specified administrator
 	 * 
-	 * 
-	 * 
+	 * @param User $user The user instance
+	 * @return \Inertia\Response
 	 */
 	public function show(User $user): Response
 	{
