@@ -12,7 +12,7 @@ import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
 import { usePage } from '@inertiajs/react'
 import { NotificationsListCell, NotificationsListPager } from './list'
-import { NotificationContext } from '../providers/NotificationProvider'
+import { NotificationContext } from '../providers/notificationProvider'
 
 import type { PageProps } from '@/types'
 import type {

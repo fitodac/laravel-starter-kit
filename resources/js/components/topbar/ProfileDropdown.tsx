@@ -93,6 +93,7 @@ export const ProfileDropdown = ({
 					<DropdownSection showDivider>
 						{showNameInDropdown ? (
 							<DropdownItem
+								key="profile-name"
 								textValue={String(t('My profile'))}
 								isReadOnly
 								className="select-none cursor-default"
@@ -108,22 +109,25 @@ export const ProfileDropdown = ({
 						)}
 
 						<DropdownItem
+							key="profile"
 							textValue={String(t('My profile'))}
-							onClick={() => router.visit(route('profile.edit'))}
+							onPress={() => router.visit(route('profile.edit'))}
 							startContent={<i className="ri-account-circle-line ri-lg" />}
 						>
 							{t('My profile')}
 						</DropdownItem>
 
 						<DropdownItem
+							key="account"
 							textValue={String(t('My account'))}
-							onClick={() => router.visit(route('account.edit'))}
+							onPress={() => router.visit(route('account.edit'))}
 							startContent={<i className="ri-profile-line ri-lg" />}
 						>
 							{t('My account')}
 						</DropdownItem>
 
 						<DropdownItem
+							key="impersonate"
 							children={can_impersonate ? t('Impersonate') : <></>}
 							startContent={
 								can_impersonate && <i className="ri-user-received-line ri-lg" />
@@ -135,8 +139,9 @@ export const ProfileDropdown = ({
 
 					<DropdownSection>
 						<DropdownItem
+							key="logout"
 							textValue={String(t('Log out'))}
-							onClick={() => router.post(route('logout'))}
+							onPress={() => router.post(route('logout'))}
 							startContent={
 								<i className="ri-logout-circle-r-line ri-lg text-danger" />
 							}

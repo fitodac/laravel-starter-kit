@@ -8,7 +8,7 @@ import 'react-modern-drawer/dist/index.css'
 import {
 	NotificationProvider,
 	NotificationContext,
-} from './providers/NotificationProvider'
+} from './providers/notificationProvider'
 
 import { NotificationContextProps } from '@/types/notifications'
 

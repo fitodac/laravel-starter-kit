@@ -290,7 +290,7 @@ export const Wysiwyg = ({
 										base: 'p-0 hover:bg-transparent',
 									}}
 								>
-									<DropdownItem>
+									<DropdownItem key="align-left">
 										<Button
 											isIconOnly
 											size="sm"
@@ -308,7 +308,7 @@ export const Wysiwyg = ({
 											<i className="ri-align-left ri-lg" />
 										</Button>
 									</DropdownItem>
-									<DropdownItem>
+									<DropdownItem key="align-center">
 										<Button
 											isIconOnly
 											size="sm"
@@ -326,7 +326,7 @@ export const Wysiwyg = ({
 											<i className="ri-align-center ri-lg" />
 										</Button>
 									</DropdownItem>
-									<DropdownItem>
+									<DropdownItem key="align-right">
 										<Button
 											isIconOnly
 											size="sm"
@@ -344,7 +344,7 @@ export const Wysiwyg = ({
 											<i className="ri-align-right ri-lg" />
 										</Button>
 									</DropdownItem>
-									<DropdownItem>
+									<DropdownItem key="align-justify">
 										<Button
 											isIconOnly
 											size="sm"

@@ -15,6 +15,7 @@ import { toast } from 'react-toastify'
 import { useGeneratePassword } from '@/hooks'
 
 import type { PageProps, User, FlashMessage } from '@/types'
+import { UserForm } from '@/types/user.d'
 
 interface Props extends PageProps {
 	user: User
@@ -39,7 +40,7 @@ export const Page = ({ user }: Props) => {
 		status: 'enabled',
 		send_details: true,
 		basic_information: true,
-	})
+	} as UserForm)
 
 	const submit = (e: FormEvent) => {
 		e.preventDefault()

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { Input, Button, Divider, Spinner, Snippet, cn } from '@heroui/react'
 import { t } from '@/i18n'
-import { NotificationContext } from '../providers/NotificationProvider'
+import { NotificationContext } from '../providers/notificationProvider'
 import { useActions } from '../hooks/useActions'
 import { ErrorMessage, Wysiwyg } from '@/components/form'
 

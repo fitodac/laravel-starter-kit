@@ -20,7 +20,7 @@ export const RealDataTable = ({ data }: { data: ProductsProps }) => {
 	const [selectedKeys, setSelectedKeys] = useState(
 		new Set(data.data.length > 2 ? [data.data[3].sku] : [])
 	)
-	const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
+	const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>()
 	const [isLoading, setIsLoading] = useState(true)
 
 	const sort = useTableSorting()

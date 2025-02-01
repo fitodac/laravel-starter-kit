@@ -11,6 +11,8 @@ interface Props {
 	layout: string
 }
 
+type LoginProps = { login: string; password: string; remember: boolean }
+
 const pageTitle = 'Log in'
 
 const params = new URLSearchParams(window.location.search) ?? null
@@ -20,7 +22,7 @@ const Page = ({ status, canResetPassword }: Props) => {
 		login: '',
 		password: '',
 		remember: false,
-	})
+	} as LoginProps)
 
 	const [pwdVisibility, setPwdVisibility] = useState<boolean>(false)
 	const inputLogin = useRef<HTMLInputElement>(null)
@@ -100,7 +102,9 @@ const Page = ({ status, canResetPassword }: Props) => {
 								value={data.remember ? '1' : '0'}
 								isDisabled={processing}
 								isSelected={data.remember}
-								onValueChange={(e) => setData('remember', e)}
+								onValueChange={(e) => {
+									setData('remember', e)
+								}}
 							>
 								{t('Remember me')}
 							</Switch>
