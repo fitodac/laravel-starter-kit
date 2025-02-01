@@ -12,6 +12,13 @@ interface Props {
 }
 
 export const Pager = ({ links, currentPage, reloadOnly }: Props) => {
+	/**
+	 *
+	 * If links are less than 2, don't show pagination
+	 *
+	 */
+	if (links.length - 2 < 2) return
+
 	return (
 		<div className="flex justify-between items-center">
 			{links && (

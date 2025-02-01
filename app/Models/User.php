@@ -52,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 		'company',
 		'bio',
 
-		// Prefferences
+		// Preferences
 		'profile_picture',
 		'status',
 	];

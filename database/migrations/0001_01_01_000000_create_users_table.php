@@ -34,7 +34,7 @@ return new class extends Migration
 			$table->string('company')->nullable();
 			$table->text('bio')->nullable();
 
-			// Prefferences and settings
+			// Preferences and settings
 			$table->string('profile_picture')->nullable();
 			$table->enum('status', ['enabled', 'disabled'])->default('enabled');
 

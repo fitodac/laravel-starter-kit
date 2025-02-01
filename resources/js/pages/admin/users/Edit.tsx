@@ -51,30 +51,30 @@ export const Page = ({ user }: Props) => {
 								tab: 'justify-start',
 							}}
 						>
-							<Tab key="basicInformation" title="Basic information">
+							<Tab key="basicInformation" title={t('Basic information')}>
 								<FormBasicInformation />
 							</Tab>
 
-							<Tab key="personalInformation" title="Personal information">
+							<Tab key="personalInformation" title={t('Personal information')}>
 								<FormPersonalInformation />
 							</Tab>
 
 							<Tab
 								key="professionalInformation"
-								title="Professional information"
+								title={t('Professional information')}
 							>
 								<FormProfessionalInformation />
 							</Tab>
 
-							<Tab key="roleStatus" title="Role and status">
+							<Tab key="roleStatus" title={t('Role and status')}>
 								<FormRoleStatus />
 							</Tab>
 
-							<Tab key="security" title="Security">
+							<Tab key="security" title={t('Security')}>
 								<FormPassword />
 							</Tab>
 
-							<Tab key="advanced" title="Advanced">
+							<Tab key="advanced" title={t('Advanced')}>
 								<DeleteAccount />
 							</Tab>
 						</Tabs>

@@ -44,23 +44,26 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: PageProps) => {
 							tabList: 'w-full overflow-x-auto',
 						}}
 					>
-						<Tab key="basicInformation" title="Basic information">
+						<Tab key="basicInformation" title={t('Basic information')}>
 							<FormBasicInformation />
 						</Tab>
 
-						<Tab key="personalInformation" title="Personal information">
+						<Tab key="personalInformation" title={t('Personal information')}>
 							<FormPersonalInformation />
 						</Tab>
 
-						<Tab key="professionalInformation" title="Professional information">
+						<Tab
+							key="professionalInformation"
+							title={t('Professional information')}
+						>
 							<FormProfessionalInformation />
 						</Tab>
 
-						<Tab key="security" title="Security">
+						<Tab key="security" title={t('Security')}>
 							<FormPassword />
 						</Tab>
 
-						<Tab key="advanced" title="Advanced">
+						<Tab key="advanced" title={t('Advanced')}>
 							<DeleteAccount />
 						</Tab>
 					</Tabs>

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Data\RoleData;
+use App\Data\UserData;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Mail;
@@ -33,8 +34,12 @@ class UserService
 		$users = User::role('User')
 			->with('sessions')
 			->orderBy('created_at', 'desc')
-			->paginate($per_page);
-		$total = User::count();
+			->paginate($per_page)
+			->toArray();
+
+		$total = User::role('User')->count();
+
+		$users['data'] = array_map(fn($user) => UserData::from($user), $users['data']);
 
 		return compact('users', 'total');
 	}

@@ -74,6 +74,7 @@ export const FormProfileImage = () => {
 				ref={imgField}
 				type="file"
 				style={{ height: 0, visibility: 'hidden' }}
+				accept=".jpg,.webp"
 				className="absolute"
 				onChange={(e) => {
 					const target = e.target as HTMLInputElement

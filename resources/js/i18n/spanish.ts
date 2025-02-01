@@ -236,4 +236,5 @@ export default {
 	'These credentials do not match our records.':
 		'Estas credenciales no coinciden con nuestros registros.',
 	'Admin dashboard': 'Panel de administración',
+	Advanced: 'Avanzado',
 }

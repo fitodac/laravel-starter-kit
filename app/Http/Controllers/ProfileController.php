@@ -64,11 +64,11 @@ class ProfileController extends Controller
 				Storage::delete($currentImagePath);
 			}
 
-
 			$file = $request->file('profile_picture');
 			$filename = time() . '.webp';
 			$image = Image::read($file);
 			$image
+				->resizeCanvas(256, 256)
 				->resize(256, 256)
 				->toWebp(100)
 				->save("storage/img/users/avatars/$filename");

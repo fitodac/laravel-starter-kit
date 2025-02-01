@@ -233,4 +233,5 @@ export default {
 	'These credentials do not match our records.':
 		'These credentials do not match our records.',
 	'Admin dashboard': 'Admin dashboard',
+	Advanced: 'Advanced',
 }

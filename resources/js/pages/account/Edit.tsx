@@ -1,4 +1,4 @@
-import { Layout } from '@/layouts/admin/Layout'
+import { Layout } from '@/layouts/user/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { FormPreferences } from './components'
@@ -49,7 +49,6 @@ const Page = ({ auth: { user }, mustVerifyEmail, status }: Props) => {
 }
 
 Page.layout = (page: JSX.Element) => {
-	console.log('page', page)
 	return <Layout {...{ children: page, pageTitle: t(pageTitle).toString() }} />
 }
 

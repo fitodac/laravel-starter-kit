@@ -21,7 +21,7 @@ class UserData extends Data
 		public ?string $country,
 		public ?string $zip,
 		public ?string $profile_picture,
-		public bool $status = true,
+		public string $status,
 		// public string $remember_token,
 		public ?array $roles = [],
 		public ?array $permissions = [],
