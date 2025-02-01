@@ -6,7 +6,7 @@ import {
 	ModalFooter,
 	useDisclosure,
 	Button,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { Navbar, TabContent } from './components'
 import { t } from '@/i18n'
 import { MediaManagerProvider } from './providers/MediaManagerProvider'

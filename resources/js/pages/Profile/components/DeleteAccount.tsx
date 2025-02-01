@@ -13,7 +13,7 @@ import {
 	Divider,
 	Card,
 	CardBody,
-} from '@nextui-org/react'
+} from '@heroui/react'
 
 export const DeleteAccount = (): JSX.Element => {
 	const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure()
@@ -92,7 +92,9 @@ export const DeleteAccount = (): JSX.Element => {
 											name="password"
 											label={t('Password')}
 											value={data.password}
-											errorMessage={errors.password && String(t(errors.password))}
+											errorMessage={
+												errors.password && String(t(errors.password))
+											}
 											isInvalid={errors.password ? true : false}
 											onValueChange={(e) => setData('password', e)}
 										/>

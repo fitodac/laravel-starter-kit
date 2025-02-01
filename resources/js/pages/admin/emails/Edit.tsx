@@ -1,7 +1,7 @@
 import { Layout } from '@/layouts/admin/Layout'
 import { PageHeader, PageContent } from '@/components'
 import { useActions } from './hooks/useActions'
-import { Input, Button, Divider, Snippet } from '@nextui-org/react'
+import { Input, Button, Divider, Snippet } from '@heroui/react'
 import { t } from '@/i18n'
 import { ErrorMessage, Wysiwyg } from '@/components/form'
 import { Link } from '@inertiajs/react'

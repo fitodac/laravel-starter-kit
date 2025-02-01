@@ -1,7 +1,7 @@
 import { FormEventHandler } from 'react'
 import { t } from '@/i18n'
 import { useForm } from '@inertiajs/react'
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { AuthLayout1, AuthLayout2, AuthLayout3 } from '@/layouts/auth'
 import { StatusMessage } from './components'
 
@@ -52,13 +52,29 @@ const Page = ({ status, layout }: Props) => {
 Page.layout = (page: JSX.Element) => {
 	switch (page.props.layout) {
 		case 'layout1':
-			return <AuthLayout1 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout1
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		case 'layout2':
-			return <AuthLayout2 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout2
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		case 'layout3':
-			return <AuthLayout3 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout3
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 		default:
-			return <AuthLayout1 {...{ children: page, pageTitle: t(pageTitle).toString() }} />
+			return (
+				<AuthLayout1
+					{...{ children: page, pageTitle: t(pageTitle).toString() }}
+				/>
+			)
 	}
 }
 

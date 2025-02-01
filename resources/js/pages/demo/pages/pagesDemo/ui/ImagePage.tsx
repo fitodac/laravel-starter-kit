@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { cn, Image } from '@nextui-org/react'
+import { cn, Image } from '@heroui/react'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'

@@ -7,7 +7,7 @@ import {
 	ModalHeader,
 	ModalBody,
 	ModalFooter,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { t } from '@/i18n'
 import { toast } from 'react-toastify'
 import { PermissionContext } from '../providers/PermissionProvider'

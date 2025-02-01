@@ -15,7 +15,7 @@ import {
 	DropdownTrigger,
 	DropdownMenu,
 	DropdownItem,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { templates, theme } from '@/config'
 import { useMainStore } from '@/store'
 import { useColorMode } from '@/hooks'

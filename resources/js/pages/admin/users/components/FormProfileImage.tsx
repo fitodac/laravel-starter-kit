@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Image, Button } from '@nextui-org/react'
+import { Image, Button } from '@heroui/react'
 import { useUser } from '@/hooks'
 import { t } from '@/i18n'
 import { router, usePage } from '@inertiajs/react'

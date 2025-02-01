@@ -1,10 +1,4 @@
-import {
-	Switch,
-	cn,
-	useSwitch,
-	VisuallyHidden,
-	Button,
-} from '@nextui-org/react'
+import { Switch, cn, useSwitch, VisuallyHidden, Button } from '@heroui/react'
 
 /**
  * BasicSwitch
@@ -282,12 +276,9 @@ export const SwitchWithIcons = () => {
  * <CustomSwitch />
  */
 export const CustomSwitch = () => {
-	const {
-		Component,
-		isSelected,
-		getBaseProps,
-		getInputProps,
-	} = useSwitch({ defaultSelected: true })
+	const { Component, isSelected, getBaseProps, getInputProps } = useSwitch({
+		defaultSelected: true,
+	})
 
 	return (
 		<div className="space-y-6" id="customSwitch">

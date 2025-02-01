@@ -10,7 +10,7 @@ import {
 	ModalFooter,
 	ModalHeader,
 	useDisclosure,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { InternalNavbar } from './components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'

@@ -1,4 +1,4 @@
-import { Avatar, AvatarGroup, Divider } from '@nextui-org/react'
+import { Avatar, AvatarGroup, Divider } from '@heroui/react'
 
 import User1 from '@/../../public/img/demo/users/avatars/1.jpg'
 import User2 from '@/../../public/img/demo/users/avatars/2.jpg'

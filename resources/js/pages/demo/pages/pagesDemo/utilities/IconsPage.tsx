@@ -3,7 +3,7 @@ import { PageHeader, PageContent } from '@/components'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
 import iconsList from './remixicon.json'
-import { Card, CardBody, Chip } from '@nextui-org/react'
+import { Card, CardBody, Chip } from '@heroui/react'
 import { InternalNavbar } from './components'
 import { toast } from 'react-toastify'
 

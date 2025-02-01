@@ -5,7 +5,7 @@ import {
 	PopoverContent,
 	Divider,
 	User,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { Fragment } from 'react/jsx-runtime'
 
 export const BasicPopover = () => {

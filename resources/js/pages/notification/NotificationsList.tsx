@@ -5,7 +5,7 @@ import { NotificationsList } from './components'
 import 'react-modern-drawer/dist/index.css'
 import { NotificationProvider } from './providers/NotificationProvider'
 import { router } from '@inertiajs/react'
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 
 import type { NotificationsTable } from '@/types/notifications'
 import { PageProps } from '@/types'

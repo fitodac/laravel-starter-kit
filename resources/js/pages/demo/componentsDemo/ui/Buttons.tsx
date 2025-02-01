@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Divider } from '@nextui-org/react'
+import { Button, ButtonGroup, Divider } from '@heroui/react'
 
 export const SolidButton = () => {
 	return (

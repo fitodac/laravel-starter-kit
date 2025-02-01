@@ -7,7 +7,7 @@ import {
 	DropdownItem,
 	Code,
 	SharedSelection,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { useMemo, useState } from 'react'
 
 export const BasicDropdown = () => {

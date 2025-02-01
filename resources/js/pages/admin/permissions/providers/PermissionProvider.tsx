@@ -1,5 +1,5 @@
 import { useReducer, type PropsWithChildren, createContext } from 'react'
-import { useDisclosure, type SortDescriptor } from '@nextui-org/react'
+import { useDisclosure, type SortDescriptor } from '@heroui/react'
 
 import type { PermissionContextProps } from '@/types/permissions'
 

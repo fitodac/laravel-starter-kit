@@ -1,4 +1,4 @@
-import { Breadcrumbs, BreadcrumbItem, Divider, Code } from '@nextui-org/react'
+import { Breadcrumbs, BreadcrumbItem, Divider, Code } from '@heroui/react'
 import { useState } from 'react'
 
 export const BasicBreadcrumbs = () => {
@@ -154,8 +154,8 @@ export const ControlledBreadcrumbs = () => {
 
 			<p className="text-xs">
 				This Breadcrumbs component offers an interactive and customizable
-				experience. Its dynamic styling and smooth transitions ensure an engaging
-				user experience across various content areas.
+				experience. Its dynamic styling and smooth transitions ensure an
+				engaging user experience across various content areas.
 			</p>
 		</div>
 	)

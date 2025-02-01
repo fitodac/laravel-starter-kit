@@ -1,13 +1,7 @@
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
 import dayjs from 'dayjs'
-import {
-	Button,
-	Card,
-	CardBody,
-	CardFooter,
-	CardHeader,
-} from '@nextui-org/react'
+import { Button, Card, CardBody, CardFooter, CardHeader } from '@heroui/react'
 
 import type {
 	Sessions as SessionsProps,

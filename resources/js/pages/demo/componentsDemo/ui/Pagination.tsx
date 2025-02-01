@@ -1,4 +1,4 @@
-import { Pagination, Divider } from '@nextui-org/react'
+import { Pagination, Divider } from '@heroui/react'
 
 export const BasicPagination = () => {
 	return (

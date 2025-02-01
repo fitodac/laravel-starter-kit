@@ -16,7 +16,7 @@ import {
 	DropdownTrigger,
 	DropdownMenu,
 	DropdownItem,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { t } from '@/i18n'
 import { extensionLink } from './wysiwyg/Link'
 

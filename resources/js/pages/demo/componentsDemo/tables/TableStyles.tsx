@@ -6,7 +6,7 @@ import {
 	TableRow,
 	TableCell,
 	getKeyValue,
-} from '@nextui-org/table'
+} from '@heroui/table'
 
 const columns = [
 	{ key: 'name', label: 'Name' },

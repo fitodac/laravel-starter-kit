@@ -3,7 +3,7 @@ import Chart from 'react-apexcharts'
 import * as config from './helpers'
 import { ApexOptions } from 'apexcharts'
 
-import { commonColors, semanticColors } from '@nextui-org/theme'
+import { commonColors, semanticColors } from '@heroui/theme'
 console.log('commonColors', commonColors)
 console.log('semanticColors', semanticColors)
 

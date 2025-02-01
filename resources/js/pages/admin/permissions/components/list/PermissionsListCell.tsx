@@ -6,7 +6,7 @@ import {
 	DropdownMenu,
 	DropdownItem,
 	cn,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { t } from '@/i18n'
 
 import type { Permission } from '@/types/permissions'

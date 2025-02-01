@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEventHandler } from 'react'
 import { useForm } from '@inertiajs/react'
 import { t } from '@/i18n'
-import { Input, Button } from '@nextui-org/react'
+import { Input, Button } from '@heroui/react'
 import { AuthLayout1, AuthLayout2, AuthLayout3 } from '@/layouts/auth'
 
 interface Props {
@@ -89,7 +89,10 @@ const Page = ({ token, email }: Props) => {
 								label={t('Confirm password')}
 								value={data.password_confirmation}
 								isDisabled={processing}
-								errorMessage={errors.password_confirmation && String(t(errors.password_confirmation))}
+								errorMessage={
+									errors.password_confirmation &&
+									String(t(errors.password_confirmation))
+								}
 								isInvalid={errors.password ? true : false}
 								onValueChange={(e) => setData('password_confirmation', e)}
 								autoComplete="off"

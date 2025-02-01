@@ -1,12 +1,5 @@
 import { useState } from 'react'
-import {
-	RadioGroup,
-	Radio,
-	Chip,
-	cn,
-	Divider,
-	User,
-} from '@nextui-org/react'
+import { RadioGroup, Radio, Chip, cn, Divider, User } from '@heroui/react'
 
 export const BasicRadio = () => {
 	return (

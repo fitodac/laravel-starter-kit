@@ -1,5 +1,5 @@
 import { type Dispatch } from 'react'
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { t } from '@/i18n'
 
 import type { NotificationTemplate } from '@/types/notification-templates.d'

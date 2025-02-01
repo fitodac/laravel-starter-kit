@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { Layout } from '@/layouts/admin/Layout'
 import { PageHeader, PageContent } from '@/components'
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { t } from '@/i18n'
 import { PermissionsList, CreateEditForm } from './components'
 import Drawer from 'react-modern-drawer'

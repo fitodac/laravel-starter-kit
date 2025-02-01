@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react'
 import { Head } from '@inertiajs/react'
 import { useColorMode } from '@/hooks'
 import { theme } from '@/config'
-import { cn } from '@nextui-org/react'
+import { cn } from '@heroui/react'
 
 import Image from '@/assets/img/pexels-pramodtiwari-14127564.jpg'
 

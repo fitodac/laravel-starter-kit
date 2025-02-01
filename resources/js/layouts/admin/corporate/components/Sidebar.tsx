@@ -9,7 +9,7 @@ import { useMainStore } from '@/store'
 import { motion } from 'framer-motion'
 import { Link, usePage } from '@inertiajs/react'
 import { templates } from '@/config'
-import { cn } from '@nextui-org/react'
+import { cn } from '@heroui/react'
 import { Fragment } from 'react/jsx-runtime'
 import { t } from '@/i18n'
 

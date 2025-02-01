@@ -1,4 +1,4 @@
-import { cn } from '@nextui-org/react'
+import { cn } from '@heroui/react'
 
 export const template = {
 	/**
@@ -44,7 +44,7 @@ export const template = {
 			),
 			menuIcon: 'text-base',
 			subMenu: 'bg-content2',
-			topSpacer: 'h-4'
+			topSpacer: 'h-4',
 		},
 	},
 

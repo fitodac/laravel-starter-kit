@@ -7,7 +7,7 @@ import {
 	Radio,
 	RadioGroup,
 	cn,
-} from '@nextui-org/react'
+} from '@heroui/react'
 
 export const VerticalFormLayout = () => {
 	return (

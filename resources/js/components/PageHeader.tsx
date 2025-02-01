@@ -1,5 +1,5 @@
 import { PropsWithChildren, ReactElement } from 'react'
-import { cn } from '@nextui-org/react'
+import { cn } from '@heroui/react'
 
 interface Props extends PropsWithChildren {
 	title: string | ReactElement

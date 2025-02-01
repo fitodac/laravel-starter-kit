@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Input, Divider, Chip, Button, Tabs, Tab } from '@nextui-org/react'
+import { Input, Divider, Chip, Button, Tabs, Tab } from '@heroui/react'
 import { t } from '@/i18n'
 
 /**

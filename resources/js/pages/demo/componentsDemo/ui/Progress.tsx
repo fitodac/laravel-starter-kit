@@ -1,4 +1,4 @@
-import { Progress, Divider } from '@nextui-org/react'
+import { Progress, Divider } from '@heroui/react'
 import { useEffect, useState } from 'react'
 
 export const BasicProgress = () => {

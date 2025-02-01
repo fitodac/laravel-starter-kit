@@ -2,7 +2,7 @@ import { Layout } from '@/layouts/admin/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { Link } from '@inertiajs/react'
-import { Button, Tabs, Tab } from '@nextui-org/react'
+import { Button, Tabs, Tab } from '@heroui/react'
 import {
 	FormBasicInformation,
 	FormPersonalInformation,

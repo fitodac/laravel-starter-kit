@@ -10,7 +10,7 @@ import {
 	Checkbox,
 	Divider,
 	Switch,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { toast } from 'react-toastify'
 import { useGeneratePassword } from '@/hooks'
 

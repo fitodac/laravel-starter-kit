@@ -3,7 +3,7 @@ import {
 	TopbarNotifications,
 	TopbarLanguage,
 } from '@/components'
-import { Button, cn, Navbar, Divider } from '@nextui-org/react'
+import { Button, cn, Navbar, Divider } from '@heroui/react'
 import { templates, theme } from '@/config'
 import { useMainStore } from '@/store'
 import { useColorMode } from '@/hooks'

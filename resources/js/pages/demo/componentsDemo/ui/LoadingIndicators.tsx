@@ -1,4 +1,4 @@
-import { Spinner, Skeleton, CircularProgress, Divider } from '@nextui-org/react'
+import { Spinner, Skeleton, CircularProgress, Divider } from '@heroui/react'
 import { useEffect, useState } from 'react'
 
 export const BasicSpinner = () => {

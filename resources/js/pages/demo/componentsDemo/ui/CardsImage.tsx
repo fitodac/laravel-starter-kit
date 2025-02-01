@@ -5,7 +5,7 @@ import {
 	CardFooter,
 	Image,
 	Button,
-} from '@nextui-org/react'
+} from '@heroui/react'
 
 import img01 from '@/assets/img/cards/01.jpg'
 import img02 from '@/assets/img/cards/02.jpg'

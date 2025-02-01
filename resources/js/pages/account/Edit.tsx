@@ -3,7 +3,7 @@ import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { FormPreferences } from './components'
 import { MustVerifyEmail } from '../profile/components'
-import { Tabs, Tab } from '@nextui-org/react'
+import { Tabs, Tab } from '@heroui/react'
 
 import type { PageProps } from '@/types'
 

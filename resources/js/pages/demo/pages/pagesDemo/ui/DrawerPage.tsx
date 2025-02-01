@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { Card, CardBody, cn } from '@nextui-org/react'
+import { Card, CardBody, cn } from '@heroui/react'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import { InternalNavbar } from './components'

@@ -2,7 +2,7 @@ import { GuestLayout } from '@/layouts'
 import { t } from '@/i18n'
 import { router } from '@inertiajs/react'
 import { PageProps } from '@/types'
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { useColorMode } from '@/hooks'
 
 const pageTitle = 'Welcome'

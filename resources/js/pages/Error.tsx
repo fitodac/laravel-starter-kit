@@ -1,6 +1,6 @@
 import { useColorMode } from '@/hooks'
 import { t } from '@/i18n'
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { Link, Head } from '@inertiajs/react'
 
 interface Props {

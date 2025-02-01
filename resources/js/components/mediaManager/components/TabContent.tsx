@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { Tab, Tabs } from '@nextui-org/react'
+import { Tab, Tabs } from '@heroui/react'
 import { MediaManagerContext } from '../providers/MediaManagerProvider'
 import { tabsMapper } from '../helpers/mappers/tabs.mapper'
 import { MediaLibrary, FileUploader, MediaEditor } from './'

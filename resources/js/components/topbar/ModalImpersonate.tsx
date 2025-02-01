@@ -7,7 +7,7 @@ import {
 	ModalHeader,
 	ModalFooter,
 	ModalContent,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { t } from '@/i18n'
 import { router } from '@inertiajs/react'
 

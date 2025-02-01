@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Textarea, Divider, Tabs, Tab } from '@nextui-org/react'
+import { Textarea, Divider, Tabs, Tab } from '@heroui/react'
 
 /**
  * BasicTextarea

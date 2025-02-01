@@ -1,5 +1,5 @@
 import { useReducer, type PropsWithChildren, createContext } from 'react'
-import { type SortDescriptor } from '@nextui-org/react'
+import { type SortDescriptor } from '@heroui/react'
 
 import type { NotificationContextProps } from '@/types/notifications'
 

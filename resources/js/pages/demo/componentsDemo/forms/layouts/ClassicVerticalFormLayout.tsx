@@ -8,7 +8,7 @@ import {
 	Checkbox,
 	Textarea,
 	cn,
-} from '@nextui-org/react'
+} from '@heroui/react'
 
 export const ClassicFormLayout = () => {
 	return (

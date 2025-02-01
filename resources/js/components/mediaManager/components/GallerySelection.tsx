@@ -1,6 +1,6 @@
 import { useContext, useCallback } from 'react'
 import { MediaManagerContext } from '../providers/MediaManagerProvider'
-import { cn, Image } from '@nextui-org/react'
+import { cn, Image } from '@heroui/react'
 import { t } from '@/i18n'
 import { GridContainer, BlockWrapper } from '@tackboon/react-grid-rearrange'
 

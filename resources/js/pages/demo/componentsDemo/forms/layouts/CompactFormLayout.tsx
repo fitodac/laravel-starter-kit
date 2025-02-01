@@ -7,7 +7,7 @@ import {
 	Select,
 	SelectItem,
 	cn,
-} from '@nextui-org/react'
+} from '@heroui/react'
 
 export const ComfortableFormLayout = () => {
 	return (

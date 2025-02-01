@@ -6,7 +6,7 @@ import {
 	Divider,
 	Button,
 	Checkbox,
-} from '@nextui-org/react'
+} from '@heroui/react'
 
 export const CardsBasic = () => {
 	return (

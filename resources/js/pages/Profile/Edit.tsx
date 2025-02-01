@@ -10,7 +10,7 @@ import {
 	DeleteAccount,
 	MustVerifyEmail,
 } from './components'
-import { Tabs, Tab } from '@nextui-org/react'
+import { Tabs, Tab } from '@heroui/react'
 import { useWindowWidth } from '@/hooks'
 
 const pageTitle = 'My profile'

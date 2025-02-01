@@ -1,4 +1,4 @@
-import { Divider, Tabs, Tab } from '@nextui-org/react'
+import { Divider, Tabs, Tab } from '@heroui/react'
 
 export const TabsBasic = () => {
 	return (

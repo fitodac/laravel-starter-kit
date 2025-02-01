@@ -1,4 +1,4 @@
-import { Listbox, ListboxItem, type Selection } from '@nextui-org/react'
+import { Listbox, ListboxItem, type Selection } from '@heroui/react'
 
 const navigate = (key: string) => {
 	const element = document.getElementById(key.toString())

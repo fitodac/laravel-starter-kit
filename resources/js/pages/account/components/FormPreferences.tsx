@@ -1,7 +1,7 @@
 import { FormEvent } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
-import { Button, Divider, RadioGroup, Radio } from '@nextui-org/react'
+import { Button, Divider, RadioGroup, Radio } from '@heroui/react'
 import { toast } from 'react-toastify'
 import ReactSafelySetInnerHTML from 'react-safely-set-inner-html'
 

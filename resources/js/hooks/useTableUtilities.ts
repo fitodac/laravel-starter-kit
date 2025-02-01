@@ -1,5 +1,5 @@
 import { router } from '@inertiajs/react'
-import type { SortDescriptor } from '@nextui-org/react'
+import type { SortDescriptor } from '@heroui/react'
 
 export const useTableSorting = () => {
 	const sort = ({

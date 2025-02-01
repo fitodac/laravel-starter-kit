@@ -9,7 +9,7 @@ import {
 	useDisclosure,
 	Card,
 	CardBody,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { t } from '@/i18n'
 import { toast } from 'react-toastify'
 

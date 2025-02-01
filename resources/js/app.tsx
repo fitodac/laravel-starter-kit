@@ -6,8 +6,8 @@ import '../css/app.css'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
-import { NextUIProvider } from '@nextui-org/react'
-import { semanticColors } from '@nextui-org/theme'
+import { HeroUIProvider } from '@heroui/react'
+import { semanticColors } from '@heroui/theme'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 window.locale = import.meta.env.VITE_APP_LOCALE || 'en'
@@ -22,9 +22,9 @@ createInertiaApp({
 	setup({ el, App, props }) {
 		if (import.meta.env.DEV) {
 			createRoot(el).render(
-				<NextUIProvider>
+				<HeroUIProvider>
 					<App {...props} />
-				</NextUIProvider>
+				</HeroUIProvider>
 			)
 			return
 		}

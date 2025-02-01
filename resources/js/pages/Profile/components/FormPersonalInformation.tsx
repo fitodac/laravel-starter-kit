@@ -1,7 +1,7 @@
 import { FormEvent } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
-import { Input, Button, Divider } from '@nextui-org/react'
+import { Input, Button, Divider } from '@heroui/react'
 import { toast } from 'react-toastify'
 
 import type { PageProps, InertiaResponse, FlashMessage } from '@/types'

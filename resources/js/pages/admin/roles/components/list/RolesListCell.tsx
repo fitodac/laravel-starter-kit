@@ -7,7 +7,7 @@ import {
 	DropdownItem,
 	Chip,
 	cn,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { t } from '@/i18n'
 
 import type { Role } from '@/types/roles'

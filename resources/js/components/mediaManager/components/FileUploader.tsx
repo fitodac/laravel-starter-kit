@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { t } from '@/i18n'
 import { router } from '@inertiajs/react'
 import { toast } from 'react-toastify'

@@ -6,7 +6,7 @@ import {
 	TableRow,
 	TableCell,
 	Spinner,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
 import { usePage } from '@inertiajs/react'

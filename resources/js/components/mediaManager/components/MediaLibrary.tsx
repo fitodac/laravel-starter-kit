@@ -3,13 +3,7 @@ import { Sidebar, GallerySelection, EmptyLibrary } from '.'
 import { t } from '@/i18n'
 import { useMediaManager } from '../hooks'
 import { MediaManagerContext } from '../providers/MediaManagerProvider'
-import {
-	cn,
-	Card,
-	CardFooter,
-	CircularProgress,
-	Image,
-} from '@nextui-org/react'
+import { cn, Card, CardFooter, CircularProgress, Image } from '@heroui/react'
 
 import type { Image as ImageProps } from '../types.d'
 

@@ -1,7 +1,7 @@
 import { Layout } from '@/layouts/user/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent, MediaManager } from '@/components'
-import { Image, Pagination } from '@nextui-org/react'
+import { Image, Pagination } from '@heroui/react'
 import { router } from '@inertiajs/react'
 
 import type { Image as ImageProps } from '@/components/mediaManager/types.d'

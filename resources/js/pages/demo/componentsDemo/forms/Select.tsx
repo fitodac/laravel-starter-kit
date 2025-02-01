@@ -8,7 +8,7 @@ import {
 	Button,
 	Tabs,
 	Tab,
-} from '@nextui-org/react'
+} from '@heroui/react'
 
 /**
  * BasicSelect

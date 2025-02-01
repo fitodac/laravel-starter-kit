@@ -1,7 +1,7 @@
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
-import { Snippet } from '@nextui-org/react'
-import { commonColors, semanticColors } from '@nextui-org/theme'
+import { Snippet } from '@heroui/react'
+import { commonColors, semanticColors } from '@heroui/theme'
 import { Fragment } from 'react/jsx-runtime'
 import type { Template } from '../../../types'
 import { useConditionalClassName } from '../hooks/useConditionalClassName'
@@ -115,7 +115,7 @@ export const ColorsPage = ({ template }: Props) => {
 						</p>
 
 						<Snippet size="sm" className="hidden md:inline-flex">
-							{`import {commonColors, semanticColors} from "@nextui-org/theme";`}
+							{`import {commonColors, semanticColors} from "@heroui/theme";`}
 						</Snippet>
 						<p>Inspect this page to see the available colors.</p>
 					</div>

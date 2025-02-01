@@ -1,4 +1,4 @@
-import { cn, Button, type ButtonProps } from '@nextui-org/react'
+import { cn, Button, type ButtonProps } from '@heroui/react'
 import { Link } from '@inertiajs/react'
 import { t } from '@/i18n'
 import { templates, theme } from '@/config'

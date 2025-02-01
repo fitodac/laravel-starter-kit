@@ -1,6 +1,6 @@
 import { t } from '@/i18n'
 import { router } from '@inertiajs/react'
-import { Button, Card, CardBody } from '@nextui-org/react'
+import { Button, Card, CardBody } from '@heroui/react'
 
 interface Props {
 	status: any

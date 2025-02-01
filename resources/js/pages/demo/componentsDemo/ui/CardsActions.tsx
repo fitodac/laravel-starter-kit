@@ -6,7 +6,7 @@ import {
 	Button,
 	cn,
 	Checkbox,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { useState } from 'react'
 
 const contents = [

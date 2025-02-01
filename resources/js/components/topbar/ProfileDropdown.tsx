@@ -9,7 +9,7 @@ import {
 	DropdownItem,
 	DropdownSection,
 	useDisclosure,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { t } from '@/i18n'
 import { usePage, router } from '@inertiajs/react'
 import { ModalImpersonate } from './ModalImpersonate'

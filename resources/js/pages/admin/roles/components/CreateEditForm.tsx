@@ -7,7 +7,7 @@ import {
 	Spinner,
 	CheckboxGroup,
 	Checkbox,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { t } from '@/i18n'
 import { RoleContext } from '../providers/RoleProvider'
 import { useActions } from '../hooks/useActions'

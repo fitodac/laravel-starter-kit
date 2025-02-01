@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react'
-import { cn, Input, Textarea, Button, Divider } from '@nextui-org/react'
+import { cn, Input, Textarea, Button, Divider } from '@heroui/react'
 import { MediaManagerContext } from '../providers/MediaManagerProvider'
 import { t } from '@/i18n'
 import { toast } from 'react-toastify'

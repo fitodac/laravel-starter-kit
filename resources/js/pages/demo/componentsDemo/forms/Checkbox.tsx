@@ -1,12 +1,5 @@
 import { useState } from 'react'
-import {
-	Checkbox,
-	CheckboxGroup,
-	Chip,
-	cn,
-	Divider,
-	User,
-} from '@nextui-org/react'
+import { Checkbox, CheckboxGroup, Chip, cn, Divider, User } from '@heroui/react'
 
 export const BasicCheckbox = () => {
 	return (

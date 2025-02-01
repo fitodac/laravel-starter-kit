@@ -6,7 +6,7 @@ import {
 	DropdownMenu,
 	DropdownTrigger,
 	Button,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import ReactSafelySetInnerHTML from 'react-safely-set-inner-html'
 import { t } from '@/i18n'
 import { router } from '@inertiajs/react'

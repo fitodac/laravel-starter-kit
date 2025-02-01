@@ -1,5 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
-const { nextui } = require('@nextui-org/react')
+const { heroui } = require('@heroui/react')
 
 import { theme, colors as themeColors } from './config/settings'
 
@@ -10,8 +10,8 @@ export default {
 		'./storage/framework/views/*.php',
 		'./resources/views/**/*.blade.php',
 		'./resources/js/**/*.tsx',
-		// NextUI
-		'./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+		// HeroUI
+		'./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
 		// Configuration
 		'./config/settings/**/*.{js,ts,jsx,tsx}',
 	],
@@ -27,7 +27,7 @@ export default {
 	},
 
 	plugins: [
-		nextui({
+		heroui({
 			// Common colors, like TailwindCSS colors, remain consistent regardless of the theme.
 			// To prevent conflicts with TailwindCSS colors, common colors are initially disabled
 			// but can be activated with the addCommonColors option.

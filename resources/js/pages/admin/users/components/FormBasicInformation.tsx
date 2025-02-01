@@ -1,7 +1,7 @@
 import { FormEvent } from 'react'
 import { t } from '@/i18n'
 import { useForm, usePage } from '@inertiajs/react'
-import { Input, Button, Divider, Chip } from '@nextui-org/react'
+import { Input, Button, Divider, Chip } from '@heroui/react'
 import { toast } from 'react-toastify'
 import { FormProfileImage } from './FormProfileImage'
 

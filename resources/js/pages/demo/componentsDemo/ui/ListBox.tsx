@@ -4,7 +4,7 @@ import {
 	ListboxItem,
 	ListboxSection,
 	type Selection,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { useState } from 'react'
 
 export const BasicListbox = () => {

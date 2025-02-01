@@ -13,7 +13,7 @@ import {
 	type SortDescriptor,
 	Chip,
 	cn,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
 import { Link, router, usePage } from '@inertiajs/react'

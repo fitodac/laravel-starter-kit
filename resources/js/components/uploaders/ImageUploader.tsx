@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react'
-import { Button, cn, tv } from '@nextui-org/react'
+import { Button, cn, tv } from '@heroui/react'
 import { useDropzone } from 'react-dropzone'
 
 interface Props {

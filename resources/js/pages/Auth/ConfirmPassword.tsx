@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEventHandler } from 'react'
 import { useForm } from '@inertiajs/react'
 import { t } from '@/i18n'
-import { Input, Button } from '@nextui-org/react'
+import { Input, Button } from '@heroui/react'
 import { AuthLayout1, AuthLayout2, AuthLayout3 } from '@/layouts/auth'
 
 const pageTitle = 'Confirm password'

@@ -1,4 +1,4 @@
-import { cn, Divider } from '@nextui-org/react'
+import { cn, Divider } from '@heroui/react'
 import { t } from '@/i18n'
 
 export const Footer = () => {

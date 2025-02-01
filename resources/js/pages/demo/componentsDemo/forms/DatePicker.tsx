@@ -1,11 +1,5 @@
 import { useState } from 'react'
-import {
-	DatePicker,
-	DateRangePicker,
-	Calendar,
-	Tabs,
-	Tab,
-} from '@nextui-org/react'
+import { DatePicker, DateRangePicker, Calendar, Tabs, Tab } from '@heroui/react'
 import {
 	now,
 	today,
@@ -122,9 +116,9 @@ export const MonthsYearsDatePicker = () => {
 
 /**
  * DateTimePicker
- * 
+ *
  * A component that allows selecting date and time.
- * 
+ *
  * This component provides a date and time picker interface with options to hide time zone and show month and year pickers.
  */
 export const DateTimePicker = () => {
@@ -251,7 +245,6 @@ export const DateRangePickerWithMonths = () => {
 		</div>
 	)
 }
-
 
 /**
  * InlineCalendar

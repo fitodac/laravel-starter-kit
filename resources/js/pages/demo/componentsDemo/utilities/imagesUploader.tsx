@@ -1,11 +1,5 @@
 import { useState } from 'react'
-import {
-	Card,
-	CardBody,
-	CardFooter,
-	CardHeader,
-	Button,
-} from '@nextui-org/react'
+import { Card, CardBody, CardFooter, CardHeader, Button } from '@heroui/react'
 import { ImageUploader } from '@/components/uploaders'
 import { MediaManager } from '@/components'
 import { t } from '@/i18n'

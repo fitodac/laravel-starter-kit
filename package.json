@@ -28,7 +28,7 @@
 		"vite": "^5.0"
 	},
 	"dependencies": {
-		"@nextui-org/react": "^2.4.6",
+		"@heroui/react": "^2.6.14",
 		"@tackboon/react-grid-rearrange": "^0.4.0",
 		"@tiptap-pro/extension-drag-handle-react": "^2.11.2",
 		"@tiptap/extension-character-count": "^2.6.6",

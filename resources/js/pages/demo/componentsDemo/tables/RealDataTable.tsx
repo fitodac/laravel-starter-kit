@@ -9,7 +9,7 @@ import {
 	getKeyValue,
 	Spinner,
 	type SortDescriptor,
-} from '@nextui-org/react'
+} from '@heroui/react'
 import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
 import { Pager, Filters } from './componentes'

@@ -1,5 +1,5 @@
 import { type Dispatch } from 'react'
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { router } from '@inertiajs/react'
 import dayjs from 'dayjs'
 import { t } from '@/i18n'

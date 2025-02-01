@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FormEventHandler } from 'react'
 import { Link, useForm } from '@inertiajs/react'
 import { t } from '@/i18n'
-import { Input, Button, Switch } from '@nextui-org/react'
+import { Input, Button, Switch } from '@heroui/react'
 import { Layout } from '@/layouts/auth'
 import { StatusMessage } from './components'
 

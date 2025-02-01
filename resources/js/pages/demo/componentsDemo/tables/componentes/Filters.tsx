@@ -1,4 +1,4 @@
-import { Button, Input, Select, SelectItem } from '@nextui-org/react'
+import { Button, Input, Select, SelectItem } from '@heroui/react'
 import { t } from '@/i18n'
 import { usePage, router } from '@inertiajs/react'
 import { useState } from 'react'

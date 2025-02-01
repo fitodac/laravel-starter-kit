@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Input, Button, Divider, Spinner, Snippet, cn } from '@nextui-org/react'
+import { Input, Button, Divider, Spinner, Snippet, cn } from '@heroui/react'
 import { t } from '@/i18n'
 import { NotificationContext } from '../providers/NotificationProvider'
 import { useActions } from '../hooks/useActions'

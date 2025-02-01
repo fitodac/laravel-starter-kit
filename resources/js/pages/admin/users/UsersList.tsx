@@ -2,7 +2,7 @@ import { Layout } from '@/layouts/admin/Layout'
 import { t } from '@/i18n'
 import { PageHeader, PageContent } from '@/components'
 import { UsersList } from './components/UsersList'
-import { Button } from '@nextui-org/react'
+import { Button } from '@heroui/react'
 import { Link } from '@inertiajs/react'
 
 const pageTitle = 'Users'
