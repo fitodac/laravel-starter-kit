@@ -1,99 +1,57 @@
+import { TableContent } from '@/components'
 import { useEffect, useState } from 'react'
-import {
-	Table,
-	TableHeader,
-	TableBody,
-	TableColumn,
-	TableRow,
-	TableCell,
-	getKeyValue,
-	Spinner,
-	type SortDescriptor,
-} from '@heroui/react'
-import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
-import { Pager, Filters } from './componentes'
+
+import { Filters } from './componentes'
 
 import type { ProductsProps } from '@/pages/demo/types'
 
 export const RealDataTable = ({ data }: { data: ProductsProps }) => {
+	const { data: tableData, links, current_page } = data
+
 	const [selectedKeys, setSelectedKeys] = useState(
-		new Set(data.data.length > 2 ? [data.data[3].sku] : [])
+		new Set(tableData.length > 2 ? ['117', '118'] : [])
 	)
-	const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>()
-	const [isLoading, setIsLoading] = useState(true)
 
-	const sort = useTableSorting()
-	const { links, current_page } = data
-
-	useEffect(() => {
-		if (data.data) setIsLoading(false)
-	}, [data])
+	// useEffect(() => console.log(selectedKeys), [selectedKeys])
 
 	return (
 		<>
-			<div className="w-full space-y-6">
-				<Filters />
+			{/* <Filters /> */}
 
-				<Table
-					removeWrapper
-					radius="none"
-					shadow="none"
-					aria-label="Table"
-					color="primary"
-					selectionMode="multiple"
-					selectedKeys={selectedKeys}
-					// @ts-ignore
-					onSelectionChange={setSelectedKeys}
-					onSortChange={(sortDescriptor) => {
-						const sd = sort({ sortDescriptor, only: ['products'] })
-						setSortDescriptor(sd)
-						setIsLoading(true)
-					}}
-					sortDescriptor={sortDescriptor}
-					bottomContent={links && <Pager {...{ links, current_page }} />}
-					classNames={{
-						base: 'w-full',
-						th: '[&]:first:rounded-none [&]:last:rounded-none [&]:first:before:!rounded-none [&]:last:before:!rounded-none',
-						td: '[&]:first:rounded-none [&]:last:rounded-none [&]:first:before:!rounded-none [&]:last:before:!rounded-none',
-						tbody: 'rounded-none',
-					}}
-				>
-					<TableHeader columns={columns}>
-						{(column) => (
-							<TableColumn key={column.key} allowsSorting width={column.width}>
-								{column.label}
-							</TableColumn>
-						)}
-					</TableHeader>
-
-					<TableBody
-						items={data.data}
-						loadingContent={<Spinner label={String(t('loading'))} />}
-						isLoading={isLoading}
-						emptyContent={t('There are no results for this view')}
-					>
-						{(item) => (
-							<TableRow key={item.sku}>
-								{(key) => (
-									<TableCell>
-										<span className="text-sm font-light">
-											{getKeyValue(item, key)}
-										</span>
-									</TableCell>
-								)}
-							</TableRow>
-						)}
-					</TableBody>
-				</Table>
-			</div>
+			<TableContent
+				{...{
+					reloadOnly: ['products'],
+					data: tableData,
+					columns: [
+						{ key: 'id', label: '#' },
+						{ key: 'name', label: 'Name', className: 'w-[550px]' },
+						{ key: 'category', label: 'Category', className: 'w-[200px]' },
+						{ key: 'price', label: 'Price', className: 'w-[200px]' },
+						{ key: 'sku', label: 'SKU', className: 'w-[150px]' },
+					],
+					links,
+					current_page,
+					cell: (item: any, key: string) => {
+						switch (key) {
+							case 'id':
+								return <small>{item.id}</small>
+							case 'name':
+								return item.name
+							case 'category':
+								return item.category
+							case 'price':
+								return item.price
+							case 'sku':
+								return item.sku
+						}
+					},
+					selectionMode: 'multiple',
+					allowsSorting: true,
+					selectedKeys,
+					onSelectionChange: (keys) => setSelectedKeys(keys),
+				}}
+			/>
 		</>
 	)
 }
-
-const columns = [
-	{ key: 'name', label: 'Name', width: 550 },
-	{ key: 'category', label: 'Category', width: 200 },
-	{ key: 'price', label: 'Price', width: 200 },
-	{ key: 'sku', label: 'SKU', width: 150 },
-]

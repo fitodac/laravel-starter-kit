@@ -14,7 +14,6 @@ import {
 	Chip,
 	cn,
 } from '@heroui/react'
-import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
 import { Link, router, usePage } from '@inertiajs/react'
 import type { PageProps, User, Users } from '@/types'
@@ -27,12 +26,6 @@ export const AdministratorsList = () => {
 		total: number
 	}
 
-	// console.log(usePage())
-	// const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))
-	// const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
-	// const [isLoading, setIsLoading] = useState(true)
-
-	// const sort = useTableSorting()
 	const { links, current_page } = users
 
 	// useEffect(() => {

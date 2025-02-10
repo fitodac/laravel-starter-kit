@@ -7,7 +7,6 @@ import {
 	TableCell,
 	Spinner,
 } from '@heroui/react'
-import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
 import { usePage } from '@inertiajs/react'
 import { NotificationsListCell, NotificationsListPager } from './list'
@@ -24,8 +23,6 @@ export const TemplatesList = () => {
 	} = usePage<PageProps>()
 
 	const { links, current_page, data } = templates as EmailTemplateTable
-
-	const sort = useTableSorting()
 
 	return (
 		<>

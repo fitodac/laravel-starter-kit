@@ -15,7 +15,6 @@ import {
 	cn,
 	Spinner,
 } from '@heroui/react'
-import { useTableSorting } from '@/hooks'
 import { t } from '@/i18n'
 import { Link, router, usePage } from '@inertiajs/react'
 import type { PageProps, User, Users } from '@/types'
@@ -25,17 +24,7 @@ import userBlank from '@/assets/img/blank-462x265.webp'
 export const UsersList = () => {
 	const { users, total } = usePage<PageProps>().props
 
-	// console.log(users)
-	// const [selectedKeys, setSelectedKeys] = useState(new Set([data.data[3].sku]))
-	// const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({})
-	// const [isLoading, setIsLoading] = useState(true)
-
-	// const sort = useTableSorting()
 	const { links, current_page } = users
-
-	// useEffect(() => {
-	// 	if (data.data.length) setIsLoading(false)
-	// }, [data])
 
 	const renderCell = useCallback(
 		(user: User, columnKey: string) =>

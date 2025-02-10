@@ -61,7 +61,6 @@ $pages = [
  * Corporate
  */
 Route::middleware(['auth', 'verified'])
-	->prefix('dashboard')
 	->name('dashboard.')
 	->group(function () use ($pages) {
 

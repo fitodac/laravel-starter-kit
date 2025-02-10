@@ -247,6 +247,9 @@ class UserNavbarProvider extends ServiceProvider
 
 		// return $menu;
 
+		// Clear cache
+		// Cache::forget($cacheKey);
+
 		return Cache::remember($cacheKey, 60, function () use ($menu) {
 			return $menu;
 		});

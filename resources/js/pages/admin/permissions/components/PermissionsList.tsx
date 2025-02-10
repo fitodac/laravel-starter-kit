@@ -8,7 +8,7 @@ import {
 	TableCell,
 	Spinner,
 } from '@heroui/react'
-import { useTableSorting } from '@/hooks'
+import { useTableSorting } from '@/components/table/hooks/useTableUtilities'
 import { t } from '@/i18n'
 import { usePage } from '@inertiajs/react'
 import { PermissionsListCell, PermissionsListPager } from './list'

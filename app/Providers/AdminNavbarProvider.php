@@ -50,7 +50,7 @@ class AdminNavbarProvider extends ServiceProvider
 
 		// Users and Administrators
 		if (
-			isset($role) && 'Super Admin' == $role ||
+			isset($role) && 'Super Admin' === $role ||
 			isset($permissions) &&
 			in_array('Can see users', $permissions)
 		) {
@@ -67,7 +67,7 @@ class AdminNavbarProvider extends ServiceProvider
 			];
 
 			if (
-				isset($role) && 'Super Admin' == $role ||
+				isset($role) && 'Super Admin' === $role ||
 				in_array('Can see admins', $permissions)
 			) {
 				$item['menu'][] = [
@@ -138,6 +138,9 @@ class AdminNavbarProvider extends ServiceProvider
 
 
 		// return $menu;
+
+		// Clear cache
+		// Cache::forget($cacheKey);
 
 		return Cache::remember($cacheKey, 60, function () use ($menu) {
 			return $menu;

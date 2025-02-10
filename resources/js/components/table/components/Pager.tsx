@@ -7,11 +7,11 @@ interface Props {
 		label: string
 		active: boolean
 	}[]
-	currentPage: number
+	current_page: number
 	reloadOnly: string[]
 }
 
-export const Pager = ({ links, currentPage, reloadOnly }: Props) => {
+export const Pager = ({ links, current_page, reloadOnly }: Props) => {
 	/**
 	 *
 	 * If links are less than 2, don't show pagination
@@ -27,18 +27,21 @@ export const Pager = ({ links, currentPage, reloadOnly }: Props) => {
 						size="sm"
 						isCompact
 						showControls
-						showShadow
+						// showShadow
 						variant="light"
 						color="primary"
-						page={currentPage}
+						page={current_page}
 						total={links.length - 2 || 0}
-						classNames={{ wrapper: 'shadow-none' }}
-						onChange={(page) =>
+						classNames={{
+							wrapper: 'shadow-none',
+							item: '!rounded-medium',
+						}}
+						onChange={(page) => {
 							router.reload({
 								data: { page },
 								only: reloadOnly,
 							})
-						}
+						}}
 					/>
 				</div>
 			)}
