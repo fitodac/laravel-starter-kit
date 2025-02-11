@@ -43,12 +43,18 @@ export const TableContent = ({
 	allowsSorting,
 	selectedKeys,
 	onSelectionChange,
+	topContent,
 }: Props) => {
 	const { loading, setLoading } = useTableStore()
 
-	const TableFooter = bottomContent ?? (
-		<Pager {...{ links, current_page, reloadOnly }} />
+	const TableFooter = (
+		<div className="flex gap-5 flex-col justify-between items-center lg:flex-row">
+			<div className="">{bottomContent}</div>
+			<Pager {...{ links, current_page, reloadOnly }} />
+		</div>
 	)
+
+	
 
 	useEffect(() => setLoading(false), [data])
 
@@ -65,6 +71,7 @@ export const TableContent = ({
 					shadow,
 					color,
 					selectionMode,
+					topContent: topContent,
 					bottomContent: TableFooter,
 				}}
 				aria-label="Table"

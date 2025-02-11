@@ -50,6 +50,7 @@ export const RealDataTable = ({ data }: { data: ProductsProps }) => {
 					allowsSorting: true,
 					selectedKeys,
 					onSelectionChange: (keys) => setSelectedKeys(keys),
+					topContent: <Filters />,
 				}}
 			/>
 		</>

@@ -60,6 +60,7 @@ export type Props = {
 		loadingWrapper?: string
 	}
 	// Bottom content for the table
+	topContent?: ReactElement | null
 	bottomContent?: React.ReactNode
 	// Empty content element or text to display when the table is empty
 	emptyContent?: React.ReactNode
