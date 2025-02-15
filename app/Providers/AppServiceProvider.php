@@ -7,6 +7,7 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Traits\NotificationTrait;
 use App\Models\EmailTemplate;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function boot(): void
 	{
+		Schema::defaultStringLength(191);
+		
 		// Gate::before(function ($user, $ability) {
 		// 	return $user->hasRole('Super Admin') ? true : null;
 		// });
