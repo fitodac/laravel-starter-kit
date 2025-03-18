@@ -9,21 +9,26 @@ export type Props = {
 	// Data
 	data: any
 	// Array of column configurations for the table
-	columns: { key: string; label: string; className?: string }[]
-	// Array of row data for the table
-	links: {
-		url: string
+	columns: {
+		key: string
 		label: string
-		active: boolean
+		width?: number
+		className?: string
 	}[]
-	// Array of row data for the table
-	current_page: number
 	// Array of row data for the table
 	cell: any
 
 	/**
 	 * OPTIONAL
 	 */
+	// Array of row data for the table
+	links?: {
+		url: string
+		label: string
+		active: boolean
+	}[]
+	// Array of row data for the table
+	current_page?: number
 	// Remove the wrapper around the table
 	removeWrapper?: boolean
 	// Hide the header of the table
@@ -73,4 +78,5 @@ export type Props = {
 
 	selectedKeys?: any
 	onSelectionChange?: (arr: any) => void
+	isCompact?: boolean
 }

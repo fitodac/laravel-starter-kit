@@ -44,17 +44,18 @@ export const TableContent = ({
 	selectedKeys,
 	onSelectionChange,
 	topContent,
+	isCompact = false,
 }: Props) => {
 	const { loading, setLoading } = useTableStore()
 
 	const TableFooter = (
 		<div className="flex gap-5 flex-col justify-between items-center lg:flex-row">
 			<div className="">{bottomContent}</div>
-			<Pager {...{ links, current_page, reloadOnly }} />
+			{links && current_page && (
+				<Pager {...{ links, current_page, reloadOnly }} />
+			)}
 		</div>
 	)
-
-	
 
 	useEffect(() => setLoading(false), [data])
 
@@ -73,6 +74,11 @@ export const TableContent = ({
 					selectionMode,
 					topContent: topContent,
 					bottomContent: TableFooter,
+					isCompact,
+					sortDescriptor,
+					selectedKeys,
+					onSelectionChange,
+					classNames,
 				}}
 				aria-label="Table"
 				onSortChange={(sortDescriptor) => {
@@ -80,9 +86,6 @@ export const TableContent = ({
 					setSortDescriptor(sd)
 					setLoading(true)
 				}}
-				sortDescriptor={sortDescriptor}
-				selectedKeys={selectedKeys}
-				onSelectionChange={onSelectionChange}
 			>
 				{/* TABLE HEADER */}
 				<TableHeader columns={columns}>

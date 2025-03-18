@@ -48,7 +48,7 @@ export const ImageUploader = ({
 	radius,
 	classNames,
 	icon,
-	disableButton,
+	disableButton = false,
 	accept = defaultAcceptedFormats,
 }: Props) => {
 	const [srcPreview, setSrcPreview] = useState<string | null>(
@@ -92,7 +92,7 @@ export const ImageUploader = ({
 								alt="Sample image"
 								className={cn(
 									image(),
-									'transition-opacity group-hover:opacity-80',
+									'transition-opacity select-none pointer-events-none group-hover:opacity-80',
 									classNames?.image
 								)}
 							/>
@@ -103,10 +103,10 @@ export const ImageUploader = ({
 									size="sm"
 									radius="full"
 									color="danger"
-									className="bg-opacity-50 top-1 right-1 absolute transition-opacity opacity-0 group-hover:opacity-100"
+									className="bg-opacity-50 top-1 right-1 absolute transition-opacity opacity-0 z-20 group-hover:opacity-100"
 									onPress={() => {
-										onFileUpload && onFileUpload(null)
 										setSrcPreview(null)
+										onFileUpload && onFileUpload(null)
 									}}
 								>
 									<i className="text-white ri-close-line ri-2x" />
