@@ -12,6 +12,7 @@
 		"php": "^8.2",
 		"bezhansalleh/filament-shield": "^3.3",
 		"filament/filament": "^3.2",
+		"fitodac/pages": "^1.0",
 		"inertiajs/inertia-laravel": "^2.0",
 		"jeffgreco13/filament-breezy": "^2.6",
 		"lab404/laravel-impersonate": "^1.7",
@@ -71,7 +72,7 @@
 	"extra": {
 		"merge-plugin": {
 			"include": [
-				"plugins/*/*/composer.json"
+				"packages/*/*/composer.json"
 			]
 		},
 		"laravel": {
@@ -87,6 +88,12 @@
 			"php-http/discovery": true
 		}
 	},
+	"repositories": [
+		{
+			"type": "path",
+			"url": "packages/fitodac/pages"
+		}
+	],
 	"minimum-stability": "stable",
 	"prefer-stable": true
 }

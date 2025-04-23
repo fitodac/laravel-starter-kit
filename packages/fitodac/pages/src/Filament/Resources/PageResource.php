@@ -1,27 +1,33 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace Fitodac\Pages\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Notifications\Notification;
-use App\Notifications\VerifyEmailNotification;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Fitodac\Pages\Models\Page;
+use Fitodac\Pages\Filament\Resources\PageResource\Pages;
 
-class UserResource extends Resource implements HasShieldPermissions
+class PageResource extends Resource
 {
-	protected static ?string $model = User::class;
-	protected static ?string $slug = 'admin/users';
-	protected static ?string $navigationIcon = 'heroicon-o-users';
+	protected static ?string $model = Page::class;
+	protected static ?string $slug = 'admin/pages';
+	protected static ?string $navigationIcon = 'heroicon-o-tv';
+	protected static ?string $navigationGroup = 'Content';
 	protected static bool $shouldRegisterNavigation = true;
-	protected static ?int $navigationSort = 300;
+	protected static ?int $navigationSort = -2;
+
 
 	/**
 	 * -------------------------------------------------------------------------------
@@ -62,16 +68,6 @@ class UserResource extends Resource implements HasShieldPermissions
 	}
 
 	/**
-	 * Filter users to only show those with the 'User' role
-	 */
-	public static function getEloquentQuery(): Builder
-	{
-		return parent::getEloquentQuery()->whereHas('roles', function (Builder $query) {
-			$query->where('name', 'User');
-		});
-	}
-
-	/**
 	 * -------------------------------------------------------------------------------
 	 * Configure the form for creating/editing pages
 	 * -------------------------------------------------------------------------------
@@ -85,7 +81,31 @@ class UserResource extends Resource implements HasShieldPermissions
 	{
 		return $form
 			->schema([
-				//
+				Section::make()
+					->schema([
+						TextInput::make('title')
+							->required()
+							->maxLength(255)
+							->reactive()
+							->afterStateUpdated(fn($state, callable $set) =>
+							$set('slug', \Illuminate\Support\Str::slug($state))),
+
+						TextInput::make('slug')
+							->required()
+							->maxLength(255)
+							->unique(Page::class, 'slug', ignoreRecord: true),
+
+						FileUpload::make('featured_image')
+							->image()
+							->directory('pages')
+							->visibility('public')
+							->maxSize(2048),
+
+						RichEditor::make('content')
+							->required()
+							->columnSpan('full'),
+					])
+					->columns(2)
 			]);
 	}
 
@@ -103,50 +123,30 @@ class UserResource extends Resource implements HasShieldPermissions
 	{
 		return $table
 			->columns([
-				Tables\Columns\TextColumn::make('username')
-					->sortable()
-					->searchable(),
-				Tables\Columns\TextColumn::make('email')
-					->sortable()
-					->searchable(),
-				Tables\Columns\TextColumn::make('email_verified_at')
-					->label('Email Verified')
-					->dateTime('d m Y H:i'),
-				Tables\Columns\TextColumn::make('created_at')
-					->label('Registered At')
-					->dateTime('d m Y H:i'),
+				TextColumn::make('title')
+					->searchable()
+					->sortable(),
+
+				TextColumn::make('slug')
+					->searchable()
+					->sortable(),
+
+				ImageColumn::make('featured_image')
+					->square(),
+
+				TextColumn::make('created_at')
+					->dateTime()
+					->sortable(),
 			])
 			->filters([
-				Tables\Filters\TernaryFilter::make('verified')
-					->label(__('Verified email'))
-					->attribute('email_verified_at')
-					->nullable(),
-				Tables\Filters\Filter::make('unverified')
-					->label('Email Not Verified')
-					->query(fn(Builder $query) => $query->whereNull('email_verified_at')),
+				//
 			])
 			->actions([
-				Tables\Actions\EditAction::make(),
-
-				Tables\Actions\Action::make('resend_verification_email')
-					->label('Resend Verification Email')
-					->icon('heroicon-o-envelope')
-					->authorize(fn(User $record) => !$record->hasVerifiedEmail())
-					->action(function (User $record) {
-						$notification = app(VerifyEmailNotification::class);
-						$notification->url = filament()->getVerifyEmailUrl($record);
-						$record->notify($notification);
-
-						Notification::make()
-							->title(__("Verification email has been resent."))
-							->send();
-					})
-					->requiresConfirmation(),
+				EditAction::make(),
+				DeleteAction::make(),
 			])
 			->bulkActions([
-				Tables\Actions\BulkActionGroup::make([
-					Tables\Actions\DeleteBulkAction::make(),
-				]),
+				DeleteBulkAction::make(),
 			]);
 	}
 
@@ -159,19 +159,22 @@ class UserResource extends Resource implements HasShieldPermissions
 
 	/**
 	 * -------------------------------------------------------------------------------
-	 * Defines the available pages for the User resource
+	 * Get the pages that make up the resource.
 	 * -------------------------------------------------------------------------------
-	 * This method configures the routing and page components for the User resource,
-	 * including list, create and edit pages in the admin panel.
 	 * 
-	 * @return array An array of page configurations
+	 * This method defines the available pages/routes for this resource:
+	 * - index: List view of all pages
+	 * - create: Form to create new pages
+	 * - edit: Form to modify existing pages
+	 * 
+	 * @return array Array of page classes and their corresponding routes
 	 */
 	public static function getPages(): array
 	{
 		return [
-			'index' => Pages\ListUsers::route('/'),
-			'create' => Pages\CreateUser::route('/create'),
-			'edit' => Pages\EditUser::route('/{record}/edit'),
+			'index' => Pages\ListPages::route('/'),
+			'create' => Pages\CreatePage::route('/create'),
+			'edit' => Pages\EditPage::route('/{record}/edit'),
 		];
 	}
 }
