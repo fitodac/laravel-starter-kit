@@ -87,6 +87,12 @@
 			"php-http/discovery": true
 		}
 	},
+	"repositories": [
+		{
+			"type": "path",
+			"url": "packages/fitodac/pages"
+		}
+	],
 	"minimum-stability": "stable",
 	"prefer-stable": true
 }
