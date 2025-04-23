@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
 
 class PermissionSeeder extends Seeder
 {
@@ -16,34 +14,40 @@ class PermissionSeeder extends Seeder
 	public function run(): void
 	{
 		$roleAdmin = Role::findByName('Admin');
+		$roleSuperAdmin = Role::findByName('Super Admin');
 
-		$can_see_users = Permission::create(['name' => 'Can see users']);
-		$can_create_new_user = Permission::create(['name' => 'Can create new user']);
-		$can_edit_user = Permission::create(['name' => 'Can edit user']);
+		/**
+		 * User permissions
+		 */
+		$view_user = Permission::create(['name' => 'view_user']);
+		$view_any_user = Permission::create(['name' => 'view_any_user']);
+		$create_user = Permission::create(['name' => 'create_user']);
+		$update_user = Permission::create(['name' => 'update_user']);
+		$delete_user = Permission::create(['name' => 'delete_user']);
+		$delete_any_user = Permission::create(['name' => 'delete_any_user']);
 
-		$can_see_admins = Permission::create(['name' => 'Can see admins']);
-		$can_create_new_admin = Permission::create(['name' => 'Can create new admin']);
-		$can_edit_admin = Permission::create(['name' => 'Can edit admin']);
+		$view_role = Permission::create(['name' => 'view_role']);
+		$view_any_role = Permission::create(['name' => 'view_any_role']);
+		$create_role = Permission::create(['name' => 'create_role']);
+		$update_role = Permission::create(['name' => 'update_role']);
+		$delete_role = Permission::create(['name' => 'delete_role']);
+		$delete_any_role = Permission::create(['name' => 'delete_any_role']);
 
-		$can_impersonate = Permission::create(['name' => 'Can impersonate']);
+		$can_impersonate = Permission::create(['name' => 'can_impersonate']);
 
-		$can_see_roles_and_permissions = Permission::create(['name' => 'Can see roles and permissions']);
-		$can_create_new_role = Permission::create(['name' => 'Can create new role']);
-		$can_edit_role = Permission::create(['name' => 'Can edit role']);
-		$can_create_new_permission = Permission::create(['name' => 'Can create new permission']);
-		$can_edit_permission = Permission::create(['name' => 'Can edit permission']);
-
-		$can_edit_notifications = Permission::create(['name' => 'Can edit notification templates']);
-		$can_edit_email_templates = Permission::create(['name' => 'Can edit email templates']);
-
+		$receive_new_user_notifications = Permission::create(['name' => 'receive_new_user_notifications']);
 
 		$roleAdmin->givePermissionTo([
-			$can_see_users,
-			$can_create_new_user,
-			$can_edit_user,
-			$can_see_roles_and_permissions,
-			$can_edit_notifications,
-			$can_edit_email_templates
+			$view_user,
+			$view_any_user,
+			$create_user,
+			$update_user,
+			$delete_user,
+			$delete_any_user
+		]);
+
+		$roleSuperAdmin->givePermissionTo([
+			$receive_new_user_notifications
 		]);
 	}
 }

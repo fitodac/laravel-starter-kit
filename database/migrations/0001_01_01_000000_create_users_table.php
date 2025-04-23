@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\UserStatusEnum;
 
 return new class extends Migration
 {
@@ -13,6 +14,7 @@ return new class extends Migration
 	{
 		Schema::create('users', function (Blueprint $table) {
 			$table->id();
+
 			// Basic information
 			$table->string('name')->nullable();
 			$table->string('lastname')->nullable();
@@ -20,23 +22,10 @@ return new class extends Migration
 			$table->string('email')->unique();
 			$table->timestamp('email_verified_at')->nullable();
 			$table->string('password');
+			$table->string('google_id')->nullable();
 
-			// Personal information
-			$table->string('phone')->nullable();
-			$table->timestamp('birth_date')->nullable();
-			$table->string('address')->nullable();
-			$table->string('city')->nullable();
-			$table->string('country')->nullable();
-			$table->string('zip')->nullable();
-
-			// Professional information
-			$table->string('job_title')->nullable();
-			$table->string('company')->nullable();
-			$table->text('bio')->nullable();
-
-			// Preferences and settings
 			$table->string('profile_picture')->nullable();
-			$table->enum('status', ['enabled', 'disabled'])->default('enabled');
+			$table->enum('status', array_column(UserStatusEnum::cases(), 'value'))->default(UserStatusEnum::ACTIVE->value);
 
 			$table->rememberToken();
 			$table->timestamps();

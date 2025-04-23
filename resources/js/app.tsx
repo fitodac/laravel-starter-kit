@@ -1,41 +1,28 @@
 import './bootstrap'
-import 'remixicon/fonts/remixicon.css'
-import 'react-toastify/dist/ReactToastify.css'
-import '../css/app.css'
 
-import { createRoot, hydrateRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react'
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
-import { HeroUIProvider } from '@heroui/react'
-import { semanticColors } from '@heroui/theme'
+import { createRoot } from 'react-dom/client'
+import { locale } from './locale'
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
-window.locale = import.meta.env.VITE_APP_LOCALE || 'en'
+const appName = import.meta.env.VITE_APP_NAME || ''
 
 createInertiaApp({
+	id: 'app',
+
 	title: (title) => `${title} - ${appName}`,
-	resolve: (name) =>
-		resolvePageComponent(
-			`./pages/${name}.tsx`,
-			import.meta.glob('./pages/**/*.tsx')
-		),
+
+	resolve: (name) => {
+		const pages = (import.meta as any).glob('./pages/**/*.tsx', { eager: true })
+		return pages[`./pages/${name}.tsx`]
+	},
+
 	setup({ el, App, props }) {
-		if (import.meta.env.DEV) {
-			createRoot(el).render(
-				<HeroUIProvider>
-					<App {...props} />
-				</HeroUIProvider>
-			)
-			return
+		const enhancedProps = {
+			...props,
+			locale: locale.methods,
 		}
 
-		hydrateRoot(el, <App {...props} />)
-	},
-	progress: {
-		delay: 0,
-		color: semanticColors.dark.primary[500],
-		includeCSS: true,
-		showSpinner: true,
+		createRoot(el).render(<App {...enhancedProps} />)
 	},
 }).then(() => {
 	document.getElementById('app')?.removeAttribute('data-page')

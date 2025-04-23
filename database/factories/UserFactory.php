@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Enums\UserStatusEnum;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -24,31 +25,17 @@ class UserFactory extends Factory
 	public function definition(): array
 	{
 		return [
-			// Basic information
 			'name' => fake()->name(),
 			'lastname' => fake()->lastName(),
-			'username' => fake()->userName(),
+			'username' => fake()->unique()->userName(),
 			'email' => fake()->unique()->safeEmail(),
 			'email_verified_at' => now(),
-			'password' => static::$password ??= Hash::make('password'),
-			'phone' => fake()->phoneNumber(),
-
-			// Personal information
-			'birth_date' => fake()->date(),
-			'address' => fake()->address(),
-			'city' => fake()->city(),
-			'country' => fake()->country(),
-			'zip' => fake()->postcode(),
-
-			// Professional information
-			'job_title' => fake()->jobTitle(),
-			'company' => fake()->company(),
-
-			// Settings
-			'bio' => fake()->text(200),
-			'profile_picture' => rand(1, 30) . '.jpg',
-			'status' => fake()->randomElement(['enabled', 'disabled']),
-
+			'password' => Hash::make('password'),
+			'status' => fake()->randomElement([
+				UserStatusEnum::ACTIVE->value,
+				UserStatusEnum::INACTIVE->value,
+				UserStatusEnum::SUSPENDED->value,
+			]),
 			'remember_token' => Str::random(10),
 		];
 	}

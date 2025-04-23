@@ -7,13 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\User;
-use App\Models\NotificationTemplate;
-use App\Models\EmailTemplate;
-use App\Traits\NotificationTrait;
+use Illuminate\Support\Facades\Lang;
 
 class SendUserDetailsOnCreateUserNotification extends Notification implements ShouldQueue
 {
-	use Queueable, NotificationTrait;
+	use Queueable;
 
 	/**
 	 * Create a new notification instance.
@@ -40,17 +38,21 @@ class SendUserDetailsOnCreateUserNotification extends Notification implements Sh
 	 */
 	public function toMail(object $notifiable): MailMessage
 	{
-		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
-
-		if (str_contains($template->body, '[user.password]')) {
-			$template->body = str_replace('[user.password]', $this->password, $template->body);
-		}
-
 		return (new MailMessage)
-			->subject($this->replaceShortcodes($template->subject, 'user.', $this->user) ?? 'Your Account has been updated')
-			->markdown('mail::message', [
-				'content' => $this->replaceShortcodes($template->body, 'user.', $this->user) ?? '',
-				'slot' => ''
+			->subject(Lang::get('Welcome to ' . config('app.name')))
+			->view('mail.user-details-created', [
+				'greeting' => Lang::get('Hello '),
+				'email' => $this->user->email,
+				'username' => $this->user->username,
+				'password' => $this->password,
+				'introLines' => [
+					Lang::get('We created an account for you on ' . config('app.name') . '.'),
+					Lang::get('Here are your login details:'),
+				],
+				'outroLines' => [
+					Lang::get('Please change your password after your first login.'),
+					Lang::get('Thank you for using our application!')
+				]
 			]);
 	}
 
@@ -62,7 +64,8 @@ class SendUserDetailsOnCreateUserNotification extends Notification implements Sh
 	public function toArray(object $notifiable): array
 	{
 		return [
-			//
+			'user_id' => $this->user->id,
+			'message' => Lang::get('Your account has been created'),
 		];
 	}
 }

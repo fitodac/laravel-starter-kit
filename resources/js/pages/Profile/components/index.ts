@@ -1,6 +1,0 @@
-export * from './DeleteAccount'
-export * from './FormBasicInformation'
-export * from './FormPersonalInformation'
-export * from './FormProfessionalInformation'
-export * from './FormPassword'
-export * from './MustVerifyEmail'

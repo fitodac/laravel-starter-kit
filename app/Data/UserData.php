@@ -5,6 +5,8 @@ namespace App\Data;
 use Spatie\LaravelData\Data;
 use App\Data\AccountData;
 use App\Models\User;
+use App\Enums\UserStatusEnum;
+use Illuminate\Support\Facades\Storage;
 
 class UserData extends Data
 {
@@ -19,10 +21,10 @@ class UserData extends Data
 		public ?string $address,
 		public ?string $city,
 		public ?string $country,
-		public ?string $zip,
+		public ?string $zip_code,
 		public ?string $profile_picture,
-		public string $status,
-		// public string $remember_token,
+		public UserStatusEnum $status,
+		public ?string $remember_token,
 		public ?array $roles = [],
 		public ?array $permissions = [],
 		public ?AccountData $account,
@@ -48,11 +50,12 @@ class UserData extends Data
 			address: $user->address,
 			city: $user->city,
 			country: $user->country,
-			zip: $user->zip,
-			profile_picture: $user->profile_picture,
-			status: $user->status,
+			zip_code: $user->zip_code,
+			profile_picture: $user->profile_picture ? Storage::url($user->profile_picture) : null,
+			status: UserStatusEnum::from($user->status),
 			roles: $user->roles->pluck('name')->toArray(),
 			permissions: $user->getAllPermissions()->pluck('name')->toArray(),
+			remember_token: $user->remember_token,
 			account: $user->account ? AccountData::from($user->account->toArray()) : null,
 		);
 	}

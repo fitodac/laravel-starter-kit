@@ -1,21 +1,39 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\StaticPagesController;
+use App\Http\Controllers\Auth\SocialiteController;
 
 
-Route::get('/', function () {
-	return Inertia::render('Welcome', [
-		'canLogin' => Route::has('login'),
-		'canRegister' => Route::has('register'),
-		'laravelVersion' => Application::VERSION,
-		'phpVersion' => PHP_VERSION,
-	]);
-});
+Route::get('/', [StaticPagesController::class, 'homePage'])
+	->name('home');
+// ->middleware(['web'])  // Add web middleware group for session, CSRF protection etc.
+// ->middleware(['cache.headers:public;max_age=3600;etag']); // Add cache headers for better performance
+
+/**
+ * ----------------------------------------------------------------------------
+ * Social login
+ * ----------------------------------------------------------------------------
+ */
+Route::get('/auth/{provider}/redirect', [SocialiteController::class, 'redirect'])
+	->name('socialite.redirect');
+Route::get('/auth/{provider}/callback', [SocialiteController::class, 'callback'])
+	->name('socialite.callback');
 
 
-require __DIR__ . '/auth.php';
-require __DIR__ . '/user.php';
-require __DIR__ . '/admin.php';
-require __DIR__ . '/demo.php';
+/**
+ * ----------------------------------------------------------------------------
+ * Demo pages
+ * ----------------------------------------------------------------------------
+ * You can remove these pages if you want
+ */
+Route::get('/dashboard', [StaticPagesController::class, 'dashboardDemoPage'])
+	->name('demo.dashboard');
+
+Route::get('/mobile', [StaticPagesController::class, 'mobileDemoPage'])
+	->name('demo.mobile');
+
+Route::get('/mobile-web-app', [StaticPagesController::class, 'webAppMobilePage'])
+	->name('demo.mobile.webApp');
+
+Route::get('/ui', fn() => redirect('/ui/index.html'));

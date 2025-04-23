@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+@import '../../resources/css/app.css';
+
+@source "../../resources/js/components";
+@source "./components/";
+
+@theme {
+	--divider: #ffffff55;
+}
+
+.dark {
+	--divider: #ffffff25;
+}
+
+@layer utilities {
+	.border-r-divider {
+		border-right: 1px dashed var(--divider);
+	}
+	.border-b-divider {
+		border-bottom: 1px dashed var(--divider);
+	}
+
+	code {
+		@apply bg-gray-950 text-gray-400 px-2 py-1 rounded-md;
+	}
+}

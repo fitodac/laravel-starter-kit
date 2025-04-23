@@ -5,24 +5,25 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
-use App\Providers\AdminNavbarProvider;
-use App\Providers\UserNavbarProvider;
 use App\Data\UserData;
-use App\Data\NotificationData;
 
 class HandleInertiaRequests extends Middleware
 {
 	/**
-	 * The root template that is loaded on the first page visit.
+	 * The root template that's loaded on the first page visit.
+	 *
+	 * @see https://inertiajs.com/server-side-setup#root-template
 	 *
 	 * @var string
 	 */
 	protected $rootView = 'app';
 
 	/**
-	 * Determine the current asset version.
+	 * Determines the current asset version.
+	 *
+	 * @see https://inertiajs.com/asset-versioning
 	 */
-	public function version(Request $request): string|null
+	public function version(Request $request): ?string
 	{
 		return parent::version($request);
 	}
@@ -30,45 +31,18 @@ class HandleInertiaRequests extends Middleware
 	/**
 	 * Define the props that are shared by default.
 	 *
+	 * @see https://inertiajs.com/shared-data
+	 *
 	 * @return array<string, mixed>
 	 */
 	public function share(Request $request): array
 	{
-
-		$user = $request->user();
-
-		if ($user) {
-			$user = UserData::fromUser($user);
-		}
-
-		$role = $user->roles[0] ?? null;
-
-		$new_notifications_count = config('settings.general.new_notifications_count');
-		$notifications = $user ? NotificationData::collect(
-			$request->user()->unreadNotifications()
-				->take($new_notifications_count)
-				->get()->toArray()
-		) : null;
-
-		$isAdmin = $request->is(config('settings.general.admin_path') . '*');
+		// dd(session('locale'));
+		// dd($request->user());
 
 
-		return [
-			...parent::share($request),
-			'auth' => [
-				'user' => $user ? $user : null,
-				'permissions' => $user->permissions ?? [],
-				'role' => $user->roles[0] ?? null,
-				'notifications' => $notifications
-			],
-			'userNavbar' => app(UserNavbarProvider::class)->getMenu($user, $role),
-			'adminNavbar' => $isAdmin ? app(AdminNavbarProvider::class)->getMenu($user, $role) : null,
-			'adminLayout' => config('settings.general.admin_layout'),
-			'userLayout' => config('settings.general.user_layout'),
-			'authLayout' => config('settings.general.auth_layout'),
-			'colorMode' => config('settings.general.color_mode', 'dark'),
-			'adminCanImpersonate' => config('settings.general.admin_can_impersonate'),
-			'isAdmin' => $isAdmin,
+		return array_merge(parent::share($request), [
+			'auth' => $request->user() ? UserData::from($request->user()) : null,
 			'ziggy' => fn() => [
 				...(new Ziggy)->toArray(),
 				'location' => $request->url(),
@@ -78,6 +52,6 @@ class HandleInertiaRequests extends Middleware
 				'error' => fn() => $request->session()->get('error'),
 				'info' => fn() => $request->session()->get('info'),
 			]
-		];
+		]);
 	}
 }

@@ -9,16 +9,15 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class AccountFactory extends Factory
 {
-	/**
-	 * Define the model's default state.
-	 *
-	 * @return array<string, mixed>
-	 */
-	public function definition(): array
-	{
-		return [
-			'language' => config('app.locale', 'en'),
-			'colorMode' => config('settings.general.color_mode', 'dark'),
-		];
-	}
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            //
+        ];
+    }
 }

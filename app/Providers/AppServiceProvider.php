@@ -3,37 +3,25 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Auth\Notifications\VerifyEmail;
-use Illuminate\Notifications\Messages\MailMessage;
-use App\Traits\NotificationTrait;
-use App\Models\EmailTemplate;
-use Illuminate\Support\Facades\Schema;
+use Filament\Http\Responses\Auth\Contracts\LoginResponse as BaseLoginResponse;
+use App\Http\Responses\Auth\LoginResponse;
 
 class AppServiceProvider extends ServiceProvider
 {
-
-	use NotificationTrait;
-
 	/**
 	 * Register any application services.
 	 */
 	public function register(): void
 	{
-		if ($this->app->environment('local')) {
-			$this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
-			$this->app->register(TelescopeServiceProvider::class);
-		}
+		// Add this to the register method
+		$this->app->bind(
+			BaseLoginResponse::class,
+			LoginResponse::class
+		);
 	}
 
 	/**
 	 * Bootstrap any application services.
 	 */
-	public function boot(): void
-	{
-		Schema::defaultStringLength(191);
-		
-		// Gate::before(function ($user, $ability) {
-		// 	return $user->hasRole('Super Admin') ? true : null;
-		// });
-	}
+	public function boot(): void {}
 }

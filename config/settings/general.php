@@ -1,20 +1,20 @@
 <?php
 
-/**
- * All environment variables must being with VITE_
- */
 return [
-	'admin_path' => env('VITE_ADMIN_PATH', 'admin'),
-	'admin_layout' => env('VITE_ADMIN_LAYOUT', 'corporate'), // corporate, executive
-	'user_layout' => env('VITE_USER_LAYOUT', 'corporate'), // corporate, executive, mobile
-	'auth_layout' => env('VITE_AUTH_LAYOUT', 'layout1'), // 'layout1', 'layout2', or 'layout3'
-	'color_mode' => env('VITE_COLOR_MODE', 'dark'), // light or dark
+	'allowed_email_domains_can_access_admin' => array_filter(
+		is_string(env('ALLOWED_EMAIL_DOMAINS_CAN_ACCESS_ADMIN'))
+			? explode(',', env('ALLOWED_EMAIL_DOMAINS_CAN_ACCESS_ADMIN'))
+			: ['@gmail.com', '@local.com']
+	),
 
-	// Determine if the super admin should be notified when a new user registers.
-	'new_user_superadmin_notification' => env('VITE_NEW_USER_SUPERADMIN_NOTIFICATION', true),
-	// Determine how many notifications to show in the dropdown menu.
-	'new_notifications_count' => env('VITE_NEW_NOTIFICATIONS_COUNT', 5),
-	// Determine how many items to show per page in the admin panel.
+	/**
+	 * Configure the default color mode for the site.
+	 */
+	'color_mode' => env('COLOR_MODE', 'dark'),
+
+	/**
+	 * Configure the default pagination amount.
+	 */
 	'per_page' => 15,
 
 	// Configure Open Graph settings for the site.
@@ -27,4 +27,44 @@ return [
 	// Determine if the admin should be able to impersonate other users.
 	// @link https://github.com/lab404/laravel-impersonate
 	'admin_can_impersonate' => env('VITE_ADMIN_CAN_IMPERSONATE', false),
+
+	/**
+	 * Configure the path to the logo image used in emails.
+	 * The path is constructed by concatenating the application URL with the image path.
+	 * 
+	 * @var string
+	 */
+	'email_logo' => config('app.url') . '/img/mail/brand.png',
+
+	/**
+	 * Determines if only super administrators can access permission settings.
+	 * When set to true, regular administrators will not be able to modify permissions.
+	 * 
+	 * @var boolean
+	 */
+	'only_super_admin_can_access_to_permissions' => true,
+
+
+	// Controls login functionality
+	'login_enabled' => true,
+	// Enable/disable new user registration
+	'registration_enabled' => true,
+	// Enable/disable password reset functionality
+	'password_reset_enabled' => true,
+	// Enable/disable Google OAuth authentication
+	'google_authentication_enabled' => true,
+
+
+	/**
+	 * The route where regular users are redirected after authentication
+	 */
+	'user_authenticated_redirect_route' => 'home',
+
+	/**
+	 * The route where admin users are redirected after authentication
+	 */
+	'admin_authenticated_redirect_route' => 'filament.admin.resources.users.index',
+
+	'date_picker_format' => 'd/m/Y'
+
 ];

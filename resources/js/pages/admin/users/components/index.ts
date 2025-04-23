@@ -1,7 +1,0 @@
-export * from './DeleteAccount'
-export * from './FormBasicInformation'
-export * from './FormPassword'
-export * from './FormPersonalInformation'
-export * from './FormProfessionalInformation'
-export * from './FormRoleStatus'
-export * from './SessionsManager'

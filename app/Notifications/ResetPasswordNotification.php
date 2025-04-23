@@ -2,65 +2,38 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
-use App\Models\EmailTemplate;
-use App\Traits\NotificationTrait;
+use Illuminate\Support\Facades\Lang;
 
-class ResetPasswordNotification extends Notification implements ShouldQueue
+use Filament\Notifications\Auth\ResetPassword;
+
+class ResetPasswordNotification extends ResetPassword
 {
-	use Queueable, NotificationTrait;
 
 	/**
-	 * Create a new notification instance.
-	 */
-	public function __construct(
-		private readonly string $resetUrl
-	) {
-		//
-	}
-
-	/**
-	 * Get the notification's delivery channels.
+	 * Get the reset password notification mail message for the given URL.
 	 *
-	 * @return array<int, string>
+	 * @param  string  $url
+	 * @return \Illuminate\Notifications\Messages\MailMessage
 	 */
-	public function via(object $notifiable): array
+	protected function buildMailMessage($url)
 	{
-		return ['mail'];
-	}
-
-	/**
-	 * Get the mail representation of the notification.
-	 */
-	public function toMail(object $notifiable): MailMessage
-	{
-		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
-
-		if (str_contains($template->body, '[url]')) {
-			$template->body = str_replace('[url]', $this->resetUrl, $template->body);
-		}
 
 		return (new MailMessage)
-			->subject($template->subject ?? 'Reset password notification')
-			->markdown('mail::message', [
-				'content' => $template->body ?? '',
-				'slot' => ''
+			->subject(Lang::get('Reset Password Notification'))
+			->markdown('mail.reset-password', [
+				'url' => $url,
+				'actionText' => Lang::get('Reset Password'),
+				'introLines' => [
+					Lang::get('You are receiving this email because we received a password reset request for your account.')
+				],
+				'expireText' => Lang::get(
+					'This password reset link will expire in :count minutes.',
+					['count' => config('auth.passwords.' . config('auth.defaults.passwords') . '.expire')]
+				),
+				'outroLines' => [
+					Lang::get('If you did not request a password reset, no further action is required.')
+				]
 			]);
 	}
-
-	/**
-	 * Get the array representation of the notification.
-	 *
-	 * @return array<string, mixed>
-	 */
-	public function toArray(object $notifiable): array
-	{
-		return [
-			//
-		];
-	}
 }
-3xcels1or

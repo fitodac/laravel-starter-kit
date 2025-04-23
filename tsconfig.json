@@ -12,13 +12,16 @@
 		"noEmit": true,
 		"skipLibCheck": true,
 		"paths": {
-			"@/*": ["./resources/js/*"],
-			"ziggy-js": ["./vendor/tightenco/ziggy"]
+			"@/*": ["./resources/js/*", "./ui-components/*"],
+			"ziggy-js": ["./vendor/tightenco/ziggy"],
+			"@lib/*": ["./resources/js/lib/*"]
 		}
 	},
 	"include": [
+		"ui-components/src/**/*.tsx",
+		"ui-components/src/**/*.ts",
 		"resources/js/**/*.ts",
 		"resources/js/**/*.tsx",
 		"resources/js/**/*.d.ts"
-	]
+, "global.d.ts"	]
 }

@@ -1,0 +1,136 @@
+@import 'tailwindcss';
+
+@import '../../../../vendor/filament/filament/dist/theme.css';
+@import '../../../../vendor/filament/forms/dist/index.css';
+@import '../../../../vendor/filament/support/dist/index.css';
+
+@import '../../app.css';
+
+:root {
+	/**
+	----------------------------------------------------------------------------------------
+	You must only use rgba colors
+	-----------------------------------------------------------------------------------------
+	**/
+
+	--primary-50: 232, 244, 255;
+	--primary-100: 185, 223, 255;
+	--primary-200: 139, 201, 255;
+	--primary-300: 93, 179, 255;
+	--primary-400: 46, 158, 255;
+	--primary-500: 0, 136, 255; /* DEFAULT */
+	--primary-600: 0, 111, 209;
+	--primary-700: 0, 87, 162;
+	--primary-800: 0, 62, 116;
+	--primary-900: 0, 37, 70;
+	--primary-950: 0, 12, 23;
+
+	--danger-50: 255, 232, 233;
+	--danger-100: 255, 185, 189;
+	--danger-200: 255, 139, 145;
+	--danger-300: 255, 93, 101;
+	--danger-400: 255, 46, 57;
+	--danger-500: 255, 0, 13; /* DEFAULT */
+	--danger-600: 209, 0, 11;
+	--danger-700: 162, 0, 9;
+	--danger-800: 116, 0, 6;
+	--danger-900: 70, 0, 4;
+	--danger-950: 23, 0, 1;
+}
+
+/**
+Colors
+**/
+.fi-color-primary {
+	@apply text-primary;
+
+	@variant dark {
+		@apply text-primary;
+	}
+}
+
+/**
+Links
+**/
+.fi-link,
+.fi-link * {
+	@apply text-primary font-normal;
+
+	@variant dark {
+		@apply text-primary;
+	}
+}
+
+/**
+Buttons
+**/
+.fi-btn {
+	@apply from-primary/85 to-primary text-primary-foreground inset-shadow-2xs 
+					inset-shadow-white/25 bg-linear-to-b dark:from-primary/75 
+					border border-zinc-950/35 shadow-zinc-950/20 ring-0 
+					transition-[filter] duration-200 select-none
+					hover:brightness-110 active:brightness-95 
+					dark:bg-linear-to-t dark:border-0 dark:border-zinc-950/50;
+
+	@variant dark {
+		@apply text-primary-foreground shadow-md;
+	}
+}
+
+/**
+Button group
+**/
+.fi-btn-group {
+	@apply ring-0 !ring-white shadow-none dark:ring-0;
+}
+
+.fi-btn-group > label.fi-btn {
+	@apply border-none brightness-80 inset-shadow-none
+	[&:not(:nth-last-child(1_of_.fi-btn))]:me-0
+	[&_.fi-btn-icon]:stroke-white;
+
+	@variant [input:checked+&] {
+		@apply brightness-100;
+	}
+}
+
+/**
+Input
+**/
+.fi-input-wrp {
+	@apply ring-0 [&:not(:has(.fi-ac-action:focus))]:focus-within:ring-0 rounded-md;
+
+	@variant dark {
+		@apply dark:[&:not(:has(.fi-ac-action:focus))]:focus-within:ring-0;
+	}
+}
+
+.fi-input {
+	@apply file:text-foreground placeholder:text-muted-foreground selection:bg-primary 
+					selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full 
+					min-w-0  border bg-transparent px-3 py-1 text-base shadow-xs 
+					transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 
+					file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none 
+					disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring 
+					focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 
+					dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+
+	@variant dark {
+		@apply text-foreground;
+	}
+}
+
+/**
+Rich editor
+**/
+.fi-fo-rich-editor-toolbar {
+	@apply p-1;
+}
+
+.fi-fo-rich-editor-toolbar-btn {
+	@apply h-7;
+}
+
+.fi-fo-rich-editor-toolbar-btn > svg {
+	@apply w-3.5 h-3.5;
+}

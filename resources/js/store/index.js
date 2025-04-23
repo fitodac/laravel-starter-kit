@@ -1,1 +1,0 @@
-export { useMainStore } from './useMainStore'

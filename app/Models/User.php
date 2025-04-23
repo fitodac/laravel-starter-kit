@@ -2,72 +2,80 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles;
-use Lab404\Impersonate\Models\Impersonate;
-use App\Notifications\ResetPasswordNotification;
-use App\Notifications\EmailVerificationNotification;
-use App\Data\AccountData;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Image\Enums\Fit;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable implements MustVerifyEmail, HasMedia
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+use Filament\Panel;
+
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
+use App\Data\AccountData;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Spatie\Permission\Traits\HasRoles;
+
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
+class User extends Authenticatable implements FilamentUser, HasAvatar, MustVerifyEmail
 {
-	use HasFactory;
-	use Notifiable;
-	use HasRoles;
-	use Impersonate;
-	use InteractsWithMedia;
+	/** @use HasFactory<\Database\Factories\UserFactory> */
+	use HasFactory, Notifiable, HasRoles;
 
 	/**
+	 * -------------------------------------------------------------------------------
+	 * The "booted" method of the model.
+	 * -------------------------------------------------------------------------------
+	 */
+	protected static function booted(): void
+	{
+		static::created(function (User $user) {
+			$user->assignRole('User');
+
+			if (!$user->account()->exists()) {
+				$user->account()->create([
+					'language' => config('app.locale'),
+					'color_mode' => config('settings.general.color_mode'),
+				]);
+			}
+		});
+	}
+
+	/**
+	 * -------------------------------------------------------------------------------
 	 * The attributes that are mass assignable.
-	 *
-	 * @var array<int, string>
+	 * -------------------------------------------------------------------------------
 	 */
 	protected $fillable = [
-		// Basic information
 		'name',
 		'lastname',
 		'username',
 		'email',
+		'email_verified_at',
 		'password',
-		'phone',
-
-		// Personal information
-		'birth_date',
-		'address',
-		'city',
-		'country',
-		'zip',
-
-		// Professional information
-		'job_title',
-		'company',
-		'bio',
-
-		// Preferences
+		'google_id',
 		'profile_picture',
 		'status',
 	];
 
-
+	/**
+	 * -------------------------------------------------------------------------------
+	 * The attributes that should be hidden for serialization.
+	 * -------------------------------------------------------------------------------
+	 */
 	protected $hidden = [
 		'password',
 		'remember_token',
 	];
 
-
 	/**
-	 * The attributes that should be cast to native types.
-	 *
-	 * @return array
+	 * -------------------------------------------------------------------------------
+	 * Get the attributes that should be cast.
+	 * -------------------------------------------------------------------------------
 	 */
 	protected function casts(): array
 	{
@@ -78,20 +86,54 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 	}
 
 	/**
+	 * -------------------------------------------------------------------------------
 	 * Get the sessions associated with the user.
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * -------------------------------------------------------------------------------
 	 */
-	public function sessions()
+	public function sessions(): HasMany
 	{
 		return $this->hasMany(Session::class);
 	}
 
 
 	/**
+	 * -------------------------------------------------------------------------------
+	 * Determines if the user can access a specific Filament panel
+	 * -------------------------------------------------------------------------------
+	 */
+	public function canAccessPanel(Panel $panel): bool
+	{
+		return true;
+		return $panel->getId() !== 'admin' ||
+			($this->hasVerifiedEmail() && Str::endsWith($this->email, config('settings.general.allowed_email_domains_can_access_admin')));
+	}
+
+	/**
+	 * -------------------------------------------------------------------------------
+	 * Get the URL of the user's Filament avatar
+	 * -------------------------------------------------------------------------------
+	 */
+	public function getFilamentAvatarUrl(): ?string
+	{
+		return $this->profile_picture ? Storage::url($this->profile_picture) : null;
+	}
+
+	/**
+	 * -------------------------------------------------------------------------------
+	 * Get the user's full name for display in Filament admin panel
+	 * -------------------------------------------------------------------------------
+	 */
+	public function getFilamentName(): string
+	{
+		return $this->name && $this->lastname
+			? "{$this->name} {$this->lastname}"
+			: $this->username ?? 'User';
+	}
+
+	/**
+	 * -------------------------------------------------------------------------------
 	 * Determine if the user can impersonate other users.
-	 *
-	 * @return bool True if the user has impersonation rights, false otherwise.
+	 * -------------------------------------------------------------------------------
 	 */
 	public function canImpersonate(): bool
 	{
@@ -103,125 +145,52 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
 	}
 
 	/**
+	 * -------------------------------------------------------------------------------
 	 * Get the account associated with the user.
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 * -------------------------------------------------------------------------------
 	 */
-	public function account()
+	public function account(): HasOne
 	{
 		return $this->hasOne(Account::class);
 	}
 
-
 	/**
+	 * -------------------------------------------------------------------------------
 	 * Get the user's roles.
-	 *
-	 * @return array An array of the user's roles.
+	 * -------------------------------------------------------------------------------
 	 */
 	public function getRoles(): array
 	{
 		return $this->roles->map(fn($role) => ['id' => $role->id, 'name' => $role->name])->toArray();
 	}
 
-
 	/**
+	 * -------------------------------------------------------------------------------
 	 * Get the user's account data.
-	 *
-	 * @return \App\Data\AccountData The user's account data.
+	 * -------------------------------------------------------------------------------
 	 */
 	public function getAccount(): AccountData
 	{
 		return AccountData::from($this->account->toArray());
 	}
 
-
 	/**
-	 * Send a password reset notification to the user.
-	 *
-	 * @param  string  $token
+	 * -------------------------------------------------------------------------------
+	 * Determine if two-factor authentication has been confirmed.
+	 * -------------------------------------------------------------------------------
 	 */
-	public function sendPasswordResetNotification($token): void
+	public function hasConfirmedTwoFactor(): bool
 	{
-		$base_url = rtrim(config('app.url'), '/');
-		$url = "$base_url/reset-password/$token";
-
-		$this->notify(new ResetPasswordNotification($url));
+		return $this->hasEnabledTwoFactor() && $this->two_factor_confirmed_at !== null;
 	}
 
-
-
 	/**
-	 * Generate a signed URL for the user to verify their email address.
-	 *
-	 * The generated URL is a temporary signed route that is only valid for the
-	 * specified duration defined in the authentication configuration. The URL
-	 * contains the user's ID and a hash of their email address.
-	 *
-	 * @return string The signed URL used to verify the user's email address.
+	 * -------------------------------------------------------------------------------
+	 * Determine if two-factor authentication is enabled.
+	 * -------------------------------------------------------------------------------
 	 */
-	private function generateVerificationUrl(): string
+	public function hasEnabledTwoFactor(): bool
 	{
-		return URL::temporarySignedRoute(
-			'verification.verify',
-			now()->addMinutes(config('auth.verification.expire', 60)),
-			['id' => $this->getKey(), 'hash' => sha1($this->getEmailForVerification())]
-		);
-	}
-
-
-	/**
-	 * Send the email verification notification.
-	 *
-	 * This method generates a signed URL containing the user's ID and
-	 * a hash of their email address. The URL is then used to verify the
-	 * user's email address and is only valid for the specified duration
-	 * defined in the authentication configuration.
-	 */
-	public function sendEmailVerificationNotification()
-	{
-		$url = $this->generateVerificationUrl();
-		$this->notify(new EmailVerificationNotification($url));
-	}
-
-
-	/**
-	 * Register media collections for the user.
-	 *
-	 * This method defines two media collections: 'images' and 'files'.
-	 * These collections can be used to organize and store media files
-	 * associated with the user.
-	 */
-
-	public function registerMediaCollections(): void
-	{
-		$this->addMediaCollection('images');
-		$this->addMediaCollection('files');
-	}
-
-
-	/**
-	 * Register media conversions for the user.
-	 *
-	 * This method adds a 'preview' media conversion that fits the media
-	 * within a 300x300 dimension while maintaining the aspect ratio.
-	 * The conversion is set to be non-queued.
-	 *
-	 * @param \Spatie\MediaLibrary\MediaCollections\Models\Media|null $media
-	 */
-
-	public function registerMediaConversions(?Media $media = null): void
-	{
-		$this
-			->addMediaConversion('webp')
-			->format('webp')
-			->performOnCollections('images')
-			->nonQueued();
-
-		$this
-			->addMediaConversion('preview')
-			->format('webp')
-			->performOnCollections('images')
-			->fit(Fit::Contain, 300, 300)
-			->nonQueued();
+		return $this->two_factor_secret !== null;
 	}
 }

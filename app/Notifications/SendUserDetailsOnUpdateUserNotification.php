@@ -7,13 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\User;
-use App\Models\NotificationTemplate;
-use App\Models\EmailTemplate;
-use App\Traits\NotificationTrait;
+use Illuminate\Support\Facades\Lang;
 
 class SendUserDetailsOnUpdateUserNotification extends Notification implements ShouldQueue
 {
-	use Queueable, NotificationTrait;
+	use Queueable;
 
 	/**
 	 * Create a new notification instance.
@@ -31,6 +29,7 @@ class SendUserDetailsOnUpdateUserNotification extends Notification implements Sh
 	 */
 	public function via(object $notifiable): array
 	{
+		// return ['mail'];
 		return ['mail', 'broadcast'];
 	}
 
@@ -39,13 +38,16 @@ class SendUserDetailsOnUpdateUserNotification extends Notification implements Sh
 	 */
 	public function toMail(object $notifiable): MailMessage
 	{
-		$template = EmailTemplate::where('type', $this->getNameSpaceAndFileName())->first();
-		
 		return (new MailMessage)
-			->subject($this->replaceShortcodes($template->subject, 'user.', $this->user) ?? 'Your Account has been updated')
-			->markdown('mail::message', [
-				'content' => $this->replaceShortcodes($template->body, 'user.', $this->user) ?? '',
-				'slot' => ''
+			->subject(Lang::get('Your Account has been updated'))
+			->view('mail.user-details-updated', [
+				'greeting' => Lang::get('Hello '),
+				'username' => $this->user->username,
+				'content' => [
+					Lang::get("We updated your account details."),
+					Lang::get("I you have any questions, please contact support immediately."),
+					Lang::get("Best regards.")
+				]
 			]);
 	}
 
@@ -57,7 +59,8 @@ class SendUserDetailsOnUpdateUserNotification extends Notification implements Sh
 	public function toArray(object $notifiable): array
 	{
 		return [
-			//
+			'user_id' => $this->user->id,
+			'message' => Lang::get('Your account details have been updated'),
 		];
 	}
 }

@@ -1,1 +1,1 @@
-export * from '../../../config/settings'
+export default {}
