@@ -63,3 +63,4 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
 		];
 	}
 }
+3xcels1or
