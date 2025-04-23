@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc655f7e0e62287ae16b020c2570969e",
+    "content-hash": "29694a2e436280c96242b42d73e64a94",
     "packages": [
         {
             "name": "amphp/amp",
@@ -2522,6 +2522,53 @@
                 "source": "https://github.com/firebase/php-jwt/tree/v6.11.1"
             },
             "time": "2025-04-09T20:32:01+00:00"
+        },
+        {
+            "name": "fitodac/pages",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "packages/fitodac/pages",
+                "reference": "2a022315509dd018f17e414eadb27d86a6a7503d"
+            },
+            "require": {
+                "filament/filament": "^3.0",
+                "inertiajs/inertia-laravel": "^2.0",
+                "laravel/framework": "^12.0",
+                "php": "^8.2",
+                "spatie/laravel-permission": "^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Fitodac\\Pages\\PagesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fitodac\\Pages\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Fitodac\\Pages\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "fitodac",
+                    "email": "fitodac@gmail.com"
+                }
+            ],
+            "description": "A Laravel package for creating dynamic pages with Filament and Inertia",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "fruitcake/php-cors",

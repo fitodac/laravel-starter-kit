@@ -30,6 +30,8 @@ This package provides a simple way to create dynamic pages with Filament admin p
 composer require fitodac/pages
 ```
 
+<br/>
+
 2. Publish migrations and resources:
 
 ```bash
@@ -37,11 +39,15 @@ php artisan vendor:publish --tag=pages-migrations
 php artisan vendor:publish --tag=pages-resources
 ```
 
+<br/>
+
 3. Run migrations:
 
 ```bash
 php artisan migrate
 ```
+
+<br/>
 
 4. Install permissions:
 
@@ -51,55 +57,31 @@ php artisan pages:install
 
 <br/>
 
-## Frontend setup
+5. Open `app/Providers/Filament/AdminPanelProvider.php` and add the following code:
 
-1. Make sure Inertia is configured correctly.
-
-2. Add the react component to your `tsconfig.json` file:
-
-```json
-{
-	"compilerOptions": {
-		// ... existing code ...
-		"paths": {
-			// ... existing code ...
-			"@/Pages/*": ["resources/js/Pages/*"]
-		}
-	},
-	"include": [
-		// ... existing code ...
-		"resources/js/Pages/**/*.tsx"
-	]
-}
+```php
+use Fitodac\Pages\PagesPlugin;
 ```
 
-3. Import and register the dynamic page component in your Inertia setup:
+Search for the `$panel` variable and register the plugin at the end of the list:
 
-```tsx
-// In your app.tsx or similar entry file
-import Page from '@/Pages/Dynamic/Page'
-
-createInertiaApp({
-	resolve: (name) => {
-		// ... existing code ...
-
-		// Register dynamic pages component
-		if (name.startsWith('Pages/Dynamic')) {
-			return Page
-		}
-
-		// ... existing code ...
-	},
-	// ... existing code ...
-})
+```php
+$panel->plugins([
+	//... existing plugins...
+	PagesPlugin::make(),
+]);
 ```
 
-4. Compile your assets to include the new React component.
+<br/>
+
+## Frontend
+
+Remember to ompile your assets to include the new React component.
 
 ```bash
 npm run dev
 # or
-yarn dev
+npm run build
 ```
 
 <br/>
@@ -115,16 +97,6 @@ yarn dev
 4. Publish your page when ready.
 
 5. Access your published pages at `/pages/{slug}` on your website.
-
-<br/>
-
-## Configuration
-
-You can publish the configuration file to customize the package behavior:
-
-```bash
-php artisan vendor:publish --tag=pages-config
-```
 
 <br/>
 <br/>

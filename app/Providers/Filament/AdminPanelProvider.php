@@ -26,6 +26,7 @@ use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\Auth\EmailVerification\EmailVerificationPrompt;
 use App\Filament\Pages\Auth\PasswordReset\RequestPasswordReset;
 use App\Http\Middleware\FilamentMiddleware;
+use Fitodac\Pages\PagesPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -156,6 +157,10 @@ class AdminPanelProvider extends PanelProvider
 							->imageResizeTargetWidth('256')
 							->imageResizeTargetHeight('256')
 					)
+			)
+
+			->plugin(
+				PagesPlugin::make()
 			)
 
 			->middleware([

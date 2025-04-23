@@ -1,6 +1,7 @@
 {
 	"name": "fitodac/pages",
 	"description": "A Laravel package for creating dynamic pages with Filament and Inertia",
+	"version": "1.0.0",
 	"type": "library",
 	"license": "MIT",
 	"authors": [

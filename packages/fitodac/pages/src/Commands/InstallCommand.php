@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Role;
 
 class InstallCommand extends Command
 {
-	protected $signature = 'fitodac-pages:install';
+	protected $signature = 'pages:install';
 
 	protected $description = 'Install the dynamic pages package and set up permissions';
 

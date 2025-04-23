@@ -7,42 +7,47 @@ use Filament\Facades\Filament;
 use Fitodac\Pages\Filament\Resources\PageResource;
 use Fitodac\Pages\Models\Page;
 use Fitodac\Pages\Policies\PagePolicy;
+use Fitodac\Pages\PagesPlugin;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class DynamicPagesServiceProvider extends ServiceProvider
+class PagesServiceProvider extends ServiceProvider
 {
+	/**
+	 * -------------------------------------------------------------------------------
+	 * Register any application services.
+	 * -------------------------------------------------------------------------------
+	 * This method binds the PagesPlugin singleton to the application container.
+	 */
 	public function register(): void
 	{
-		//
+		$this->app->singleton(PagesPlugin::class, function () {
+			return new PagesPlugin();
+		});
 	}
 
+	/**
+	 * -------------------------------------------------------------------------------
+	 * Bootstrap any application services.
+	 * -------------------------------------------------------------------------------
+	 */
 	public function boot(): void
 	{
 		// Registrar políticas
 		Gate::policy(Page::class, PagePolicy::class);
 
-		// Registrar recursos de Filament
-		Filament::registerResources([
-			PageResource::class,
-		]);
-
-		// Cargar migraciones
 		$this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-		// Registrar rutas
 		$this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
-		// Publicar archivos de configuración, migraciones, etc.
 		$this->publishes([
 			__DIR__ . '/../database/migrations' => database_path('migrations'),
-		], 'dynamic-pages-migrations');
+		], 'pages-migrations');
 
 		$this->publishes([
-			__DIR__ . '/../resources/js/Pages' => resource_path('js/Pages'),
-		], 'dynamic-pages-resources');
+			__DIR__ . '/../resources/js/Pages' => resource_path('js/pages'),
+		], 'pages-resources');
 
 		// Crear el seeder para los permisos
 		if ($this->app->runningInConsole()) {

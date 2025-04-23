@@ -4,6 +4,8 @@ namespace Fitodac\Pages\Filament\Resources\PageResource\Pages;
 
 use Fitodac\Pages\Filament\Resources\PageResource;
 use Filament\Actions\DeleteAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditPage extends EditRecord
@@ -14,6 +16,8 @@ class EditPage extends EditRecord
 	{
 		return [
 			DeleteAction::make(),
+			ForceDeleteAction::make(),
+			RestoreAction::make(),
 		];
 	}
 }
