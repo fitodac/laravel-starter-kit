@@ -71,7 +71,7 @@
 	"extra": {
 		"merge-plugin": {
 			"include": [
-				"plugins/*/*/composer.json"
+				"packages/*/*/composer.json"
 			]
 		},
 		"laravel": {

@@ -1,0 +1,53 @@
+{
+	"name": "fitodac/pages",
+	"description": "A Laravel package for creating dynamic pages with Filament and Inertia",
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "fitodac",
+			"email": "fitodac@gmail.com"
+		}
+	],
+	"require": {
+		"php": "^8.2",
+		"laravel/framework": "^12.0",
+		"filament/filament": "^3.0",
+		"inertiajs/inertia-laravel": "^1.0",
+		"spatie/laravel-permission": "^6.0"
+	},
+	"require-dev": {
+		"@inertiajs/react": "^2.0.5",
+		"@types/node": "^22.13.14",
+		"@types/react": "^19.0.11",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"laravel-vite-plugin": "^1.2.0",
+		"orchestra/testbench": "^8.0",
+		"phpunit/phpunit": "^10.0",
+		"typescript": "^5.8.2",
+		"vite": "^6.0.11"
+	},
+	"autoload": {
+		"psr-4": {
+			"Fitodac\\Pages\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Fitodac\\Pages\\Tests\\": "tests/"
+		}
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Fitodac\\Pages\\PagesServiceProvider"
+			]
+		}
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"config": {
+		"sort-packages": true
+	}
+}
