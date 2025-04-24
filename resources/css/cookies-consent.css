@@ -106,7 +106,7 @@
 }
 #cookies-policy .cookies__intro a:focus,
 #cookies-policy .cookies__intro a:hover {
-	color: #7959ef;
+	color: var(--primary);
 }
 #cookies-policy .cookies__actions {
 	display: flex;
@@ -188,7 +188,7 @@
 	z-index: 1;
 }
 #cookies-policy .cookies__category input:checked + .cookies__box:after {
-	background: #7959ef;
+	background: var(--primary);
 	opacity: 1;
 }
 #cookies-policy .cookies__category input:disabled + .cookies__box:after {
@@ -209,7 +209,7 @@
 	line-height: 1.4em;
 }
 #cookies-policy .cookies__details {
-	color: #7959ef;
+	color: var(--primary);
 	display: block;
 	font-size: 0.875em;
 	margin: 0.625em 0 0.9em;
@@ -217,7 +217,7 @@
 }
 #cookies-policy .cookies__details:focus,
 #cookies-policy .cookies__details:hover {
-	color: #7959ef;
+	color: var(--primary);
 }
 #cookies-policy .cookies__definitions {
 	color: #676767;
