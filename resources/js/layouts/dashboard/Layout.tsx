@@ -1,6 +1,6 @@
 import { SidebarInset, SidebarProvider } from '@/components'
 import { Head } from '@inertiajs/react'
-import { JSX, PropsWithChildren } from 'react'
+import { JSX, PropsWithChildren, useRef } from 'react'
 import { AppSidebar, Header } from './components'
 
 interface Props extends PropsWithChildren {
@@ -9,6 +9,8 @@ interface Props extends PropsWithChildren {
 }
 
 const Layout = ({ children, pageTitle, header }: Props) => {
+	const currentRoute = useRef(route().current())
+
 	return (
 		<>
 			<Head title={pageTitle}>

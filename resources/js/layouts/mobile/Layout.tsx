@@ -1,6 +1,7 @@
 import { MotionNavbar } from '@/layouts/mobile/components/MotionNavbar'
-import { Head } from '@inertiajs/react'
-import { PropsWithChildren } from 'react'
+import { Head, router } from '@inertiajs/react'
+import { useVisibilityChange } from '@uidotdev/usehooks'
+import { PropsWithChildren, useEffect, useRef } from 'react'
 import { Footer, Header } from './components'
 
 interface Props extends PropsWithChildren {
@@ -8,6 +9,13 @@ interface Props extends PropsWithChildren {
 }
 
 const Layout = ({ children, pageTitle }: Props) => {
+	const currentRoute = useRef(route().current())
+	const documentVisible = useVisibilityChange()
+
+	useEffect(() => {
+		if (documentVisible) router.reload()
+	}, [documentVisible])
+
 	return (
 		<main className="max-w-lg mx-auto">
 			<Head title={pageTitle}>

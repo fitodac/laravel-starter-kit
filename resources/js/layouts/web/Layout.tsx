@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, useRef } from 'react'
 import { Footer, Header } from './components'
 
 interface Props extends PropsWithChildren {
@@ -7,6 +7,8 @@ interface Props extends PropsWithChildren {
 }
 
 const Layout = ({ children, pageTitle }: Props) => {
+	const currentRoute = useRef(route().current())
+
 	return (
 		<main>
 			<Head title={pageTitle}>
