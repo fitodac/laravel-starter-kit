@@ -32,6 +32,26 @@ class PermissionSeeder extends Seeder
 			Permission::firstOrCreate(['name' => $permission]);
 		}
 
+		$roles_permissions = [
+			'view_any_role',
+			'view_role',
+			'create_role',
+			'update_role',
+			'delete_role',
+			'delete_any_role',
+			'{{ ForceDelete }}',
+			'{{ ForceDeleteAny }}',
+			'{{ Restore }}',
+			'{{ RestoreAny }}',
+			'{{ Replicate }}',
+			'{{ Reorder }}'
+		];
+
+		foreach ($roles_permissions as $permission) {
+			Permission::firstOrCreate(['name' => $permission]);
+		}
+
+
 		// $view_role = Permission::create(['name' => 'view_role']);
 		// $view_any_role = Permission::create(['name' => 'view_any_role']);
 		// $create_role = Permission::create(['name' => 'create_role']);

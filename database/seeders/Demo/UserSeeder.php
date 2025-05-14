@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
 	 */
 	public function run(): void
 	{
-		for($i = 0; $i < 100; $i++){
+		for ($i = 0; $i < 10; $i++) {
 			User::factory()->create([
 				'username' => "user$i",
 				'email' => "user$i@local.com",

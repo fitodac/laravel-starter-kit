@@ -3,7 +3,6 @@
 namespace App\Filament\Pages\Auth;
 
 use Filament\Forms\Form;
-use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\TextInput;
@@ -11,6 +10,10 @@ use Filament\Pages\Auth\Login as BaseLogin;
 use Illuminate\Validation\ValidationException;
 use Filament\Http\Responses\Auth\Contracts\LoginResponse;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
+use Filament\Forms\Components\Component;
+use Filament\Notifications\Notification;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Facades\Blade;
 
 
 class Login extends BaseLogin
@@ -26,31 +29,63 @@ class Login extends BaseLogin
 	{
 		return $form
 			->schema([
-				TextInput::make('login')
-					->label(__('Email or Username'))
-					->required()
-					->autocomplete()
-					->autofocus(),
+				$this->getLoginFormComponent(),
 				$this->getPasswordFormComponent(),
 				$this->getRememberFormComponent(),
-			]);
+			])
+			->statePath('data');
 	}
 
+	/**
+	 * -------------------------------------------------------------------------------
+	 * Get the login form component configuration
+	 * -------------------------------------------------------------------------------
+	 */
+	protected function getLoginFormComponent(): Component
+	{
+		return TextInput::make('login')
+			->label('Login')
+			->autocomplete()
+			->autofocus()
+			->extraInputAttributes(['tabindex' => 1]);
+	}
+
+
+	/**
+	 * -------------------------------------------------------------------------------
+	 * Get the password form component configuration
+	 * -------------------------------------------------------------------------------
+	 */
+	protected function getPasswordFormComponent(): Component
+	{
+		return TextInput::make('password')
+			->label(__('filament-panels::pages/auth/login.form.password.label'))
+			->hint(filament()->hasPasswordReset() ? new HtmlString(Blade::render('<x-filament::link :href="filament()->getRequestPasswordResetUrl()" tabindex="3"> {{ __(\'filament-panels::pages/auth/login.actions.request_password_reset.label\') }}</x-filament::link>')) : null)
+			->password()
+			->revealable(filament()->arePasswordsRevealable())
+			->autocomplete('current-password')
+			->extraInputAttributes(['tabindex' => 2]);
+	}
+
+
+	/**
+	 * -------------------------------------------------------------------------------
+	 * Handle validation errors during form submission
+	 * -------------------------------------------------------------------------------
+	 */
+	protected function onValidationError(ValidationException $exception): void
+	{
+		Notification::make()
+			->title($exception->getMessage())
+			->danger()
+			->send();
+	}
 
 
 	/**
 	 * -------------------------------------------------------------------------------
 	 * Authenticates the user login attempt
 	 * -------------------------------------------------------------------------------
-	 * This method handles the authentication process by:
-	 * 1. Checking rate limiting
-	 * 2. Validating credentials (email/username and password)
-	 * 3. Attempting authentication
-	 * 4. Redirecting based on user role
-	 * 
-	 * @throws ValidationException When authentication fails or rate limit is exceeded
-	 * @throws TooManyRequestsException When too many login attempts are made
-	 * @return LoginResponse|null Returns null after successful redirect, or LoginResponse
 	 */
 	public function authenticate(): ?LoginResponse
 	{
@@ -67,22 +102,21 @@ class Login extends BaseLogin
 
 		$data = $this->form->getState();
 
-		$credentials = [
-			'password' => $data['password'],
-		];
+		if (! Filament::auth()->attempt($this->getCredentialsFromFormData($data), $data['remember'] ?? false)) {
+			$this->throwFailureValidationException();
+		}
 
-		$loginType = filter_var($data['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-		$credentials[$loginType] = $data['login'];
+		$user = Filament::auth()->user();
 
-		if (! Auth::attempt($credentials, $data['remember'] ?? false)) {
+		// Check if user is suspended
+		if ($user->status === 'suspended') {
+			Auth::logout();
 			throw ValidationException::withMessages([
-				'login' => __('filament-panels::pages/auth/login.messages.failed'),
+				'data.login' => 'Your account has been suspended. Contact us for more information',
 			]);
 		}
 
 		Filament::auth()->login(Auth::user(), (bool) $data['remember']);
-
-		$user = Auth::user();
 
 		if ($user->hasRole(['Admin', 'Super Admin'])) {
 			$this->redirect(route(config('settings.general.admin_authenticated_redirect_route')));
@@ -90,6 +124,38 @@ class Login extends BaseLogin
 			$this->redirect(route(config('settings.general.user_authenticated_redirect_route')));
 		}
 
+		session()->regenerate();
 		return null;
+
+		// return app(LoginResponse::class);
+	}
+
+
+	/**
+	 * -------------------------------------------------------------------------------
+	 * Extracts and formats credentials from form data
+	 * -------------------------------------------------------------------------------
+	 */
+	protected function getCredentialsFromFormData(array $data): array
+
+	{
+		$login_type = filter_var($data['login'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+		return [
+			$login_type => $data['login'],
+			'password'  => $data['password'],
+		];
+	}
+
+	/**
+	 * -------------------------------------------------------------------------------
+	 * Throws validation exception for failed login attempts
+	 * -------------------------------------------------------------------------------
+	 */
+	protected function throwFailureValidationException(): never
+	{
+		throw ValidationException::withMessages([
+			'data.login' => __('filament-panels::pages/auth/login.messages.failed'),
+		]);
 	}
 }

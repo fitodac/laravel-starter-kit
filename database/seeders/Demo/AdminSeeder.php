@@ -17,14 +17,16 @@ class AdminSeeder extends Seeder
 			'name' => 'Max',
 			'lastname' => 'Masterson',
 			'username' => 'maxmasterson',
-			'email' => 'superadmin@local.com'
+			'email' => 'superadmin@local.com',
+			'status' => 'active',
 		]);
 
 		$admin = User::factory()->create([
 			'name' => 'Emma',
 			'lastname' => 'Smith',
 			'username' => 'real_emma',
-			'email' => 'admin@local.com'
+			'email' => 'admin@local.com',
+			'status' => 'active',
 		]);
 
 		$superadmin->syncRoles(['Super Admin']);

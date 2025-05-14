@@ -63,7 +63,7 @@ return [
 	/**
 	 * The route where admin users are redirected after authentication
 	 */
-	'admin_authenticated_redirect_route' => 'filament.admin.resources.users.index',
+	'admin_authenticated_redirect_route' => 'filament.admin.resources.admin.users.index',
 
 	'date_picker_format' => 'd/m/Y'
 
