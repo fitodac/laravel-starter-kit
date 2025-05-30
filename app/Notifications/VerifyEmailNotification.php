@@ -3,26 +3,37 @@
 namespace App\Notifications;
 
 use Illuminate\Notifications\Messages\MailMessage;
-use Filament\Notifications\Auth\VerifyEmail;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
 
-class VerifyEmailNotification extends VerifyEmail
+class VerifyEmailNotification extends Notification
 {
+
 	/**
-	 * Get the verify email notification mail message for the given URL.
+	 * Create a new notification instance.
+	 */
+	public function __construct(protected string $url) {}
+
+	/**
+	 * Get the notification's delivery channels.
 	 *
-	 * @param  string  $url
+	 * @return array<int, string>
+	 */
+	public function via(object $notifiable): array
+	{
+		return ['mail'];
+	}
+
+	/**
+	 * Get the mail representation of the notification.
+	 *
+	 * @param  object  $notifiable
 	 * @return \Illuminate\Notifications\Messages\MailMessage
 	 */
-	protected function buildMailMessage($url)
+	public function toMail(object $notifiable): MailMessage
 	{
 		return (new MailMessage)
 			->subject(Lang::get('Verify Email Address'))
-			->markdown('mail.verify-email', [
-				'url' => $url,
-				'actionText' => Lang::get('Verify Email Address'),
-				'introLines' => [Lang::get('Please click the button below to verify your email address.')],
-				'outroLines' => [Lang::get('If you did not create an account, no further action is required.')],
-			]);
+			->markdown('mail.verify-email', ['url' => $this->url]);
 	}
 }

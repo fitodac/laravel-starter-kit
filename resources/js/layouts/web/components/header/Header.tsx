@@ -66,13 +66,13 @@ export const Header = () => {
 									>
 										<DropdownMenuGroup>
 											<DropdownMenuItem asChild>
-												<a href={route('filament.admin.pages.profile')}>
+												<a href={route('filament.user.pages.profile')}>
 													<RiUserLine /> Profile
 												</a>
 											</DropdownMenuItem>
 
 											<DropdownMenuItem asChild>
-												<a href={route('filament.admin.pages.account')}>
+												<a href={route('filament.user.pages.account')}>
 													Account
 												</a>
 											</DropdownMenuItem>
@@ -95,14 +95,14 @@ export const Header = () => {
 						) : (
 							<>
 								<a
-									href={route('filament.admin.auth.login')}
+									href={route('filament.user.auth.login')}
 									className={buttonVariants({ variant: 'ghost', size: 'sm' })}
 								>
 									Sign in
 								</a>
 
 								<a
-									href={route('filament.admin.auth.register')}
+									href={route('filament.user.auth.register')}
 									className={buttonVariants({ variant: 'glow', size: 'sm' })}
 								>
 									Get started today

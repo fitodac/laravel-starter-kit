@@ -37,3 +37,19 @@ Route::get('/mobile-web-app', [StaticPagesController::class, 'webAppMobilePage']
 	->name('demo.mobile.webApp');
 
 Route::get('/ui', fn() => redirect('/ui/index.html'));
+
+
+/**
+ * ----------------------------------------------------------------------------
+ * Routes protected by middlewares (examples)
+ * ----------------------------------------------------------------------------
+ * You can remove these if you want
+ */
+
+/**
+ * Routes that require both "auth" and "role:Admin|Super Admin" middleware
+ * are grouped under the "admin" prefix
+ */
+Route::middleware(['auth', 'role:Admin|Super Admin'])->prefix('admin')->group(function () {
+	// Routes...
+});

@@ -2,12 +2,12 @@
 
 <div style="padding: 20px 0;">
 	<p style="font-size: 14px; margin-bottom: 15px; color: #374151;">
-		{{ $greeting }} <strong>{{ $username }}</strong>,
+		{{ __('Hello') }} <strong>{{ $username }}</strong>,
 	</p>
 
-	@foreach ($content as $line)
-	<p style="font-size: 14px;">{{ $line }}</p>
-	@endforeach
+	<p style="font-size: 14px;">{{ __("We updated your account details.") }}</p>
+	<p style="font-size: 14px;">{{ __("I you have any questions, please contact support immediately.") }}</p>
+	<p style="font-size: 14px;">{{ __("Best regards.") }}</p>
 
 </div>
 

@@ -22,6 +22,7 @@ class UserResource extends Resource implements HasShieldPermissions
 	protected static ?string $navigationIcon = 'heroicon-o-users';
 	protected static bool $shouldRegisterNavigation = true;
 	protected static ?int $navigationSort = 300;
+	protected static ?string $navigationGroup = 'Filament Shield';
 
 	/**
 	 * -------------------------------------------------------------------------------

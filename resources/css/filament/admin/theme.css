@@ -98,31 +98,59 @@ Button group
 Input
 **/
 .fi-input-wrp {
-	@apply ring-0 [&:not(:has(.fi-ac-action:focus))]:focus-within:ring-0 rounded-md;
+	@apply ring-0 [&:not(:has(.fi-ac-action:focus))]:focus-within:ring-0;
 
 	@variant dark {
 		@apply dark:[&:not(:has(.fi-ac-action:focus))]:focus-within:ring-0;
 	}
 }
 
-.fi-input {
-	@apply file:text-foreground placeholder:text-muted-foreground selection:bg-primary 
-					selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full 
-					min-w-0  border bg-transparent px-3 py-1 text-base shadow-xs 
-					transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 
-					file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none 
-					disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring 
-					focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 
-					dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive;
+.fi-input,
+.fi-select-input,
+.fi-input-wrp-input button input {
+	@apply placeholder:text-muted-foreground selection:bg-primary 
+		selection:text-primary-foreground border-input flex h-9 w-full 
+		min-w-0 border bg-transparent px-3 py-1 text-base shadow-xs 
+		rounded-md transition-[color,box-shadow] outline-none 
+		file:text-foreground file:inline-flex file:h-7 file:border-0 
+		file:bg-transparent file:text-sm file:font-medium 
+		disabled:pointer-events-none disabled:cursor-not-allowed 
+		disabled:opacity-50 md:text-sm focus-visible:border-ring 
+		focus-visible:ring-ring/50 focus-visible:ring-[3px] 
+		aria-invalid:ring-destructive/20 aria-invalid:border-destructive;
 
 	@variant dark {
-		@apply text-foreground;
+		@apply bg-input/30 text-foreground aria-invalid:ring-destructive/40;
 	}
+}
+
+.fi-input-wrp-input {
+	@apply not-last:[&>.fi-input]:rounded-r-none;
+}
+
+.fi-input-wrp-suffix {
+	@apply border border-input rounded-r-md;
 }
 
 /**
 Rich editor
 **/
+.fi-fo-rich-editor {
+	.fi-input-wrp-input {
+		@apply border bg-transparent shadow-xs rounded-md transition-[color,box-shadow] 
+			outline-none 
+			file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm 
+			file:font-medium disabled:pointer-events-none 
+			disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring 
+			focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 
+			aria-invalid:border-destructive;
+
+		@variant dark {
+			@apply text-foreground aria-invalid:ring-destructive/40;
+		}
+	}
+}
+
 .fi-fo-rich-editor-toolbar {
 	@apply p-1;
 }

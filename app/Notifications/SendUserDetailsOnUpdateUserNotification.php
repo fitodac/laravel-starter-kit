@@ -42,12 +42,7 @@ class SendUserDetailsOnUpdateUserNotification extends Notification implements Sh
 			->subject(Lang::get('Your Account has been updated'))
 			->view('mail.user-details-updated', [
 				'greeting' => Lang::get('Hello '),
-				'username' => $this->user->username,
-				'content' => [
-					Lang::get("We updated your account details."),
-					Lang::get("I you have any questions, please contact support immediately."),
-					Lang::get("Best regards.")
-				]
+				'username' => $this->user->username
 			]);
 	}
 

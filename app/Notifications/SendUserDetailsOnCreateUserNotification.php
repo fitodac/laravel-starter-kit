@@ -44,15 +44,7 @@ class SendUserDetailsOnCreateUserNotification extends Notification implements Sh
 				'greeting' => Lang::get('Hello '),
 				'email' => $this->user->email,
 				'username' => $this->user->username,
-				'password' => $this->password,
-				'introLines' => [
-					Lang::get('We created an account for you on ' . config('app.name') . '.'),
-					Lang::get('Here are your login details:'),
-				],
-				'outroLines' => [
-					Lang::get('Please change your password after your first login.'),
-					Lang::get('Thank you for using our application!')
-				]
+				'password' => $this->password
 			]);
 	}
 

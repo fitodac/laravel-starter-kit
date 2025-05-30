@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Notifications\VerifyEmailNotification;
 use App\Notifications\NewUserRegisteredNotification;
+use Illuminate\Support\Facades\Log;
 use Filament\Pages\Auth\Register as BaseRegister;
 
 
@@ -42,8 +43,7 @@ class Register extends BaseRegister
 
 	protected function handleRegistration(array $data): Model
 	{
-		$data['name'] = $data['username']; // Map username to name field
-
+		$data['name'] = $data['username'];
 		return $this->getUserModel()::create([
 			'name' => $data['name'],
 			'username' => $data['username'],
@@ -68,16 +68,37 @@ class Register extends BaseRegister
 			throw new Exception("Model [{$userClass}] does not have a [notify()] method.");
 		}
 
-		$notification = app(VerifyEmailNotification::class);
-		$notification->url = Filament::getVerifyEmailUrl($user);
+		// Send email verification notification
+		try {
+			$notification = app(VerifyEmailNotification::class, [
+				'url' => Filament::getVerifyEmailUrl($user)
+			]);
 
-		$user->notify($notification);
+			$user->notify($notification);
+		} catch (\Throwable $th) {
+			Log::error('Failed to send email verification notification to user: ' . $user->email, [
+				'error' => $th->getMessage(),
+				'trace' => $th->getTraceAsString()
+			]);
+		}
 
-		$notificationForAdmins = app(NewUserRegisteredNotification::class);
-		$notificationForAdmins->newUser = $user;
+		// Send notification to admins
+		try {
+			$notificationForAdmins = app(NewUserRegisteredNotification::class, [
+				'newUser' => $user
+			]);
 
-		$admins = $this->getUserModel()::permission('receive_new_user_notifications')->get();
 
-		foreach ($admins as $admin) $admin->notify($notificationForAdmins);
+			$admins = $this->getUserModel()::permission('receive_new_user_notifications')->get();
+
+			foreach ($admins as $admin) {
+				$admin->notify($notificationForAdmins);
+			}
+		} catch (\Throwable $th) {
+			Log::error('Failed to send new user notification to admins for user: ' . $user->email, [
+				'error' => $th->getMessage(),
+				'trace' => $th->getTraceAsString()
+			]);
+		}
 	}
 }

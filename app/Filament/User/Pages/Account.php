@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages\Account;
+namespace App\Filament\User\Pages;
 
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Auth;

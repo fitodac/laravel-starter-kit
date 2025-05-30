@@ -2,19 +2,18 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
 use App\Models\User;
 
-class NewUserRegisteredNotification extends Notification implements ShouldQueue
+class NewUserRegisteredNotification extends Notification
 {
-	use Queueable;
 
-
-	public $newUser;
+	/**
+	 * Create a new notification instance.
+	 */
+	public function __construct(protected User $newUser) {}
 
 	/**
 	 * Get the notification's delivery channels.
@@ -37,12 +36,6 @@ class NewUserRegisteredNotification extends Notification implements ShouldQueue
 				'username' => $this->newUser->username,
 				'email' => $this->newUser->email,
 				'created_at' => $this->newUser->created_at->format('d/m/Y'),
-				'introLines' => [
-					Lang::get("A new user has been registered on the application:")
-				],
-				'outroLines' => [
-					Lang::get('Best regards, :appName team', ['appName' => config('app.name')]),
-				],
 			]);
 	}
 }

@@ -18,13 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
-use Filament\Forms\Components\FileUpload;
-use Filament\Navigation\MenuItem;
-
 use App\Filament\Pages\Auth\Login;
-use App\Filament\Pages\Auth\Register;
-use App\Filament\Pages\Auth\EmailVerification\EmailVerificationPrompt;
-use App\Filament\Pages\Auth\PasswordReset\RequestPasswordReset;
 use App\Http\Middleware\FilamentMiddleware;
 use Fitodac\Pages\PagesPlugin;
 
@@ -33,9 +27,14 @@ class AdminPanelProvider extends PanelProvider
 	public function panel(Panel $panel): Panel
 	{
 		return $panel
-			->default()
 			->id('admin')
-			->path('')
+			->path('admin')
+			->authGuard('web')
+			->registration(false)
+			->login()
+			->authMiddleware([
+				'role:Admin|Super Admin'
+			])
 			->colors([
 				// 'primary' => Color::Blue,
 				// 'danger' => Color::Rose,
@@ -45,6 +44,8 @@ class AdminPanelProvider extends PanelProvider
 				'warning' => Color::Orange,
 			])
 			->font('Inter')
+			->brandLogo(asset('img/brand.svg'))
+			->brandLogoHeight('1.4rem')
 
 			->viteTheme('resources/css/filament/admin/theme.css')
 			->darkMode(false)
@@ -52,13 +53,7 @@ class AdminPanelProvider extends PanelProvider
 			->favicon('favicon.ico')
 			->sidebarCollapsibleOnDesktop(true)
 
-			->userMenuItems([
-				MenuItem::make()
-					->label(__('Account'))
-					->url(fn(): string => route('filament.admin.pages.account'))
-					->icon('heroicon-o-cog-6-tooth'),
-
-			])
+			->userMenuItems([])
 
 			->databaseNotifications()
 
@@ -96,36 +91,6 @@ class AdminPanelProvider extends PanelProvider
 				Authenticate::class,
 			])
 
-			/**
-			 * ------------------------------------------------
-			 * Authentication
-			 * ------------------------------------------------
-			 */
-			// ->login(Login::class) // Keep default or specify if customized
-			// ->registration(Register::class) // Keep default or specify if customized
-			// ->passwordReset(RequestPasswordReset::class) // Keep default or specify if customized
-			// ->emailVerification(EmailVerificationPrompt::class) // Keep default or specify if customized
-
-			// Use conditional logic to apply custom auth pages
-			->when(config('settings.general.login_enabled') ?? true, fn($panel) => $panel->login(Login::class))
-			// Ensure the custom Register class is used here when registration is enabled
-			->when(config('settings.general.registration_enabled') ?? true, fn($panel) => $panel->registration(Register::class))
-			->when(config('settings.general.password_reset_enabled') ?? true, fn($panel) => $panel->passwordReset(RequestPasswordReset::class))
-			->when(config('settings.general.email_verification_enabled') ?? true, fn($panel) => $panel->emailVerification(EmailVerificationPrompt::class)) // Added conditional for email verification too
-
-			->loginRouteSlug('login')
-			->registrationRouteSlug('register')
-			->passwordResetRoutePrefix('password-reset')
-			->passwordResetRequestRouteSlug('request')
-			->passwordResetRouteSlug('reset')
-			->emailVerificationRoutePrefix('email-verification')
-			->emailVerificationPromptRouteSlug('prompt')
-			->emailVerificationRouteSlug('verify')
-			// Socialite
-			->renderHook(
-				'panels::auth.login.form.after',
-				fn() => config('settings.general.google_authentication_enabled') ? view('auth.socialite.social-authentication') : null
-			)
 
 			/**
 			 * ------------------------------------------------
@@ -142,21 +107,7 @@ class AdminPanelProvider extends PanelProvider
 						hasAvatars: true,
 						slug: 'profile'
 					)
-					->enableTwoFactorAuthentication(
-						force: false
-					)
-					->avatarUploadComponent(
-						fn() => FileUpload::make('profile_picture')
-							->avatar()
-							->disk('public')
-							->directory('avatars')
-							->visibility('public')
-							->maxSize(1024)
-							->imageResizeMode('cover')
-							->imageCropAspectRatio('1:1')
-							->imageResizeTargetWidth('256')
-							->imageResizeTargetHeight('256')
-					)
+					->enableTwoFactorAuthentication(true)
 			)
 
 			->plugin(
@@ -168,6 +119,13 @@ class AdminPanelProvider extends PanelProvider
 			])
 			->authMiddleware([
 				FilamentMiddleware::class
-			]);
+			])
+
+			/**
+			 * ------------------------------------------------
+			 * Authentication
+			 * ------------------------------------------------
+			 */
+			->when(config('settings.general.login_enabled') ?? true, fn($panel) => $panel->login(Login::class));
 	}
 }

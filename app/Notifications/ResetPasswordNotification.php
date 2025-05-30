@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Auth;
 
 use Filament\Notifications\Auth\ResetPassword;
 
@@ -21,19 +22,6 @@ class ResetPasswordNotification extends ResetPassword
 
 		return (new MailMessage)
 			->subject(Lang::get('Reset Password Notification'))
-			->markdown('mail.reset-password', [
-				'url' => $url,
-				'actionText' => Lang::get('Reset Password'),
-				'introLines' => [
-					Lang::get('You are receiving this email because we received a password reset request for your account.')
-				],
-				'expireText' => Lang::get(
-					'This password reset link will expire in :count minutes.',
-					['count' => config('auth.passwords.' . config('auth.defaults.passwords') . '.expire')]
-				),
-				'outroLines' => [
-					Lang::get('If you did not request a password reset, no further action is required.')
-				]
-			]);
+			->markdown('mail.reset-password', ['url' => $url]);
 	}
 }

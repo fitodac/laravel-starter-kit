@@ -51,13 +51,14 @@ class PermissionSeeder extends Seeder
 			Permission::firstOrCreate(['name' => $permission]);
 		}
 
+		$pages_permissions = [
+			'view_any_page',
+			'view_page'
+		];
 
-		// $view_role = Permission::create(['name' => 'view_role']);
-		// $view_any_role = Permission::create(['name' => 'view_any_role']);
-		// $create_role = Permission::create(['name' => 'create_role']);
-		// $update_role = Permission::create(['name' => 'update_role']);
-		// $delete_role = Permission::create(['name' => 'delete_role']);
-		// $delete_any_role = Permission::create(['name' => 'delete_any_role']);
+		foreach ($pages_permissions as $permission) {
+			Permission::firstOrCreate(['name' => $permission]);
+		}
 
 		$can_impersonate = Permission::create(['name' => 'can_impersonate']);
 
@@ -66,6 +67,7 @@ class PermissionSeeder extends Seeder
 		// Assign permissions to Admin role
 		$roleAdmin = Role::firstOrCreate(['name' => 'Admin']);
 		$roleAdmin->givePermissionTo($users_permissions);
+		$roleAdmin->givePermissionTo($pages_permissions);
 
 		// Assign permissions to Super Admin role
 		$roleSuperAdmin->givePermissionTo([
